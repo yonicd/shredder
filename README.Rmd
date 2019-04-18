@@ -19,6 +19,8 @@ knitr::opts_chunk$set(
 
 The goal of shredder is to apply tidylike verbs to rstan simulation objects. The usage is similar to the `dplyr` verbs, the input is a stanfit object and the output is a manipulated stanfit object.
 
+It is very powerful to use with [`tidybayes`](#tidybayes) verbs to manipulate the shape of the output.
+
 ## Installation
 
 You can install shredder from `GHE` with:
@@ -50,9 +52,18 @@ This is a basic example which shows you how to solve a common problem:
 ```{r example}
 library(shredder)
 library(rstan)
-
-objsize <- function(x) sprintf('Object Size: %s',format(object.size(x),units = 'auto'))
+library(tidybayes)
 ```
+
+```{r}
+objsize <- function(x){
+  sprintf(
+    'Object Size: %s',
+    format(object.size(x),units = 'auto')
+  )
+} 
+```
+
 
 ```{r}
 
@@ -83,8 +94,8 @@ excode <- '
 
 ```
 
-```{r,results='hide'}
-fit <- stan(model_code = excode, iter = 500, verbose = FALSE)
+```{r,results='hide',cache = TRUE}
+fit <- rstan::stan(model_code = excode, iter = 500, verbose = FALSE)
 ```
 
 ```{r}
@@ -183,4 +194,37 @@ purrr::map_chr(fit11,objsize)
 
 fit11[[1]]
 
+```
+
+## tidybayes
+
+### Spread
+
+```{r}
+fit%>%
+  tidybayes::spread_draws(alpha,sigma)
+
+fit%>%
+  stan_sample_n(2)%>%
+  tidybayes::spread_draws(alpha,sigma)
+
+fit%>%
+  stan_sample_n(2)%>%
+  tidybayes::spread_draws(z[i,j])
+
+```
+ 
+### Gather
+
+```{r}
+fit%>%
+  tidybayes::gather_draws(alpha,sigma)
+
+fit%>%
+  stan_sample_n(2)%>%
+  tidybayes::gather_draws(alpha,sigma)
+
+fit%>%
+  stan_sample_n(2)%>%
+  tidybayes::gather_draws(z[i,j])
 ```
