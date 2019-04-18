@@ -26,7 +26,7 @@ stan_split <- function(object, ncut = 10, inc_warmup = TRUE){
   bin_number <- sort(rep(1:ncut, each = N%/%ncut, length.out = N))
   
   purrr::map(split(1:N,bin_number),.f=function(this, x, inc_warmup) {
-    stan_slice(this = object, x, inc_warmup = inc_warmup)
+    stan_slice(object = this, x, inc_warmup = inc_warmup)
   },
   this = object,
   inc_warmup = inc_warmup

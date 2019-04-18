@@ -20,19 +20,27 @@ stan_slice <- function(object,..., inc_warmup = TRUE){
   
   dots <- list(...)[[1]]
   
+  warm_x <- seq_len(object@sim$warmup)
+  iter_x <- seq_len(object@sim$iter)[-warm_x]
+  inits_x <- iter_x[dots] - length(warm_x)
+  
+  check_dots <- which(length(iter_x)>=dots)
+  
+  if(length(check_dots)!=length(dots)){
+    warning('some indicies not in sample indicies of object, truncating the intersection')
+    dots <- dots[check_dots]
+  }
+  
+  if(exists('summary',envir = object@`.MISC`))
+    rm('summary',envir = object@`.MISC`)
+  
   if(inc_warmup){
-    
-    warm_x <- seq_len(object@sim$warmup)
-    iter_x <- seq_len(object@sim$iter)[-warm_x]
-    inits_x <- iter_x[dots] - length(warm_x)
+
     samp <- c(warm_x,iter_x[dots])
     object@sim$iter <- length(samp)
     
   }else{
     
-    warm_x <- seq_len(object@sim$warmup)
-    iter_x <- seq_len(object@sim$iter)[-warm_x]
-    inits_x <- iter_x[dots] - length(warm_x)
     samp <- iter_x[dots]
     
     object@sim$iter <- length(samp)
@@ -55,7 +63,7 @@ stan_slice <- function(object,..., inc_warmup = TRUE){
   
   object@sim$samples <- purrr::map(object@sim$samples,stan_subset,idx=samp)
   object@sim$n_save <- rep(object@sim$iter,length(object@sim$n_save))
-  
+
   object
   
 }
