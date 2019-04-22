@@ -10,3 +10,5 @@ NULL
 #' @rdname pipe
 #' @export
 NULL
+
+pars_env <- new.env()
