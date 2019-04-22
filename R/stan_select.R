@@ -18,6 +18,8 @@
 #' @importFrom rlang enquos quo_text eval_tidy
 #' @importFrom purrr map
 stan_select <- function(object, ...){
+
+  assign('pars',object@sim$pars_oi,envir = pars_env)
   
   pars <- unlist(lapply(rlang::enquos(...),{
     FUN = function(x,data){
@@ -25,11 +27,11 @@ stan_select <- function(object, ...){
       ret <- rlang::quo_text(x)
       
       if(grepl('(stan_contains|stan_starts_with|stan_ends_with)',ret))
-        ret <- rlang::eval_tidy(x,data)
+        ret <- rlang::eval_tidy(x)
       
       ret
     }
-    },data = list(fit = object))
+  })
   )
   
   if(!length(pars))

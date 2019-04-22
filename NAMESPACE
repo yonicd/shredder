@@ -2,6 +2,7 @@
 
 export("%>%")
 export("%||%")
+export(peek_pars)
 export(stan_contains)
 export(stan_ends_with)
 export(stan_filter)
