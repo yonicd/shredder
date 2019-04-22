@@ -21,6 +21,13 @@ stan_select <- function(object, ...){
   
   pars <- unlist(lapply(rlang::enquos(...),rlang::quo_text))
   
+  if(grepl('(stan_contains|stan_starts_with|stan_ends_with)',pars)){
+    pars <- unlist(lapply(rlang::enquos(...),rlang::eval_tidy,data = list(fit = object)))  
+  }
+  
+  if(!length(pars))
+    return(message('no pars selected'))
+  
   object@sim$pars_oi <- intersect(object@sim$pars_oi,pars)
   object@sim$dims_oi <- object@sim$dims_oi[object@sim$pars_oi]
   object@sim$fnames_oi <- grep(sprintf('^(%s)',paste0(pars,collapse = '|')),object@sim$fnames_oi,value = TRUE)
