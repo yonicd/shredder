@@ -15,15 +15,22 @@
 #'  \code{\link[purrr]{map}}
 #' @rdname stan_select
 #' @export 
-#' @importFrom rlang enquos quo_text
+#' @importFrom rlang enquos quo_text eval_tidy
 #' @importFrom purrr map
 stan_select <- function(object, ...){
   
-  pars <- unlist(lapply(rlang::enquos(...),rlang::quo_text))
-  
-  if(grepl('(stan_contains|stan_starts_with|stan_ends_with)',pars)){
-    pars <- unlist(lapply(rlang::enquos(...),rlang::eval_tidy,data = list(fit = object)))  
-  }
+  pars <- unlist(lapply(rlang::enquos(...),{
+    FUN = function(x,data){
+      
+      ret <- rlang::quo_text(x)
+      
+      if(grepl('(stan_contains|stan_starts_with|stan_ends_with)',ret))
+        ret <- rlang::eval_tidy(x,data)
+      
+      ret
+    }
+    },data = list(fit = object))
+  )
   
   if(!length(pars))
     return(message('no pars selected'))
