@@ -18,6 +18,8 @@
 #' @importFrom purrr map
 stan_slice <- function(object,..., inc_warmup = TRUE){
   
+  check_stanfit(object)
+  
   dots <- list(...)[[1]]
   
   warm_x <- seq_len(object@sim$warmup)

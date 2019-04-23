@@ -16,3 +16,25 @@ stan_subset <- function(x,idx){
 stan_trim_postwarm <- function(x,idx){
   purrr::map(x,.f = function(y,idx) y[idx] , idx=idx)
 }
+
+#' @title The Par Names of a Stanfit Object
+#' @description Functions to get the names of a stanfit object.
+#' @param x a stanfit object
+#' @param expand logical, if TRUE par names are returned including dimesnion indicies (fnames_oi), Default: FALSE
+#' @return character
+#' @rdname stan_names
+#' @export 
+stan_names <- function(x,expand = FALSE){
+  
+  check_stanfit(x)
+  
+  if(expand){
+    
+    x@sim$fnames_oi
+    
+  }else{
+    
+    x@sim$pars_oi
+    
+  }
+}

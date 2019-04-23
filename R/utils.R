@@ -12,3 +12,10 @@ NULL
 NULL
 
 pars_env <- new.env()
+
+#' @importFrom checkmate assert checkClass
+check_stanfit <- function(x){
+  checkmate::assert(
+    checkmate::checkClass(x, "stanfit")
+  )
+}

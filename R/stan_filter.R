@@ -22,6 +22,8 @@
 #' @importFrom purrr discard flatten_chr map_df map_dfc map
 stan_filter <- function(object, ...,chain = 1){
   
+  check_stanfit(object)
+  
   warm_x <- seq_len(object@sim$warmup)
   iter_x <- seq_len(object@sim$iter)[-warm_x]
   
