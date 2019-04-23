@@ -18,6 +18,8 @@
 #' @importFrom purrr map_dbl map
 stan_split <- function(object, ncut = 10, inc_warmup = TRUE){
   
+  check_stanfit(object)
+  
   N <- unique(purrr::map_dbl(object@stan_args,.f=function(x) x$iter - x$warmup))
   
   if(length(N)>1)

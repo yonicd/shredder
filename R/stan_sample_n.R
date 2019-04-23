@@ -17,6 +17,8 @@
 #' @importFrom purrr map
 stan_sample_n <- function(object,size){
   
+  check_stanfit(object)
+  
   warm_x <- seq_len(object@sim$warmup)
   iter_x <- seq_len(object@sim$iter)[-warm_x]
   

@@ -18,7 +18,9 @@
 #' @importFrom rlang enquos quo_text eval_tidy
 #' @importFrom purrr map
 stan_select <- function(object, ...){
-
+  
+  check_stanfit(object)
+  
   assign('pars',object@sim$pars_oi,envir = pars_env)
   
   pars <- unlist(lapply(rlang::enquos(...),{
