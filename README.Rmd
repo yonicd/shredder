@@ -38,6 +38,8 @@ remotes::install_github(
   - Dimension
     - pars: 
       - `stan_select`   : extract specific pars
+      - `stan_contains`, `stan_starts_with`,`stan_ends_with`: partial par extractions (used within `stan_select`)
+      - `stan_names`    : return names within the stanfit object
     - post-warmup samples 
       - `stan_slice`    : extract specific samples by index
       - `stan_sample_n` : extract random n samples
@@ -104,6 +106,18 @@ objsize(fit)
 fit
 ```
 
+## Pars
+
+### Names
+
+```{r}
+fit%>%stan_names()
+
+fit%>%stan_names(expand = TRUE)
+```
+
+### Select
+
 ```{r}
 fit1 <- fit%>%
   stan_select(mu)
@@ -127,6 +141,23 @@ objsize(fit3)
 fit3
 
 ```
+
+### Select with Partials
+
+```{r}
+fit%>%
+  stan_select(stan_contains('z'))
+
+fit%>%
+  stan_select(stan_ends_with('a'))
+
+fit%>%
+  stan_select(mu,stan_ends_with('a'))
+```
+
+## Post-warmup samples
+
+### Subsetting post warmup samples
 
 ```{r}
 
@@ -159,6 +190,8 @@ fit3
   fit7
 ```
 
+### Select and Slice
+
 ```{r}
   fit8 <- fit%>%
     stan_select(mu)%>%
@@ -166,6 +199,8 @@ fit3
 
   fit8
 ```
+
+### Split
 
 ```{r}
 

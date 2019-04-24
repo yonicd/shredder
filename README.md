@@ -31,6 +31,9 @@ remotes::install_github(
   - Dimension
       - pars:
           - `stan_select` : extract specific pars
+          - `stan_contains`, `stan_starts_with`,`stan_ends_with`:
+            partial par extractions (used within `stan_select`)
+          - `stan_names` : return names within the stanfit object
       - post-warmup samples
           - `stan_slice` : extract specific samples by index
           - `stan_sample_n` : extract random n samples
@@ -129,6 +132,21 @@ fit
 #> convergence, Rhat=1).
 ```
 
+## Pars
+
+### Names
+
+``` r
+fit%>%stan_names()
+#> [1] "mu"    "sigma" "z"     "alpha" "lp__"
+
+fit%>%stan_names(expand = TRUE)
+#>  [1] "mu"     "sigma"  "z[1,1]" "z[2,1]" "z[3,1]" "z[1,2]" "z[2,2]"
+#>  [8] "z[3,2]" "alpha"  "lp__"
+```
+
+### Select
+
 ``` r
 fit1 <- fit%>%
   stan_select(mu)
@@ -194,6 +212,64 @@ fit3
 #> and Rhat is the potential scale reduction factor on split chains (at 
 #> convergence, Rhat=1).
 ```
+
+### Select with Partials
+
+``` r
+fit%>%
+  stan_select(stan_contains('z'))
+#> Inference for Stan model: 9eb770bb13e360b55b7f4acaf07142c1.
+#> 4 chains, each with iter=500; warmup=250; thin=1; 
+#> post-warmup draws per chain=250, total post-warmup draws=1000.
+#> 
+#>         mean se_mean   sd  2.5%   25%   50%  75% 97.5% n_eff Rhat
+#> z[1,1]  0.04    0.02 0.99 -2.01 -0.62  0.06 0.70  1.92  1992    1
+#> z[1,2]  0.00    0.02 0.94 -1.78 -0.66  0.00 0.66  1.77  1765    1
+#> z[2,1] -0.03    0.02 0.97 -1.97 -0.67 -0.02 0.61  1.82  1548    1
+#> z[2,2]  0.00    0.03 0.98 -1.86 -0.69  0.02 0.69  1.91  1382    1
+#> z[3,1]  0.02    0.02 0.91 -1.80 -0.58  0.01 0.60  1.90  1772    1
+#> z[3,2]  0.06    0.03 1.02 -1.95 -0.66  0.08 0.77  2.02  1461    1
+#> 
+#> Samples were drawn using  at Thu Apr 18 17:41:28 2019.
+#> For each parameter, n_eff is a crude measure of effective sample size,
+#> and Rhat is the potential scale reduction factor on split chains (at 
+#> convergence, Rhat=1).
+
+fit%>%
+  stan_select(stan_ends_with('a'))
+#> Inference for Stan model: 9eb770bb13e360b55b7f4acaf07142c1.
+#> 4 chains, each with iter=500; warmup=250; thin=1; 
+#> post-warmup draws per chain=250, total post-warmup draws=1000.
+#> 
+#>       mean se_mean   sd 2.5%  25%  50%  75% 97.5% n_eff Rhat
+#> sigma 1.19    0.01 0.22 0.84 1.03 1.16 1.31  1.70  1102    1
+#> alpha 0.50    0.01 0.49 0.02 0.14 0.35 0.71  1.81  1597    1
+#> 
+#> Samples were drawn using  at Thu Apr 18 17:41:28 2019.
+#> For each parameter, n_eff is a crude measure of effective sample size,
+#> and Rhat is the potential scale reduction factor on split chains (at 
+#> convergence, Rhat=1).
+
+fit%>%
+  stan_select(mu,stan_ends_with('a'))
+#> Inference for Stan model: 9eb770bb13e360b55b7f4acaf07142c1.
+#> 4 chains, each with iter=500; warmup=250; thin=1; 
+#> post-warmup draws per chain=250, total post-warmup draws=1000.
+#> 
+#>       mean se_mean   sd  2.5%   25%  50%  75% 97.5% n_eff Rhat
+#> mu    0.12    0.01 0.27 -0.41 -0.06 0.11 0.29  0.68  1189    1
+#> sigma 1.19    0.01 0.22  0.84  1.03 1.16 1.31  1.70  1102    1
+#> alpha 0.50    0.01 0.49  0.02  0.14 0.35 0.71  1.81  1597    1
+#> 
+#> Samples were drawn using  at Thu Apr 18 17:41:28 2019.
+#> For each parameter, n_eff is a crude measure of effective sample size,
+#> and Rhat is the potential scale reduction factor on split chains (at 
+#> convergence, Rhat=1).
+```
+
+## Post-warmup samples
+
+### Subsetting post warmup samples
 
 ``` r
 
@@ -310,6 +386,8 @@ fit3
 #> convergence, Rhat=1).
 ```
 
+### Select and Slice
+
 ``` r
   fit8 <- fit%>%
     stan_select(mu)%>%
@@ -328,6 +406,8 @@ fit3
 #> and Rhat is the potential scale reduction factor on split chains (at 
 #> convergence, Rhat=1).
 ```
+
+### Split
 
 ``` r
 
