@@ -32,7 +32,7 @@ You can install shredder from `GHE` with:
 
 ``` r
 remotes::install_github(
-  repo = 'internal-projects/shredder',
+  repo = 'yoni/shredder',
   host = 'ghe.metrumrg.com/api/v3',
   auth_token = Sys.getenv('GHE_PAT')
 )
