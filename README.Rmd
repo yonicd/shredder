@@ -15,11 +15,21 @@ knitr::opts_chunk$set(
 # shredder
 
 <!-- badges: start -->
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 <!-- badges: end -->
 
 The goal of shredder is to apply tidylike verbs to rstan simulation objects. The usage is similar to the `dplyr` verbs, the input is a stanfit object and the output is a manipulated stanfit object.
 
 It is very powerful to use with [`tidybayes`](#tidybayes) verbs to manipulate the shape of the output.
+
+> Disclaimer: this is experimental, use deliberately, with caution and not on client projects
+
+## TODO
+
+  - Construct proposal for tools committee
+  - Fill in documentation skeletons
+  - Add unit tests
+  
 
 ## Installation
 
