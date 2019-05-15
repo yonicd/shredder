@@ -1,4 +1,4 @@
-title: covrpage
+title: shredder
 
 destination: docs
 
@@ -31,3 +31,10 @@ reference:
   - title: "Examples"
     contents:
       - has_concept("examples")
+articles:
+  - title: "Usage"
+    contents:
+      - Usage
+  - title: "Extending"
+    contents:
+      - tidybayes
