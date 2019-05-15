@@ -16,6 +16,7 @@
 #' @seealso 
 #' [quotation][rlang::quotation], [quo_label][rlang::quo_label], [map][purrr::map]
 #' @rdname stan_select
+#' @family subsetting
 #' @export 
 #' @importFrom rlang enquos quo_text eval_tidy
 #' @importFrom purrr map

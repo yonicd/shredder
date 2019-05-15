@@ -17,6 +17,7 @@
 #' @seealso 
 #'  [map][purrr::map]
 #' @rdname stan_sample
+#' @family filtering
 #' @export 
 #' @importFrom purrr map
 stan_sample_n <- function(object,size){

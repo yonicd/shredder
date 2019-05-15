@@ -25,3 +25,7 @@ character
 \description{
 Partial match functions used in stan_select
 }
+\seealso{
+Other subsetting: \code{\link{stan_select}}
+}
+\concept{subsetting}

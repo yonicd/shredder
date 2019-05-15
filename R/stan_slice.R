@@ -17,9 +17,8 @@
 #'   stan_select(mu_alpha)%>%
 #'   stan_slice(1:30,inc_warmup = FALSE)
 #' 
-#' @seealso 
-#'  [map][purrr::map]
 #' @rdname stan_slice
+#' @family filtering
 #' @export 
 #' @importFrom purrr map
 stan_slice <- function(object,..., inc_warmup = TRUE){

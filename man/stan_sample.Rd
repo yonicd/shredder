@@ -34,4 +34,8 @@ rats\%>\%
 }
 \seealso{
 \link[purrr:map]{map}
+
+Other filtering: \code{\link{stan_filter}},
+  \code{\link{stan_slice}}
 }
+\concept{filtering}

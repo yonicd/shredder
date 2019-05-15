@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>split stanfit object into smaller pieces — stan_split • covrpage</title>
+<title>Articles • covrpage</title>
 
 <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
 
@@ -32,11 +32,7 @@
 
 
 
-<meta property="og:title" content="split stanfit object into smaller pieces — stan_split" />
-
-<meta property="og:description" content="Split stanfit post-warmup samples into smaller objects to
-facilitate parallel post processing." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="Articles" />
 
 
 
@@ -52,7 +48,7 @@ facilitate parallel post processing." />
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-article-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -110,66 +106,18 @@ facilitate parallel post processing." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>split stanfit object into smaller pieces</h1>
-    <small class="dont-index">Source: <a href='https://ghe.metrumrg.com/internal-projects/shredder/blob/master/R/stan_split.R'><code>R/stan_split.R</code></a></small>
-    <div class="hidden name"><code>stan_split.Rd</code></div>
+      <h1>Articles</h1>
     </div>
 
-    <div class="ref-description">
-    
-    <p>Split stanfit post-warmup samples into smaller objects to
-facilitate parallel post processing.</p>
-    
+    <div class="section ">
+      <h3>All vignettes</h3>
+      <p class="section-desc"></p>
+
+      <ul>
+        <li><a href="Usage.html">Usage</a></li>
+        <li><a href="tidybayes.html">Interacting with tidybayes</a></li>
+      </ul>
     </div>
-
-    <pre class="usage"><span class='fu'>stan_split</span>(<span class='no'>object</span>, <span class='kw'>ncut</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>inc_warmup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>object</th>
-      <td><p>stanfit</p></td>
-    </tr>
-    <tr>
-      <th>ncut</th>
-      <td><p>numeric, number of smaller objects to create, Default: 10</p></td>
-    </tr>
-    <tr>
-      <th>inc_warmup</th>
-      <td><p>logical, include warmup in the smaller objects, Default: TRUE</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>list of stanfits objects</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><a href='stan_slice.html'>stan_slice</a></p>
-<p>Other utility: <code><a href='stan_names.html'>stan_names</a></code></p></div>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>rats</span><span class='kw'>%&gt;%</span>
-  <span class='fu'>stan_split</span>(<span class='kw'>ncut</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'rats' not found</span></div><div class='input'>
-<span class='no'>rats</span><span class='kw'>%&gt;%</span>
-  <span class='fu'>stan_split</span>(<span class='kw'>ncut</span> <span class='kw'>=</span> <span class='fl'>4</span>,<span class='kw'>inc_warmup</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'rats' not found</span></div><div class='input'>
-</div></pre>
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
   </div>
 </div>
 

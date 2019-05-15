@@ -33,3 +33,8 @@ rats\%>\%
   stan_filter(mu_beta < 6)
   
 }
+\seealso{
+Other filtering: \code{\link{stan_sample_frac}},
+  \code{\link{stan_slice}}
+}
+\concept{filtering}

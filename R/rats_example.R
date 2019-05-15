@@ -9,6 +9,7 @@
 #'  [stan][rstan::stan]
 #'  [detectCores][parallel::detectCores]
 #' @rdname rats_example
+#' @family examples
 #' @export 
 #' @importFrom rstan stan
 #' @importFrom parallel detectCores

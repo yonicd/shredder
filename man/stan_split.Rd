@@ -30,4 +30,7 @@ rats\%>\%
 }
 \seealso{
 \link[shredder:stan_slice]{stan_slice}
+
+Other utility: \code{\link{stan_names}}
 }
+\concept{utility}

@@ -21,3 +21,4 @@ rats
 \link[rstan:stan]{stan}
 \link[parallel:detectCores]{detectCores}
 }
+\concept{examples}

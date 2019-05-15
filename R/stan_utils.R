@@ -25,6 +25,7 @@ stan_trim_postwarm <- function(x,idx){
 #'   indicies (fnames_oi), Default: FALSE
 #' @return character
 #' @rdname stan_names
+#' @family utility
 #' @export 
 stan_names <- function(x,expand = FALSE){
   

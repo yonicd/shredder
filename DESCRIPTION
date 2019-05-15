@@ -6,6 +6,7 @@ Authors@R: person("Jonathan Sidi",role=c("aut","cre"),email="yonis@metrumrg.com"
 Description: Verbs to manipulate stanfit class objects returned by rstan.
 Depends: R (>= 3.2.0)
 Imports: rlang, stringi, purrr, checkmate, rstan, parallel
+Suggests: tidybayes, broom, bayesplot, knitr, rmarkdown
 Encoding: UTF-8
 LazyData: true
 URL: https://ghe.metrumrg.com/internal-projects/shredder
@@ -13,3 +14,4 @@ BugReports: https://ghe.metrumrg.com/internal-projects/shredder/issues
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 License: MIT + file LICENSE
+VignetteBuilder: knitr

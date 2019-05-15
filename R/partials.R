@@ -18,6 +18,7 @@ peek_pars <- function(){
 #' @param pars list of pars to search in, Default: peek_pars()
 #' @return character
 #' @rdname stan_partials
+#' @family subsetting
 #' @export 
 #' @importFrom rlang is_string
 stan_contains <- function (match, ignore.case = TRUE,pars = peek_pars()) {
