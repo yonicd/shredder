@@ -120,21 +120,34 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>rats_example</span>()</pre>
-        
+    <pre class="usage"><span class='fu'>rats_example</span>(<span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>123</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>seed</th>
+      <td><p>numeric, seed for <a href='http://www.rdocumentation.org/packages/rstan/topics/stan'>rstan</a>, Default: 123</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p><a href='https://www.mrc-bsu.cam.ac.uk/wp-content/uploads/WinBUGS_Vol1.pdf'>Data Description</a>,
+<a href='https://github.com/stan-dev/example-models/tree/master/bugs_examples/vol1/rats'>Data and Script</a></p>
+    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>stanfit object</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='http://www.rdocumentation.org/packages/rstan/topics/stan'>stan</a>
+    <div class='dont-index'><p><a href='http://www.rdocumentation.org/packages/rstan/topics/stan'>rstan</a>
 <a href='http://www.rdocumentation.org/packages/parallel/topics/detectCores'>detectCores</a></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>set.seed</span>(<span class='fl'>123</span>)
-<span class='no'>rats</span> <span class='kw'>&lt;-</span> <span class='fu'>rats_example</span>()</div><div class='output co'>#&gt; <span class='message'>rstan (Version 2.18.2, GitRev: 2e1f913d3ca3)</span></div><div class='output co'>#&gt; <span class='message'>For execution on a local, multicore CPU with excess RAM we recommend calling</span>
+    <pre class="examples"><div class='input'><span class='no'>rats</span> <span class='kw'>&lt;-</span> <span class='fu'>rats_example</span>()</div><div class='output co'>#&gt; <span class='message'>rstan (Version 2.18.2, GitRev: 2e1f913d3ca3)</span></div><div class='output co'>#&gt; <span class='message'>For execution on a local, multicore CPU with excess RAM we recommend calling</span>
 #&gt; <span class='message'>options(mc.cores = parallel::detectCores()).</span>
 #&gt; <span class='message'>To avoid recompilation of unchanged Stan programs, we recommend calling</span>
 #&gt; <span class='message'>rstan_options(auto_write = TRUE)</span></div><div class='input'><span class='no'>rats</span></div><div class='output co'>#&gt; Inference for Stan model: rats.
@@ -142,149 +155,149 @@
 #&gt; post-warmup draws per chain=1000, total post-warmup draws=4000.
 #&gt; 
 #&gt;                  mean se_mean    sd    2.5%     25%     50%     75%   97.5%
-#&gt; alpha[1]       240.00    0.04  2.73  234.56  238.19  240.03  241.81  245.40
-#&gt; alpha[2]       247.87    0.04  2.70  242.58  246.07  247.87  249.64  253.27
-#&gt; alpha[3]       252.35    0.04  2.70  246.88  250.56  252.34  254.12  257.70
-#&gt; alpha[4]       232.57    0.04  2.73  227.08  230.81  232.53  234.42  238.04
-#&gt; alpha[5]       231.70    0.04  2.69  226.41  229.84  231.68  233.50  236.98
-#&gt; alpha[6]       249.67    0.03  2.69  244.36  247.87  249.65  251.51  255.10
-#&gt; alpha[7]       228.84    0.04  2.74  223.33  227.09  228.81  230.62  234.33
-#&gt; alpha[8]       248.21    0.04  2.64  243.12  246.38  248.25  250.05  253.18
-#&gt; alpha[9]       283.05    0.04  2.75  277.57  281.25  283.08  284.86  288.48
-#&gt; alpha[10]      219.46    0.04  2.71  214.11  217.64  219.47  221.21  224.76
-#&gt; alpha[11]      258.13    0.04  2.73  252.92  256.29  258.07  259.96  263.41
-#&gt; alpha[12]      228.26    0.04  2.70  222.80  226.50  228.25  230.05  233.73
-#&gt; alpha[13]      242.40    0.04  2.79  236.77  240.59  242.50  244.26  247.84
-#&gt; alpha[14]      268.12    0.04  2.67  262.95  266.33  268.14  269.93  273.31
-#&gt; alpha[15]      242.85    0.03  2.67  237.56  241.05  242.83  244.64  248.04
-#&gt; alpha[16]      245.25    0.04  2.66  239.96  243.49  245.22  246.99  250.52
-#&gt; alpha[17]      232.26    0.04  2.73  227.08  230.41  232.24  234.11  237.64
-#&gt; alpha[18]      240.54    0.04  2.72  235.19  238.74  240.53  242.40  245.92
-#&gt; alpha[19]      253.72    0.04  2.71  248.45  251.92  253.68  255.61  259.11
-#&gt; alpha[20]      241.65    0.04  2.69  236.32  239.84  241.62  243.47  246.82
-#&gt; alpha[21]      248.50    0.03  2.64  243.14  246.81  248.52  250.26  253.71
-#&gt; alpha[22]      225.34    0.04  2.76  219.89  223.55  225.35  227.14  230.78
-#&gt; alpha[23]      228.63    0.04  2.69  223.47  226.80  228.57  230.54  233.75
-#&gt; alpha[24]      245.12    0.04  2.79  239.54  243.28  245.09  247.00  250.63
-#&gt; alpha[25]      234.52    0.04  2.66  229.32  232.74  234.50  236.30  239.79
-#&gt; alpha[26]      253.95    0.04  2.71  248.69  252.10  253.97  255.74  259.20
-#&gt; alpha[27]      254.29    0.04  2.67  249.11  252.45  254.33  256.14  259.47
-#&gt; alpha[28]      243.03    0.04  2.77  237.65  241.17  243.09  244.86  248.43
-#&gt; alpha[29]      218.10    0.04  2.75  212.60  216.25  218.13  219.94  223.58
-#&gt; alpha[30]      241.46    0.04  2.72  236.07  239.59  241.50  243.29  246.73
-#&gt; beta[1]          6.06    0.00  0.25    5.59    5.90    6.06    6.23    6.56
-#&gt; beta[2]          7.07    0.00  0.27    6.55    6.89    7.07    7.24    7.58
-#&gt; beta[3]          6.48    0.00  0.24    6.00    6.32    6.49    6.64    6.97
-#&gt; beta[4]          5.33    0.00  0.26    4.81    5.16    5.33    5.50    5.85
-#&gt; beta[5]          6.58    0.00  0.25    6.09    6.41    6.58    6.74    7.05
-#&gt; beta[6]          6.18    0.00  0.25    5.68    6.01    6.17    6.35    6.67
-#&gt; beta[7]          5.97    0.00  0.25    5.48    5.81    5.97    6.14    6.47
-#&gt; beta[8]          6.42    0.00  0.25    5.93    6.26    6.42    6.58    6.92
-#&gt; beta[9]          7.07    0.00  0.27    6.55    6.90    7.07    7.25    7.58
-#&gt; beta[10]         5.85    0.00  0.24    5.38    5.68    5.84    6.01    6.31
-#&gt; beta[11]         6.81    0.00  0.26    6.31    6.64    6.81    6.99    7.30
-#&gt; beta[12]         6.11    0.00  0.25    5.62    5.95    6.11    6.27    6.61
-#&gt; beta[13]         6.16    0.00  0.25    5.68    5.99    6.16    6.33    6.65
-#&gt; beta[14]         6.70    0.00  0.26    6.19    6.52    6.69    6.87    7.21
-#&gt; beta[15]         5.41    0.00  0.26    4.92    5.22    5.41    5.59    5.91
-#&gt; beta[16]         5.92    0.00  0.25    5.43    5.76    5.92    6.08    6.41
-#&gt; beta[17]         6.28    0.00  0.25    5.77    6.11    6.28    6.45    6.78
-#&gt; beta[18]         5.84    0.00  0.25    5.35    5.67    5.84    6.00    6.32
-#&gt; beta[19]         6.41    0.00  0.25    5.93    6.24    6.41    6.58    6.90
-#&gt; beta[20]         6.06    0.00  0.25    5.56    5.89    6.06    6.22    6.54
-#&gt; beta[21]         6.41    0.00  0.25    5.91    6.25    6.41    6.57    6.91
-#&gt; beta[22]         5.85    0.00  0.26    5.36    5.68    5.85    6.03    6.35
-#&gt; beta[23]         5.74    0.00  0.25    5.25    5.58    5.74    5.91    6.22
-#&gt; beta[24]         5.88    0.00  0.24    5.40    5.72    5.88    6.05    6.37
-#&gt; beta[25]         6.92    0.00  0.26    6.41    6.75    6.92    7.10    7.43
-#&gt; beta[26]         6.56    0.00  0.25    6.07    6.39    6.56    6.73    7.04
-#&gt; beta[27]         5.90    0.00  0.25    5.42    5.73    5.89    6.07    6.39
-#&gt; beta[28]         5.84    0.00  0.25    5.35    5.66    5.84    6.02    6.33
-#&gt; beta[29]         5.66    0.00  0.25    5.18    5.49    5.66    5.82    6.15
-#&gt; beta[30]         6.13    0.00  0.25    5.63    5.97    6.13    6.30    6.63
-#&gt; mu_alpha       242.56    0.04  2.53  237.66  240.86  242.52  244.30  247.52
-#&gt; mu_beta          6.19    0.00  0.12    5.96    6.11    6.19    6.26    6.42
-#&gt; sigmasq_y       38.06    0.13  5.90   28.28   33.87   37.40   41.54   51.41
-#&gt; sigmasq_alpha  180.47    0.57 38.88  116.59  152.83  176.34  203.98  266.54
-#&gt; sigmasq_beta     0.31    0.00  0.11    0.14    0.23    0.29    0.36    0.58
-#&gt; sigma_y          6.15    0.01  0.47    5.32    5.82    6.12    6.45    7.17
-#&gt; sigma_alpha     13.36    0.02  1.43   10.80   12.36   13.28   14.28   16.33
-#&gt; sigma_beta       0.55    0.00  0.10    0.38    0.48    0.54    0.60    0.76
-#&gt; alpha0         106.42    0.05  3.68   99.29  104.00  106.37  108.94  113.67
-#&gt; lp__          -433.74    0.22  7.06 -448.41 -438.42 -433.37 -428.84 -421.23
+#&gt; alpha[1]       239.94    0.03  2.65  234.72  238.13  239.94  241.73  245.15
+#&gt; alpha[2]       247.80    0.04  2.74  242.30  246.01  247.86  249.64  253.05
+#&gt; alpha[3]       252.44    0.04  2.58  247.22  250.74  252.43  254.13  257.50
+#&gt; alpha[4]       232.60    0.03  2.71  227.23  230.81  232.61  234.38  237.94
+#&gt; alpha[5]       231.64    0.03  2.69  226.32  229.85  231.62  233.46  236.90
+#&gt; alpha[6]       249.75    0.04  2.65  244.39  248.04  249.75  251.49  255.06
+#&gt; alpha[7]       228.70    0.03  2.69  223.51  226.94  228.64  230.42  234.05
+#&gt; alpha[8]       248.33    0.04  2.65  243.23  246.52  248.28  250.12  253.61
+#&gt; alpha[9]       283.27    0.04  2.68  277.83  281.53  283.28  285.08  288.40
+#&gt; alpha[10]      219.27    0.03  2.62  213.97  217.53  219.26  221.05  224.29
+#&gt; alpha[11]      258.26    0.03  2.71  252.87  256.49  258.27  260.03  263.85
+#&gt; alpha[12]      228.14    0.03  2.74  222.81  226.28  228.09  229.98  233.68
+#&gt; alpha[13]      242.41    0.03  2.71  237.15  240.63  242.41  244.15  247.83
+#&gt; alpha[14]      268.28    0.04  2.74  262.85  266.42  268.30  270.08  273.56
+#&gt; alpha[15]      242.79    0.04  2.69  237.54  241.00  242.82  244.60  248.01
+#&gt; alpha[16]      245.30    0.03  2.64  240.14  243.58  245.29  247.01  250.63
+#&gt; alpha[17]      232.21    0.04  2.68  226.95  230.44  232.21  233.99  237.44
+#&gt; alpha[18]      240.47    0.03  2.72  235.21  238.65  240.47  242.28  245.80
+#&gt; alpha[19]      253.76    0.04  2.68  248.54  252.00  253.79  255.54  259.13
+#&gt; alpha[20]      241.68    0.03  2.70  236.43  239.86  241.68  243.50  246.96
+#&gt; alpha[21]      248.52    0.04  2.67  243.26  246.71  248.56  250.26  253.88
+#&gt; alpha[22]      225.29    0.03  2.62  220.21  223.53  225.30  227.03  230.43
+#&gt; alpha[23]      228.52    0.03  2.71  223.31  226.76  228.52  230.31  233.96
+#&gt; alpha[24]      245.13    0.04  2.64  239.73  243.39  245.12  246.86  250.35
+#&gt; alpha[25]      234.51    0.03  2.60  229.37  232.81  234.48  236.24  239.55
+#&gt; alpha[26]      254.00    0.03  2.66  248.81  252.22  254.02  255.77  259.24
+#&gt; alpha[27]      254.33    0.03  2.65  249.18  252.47  254.30  256.17  259.45
+#&gt; alpha[28]      243.00    0.04  2.65  237.95  241.27  243.02  244.68  248.30
+#&gt; alpha[29]      217.90    0.03  2.70  212.52  216.02  217.86  219.73  223.26
+#&gt; alpha[30]      241.38    0.03  2.60  236.25  239.60  241.41  243.14  246.33
+#&gt; beta[1]          6.06    0.00  0.24    5.60    5.90    6.06    6.22    6.52
+#&gt; beta[2]          7.05    0.00  0.26    6.54    6.88    7.05    7.22    7.54
+#&gt; beta[3]          6.48    0.00  0.24    6.02    6.32    6.49    6.64    6.95
+#&gt; beta[4]          5.34    0.00  0.26    4.82    5.17    5.34    5.52    5.85
+#&gt; beta[5]          6.57    0.00  0.24    6.10    6.40    6.57    6.72    7.03
+#&gt; beta[6]          6.18    0.00  0.24    5.69    6.01    6.18    6.34    6.67
+#&gt; beta[7]          5.98    0.00  0.24    5.50    5.81    5.97    6.14    6.45
+#&gt; beta[8]          6.42    0.00  0.25    5.93    6.25    6.42    6.58    6.91
+#&gt; beta[9]          7.06    0.00  0.26    6.56    6.88    7.06    7.23    7.55
+#&gt; beta[10]         5.85    0.00  0.24    5.37    5.69    5.85    6.02    6.32
+#&gt; beta[11]         6.80    0.00  0.25    6.31    6.63    6.80    6.97    7.29
+#&gt; beta[12]         6.12    0.00  0.25    5.63    5.95    6.12    6.29    6.60
+#&gt; beta[13]         6.16    0.00  0.24    5.69    6.00    6.16    6.33    6.61
+#&gt; beta[14]         6.69    0.00  0.25    6.20    6.52    6.69    6.86    7.17
+#&gt; beta[15]         5.42    0.00  0.24    4.93    5.26    5.42    5.58    5.89
+#&gt; beta[16]         5.93    0.00  0.24    5.44    5.76    5.93    6.08    6.40
+#&gt; beta[17]         6.27    0.00  0.23    5.82    6.12    6.27    6.43    6.73
+#&gt; beta[18]         5.84    0.00  0.25    5.35    5.68    5.85    6.01    6.34
+#&gt; beta[19]         6.41    0.00  0.24    5.94    6.24    6.41    6.56    6.88
+#&gt; beta[20]         6.05    0.00  0.24    5.59    5.90    6.05    6.21    6.51
+#&gt; beta[21]         6.41    0.00  0.25    5.92    6.24    6.41    6.57    6.89
+#&gt; beta[22]         5.86    0.00  0.23    5.41    5.70    5.86    6.01    6.31
+#&gt; beta[23]         5.75    0.00  0.24    5.28    5.58    5.74    5.90    6.21
+#&gt; beta[24]         5.89    0.00  0.24    5.42    5.73    5.89    6.05    6.37
+#&gt; beta[25]         6.91    0.00  0.26    6.40    6.74    6.91    7.09    7.42
+#&gt; beta[26]         6.55    0.00  0.24    6.08    6.39    6.55    6.71    7.02
+#&gt; beta[27]         5.90    0.00  0.24    5.42    5.73    5.90    6.06    6.37
+#&gt; beta[28]         5.85    0.00  0.24    5.37    5.68    5.85    6.01    6.32
+#&gt; beta[29]         5.67    0.00  0.24    5.19    5.51    5.67    5.83    6.15
+#&gt; beta[30]         6.14    0.00  0.25    5.66    5.97    6.14    6.30    6.62
+#&gt; mu_alpha       242.45    0.04  2.68  237.17  240.65  242.43  244.22  247.79
+#&gt; mu_beta          6.19    0.00  0.11    5.98    6.11    6.19    6.26    6.40
+#&gt; sigmasq_y       37.19    0.13  5.68   27.60   33.20   36.71   40.67   49.83
+#&gt; sigmasq_alpha  216.80    1.00 63.46  124.16  173.10  205.47  249.85  371.18
+#&gt; sigmasq_beta     0.27    0.00  0.10    0.13    0.21    0.26    0.33    0.51
+#&gt; sigma_y          6.08    0.01  0.46    5.25    5.76    6.06    6.38    7.06
+#&gt; sigma_alpha     14.58    0.03  2.06   11.14   13.16   14.33   15.81   19.27
+#&gt; sigma_beta       0.52    0.00  0.09    0.36    0.45    0.51    0.57    0.72
+#&gt; alpha0         106.36    0.05  3.53   99.55  104.01  106.36  108.69  113.32
+#&gt; lp__          -438.05    0.23  7.05 -453.46 -442.45 -437.57 -433.16 -425.80
 #&gt;               n_eff Rhat
-#&gt; alpha[1]       5310    1
-#&gt; alpha[2]       4683    1
-#&gt; alpha[3]       5144    1
-#&gt; alpha[4]       6023    1
-#&gt; alpha[5]       5385    1
-#&gt; alpha[6]       5983    1
-#&gt; alpha[7]       5510    1
-#&gt; alpha[8]       4035    1
-#&gt; alpha[9]       5993    1
-#&gt; alpha[10]      5396    1
-#&gt; alpha[11]      5516    1
-#&gt; alpha[12]      5180    1
-#&gt; alpha[13]      6184    1
-#&gt; alpha[14]      5337    1
-#&gt; alpha[15]      6176    1
-#&gt; alpha[16]      4899    1
-#&gt; alpha[17]      4563    1
-#&gt; alpha[18]      5540    1
-#&gt; alpha[19]      5226    1
-#&gt; alpha[20]      4798    1
-#&gt; alpha[21]      5763    1
-#&gt; alpha[22]      5345    1
-#&gt; alpha[23]      5691    1
-#&gt; alpha[24]      5786    1
-#&gt; alpha[25]      4800    1
-#&gt; alpha[26]      5666    1
-#&gt; alpha[27]      5531    1
-#&gt; alpha[28]      5498    1
-#&gt; alpha[29]      5277    1
-#&gt; alpha[30]      5918    1
-#&gt; beta[1]        4995    1
-#&gt; beta[2]        5151    1
-#&gt; beta[3]        5380    1
-#&gt; beta[4]        4404    1
-#&gt; beta[5]        4907    1
-#&gt; beta[6]        5365    1
-#&gt; beta[7]        5202    1
-#&gt; beta[8]        5115    1
-#&gt; beta[9]        5152    1
-#&gt; beta[10]       5109    1
-#&gt; beta[11]       5783    1
-#&gt; beta[12]       4410    1
-#&gt; beta[13]       5414    1
-#&gt; beta[14]       4774    1
-#&gt; beta[15]       4205    1
-#&gt; beta[16]       5088    1
-#&gt; beta[17]       5476    1
-#&gt; beta[18]       5360    1
-#&gt; beta[19]       5068    1
-#&gt; beta[20]       5039    1
-#&gt; beta[21]       5448    1
-#&gt; beta[22]       5177    1
-#&gt; beta[23]       5679    1
-#&gt; beta[24]       5389    1
-#&gt; beta[25]       4674    1
-#&gt; beta[26]       5504    1
-#&gt; beta[27]       5161    1
-#&gt; beta[28]       5232    1
-#&gt; beta[29]       4836    1
-#&gt; beta[30]       5346    1
-#&gt; mu_alpha       5003    1
-#&gt; mu_beta        4027    1
-#&gt; sigmasq_y      1939    1
-#&gt; sigmasq_alpha  4608    1
-#&gt; sigmasq_beta   3212    1
-#&gt; sigma_y        1965    1
-#&gt; sigma_alpha    4707    1
-#&gt; sigma_beta     3091    1
-#&gt; alpha0         4635    1
-#&gt; lp__           1003    1
+#&gt; alpha[1]       7024    1
+#&gt; alpha[2]       6023    1
+#&gt; alpha[3]       5059    1
+#&gt; alpha[4]       7017    1
+#&gt; alpha[5]       6477    1
+#&gt; alpha[6]       5331    1
+#&gt; alpha[7]       7721    1
+#&gt; alpha[8]       5596    1
+#&gt; alpha[9]       5129    1
+#&gt; alpha[10]      6879    1
+#&gt; alpha[11]      6760    1
+#&gt; alpha[12]      7475    1
+#&gt; alpha[13]      6268    1
+#&gt; alpha[14]      6108    1
+#&gt; alpha[15]      5881    1
+#&gt; alpha[16]      6282    1
+#&gt; alpha[17]      5517    1
+#&gt; alpha[18]      6733    1
+#&gt; alpha[19]      5846    1
+#&gt; alpha[20]      6563    1
+#&gt; alpha[21]      5708    1
+#&gt; alpha[22]      6554    1
+#&gt; alpha[23]      7679    1
+#&gt; alpha[24]      5278    1
+#&gt; alpha[25]      5746    1
+#&gt; alpha[26]      6521    1
+#&gt; alpha[27]      7077    1
+#&gt; alpha[28]      5487    1
+#&gt; alpha[29]      6188    1
+#&gt; alpha[30]      6561    1
+#&gt; beta[1]        6351    1
+#&gt; beta[2]        6081    1
+#&gt; beta[3]        5675    1
+#&gt; beta[4]        5389    1
+#&gt; beta[5]        5753    1
+#&gt; beta[6]        5846    1
+#&gt; beta[7]        6277    1
+#&gt; beta[8]        5725    1
+#&gt; beta[9]        5306    1
+#&gt; beta[10]       5511    1
+#&gt; beta[11]       5720    1
+#&gt; beta[12]       5937    1
+#&gt; beta[13]       6602    1
+#&gt; beta[14]       6294    1
+#&gt; beta[15]       5773    1
+#&gt; beta[16]       6010    1
+#&gt; beta[17]       4764    1
+#&gt; beta[18]       5926    1
+#&gt; beta[19]       6205    1
+#&gt; beta[20]       6409    1
+#&gt; beta[21]       6100    1
+#&gt; beta[22]       6723    1
+#&gt; beta[23]       5846    1
+#&gt; beta[24]       6067    1
+#&gt; beta[25]       5229    1
+#&gt; beta[26]       5256    1
+#&gt; beta[27]       6120    1
+#&gt; beta[28]       5674    1
+#&gt; beta[29]       7156    1
+#&gt; beta[30]       6008    1
+#&gt; mu_alpha       5295    1
+#&gt; mu_beta        4302    1
+#&gt; sigmasq_y      1942    1
+#&gt; sigmasq_alpha  4027    1
+#&gt; sigmasq_beta   3640    1
+#&gt; sigma_y        1963    1
+#&gt; sigma_alpha    4324    1
+#&gt; sigma_beta     3579    1
+#&gt; alpha0         4815    1
+#&gt; lp__            978    1
 #&gt; 
-#&gt; Samples were drawn using NUTS(diag_e) at Tue May 14 23:08:13 2019.
+#&gt; Samples were drawn using NUTS(diag_e) at Wed May 15 09:01:47 2019.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div></pre>
@@ -292,7 +305,10 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#source">Source</a></li>
+
       <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>

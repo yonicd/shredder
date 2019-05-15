@@ -6,8 +6,6 @@
 #'   [shredder][stan_frac] fraction of samples to sample.
 #' @return stanfit
 #' @examples 
-#' set.seed(123)
-#' 
 #' rats <- rats_example()
 #' 
 #' rats%>%

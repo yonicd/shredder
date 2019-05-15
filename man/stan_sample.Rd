@@ -23,8 +23,6 @@ This is a wrapper around sample.int() to make it easy to select
 random samples from each parameter in a stanfit object.
 }
 \examples{
-set.seed(123)
-
 rats <- rats_example()
 
 rats\%>\%

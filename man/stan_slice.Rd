@@ -21,7 +21,6 @@ Choose post-warumps samples by their ordinal
 position from each parameter in a stanfit object
 }
 \examples{
-set.seed(123)
 rats <- rats_example()
 
 rats\%>\%

@@ -23,7 +23,35 @@ stan_ends_with(match, ignore.case = TRUE, pars = peek_pars())
 character
 }
 \description{
-Partial match functions used in stan_select
+Partial match functions used in \link[shredder:stan_select]{stan_select}
+}
+\examples{
+rats <- rats_example()
+
+rats\%>\%
+  stan_names()
+
+rats\%>\%
+  stan_select(stan_contains('sq'))
+
+rats\%>\%
+  stan_select(mu_alpha, stan_contains('sq'))
+  
+rats\%>\%
+  stan_select(stan_starts_with('mu'))
+
+rats\%>\%
+  stan_select(stan_starts_with('mu'),stan_contains('sq'))
+  
+  
+rats\%>\%
+  stan_select(stan_ends_with('0'))
+
+# free form regex in contains   
+rats\%>\%
+  stan_select(stan_contains('sq|mu'))
+
+
 }
 \seealso{
 Other subsetting: \code{\link{stan_select}}

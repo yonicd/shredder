@@ -18,7 +18,6 @@ stanfit object
 Choose variables from a stanfit object
 }
 \examples{
-set.seed(123)
 rats <- rats_example()
 
 rats\%>\%stan_select(mu_beta)

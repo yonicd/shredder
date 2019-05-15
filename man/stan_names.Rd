@@ -18,6 +18,14 @@ character
 \description{
 Functions to get the names of a stanfit object.
 }
+\examples{
+rats <- rats_example()
+
+rats\%>\%stan_names()
+
+rats\%>\%stan_names(expand = TRUE)
+
+}
 \seealso{
 Other utility: \code{\link{stan_split}}
 }

@@ -21,8 +21,6 @@ Use stan_filter() to choose indicies of samples across parameters
 where conditions are true.
 }
 \examples{
-set.seed(123)
-
 rats <- rats_example()
 
 rats\%>\%

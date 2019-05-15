@@ -21,6 +21,8 @@ Split stanfit post-warmup samples into smaller objects to
 facilitate parallel post processing.
 }
 \examples{
+rats <- rats_example()
+
 rats\%>\%
   stan_split(ncut = 4)
   

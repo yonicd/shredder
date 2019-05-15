@@ -3,8 +3,15 @@
 \name{rats_example}
 \alias{rats_example}
 \title{Rats model}
+\source{
+\href{https://www.mrc-bsu.cam.ac.uk/wp-content/uploads/WinBUGS_Vol1.pdf}{Data Description},
+\href{https://github.com/stan-dev/example-models/tree/master/bugs_examples/vol1/rats}{Data and Script}
+}
 \usage{
-rats_example()
+rats_example(seed = 123)
+}
+\arguments{
+\item{seed}{numeric, seed for \link[rstan:stan]{rstan}, Default: 123}
 }
 \value{
 stanfit object
@@ -13,12 +20,11 @@ stanfit object
 Run Rats data model
 }
 \examples{
-set.seed(123)
 rats <- rats_example()
 rats
 }
 \seealso{
-\link[rstan:stan]{stan}
+\link[rstan:stan]{rstan}
 \link[parallel:detectCores]{detectCores}
 }
 \concept{examples}

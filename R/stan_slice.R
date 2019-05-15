@@ -6,7 +6,6 @@
 #' @param inc_warmup logical, include warmup in output, Default: TRUE
 #' @return stanfit object
 #' @examples 
-#' set.seed(123)
 #' rats <- rats_example()
 #' 
 #' rats%>%

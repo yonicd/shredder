@@ -6,8 +6,6 @@
 #' @param chain numeric, chain to apply filter predicated on, Default: 1
 #' @return stanfit object
 #' @examples 
-#' set.seed(123)
-#' 
 #' rats <- rats_example()
 #' 
 #' rats%>%

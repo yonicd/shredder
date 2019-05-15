@@ -23,6 +23,13 @@ stan_trim_postwarm <- function(x,idx){
 #' @param x a stanfit object
 #' @param expand logical, if TRUE par names are returned including dimesnion 
 #'   indicies (fnames_oi), Default: FALSE
+#' @examples 
+#' rats <- rats_example()
+#' 
+#' rats%>%stan_names()
+#' 
+#' rats%>%stan_names(expand = TRUE)
+#' 
 #' @return character
 #' @rdname stan_names
 #' @family utility
