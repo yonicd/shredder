@@ -1,18 +1,24 @@
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param object PARAM_DESCRIPTION
-#' @param ... PARAM_DESCRIPTION
-#' @param inc_warmup PARAM_DESCRIPTION, Default: TRUE
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' @title Choose post-warumps samples by position
+#' @description Choose post-warumps samples by their ordinal 
+#' position from each parameter in a stanfit object
+#' @param object stanfit object
+#' @param ... Integer samples values
+#' @param inc_warmup logical, include warmup in output, Default: TRUE
+#' @return stanfit object
 #' @examples 
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' set.seed(123)
+#' rats <- rats_example()
+#' 
+#' rats%>%
+#'   stan_select(mu_alpha)%>%
+#'   stan_slice(1:30)
+#' 
+#' rats%>%
+#'   stan_select(mu_alpha)%>%
+#'   stan_slice(1:30,inc_warmup = FALSE)
+#' 
 #' @seealso 
-#'  \code{\link[purrr]{map}}
+#'  [map][purrr::map]
 #' @rdname stan_slice
 #' @export 
 #' @importFrom purrr map

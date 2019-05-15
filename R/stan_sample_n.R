@@ -1,18 +1,22 @@
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param object PARAM_DESCRIPTION
-#' @param size PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' @title Sample n post-warumps samples from a stanfit object
+#' @description This is a wrapper around sample.int() to make it easy to select
+#'  random samples from each parameter in a stanfit object.
+#' @param object stanfit object
+#' @param size numeric, for [shredder][stan_sample_n] size of sample, for 
+#'   [shredder][stan_frac] fraction of samples to sample.
+#' @return stanfit
 #' @examples 
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' set.seed(123)
+#' 
+#' rats <- rats_example()
+#' 
+#' rats%>%
+#'   stan_select(mu_alpha)%>%
+#'   stan_sample_n(30)
+#'   
 #' @seealso 
-#'  \code{\link[purrr]{map}}
-#' @rdname stan_sample_n
+#'  [map][purrr::map]
+#' @rdname stan_sample
 #' @export 
 #' @importFrom purrr map
 stan_sample_n <- function(object,size){

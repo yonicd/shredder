@@ -9,7 +9,8 @@ stan_names(x, expand = FALSE)
 \arguments{
 \item{x}{a stanfit object}
 
-\item{expand}{logical, if TRUE par names are returned including dimesnion indicies (fnames_oi), Default: FALSE}
+\item{expand}{logical, if TRUE par names are returned including dimesnion
+indicies (fnames_oi), Default: FALSE}
 }
 \value{
 character

@@ -2,35 +2,34 @@
 % Please edit documentation in R/stan_filter.R
 \name{stan_filter}
 \alias{stan_filter}
-\title{FUNCTION_TITLE}
+\title{Return post-warmup samples with matching conditions}
 \usage{
 stan_filter(object, ..., chain = 1)
 }
 \arguments{
-\item{object}{PARAM_DESCRIPTION}
+\item{object}{stanfit object}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{\dots}{Logical predicates defined in terms of the parameters in object}
 
-\item{chain}{PARAM_DESCRIPTION, Default: 1}
+\item{chain}{numeric, chain to apply filter predicated on, Default: 1}
 }
 \value{
-OUTPUT_DESCRIPTION
+stanfit object
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
+Use stan_filter() to choose indicies of samples across parameters
+where conditions are true.
 }
 \examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}
-\seealso{
-\code{\link[rlang]{quo_squash}},\code{\link[rlang]{quotation}}
-\code{\link[stringi]{stri_extract_all}}
-\code{\link[purrr]{keep}},\code{\link[purrr]{flatten}},\code{\link[purrr]{map}}
+set.seed(123)
+
+rats <- rats_example()
+
+rats\%>\%
+  stan_select(mu_alpha,mu_beta)
+  
+rats\%>\%
+  stan_select(mu_alpha,mu_beta)\%>\%
+  stan_filter(mu_beta < 6)
+  
 }

@@ -3,7 +3,7 @@ grep_pars <- function (this, universe, ...) {
 }
 
 #' @title Access stored pars for stan partials
-#' @description Access pars currently stored that \code{\link[shredder]{stan_select_partials}} use.
+#' @description Access pars currently stored that [stan_partials][shredder::stan_partials] use.
 #' @return character
 #' @rdname peek_pars
 #' @export 
@@ -17,7 +17,7 @@ peek_pars <- function(){
 #' @param ignore.case logical to ignore the case, Default: TRUE
 #' @param pars list of pars to search in, Default: peek_pars()
 #' @return character
-#' @rdname stan_select_partials
+#' @rdname stan_partials
 #' @export 
 #' @importFrom rlang is_string
 stan_contains <- function (match, ignore.case = TRUE,pars = peek_pars()) {
@@ -32,7 +32,7 @@ stan_contains <- function (match, ignore.case = TRUE,pars = peek_pars()) {
 }
 
 #' @export
-#' @rdname stan_select_partials
+#' @rdname stan_partials
 stan_starts_with <- function (match, ignore.case = TRUE,pars = peek_pars()) {
   
   stopifnot(rlang::is_string(match), nchar(match) > 0)
@@ -45,7 +45,7 @@ stan_starts_with <- function (match, ignore.case = TRUE,pars = peek_pars()) {
 }
 
 #' @export
-#' @rdname stan_select_partials
+#' @rdname stan_partials
 stan_ends_with <- function (match, ignore.case = TRUE,pars = peek_pars()) {
   
   stopifnot(rlang::is_string(match), nchar(match) > 0)

@@ -2,32 +2,32 @@
 % Please edit documentation in R/stan_select.R
 \name{stan_select}
 \alias{stan_select}
-\title{FUNCTION_TITLE}
+\title{Select parameters by name}
 \usage{
 stan_select(object, ...)
 }
 \arguments{
-\item{object}{PARAM_DESCRIPTION}
+\item{object}{a stanfit object}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{One or more unquoted expressions separated by commas}
 }
 \value{
-OUTPUT_DESCRIPTION
+stanfit object
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
+Choose variables from a stanfit object
 }
 \examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+set.seed(123)
+rats <- rats_example()
+
+rats\%>\%stan_select(mu_beta)
+
+rats\%>\%stan_select(mu_beta,beta)
+
+rats\%>\%stan_select(!!!rlang::syms(c('mu_beta','mu_alpha')))
+
 }
 \seealso{
-\code{\link[rlang]{quotation}},\code{\link[rlang]{quo_label}}
-\code{\link[purrr]{map}}
+\link[rlang:quotation]{quotation}, \link[rlang:quo_label]{quo_label}, \link[purrr:map]{map}
 }

@@ -1,20 +1,22 @@
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param object PARAM_DESCRIPTION
-#' @param ... PARAM_DESCRIPTION
-#' @param chain PARAM_DESCRIPTION, Default: 1
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' @title Return post-warmup samples with matching conditions
+#' @description Use stan_filter() to choose indicies of samples across parameters 
+#'   where conditions are true.
+#' @param object stanfit object
+#' @param \dots Logical predicates defined in terms of the parameters in object
+#' @param chain numeric, chain to apply filter predicated on, Default: 1
+#' @return stanfit object
 #' @examples 
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @seealso 
-#'  \code{\link[rlang]{quo_squash}},\code{\link[rlang]{quotation}}
-#'  \code{\link[stringi]{stri_extract_all}}
-#'  \code{\link[purrr]{keep}},\code{\link[purrr]{flatten}},\code{\link[purrr]{map}}
+#' set.seed(123)
+#' 
+#' rats <- rats_example()
+#' 
+#' rats%>%
+#'   stan_select(mu_alpha,mu_beta)
+#'   
+#' rats%>%
+#'   stan_select(mu_alpha,mu_beta)%>%
+#'   stan_filter(mu_beta < 6)
+#'   
 #' @rdname stan_filter
 #' @export 
 #' @importFrom rlang quo_squash quo
@@ -29,9 +31,16 @@ stan_filter <- function(object, ...,chain = 1){
   
   squish <- rlang::quo_squash(rlang::quo(...))
   
-  idcs <- stringi::stri_extract_all_regex(as.character(squish),pattern = '`(.*?)`')%>%
+  idcs_fnames_oi <- stringi::stri_extract_all_regex(as.character(squish),pattern = '`(.*?)`')%>%
     purrr::discard(is.na)%>%
     purrr::flatten_chr()
+  
+  idcs_pars_oi <- intersect(as.character(squish),stan_names(object))
+  
+  idcs <- c(idcs_pars_oi,idcs_fnames_oi)
+  
+  if(!length(idcs))
+    return(message('no pars selected'))
   
   samp_df <- purrr::map_df(object@sim$samples[chain],.f=function(x,idc,warm_x){
     ret <- purrr::map_dfc(x[gsub('`','',idc)],identity)

@@ -18,12 +18,14 @@ It is very powerful to use with [`tidybayes`](#tidybayes) verbs to
 manipulate the shape of the output.
 
 > Disclaimer: this is experimental, use deliberately, with caution and
-> not on client projects
+> not on client
+projects
+
+[proposal](https://docs.google.com/document/d/1_xFfVPPmPMQoFwpyGoL4N6kGNXLY0hZSEtmSiY03IXY/edit)
+for tools committee
 
 ## TODO
 
-  - Construct proposal for tools committee
-  - Fill in documentation skeletons
   - Add unit tests
 
 ## Installation

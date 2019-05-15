@@ -24,13 +24,11 @@ It is very powerful to use with [`tidybayes`](#tidybayes) verbs to manipulate th
 
 > Disclaimer: this is experimental, use deliberately, with caution and not on client projects
 
-## TODO
+[proposal](https://docs.google.com/document/d/1_xFfVPPmPMQoFwpyGoL4N6kGNXLY0hZSEtmSiY03IXY/edit) for tools committee
 
-  - Construct proposal for tools committee
-  - Fill in documentation skeletons
+## TODO
   - Add unit tests
   
-
 ## Installation
 
 You can install shredder from `GHE` with:
