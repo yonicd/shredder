@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • shredder</title>
+<title>Function reference • covrpage</title>
 
 <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
 
@@ -60,8 +60,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">shredder</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <a class="navbar-link" href="../index.html">covrpage</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
       </span>
     </div>
 
@@ -76,12 +76,21 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../articles/index.html">Articles</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://ghe.metrumrg.com/internal-projects/shredder">
     <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://twitter.com/MetrumRG">
+    <span class="fa fa-lg fa-twitter"></span>
      
   </a>
 </li>
@@ -111,46 +120,36 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <h2 id="section-selecting-paramters" class="hasAnchor"><a href="#section-selecting-paramters" class="anchor"></a>Selecting Paramters</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="peek_pars.html">peek_pars()</a></code> </p>
+          <p><code><a href="stan_partials.html">stan_contains()</a></code> <code><a href="stan_partials.html">stan_starts_with()</a></code> <code><a href="stan_partials.html">stan_ends_with()</a></code> </p>
         </td>
-        <td><p>Access stored pars for stan partials</p></td>
+        <td><p>Partial match functions for stanfit objects</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="pipe.html">%>%</a></code> </p>
+          <p><code><a href="stan_select.html">stan_select()</a></code> </p>
         </td>
-        <td><p>Pipe operator</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rats_example.html">rats_example()</a></code> </p>
-        </td>
-        <td><p>Rats model</p></td>
-      </tr><tr>
+        <td><p>Select parameters by name</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-filtering-post-warmup-samples" class="hasAnchor"><a href="#section-filtering-post-warmup-samples" class="anchor"></a>Filtering Post-Warmup Samples</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="stan_filter.html">stan_filter()</a></code> </p>
         </td>
         <td><p>Return post-warmup samples with matching conditions</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="stan_names.html">stan_names()</a></code> </p>
-        </td>
-        <td><p>The Par Names of a Stanfit Object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="stan_partials.html">stan_contains()</a></code> <code><a href="stan_partials.html">stan_starts_with()</a></code> <code><a href="stan_partials.html">stan_ends_with()</a></code> </p>
-        </td>
-        <td><p>Partial match functions for stanfit objects</p></td>
       </tr><tr>
         
         <td>
@@ -160,21 +159,43 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="stan_select.html">stan_select()</a></code> </p>
-        </td>
-        <td><p>Select parameters by name</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="stan_slice.html">stan_slice()</a></code> </p>
         </td>
         <td><p>Choose post-warumps samples by position</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-shredder-utilities" class="hasAnchor"><a href="#section-shredder-utilities" class="anchor"></a>Shredder Utilities</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="stan_names.html">stan_names()</a></code> </p>
+        </td>
+        <td><p>The Par Names of a Stanfit Object</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="stan_split.html">stan_split()</a></code> </p>
         </td>
         <td><p>split stanfit object into smaller pieces</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-examples" class="hasAnchor"><a href="#section-examples" class="anchor"></a>Examples</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="rats_example.html">rats_example()</a></code> </p>
+        </td>
+        <td><p>Rats model</p></td>
       </tr>
     </tbody>
     </table>
@@ -183,7 +204,10 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-selecting-paramters">Selecting Paramters</a></li>
+      <li><a href="#section-filtering-post-warmup-samples">Filtering Post-Warmup Samples</a></li>
+      <li><a href="#section-shredder-utilities">Shredder Utilities</a></li>
+      <li><a href="#section-examples">Examples</a></li>
     </ul>
   </div>
 </div>

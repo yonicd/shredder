@@ -18,6 +18,7 @@
 #'   stan_filter(mu_beta < 6)
 #'   
 #' @rdname stan_filter
+#' @family filtering
 #' @export 
 #' @importFrom rlang quo_squash quo
 #' @importFrom stringi stri_extract_all_regex

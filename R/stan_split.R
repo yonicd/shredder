@@ -15,6 +15,7 @@
 #' @seealso 
 #'  [stan_slice][shredder::stan_slice]
 #' @rdname stan_split
+#' @family utility
 #' @export 
 #' @importFrom purrr map_dbl map
 stan_split <- function(object, ncut = 10, inc_warmup = TRUE){

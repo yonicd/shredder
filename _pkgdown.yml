@@ -1,1 +1,33 @@
+title: covrpage
+
 destination: docs
+
+development:
+  mode: auto
+
+navbar:
+  structure:
+    left:  [home, reference, articleindex, news]
+    right: [github, twitter]
+  components:
+    articles: ~
+    articleindex:
+      text: Articles
+      href: articles/index.html
+    twitter:
+      icon: fa-lg fa-twitter
+      href: http://twitter.com/MetrumRG
+
+reference:
+  - title: "Selecting Paramters"
+    contents:
+      - has_concept("subsetting")
+  - title: "Filtering Post-Warmup Samples"
+    contents:
+      - has_concept("filtering")
+  - title: "Shredder Utilities"
+    contents:
+      - has_concept("utility")
+  - title: "Examples"
+    contents:
+      - has_concept("examples")

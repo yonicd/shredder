@@ -18,3 +18,7 @@ character
 \description{
 Functions to get the names of a stanfit object.
 }
+\seealso{
+Other utility: \code{\link{stan_split}}
+}
+\concept{utility}
