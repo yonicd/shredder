@@ -25,7 +25,8 @@ rats_example <- function(seed=123){
     }
   }
 
-  attachNamespace('rstan')
+  if(!('package:rstan' %in% search()))
+    attachNamespace('rstan')
   
   ret <- rstan::stan(
     file  = system.file('rats.stan',package='shredder'),

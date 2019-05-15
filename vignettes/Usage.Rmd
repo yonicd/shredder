@@ -27,53 +27,12 @@ library(shredder)
 library(rstan)
 ```
 
-```{r}
-objsize <- function(x){
-  sprintf(
-    'Object Size: %s',
-    format(object.size(x),units = 'auto')
-  )
-} 
-```
-
-
-```{r}
-
-excode <- '
-  transformed data {
-    real y[20];
-    y[1] = 0.5796;  y[2] = 0.2276;   y[3]  = -0.2959; 
-    y[4] = -0.3742; y[5] = 0.3885;   y[6]  = -2.1585;
-    y[7] = 0.7111;  y[8] = 1.4424;   y[9]  = 2.5430; 
-    y[10] = 0.3746; y[11] = 0.4773;  y[12] = 0.1803; 
-    y[13] = 0.5215; y[14] = -1.6044; y[15] = -0.6703; 
-    y[16] = 0.9459; y[17] = -0.382;  y[18] = 0.7619;
-    y[19] = 0.1006; y[20] = -1.7461;
-  }
-  parameters {
-    real mu;
-    real<lower=0, upper=10> sigma;
-    vector[2] z[3];
-    real<lower=0> alpha;
-  } 
-  model {
-    y ~ normal(mu, sigma);
-    for (i in 1:3) 
-      z[i] ~ normal(0, 1);
-    alpha ~ exponential(2);
-  } 
-'
-
-```
-
-```{r,results='hide',cache = TRUE}
-fit <- rstan::stan(model_code = excode, iter = 500, verbose = FALSE)
+```{r,results='hide',warning=FALSE,message=FALSE}
+rats <- shredder::rats_example()
 ```
 
 ```{r}
-objsize(fit)
-
-fit
+rats
 ```
 
 ## Pars
@@ -81,48 +40,38 @@ fit
 ### Names
 
 ```{r}
-fit%>%stan_names()
+rats%>%
+  stan_names()
 
-fit%>%stan_names(expand = TRUE)
+rats%>%
+  stan_names(expand = TRUE)
 ```
 
 ### Select
 
 ```{r}
-fit1 <- fit%>%
-  stan_select(mu)
+rats%>%
+  stan_select(mu_alpha)
 
-objsize(fit1)
+rats%>%
+  stan_select(mu_alpha,mu_beta)
 
-fit1
-
-fit2 <- fit%>%
-  stan_select(mu,sigma)
-
-objsize(fit2)
-
-fit2
-
-fit3 <- fit%>%
-  stan_select(!!!rlang::syms(c('z','alpha')))
-
-objsize(fit3)
-
-fit3
+rats%>%
+  stan_select(!!!rlang::syms(c('mu_alpha','mu_beta')))
 
 ```
 
 ### Select with Partials
 
 ```{r}
-fit%>%
-  stan_select(stan_contains('z'))
+rats%>%
+  stan_select(stan_contains('alpha'))
 
-fit%>%
-  stan_select(stan_ends_with('a'))
+rats%>%
+  stan_select(stan_ends_with('0'))
 
-fit%>%
-  stan_select(mu,stan_ends_with('a'))
+rats%>%
+  stan_select(mu_alpha,stan_ends_with('0'))
 ```
 
 ## Post-warmup samples
@@ -131,72 +80,51 @@ fit%>%
 
 ```{r}
 
-  fit4 <- fit%>%
+  rats%>%
     stan_slice(1:50,inc_warmup = TRUE)
 
-  objsize(fit4)
-
-  fit4
-
-  fit5 <- fit%>%
+  rats%>%
     stan_slice(1:50,inc_warmup = FALSE)
 
-  objsize(fit5)
-  
-  fit5
-  
-  fit6 <- fit%>%
+  rats%>%
     stan_sample_n(100)
 
-  objsize(fit6)
-  
-  fit6
-  
-  fit7 <- fit%>%
+  rats%>%
     stan_sample_frac(0.5)
-  
-  objsize(fit7)
-  
-  fit7
+
 ```
 
 ### Select and Slice
 
 ```{r}
-  fit8 <- fit%>%
-    stan_select(mu)%>%
+  rats%>%
+    stan_select(mu_alpha)%>%
     stan_slice(1:50)
 
-  fit8
+```
+
+### Filter
+
+```{r}
+rats%>%
+   stan_select(mu_alpha,mu_beta)
+   
+ rats%>%
+   stan_select(mu_alpha,mu_beta)%>%
+   stan_filter(mu_beta < 6)
 ```
 
 ### Split
 
 ```{r}
 
-fit9 <- fit%>%
+rats%>%
     stan_split(inc_warmup = TRUE)
 
-length(fit9)
-
-purrr::map_chr(fit9,objsize)
-
-fit9[[1]]
-
-fit10 <- fit%>%
+rats%>%
     stan_split(inc_warmup = FALSE)
 
-purrr::map_chr(fit10,objsize)
-
-fit10[[1]]
-
-fit11 <- fit%>%
+rats%>%
     stan_split(ncut = 4, inc_warmup = FALSE)
-
-length(fit11)
-
-purrr::map_chr(fit11,objsize)
-
-fit11[[1]]
 
 ```
