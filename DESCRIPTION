@@ -1,7 +1,7 @@
 Package: shredder
 Type: Package
 Title: Tidylike Verbs for Stan
-Version: 0.0.3
+Version: 0.0.4
 Authors@R: person("Jonathan Sidi",role=c("aut","cre"),email="yonis@metrumrg.com")
 Description: Verbs to manipulate stanfit class objects returned by rstan.
 Depends: R (>= 3.2.0)
