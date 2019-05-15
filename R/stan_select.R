@@ -1,18 +1,20 @@
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param object PARAM_DESCRIPTION
-#' @param ... PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' @title Select parameters by name
+#' @description Choose variables from a stanfit object
+#' @param object a stanfit object
+#' @param ... One or more unquoted expressions separated by commas
+#' @return stanfit object
 #' @examples 
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' set.seed(123)
+#' rats <- rats_example()
+#' 
+#' rats%>%stan_select(mu_beta)
+#' 
+#' rats%>%stan_select(mu_beta,beta)
+#' 
+#' rats%>%stan_select(!!!rlang::syms(c('mu_beta','mu_alpha')))
+#' 
 #' @seealso 
-#'  \code{\link[rlang]{quotation}},\code{\link[rlang]{quo_label}}
-#'  \code{\link[purrr]{map}}
+#' [quotation][rlang::quotation], [quo_label][rlang::quo_label], [map][purrr::map]
 #' @rdname stan_select
 #' @export 
 #' @importFrom rlang enquos quo_text eval_tidy

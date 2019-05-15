@@ -10,5 +10,5 @@ peek_pars()
 character
 }
 \description{
-Access pars currently stored that \code{\link[shredder]{stan_select_partials}} use.
+Access pars currently stored that \link[shredder:stan_partials]{stan_partials} use.
 }

@@ -2,33 +2,37 @@
 % Please edit documentation in R/stan_slice.R
 \name{stan_slice}
 \alias{stan_slice}
-\title{FUNCTION_TITLE}
+\title{Choose post-warumps samples by position}
 \usage{
 stan_slice(object, ..., inc_warmup = TRUE)
 }
 \arguments{
-\item{object}{PARAM_DESCRIPTION}
+\item{object}{stanfit object}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{Integer samples values}
 
-\item{inc_warmup}{PARAM_DESCRIPTION, Default: TRUE}
+\item{inc_warmup}{logical, include warmup in output, Default: TRUE}
 }
 \value{
-OUTPUT_DESCRIPTION
+stanfit object
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
+Choose post-warumps samples by their ordinal
+position from each parameter in a stanfit object
 }
 \examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+set.seed(123)
+rats <- rats_example()
+
+rats\%>\%
+  stan_select(mu_alpha)\%>\%
+  stan_slice(1:30)
+
+rats\%>\%
+  stan_select(mu_alpha)\%>\%
+  stan_slice(1:30,inc_warmup = FALSE)
+
 }
 \seealso{
-\code{\link[purrr]{map}}
+\link[purrr:map]{map}
 }

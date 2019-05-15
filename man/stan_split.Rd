@@ -2,33 +2,32 @@
 % Please edit documentation in R/stan_split.R
 \name{stan_split}
 \alias{stan_split}
-\title{FUNCTION_TITLE}
+\title{split stanfit object into smaller pieces}
 \usage{
 stan_split(object, ncut = 10, inc_warmup = TRUE)
 }
 \arguments{
-\item{object}{PARAM_DESCRIPTION}
+\item{object}{stanfit}
 
-\item{ncut}{PARAM_DESCRIPTION, Default: 10}
+\item{ncut}{numeric, number of smaller objects to create, Default: 10}
 
-\item{inc_warmup}{PARAM_DESCRIPTION, Default: TRUE}
+\item{inc_warmup}{logical, include warmup in the smaller objects, Default: TRUE}
 }
 \value{
-OUTPUT_DESCRIPTION
+list of stanfits objects
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
+Split stanfit post-warmup samples into smaller objects to
+facilitate parallel post processing.
 }
 \examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+rats\%>\%
+  stan_split(ncut = 4)
+  
+rats\%>\%
+  stan_split(ncut = 4,inc_warmup = FALSE)
+
 }
 \seealso{
-\code{\link[purrr]{map}}
+\link[shredder:stan_slice]{stan_slice}
 }

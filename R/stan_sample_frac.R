@@ -1,18 +1,4 @@
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param object PARAM_DESCRIPTION
-#' @param size PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples 
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @seealso 
-#'  \code{\link[purrr]{map}}
-#' @rdname stan_sample_frac
+#' @rdname stan_sample
 #' @export 
 #' @importFrom purrr map
 stan_sample_frac <- function(object,size){
