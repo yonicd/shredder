@@ -2,3 +2,12 @@
 
 language: R
 cache: packages
+
+script:
+- wget --no-check-certificate https://s3.amazonaws.com/metrumrg-devops/keys-and-certs/ca-certs/star_metrum/__metrumrg_com.ca-bundle
+- sudo sh -c 'cat ./__metrumrg_com.ca-bundle >> /etc/ssl/certs/ca-certificates.crt'
+- Rscript -e 'devtools::check()'
+
+env:
+  global:
+    - OCTOKIT_API_ENDPOINT="https://ghe.metrumrg.com/api/v3"
