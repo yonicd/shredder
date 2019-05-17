@@ -56,3 +56,11 @@ clear_summary <- function(object){
   
   object
 }
+
+#' @importFrom purrr rerun
+reset_perm <- function(object,inits_x){
+  nx <- length(inits_x)
+  nc <- length(object@sim$permutation)
+  object@sim$permutation <- purrr::rerun(nc,sample(seq_len(nx),size = nx))
+  object
+}
