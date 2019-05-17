@@ -19,7 +19,7 @@
 #' @rdname stan_slice
 #' @family filtering
 #' @export 
-#' @importFrom purrr map
+#' @importFrom purrr map rerun
 stan_slice <- function(object,..., inc_warmup = TRUE){
   
   check_stanfit(object)
@@ -64,8 +64,10 @@ stan_slice <- function(object,..., inc_warmup = TRUE){
   },i = object@sim$iter,inc_warmup = inc_warmup)
   
   object@inits <- purrr::map(object@inits,stan_trim_postwarm,idx=inits_x)
-  object@sim$permutation <- purrr::map(object@sim$permutation,.f = function(y,idx) y[idx] , idx=inits_x)
   
+  #reset permuations
+  object@sim$permutation <- purrr::rerun(length(object@sim$permutation),sample(inits_x,size = length(inits_x)))
+
   object@sim$samples <- purrr::map(object@sim$samples,stan_subset,idx=samp)
   object@sim$n_save <- rep(object@sim$iter,length(object@sim$n_save))
 

@@ -56,7 +56,7 @@ stan_sample_frac <- function(object, size, weight = NULL, inc_warmup = TRUE){
   
 }
 
-#' @importFrom purrr map
+#' @importFrom purrr map rerun
 stan_sample <- function(object, samp, warm_x, inc_warmup){
   
   inits_x <- samp - length(warm_x)
@@ -89,8 +89,8 @@ stan_sample <- function(object, samp, warm_x, inc_warmup){
                                  inc_warmup = inc_warmup)
   
   object@inits           <- purrr::map(object@inits,stan_trim_postwarm,idx=inits_x)
-  object@sim$permutation <- purrr::map(object@sim$permutation,
-                                       .f = function(y,idx) y[idx] , idx=inits_x)
+  
+  object@sim$permutation <- purrr::rerun(length(object@sim$permutation),sample(inits_x,size = length(inits_x)))
   
   object@sim$samples     <- purrr::map(object@sim$samples,stan_subset,idx=samp)
   object@sim$n_save      <- rep(object@sim$iter,length(object@sim$n_save))
