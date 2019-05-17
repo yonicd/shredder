@@ -32,7 +32,7 @@ rats\%>\%
   
 }
 \seealso{
-Other filtering: \code{\link{stan_sample_frac}},
+Other filtering: \code{\link{stan_sample_n}},
   \code{\link{stan_slice}}
 }
 \concept{filtering}

@@ -38,3 +38,6 @@ articles:
   - title: "Extending"
     contents:
       - tidybayes
+  - title: "Unit Tests"
+    contents: 
+      - tests_and_coverage

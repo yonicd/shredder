@@ -48,3 +48,11 @@ stan_names <- function(x,expand = FALSE){
     
   }
 }
+
+clear_summary <- function(object){
+  
+  if(exists('summary',envir = object@`.MISC`))
+    rm('summary',envir = object@`.MISC`)
+  
+  object
+}

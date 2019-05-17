@@ -23,6 +23,7 @@
 stan_slice <- function(object,..., inc_warmup = TRUE){
   
   check_stanfit(object)
+  object <- clear_summary(object)
   
   dots <- list(...)[[1]]
   
@@ -37,9 +38,6 @@ stan_slice <- function(object,..., inc_warmup = TRUE){
     dots <- dots[check_dots]
   }
   
-  if(exists('summary',envir = object@`.MISC`))
-    rm('summary',envir = object@`.MISC`)
-  
   if(inc_warmup){
 
     samp <- c(warm_x,iter_x[dots])
@@ -52,6 +50,7 @@ stan_slice <- function(object,..., inc_warmup = TRUE){
     object@sim$iter <- length(samp)
     object@sim$warmup <- 0
     object@sim$warmup2 <- rep(object@sim$warmup,object@sim$chains)
+    
   }
   
   
