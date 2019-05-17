@@ -4,8 +4,11 @@
 # shredder
 
 <!-- badges: start -->
+
 [![Build
 Status](https://travis.metrumrg.com/yoni/shredder.svg?token=tfrDuc83e84K9CqJKyCs&branch=master)](https://travis.metrumrg.com/yoni/shredder)
+[![Covrpage
+Summary](https://img.shields.io/badge/covrpage-Last_Build_2019_05_17-brightgreen.svg)](http://tinyurl.com/y3zvyrpx)
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
@@ -24,10 +27,6 @@ projects
 
 [proposal](https://docs.google.com/document/d/1_xFfVPPmPMQoFwpyGoL4N6kGNXLY0hZSEtmSiY03IXY/edit)
 for tools committee
-
-## TODO
-
-  - Add unit tests
 
 ## Installation
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sample n post-warumps samples from a stanfit object — stan_sample_frac • shredder</title>
+<title>Sample n post-warumps samples from a stanfit object — stan_sample_n • shredder</title>
 
 <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
 
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Sample n post-warumps samples from a stanfit object — stan_sample_frac" />
+<meta property="og:title" content="Sample n post-warumps samples from a stanfit object — stan_sample_n" />
 
-<meta property="og:description" content="This is a wrapper around sample.int() to make it easy to select
+<meta property="og:description" content="This is a wrapper around sample() to make it easy to select
 random samples from each parameter in a stanfit object." />
 <meta name="twitter:card" content="summary" />
 
@@ -65,7 +65,7 @@ random samples from each parameter in a stanfit object." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shredder</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5</span>
       </span>
     </div>
 
@@ -111,20 +111,20 @@ random samples from each parameter in a stanfit object." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Sample n post-warumps samples from a stanfit object</h1>
-    <small class="dont-index">Source: <a href='https://ghe.metrumrg.com/internal-projects/shredder/blob/master/R/stan_sample_frac.R'><code>R/stan_sample_frac.R</code></a>, <a href='https://ghe.metrumrg.com/internal-projects/shredder/blob/master/R/stan_sample_n.R'><code>R/stan_sample_n.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://ghe.metrumrg.com/internal-projects/shredder/blob/master/R/stan_sample.R'><code>R/stan_sample.R</code></a></small>
     <div class="hidden name"><code>stan_sample.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This is a wrapper around sample.int() to make it easy to select
+    <p>This is a wrapper around sample() to make it easy to select
 random samples from each parameter in a stanfit object.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>stan_sample_frac</span>(<span class='no'>object</span>, <span class='no'>size</span>)
+    <pre class="usage"><span class='fu'>stan_sample_n</span>(<span class='no'>object</span>, <span class='no'>size</span>, <span class='kw'>weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>inc_warmup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>stan_sample_n</span>(<span class='no'>object</span>, <span class='no'>size</span>)</pre>
+<span class='fu'>stan_sample_frac</span>(<span class='no'>object</span>, <span class='no'>size</span>, <span class='kw'>weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>inc_warmup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,6 +138,15 @@ random samples from each parameter in a stanfit object.</p>
       <td><p>numeric, for shredder size of sample, for
 shredder fraction of samples to sample.</p></td>
     </tr>
+    <tr>
+      <th>weight, </th>
+      <td><p>a vector of probability weights for obtaining the elements of
+the vector being sampled.</p></td>
+    </tr>
+    <tr>
+      <th>inc_warmup</th>
+      <td><p>logical, include warmup in output, Default: TRUE</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -146,8 +155,7 @@ shredder fraction of samples to sample.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></p>
-<p>Other filtering: <code><a href='stan_filter.html'>stan_filter</a></code>,
+    <div class='dont-index'><p>Other filtering: <code><a href='stan_filter.html'>stan_filter</a></code>,
   <code><a href='stan_slice.html'>stan_slice</a></code></p></div>
     
 
@@ -163,10 +171,36 @@ shredder fraction of samples to sample.</p></td>
 #&gt;            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
 #&gt; mu_alpha 242.33     0.2 2.61 236.69 240.74 242.63 243.77 247.18   177 0.98
 #&gt; 
-#&gt; Samples were drawn using  at Thu May 16 15:57:15 2019.
+#&gt; Samples were drawn using  at Fri May 17 08:32:20 2019.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
-#&gt; convergence, Rhat=1).</div><div class='input'>  
+#&gt; convergence, Rhat=1).</div><div class='input'>
+<span class='no'>rats</span><span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='stan_select.html'>stan_select</a></span>(<span class='no'>mu_alpha</span>)<span class='kw'>%&gt;%</span>
+  <span class='fu'>stan_sample_frac</span>(<span class='fl'>0.5</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
+#&gt; 4 chains, each with iter=1500; warmup=1000; thin=1; 
+#&gt; post-warmup draws per chain=500, total post-warmup draws=2000.
+#&gt; 
+#&gt;            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
+#&gt; mu_alpha 242.47    0.06 2.68 236.91 240.67 242.41 244.31 247.64  2006    1
+#&gt; 
+#&gt; Samples were drawn using  at Fri May 17 08:32:20 2019.
+#&gt; For each parameter, n_eff is a crude measure of effective sample size,
+#&gt; and Rhat is the potential scale reduction factor on split chains (at 
+#&gt; convergence, Rhat=1).</div><div class='input'>
+<span class='no'>rats</span><span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='stan_select.html'>stan_select</a></span>(<span class='no'>mu_alpha</span>)<span class='kw'>%&gt;%</span>
+  <span class='fu'>stan_sample_n</span>(<span class='fl'>30</span>,<span class='kw'>inc_warmup</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
+#&gt; 4 chains, each with iter=30; warmup=0; thin=1; 
+#&gt; post-warmup draws per chain=30, total post-warmup draws=120.
+#&gt; 
+#&gt;            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
+#&gt; mu_alpha 242.37    0.24 2.76 237.76 240.43 242.23 244.04 248.17   136 0.99
+#&gt; 
+#&gt; Samples were drawn using  at Fri May 17 08:32:20 2019.
+#&gt; For each parameter, n_eff is a crude measure of effective sample size,
+#&gt; and Rhat is the potential scale reduction factor on split chains (at 
+#&gt; convergence, Rhat=1).</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

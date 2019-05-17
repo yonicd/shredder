@@ -38,6 +38,10 @@ rats\%>\%
   stan_select(mu_alpha)\%>\%
   stan_sample_frac(0.5)
 
+rats\%>\%
+  stan_select(mu_alpha)\%>\%
+  stan_sample_n(30,inc_warmup = FALSE)
+
 }
 \seealso{
 Other filtering: \code{\link{stan_filter}},
