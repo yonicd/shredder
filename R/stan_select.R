@@ -31,11 +31,16 @@ stan_select <- function(object, ...){
     FUN = function(x,data){
       
       ret <- rlang::quo_text(x)
-      
+
       if(grepl('(stan_contains|stan_starts_with|stan_ends_with)',ret)){
         ret <- rlang::eval_tidy(x)
       }
-        
+
+      # remove back ticks from templates of "`par[index]`" to be "par[index]"
+      # this is needed for quot_text output
+      if(grepl('(?=.*`)(?=.*\\[(.*?)\\])','`alpha[1]`',perl = TRUE)){
+        ret <- gsub('`','',ret)
+      }
       
       ret
     }

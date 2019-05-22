@@ -26,6 +26,14 @@ testthat::describe('names',{
     testthat::expect_equal(x@model_pars,c('mu_alpha','mu_beta'))
   })
 
+  
+  it('regex character pars',{
+    idx <- sprintf('alpha[%s]',1:5)
+    x <- rats%>%stan_select(!!!rlang::syms(idx))
+    testthat::expect_equal(x@sim$fnames_oi,idx)
+  })
+  
+
   it('remove summary',{
     rstan::summary(rats)
     x <- rats%>%stan_select(mu_alpha)

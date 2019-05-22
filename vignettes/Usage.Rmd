@@ -63,6 +63,10 @@ rats%>%
 rats%>%
   stan_select(alpha[1],alpha[2])
 
+
+rats%>%
+  stan_select(!!!rlang::syms(sprintf('alpha[%s]',1:5)))
+
 ```
 
 ### Select with Partials
