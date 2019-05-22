@@ -1,18 +1,27 @@
 testthat::context('select')
 rats <- readRDS('../files/rats.Rds')
 testthat::describe('names',{
-  
-  it('single name',{
+
+  it('no pars',{
+    testthat::expect_message(rats%>%stan_select(),regexp = 'no pars selected')
+  })
+    
+  it('single par',{
     x <- rats%>%stan_select(mu_alpha)
     testthat::expect_equal(x@model_pars,'mu_alpha')
   })
   
-  it('multiple names',{
+  it('multiple pars',{
     x <- rats%>%stan_select(mu_alpha,mu_beta)
     testthat::expect_equal(x@model_pars,c('mu_alpha','mu_beta'))
   })
   
-  it('character names',{
+  it('par index',{
+    x <- rats%>%stan_select(alpha[1])
+    testthat::expect_equal(x@sim$fnames_oi,c('alpha[1]'))
+  })
+  
+  it('character pars',{
     x <- rats%>%stan_select(!!! rlang::syms(c('mu_alpha','mu_beta')))
     testthat::expect_equal(x@model_pars,c('mu_alpha','mu_beta'))
   })
@@ -51,4 +60,13 @@ testthat::describe('partials',{
     testthat::expect_equal(x@model_pars,c('alpha','mu_alpha','mu_beta'))
   })
   
+  it('par regex index',{
+    x <- rats%>%stan_select(stan_contains('alpha\\[1\\]'))
+    testthat::expect_equal(x@sim$fnames_oi,c('alpha[1]'))
+  })
+  
+  it('par regex multiple index',{
+    x <- rats%>%stan_select(stan_contains('alpha\\[[1-2]\\]'))
+    testthat::expect_equal(x@sim$fnames_oi,c('alpha[1]','alpha[2]'))
+  })
 })

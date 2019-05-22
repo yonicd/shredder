@@ -25,7 +25,13 @@ stan_slice <- function(object,..., inc_warmup = TRUE){
   check_stanfit(object)
   object <- clear_summary(object)
   
-  dots <- list(...)[[1]]
+  dots_list <- list(...)
+  
+  if(!length(dots_list)){
+    return(object)  
+  }
+  
+  dots <- dots_list[[1]]
   
   warm_x <- seq_len(object@sim$warmup)
   iter_x <- seq_len(object@sim$iter)[-warm_x]
