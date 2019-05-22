@@ -59,6 +59,10 @@ rats%>%
 rats%>%
   stan_select(!!!rlang::syms(c('mu_alpha','mu_beta')))
 
+
+rats%>%
+  stan_select(alpha[1],alpha[2])
+
 ```
 
 ### Select with Partials
@@ -68,10 +72,16 @@ rats%>%
   stan_select(stan_contains('alpha'))
 
 rats%>%
+  stan_select(stan_contains('alpha\\[1\\]'))
+
+rats%>%
+  stan_select(stan_contains('alpha\\[[1-9]\\]'))
+
+rats%>%
   stan_select(stan_ends_with('0'))
 
 rats%>%
-  stan_select(mu_alpha,stan_ends_with('0'))
+  stan_select(mu_alpha,stan_ends_with('0'),beta[1])
 ```
 
 ## Post-warmup samples
