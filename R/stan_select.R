@@ -23,15 +23,19 @@ stan_select <- function(object, ...){
   
   check_stanfit(object)
   
-  assign('pars',object@sim$pars_oi,envir = pars_env)
+  all_pars <- union(object@sim$pars_oi,object@sim$fnames_oi)
+  
+  assign('pars',all_pars,envir = pars_env)
   
   pars <- unlist(lapply(rlang::enquos(...),{
     FUN = function(x,data){
       
       ret <- rlang::quo_text(x)
       
-      if(grepl('(stan_contains|stan_starts_with|stan_ends_with)',ret))
+      if(grepl('(stan_contains|stan_starts_with|stan_ends_with)',ret)){
         ret <- rlang::eval_tidy(x)
+      }
+        
       
       ret
     }
@@ -41,10 +45,17 @@ stan_select <- function(object, ...){
   if(!length(pars))
     return(message('no pars selected'))
   
+  pars <- unique(pars)
+  
+  fnames_object <- find_fnames(object,pars)
+  
+  object <- fnames_object$object
+  pars <- fnames_object$pars
+  
   object@sim$pars_oi <- intersect(object@sim$pars_oi,pars)
   object@sim$dims_oi <- object@sim$dims_oi[object@sim$pars_oi]
-  object@sim$fnames_oi <- grep(sprintf('^(%s)',paste0(pars,collapse = '|')),object@sim$fnames_oi,value = TRUE)
   object@sim$n_flatnames <- length(object@sim$fnames_oi)
+  
   
   object@inits <- purrr::map(object@inits,.f=function(x,y) x[y], y = pars)
   
