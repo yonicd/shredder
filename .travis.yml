@@ -13,6 +13,10 @@ r_packages:
 - roxygen2
 - devtools
 
+r_github_packages:
+- metrumresearchgroup/covrpage
+- metrumresearchgroup/pkgdown
+
 before_install:
 - Rscript Makevars.R
 
@@ -20,6 +24,20 @@ script:
 - wget --no-check-certificate https://s3.amazonaws.com/metrumrg-devops/keys-and-certs/ca-certs/star_metrum/__metrumrg_com.ca-bundle
 - sudo sh -c 'cat ./__metrumrg_com.ca-bundle >> /etc/ssl/certs/ca-certificates.crt'
 - Rscript -e 'devtools::check()'
+
+after_success:
+- Rscript -e 'devtools::install(); covrpage::covrpage_ci()'
+- Rscript -e 'pkgdown::build_site()'
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: "$GHE_PAT"
+  github-url: "ghe.metrumrg.com"
+  keep-history: true
+  local-dir: docs
+  on:
+    branch: master
 
 env:
   global:
