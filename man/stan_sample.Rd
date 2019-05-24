@@ -13,7 +13,7 @@ stan_sample_frac(object, size, weight = NULL, inc_warmup = TRUE)
 \item{object}{stanfit object}
 
 \item{size}{numeric, for \link[=stan_sample_n]{shredder} size of sample, for
-\link[=stan_frac]{shredder} fraction of samples to sample.}
+\link[=stan_sample_frac]{shredder} fraction of samples to sample.}
 
 \item{weight, }{a vector of probability weights for obtaining the elements of
 the vector being sampled.}
@@ -28,7 +28,7 @@ This is a wrapper around sample() to make it easy to select
 random samples from each parameter in a stanfit object.
 }
 \examples{
-rats <- rats_example()
+rats <- rats_example(nCores = 1)
 
 rats\%>\%
   stan_select(mu_alpha)\%>\%

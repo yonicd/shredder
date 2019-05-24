@@ -4,7 +4,7 @@
 \name{rat_data}
 \alias{rat_data}
 \title{rats model data}
-\format{A List containing 5 elements:
+\format{An object of class \code{"list"}:
 \describe{
 \item{\code{N}}{integer Number of subjects}
 \item{\code{T}}{integer Number of measurements}

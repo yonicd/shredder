@@ -4,7 +4,6 @@
 # shredder
 
 <!-- badges: start -->
-
 [![Build
 Status](https://travis.metrumrg.com/yoni/shredder.svg?token=tfrDuc83e84K9CqJKyCs&branch=master)](https://travis.metrumrg.com/yoni/shredder)
 [![Covrpage

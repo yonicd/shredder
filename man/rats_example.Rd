@@ -8,10 +8,12 @@
 \href{https://github.com/stan-dev/example-models/tree/master/bugs_examples/vol1/rats}{Data and Script}
 }
 \usage{
-rats_example(seed = 123)
+rats_example(seed = 123, nCores = pmin(parallel::detectCores(), 4))
 }
 \arguments{
 \item{seed}{numeric, seed for \link[rstan:stan]{rstan}, Default: 123}
+
+\item{nCores}{numeric, Maximum number of cores to use, Default: pmin(parallel::detectCores(),4)}
 }
 \value{
 stanfit object
@@ -20,8 +22,9 @@ stanfit object
 Run Rats data model
 }
 \examples{
-rats <- rats_example()
-rats
+  library(shredder)
+  rats <- rats_example(nCores = 1)
+  rats
 }
 \seealso{
 \link[rstan:stan]{rstan}

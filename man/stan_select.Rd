@@ -18,7 +18,7 @@ stanfit object
 Choose variables from a stanfit object
 }
 \examples{
-rats <- rats_example()
+rats <- rats_example(nCores = 1)
 
 rats\%>\%stan_select(mu_beta)
 

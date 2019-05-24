@@ -1,10 +1,12 @@
 #' @title Rats model
 #' @description Run Rats data model
 #' @param seed numeric, seed for [rstan][rstan::stan], Default: 123
+#' @param nCores numeric, Maximum number of cores to use, Default: pmin(parallel::detectCores(),4)
 #' @return stanfit object
 #' @examples 
-#' rats <- rats_example()
-#' rats
+#'   library(shredder)
+#'   rats <- rats_example(nCores = 1)
+#'   rats
 #' @seealso 
 #'  [rstan][rstan::stan]
 #'  [detectCores][parallel::detectCores]
@@ -15,8 +17,8 @@
 #' @export 
 #' @importFrom rstan stan
 #' @importFrom parallel detectCores
-rats_example <- function(seed=123){
-  
+rats_example <- function(seed=123, nCores = pmin(parallel::detectCores(),4)){
+
   if(exists('rats',envir = example_env)){
     if(exists('seed',envir = example_env)){
       if(seed==get('seed',envir = example_env)){
@@ -27,14 +29,11 @@ rats_example <- function(seed=123){
 
   if(!('package:rstan' %in% search()))
     attachNamespace('rstan')
-  
-  if(!('package:shredder' %in% search()))
-    attachNamespace('shredder')
-  
+
   ret <- rstan::stan(
     file  = system.file('rats.stan',package='shredder'),
     data  = rat_data,
-    cores = pmin(parallel::detectCores(),4),
+    cores = nCores,
     seed  = seed
   )
   

@@ -3,13 +3,13 @@
 #'  random samples from each parameter in a stanfit object.
 #' @param object stanfit object
 #' @param size numeric, for [shredder][stan_sample_n] size of sample, for 
-#'   [shredder][stan_frac] fraction of samples to sample.
+#'   [shredder][stan_sample_frac] fraction of samples to sample.
 #' @param weight, a vector of probability weights for obtaining the elements of
 #'  the vector being sampled.
 #' @param inc_warmup logical, include warmup in output, Default: TRUE
 #' @return stanfit
 #' @examples 
-#' rats <- rats_example()
+#' rats <- rats_example(nCores = 1)
 #' 
 #' rats%>%
 #'   stan_select(mu_alpha)%>%

@@ -2,8 +2,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
-^README\.Rmd$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
 ^\.travis\.yml$
+^Makevars\.R$
+^__metrumrg_com\.ca-bundle$

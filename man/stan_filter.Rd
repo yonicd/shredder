@@ -21,7 +21,7 @@ Use stan_filter() to choose indicies of samples across parameters
 where conditions are true.
 }
 \examples{
-rats <- rats_example()
+rats <- rats_example(nCores = 1)
 
 rats\%>\%
   stan_select(mu_alpha,mu_beta)

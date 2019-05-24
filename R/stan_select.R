@@ -4,7 +4,7 @@
 #' @param ... One or more unquoted expressions separated by commas
 #' @return stanfit object
 #' @examples 
-#' rats <- rats_example()
+#' rats <- rats_example(nCores = 1)
 #' 
 #' rats%>%stan_select(mu_beta)
 #' 

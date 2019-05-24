@@ -19,7 +19,7 @@ character
 Functions to get the names of a stanfit object.
 }
 \examples{
-rats <- rats_example()
+rats <- rats_example(nCores = 1)
 
 rats\%>\%stan_names()
 

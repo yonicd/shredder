@@ -6,7 +6,7 @@
 #' @param inc_warmup logical, include warmup in output, Default: TRUE
 #' @return stanfit object
 #' @examples 
-#' rats <- rats_example()
+#' rats <- rats_example(nCores = 1)
 #' 
 #' rats%>%
 #'   stan_select(mu_alpha)%>%

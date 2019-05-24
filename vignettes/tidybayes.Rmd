@@ -23,7 +23,7 @@ library(tidybayes)
 ## tidybayes
 
 ```{r,results='hide',warning=FALSE,message=FALSE}
-rats <- shredder::rats_example()
+rats <- shredder::rats_example(nCores = 1)
 ```
 
 ### Spread

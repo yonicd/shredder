@@ -6,7 +6,7 @@
 #' @param inc_warmup logical, include warmup in the smaller objects, Default: TRUE
 #' @return list of stanfits objects
 #' @examples 
-#' rats <- rats_example()
+#' rats <- rats_example(nCores = 1)
 #' 
 #' rats%>%
 #'   stan_split(ncut = 4)

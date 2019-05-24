@@ -24,7 +24,7 @@ stan_trim_postwarm <- function(x,idx){
 #' @param expand logical, if TRUE par names are returned including dimesnion 
 #'   indicies (fnames_oi), Default: FALSE
 #' @examples 
-#' rats <- rats_example()
+#' rats <- rats_example(nCores = 1)
 #' 
 #' rats%>%stan_names()
 #' 

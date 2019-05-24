@@ -6,7 +6,7 @@
 #' @param chain numeric, chain to apply filter predicated on, Default: 1
 #' @return stanfit object
 #' @examples 
-#' rats <- rats_example()
+#' rats <- rats_example(nCores = 1)
 #' 
 #' rats%>%
 #'   stan_select(mu_alpha,mu_beta)
