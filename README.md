@@ -1,6 +1,3 @@
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 # shredder
 
 <!-- badges: start -->
@@ -50,7 +47,7 @@ remotes::install_github(
       - post-warmup samples
           - `stan_slice` : extract specific samples by index
           - `stan_sample_n` : extract random n samples
-          - `stan_frac_n` : extract fraction of total samples
+          - `stan_sample_frac` : extract fraction of total samples
           - `stan_filter` : extract subset of samples conditional on
             filter of parameter values
           - `stan_split` : create a list with ncut slices of the samples
