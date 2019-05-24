@@ -26,5 +26,7 @@ rats
 \seealso{
 \link[rstan:stan]{rstan}
 \link[parallel:detectCores]{detectCores}
+
+Other examples: \code{\link{rat_data}}
 }
 \concept{examples}

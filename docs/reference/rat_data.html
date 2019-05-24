@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Choose post-warumps samples by position — stan_slice • shredder</title>
+<title>rats model data — rat_data • shredder</title>
 
 <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
 
@@ -32,10 +32,9 @@
 
 
 
-<meta property="og:title" content="Choose post-warumps samples by position — stan_slice" />
+<meta property="og:title" content="rats model data — rat_data" />
 
-<meta property="og:description" content="Choose post-warumps samples by their ordinal
-position from each parameter in a stanfit object" />
+<meta property="og:description" content="Data used in rats example model" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,89 +109,50 @@ position from each parameter in a stanfit object" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Choose post-warumps samples by position</h1>
-    <small class="dont-index">Source: <a href='https://ghe.metrumrg.com/internal-projects/shredder/blob/master/R/stan_slice.R'><code>R/stan_slice.R</code></a></small>
-    <div class="hidden name"><code>stan_slice.Rd</code></div>
+    <h1>rats model data</h1>
+    <small class="dont-index">Source: <a href='https://ghe.metrumrg.com/internal-projects/shredder/blob/master/R/rat_data-data.R'><code>R/rat_data-data.R</code></a></small>
+    <div class="hidden name"><code>rat_data.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Choose post-warumps samples by their ordinal
-position from each parameter in a stanfit object</p>
+    <p>Data used in rats example model</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>stan_slice</span>(<span class='no'>object</span>, <span class='no'>...</span>, <span class='kw'>inc_warmup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>object</th>
-      <td><p>stanfit object</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Integer samples values</p></td>
-    </tr>
-    <tr>
-      <th>inc_warmup</th>
-      <td><p>logical, include warmup in output, Default: TRUE</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <pre class="usage"><span class='no'>rat_data</span></pre>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>stanfit object</p>
+    <p>A List containing 5 elements:</p><dl class='dl-horizontal'>
+<dt><code>N</code></dt><dd><p>integer Number of subjects</p></dd>
+<dt><code>T</code></dt><dd><p>integer Number of measurements</p></dd>
+<dt><code>x</code></dt><dd><p>numeric Day of measurement</p></dd>
+<dt><code>Y</code></dt><dd><p>tibble Values of measurements</p></dd>
+<dt><code>xbar</code></dt><dd><p>numeric Mean days of measurements</p></dd>
+</dl>
+    
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p><a href='https://www.mrc-bsu.cam.ac.uk/wp-content/uploads/WinBUGS_Vol1.pdf'>Data Description</a>,
+<a href='https://github.com/stan-dev/example-models/tree/master/bugs_examples/vol1/rats'>Data and Script</a></p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other filtering: <code><a href='stan_filter.html'>stan_filter</a></code>,
-  <code><a href='stan_sample.html'>stan_sample_n</a></code></p></div>
+    <div class='dont-index'><p>Other examples: <code><a href='rats_example.html'>rats_example</a></code></p></div>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>rats</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rats_example.html'>rats_example</a></span>()
-
-<span class='no'>rats</span><span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='stan_select.html'>stan_select</a></span>(<span class='no'>mu_alpha</span>)<span class='kw'>%&gt;%</span>
-  <span class='fu'>stan_slice</span>(<span class='fl'>1</span>:<span class='fl'>30</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
-#&gt; 4 chains, each with iter=1030; warmup=1000; thin=1; 
-#&gt; post-warmup draws per chain=30, total post-warmup draws=120.
-#&gt; 
-#&gt;            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
-#&gt; mu_alpha 242.65    0.17 2.45 236.94 241.18 242.67 244.39 247.21   207 0.98
-#&gt; 
-#&gt; Samples were drawn using  at Fri May 24 08:16:05 2019.
-#&gt; For each parameter, n_eff is a crude measure of effective sample size,
-#&gt; and Rhat is the potential scale reduction factor on split chains (at 
-#&gt; convergence, Rhat=1).</div><div class='input'>
-<span class='no'>rats</span><span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='stan_select.html'>stan_select</a></span>(<span class='no'>mu_alpha</span>)<span class='kw'>%&gt;%</span>
-  <span class='fu'>stan_slice</span>(<span class='fl'>1</span>:<span class='fl'>30</span>,<span class='kw'>inc_warmup</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
-#&gt; 4 chains, each with iter=30; warmup=0; thin=1; 
-#&gt; post-warmup draws per chain=30, total post-warmup draws=120.
-#&gt; 
-#&gt;            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
-#&gt; mu_alpha 242.65    0.17 2.45 236.94 241.18 242.67 244.39 247.21   207 0.98
-#&gt; 
-#&gt; Samples were drawn using  at Fri May 24 08:16:05 2019.
-#&gt; For each parameter, n_eff is a crude measure of effective sample size,
-#&gt; and Rhat is the potential scale reduction factor on split chains (at 
-#&gt; convergence, Rhat=1).</div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
+      <li><a href="#format">Format</a></li>
+
+      <li><a href="#source">Source</a></li>
 
       <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>
