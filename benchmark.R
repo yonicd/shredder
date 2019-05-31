@@ -26,10 +26,16 @@ sge_libpath <- function(...){
 
 sge_libpath('lib')
 
+# you can get batchtools.sge-mrg_now.tmpl from the uri below
+# https://ghe.metrumrg.com/raw/yoni/batchtools_qapply/master/batchtools.sge-mrg_now.tmpl?token=AAAABaq85utmwOCu4YCa_hXZTJbGZUicks5c-pTXwA%3D%3D
+
 sge <- future::tweak(
   future.batchtools::batchtools_sge,
   label = 'test',
-  template = 'batchtools.sge-mrg.tmpl'
+  template = 'batchtools.sge-mrg_now.tmpl',
+  # "now" is to skip the queue to avert latency queue time 
+  # assumes though you have enough slots open to accommodate all jobs
+  resources = list(now=TRUE)
 )
 
 future::availableCores()
@@ -63,7 +69,7 @@ stan_dims <- function(fit){
 bucket <- 'metrumrg-sandbox'
 root_aws <- 'yonis/mer0501'
 
-obj_name <- 'yonis/mer0501/stage2/data/joint_model_invariant_base_max.Rds'
+obj_name <- file.path(root_aws,'stage2/data/joint_model_invariant_base_max.Rds')
 tf <- tempfile(fileext = '.Rds')
 aws.s3::save_object(obj_name, file = tf, bucket = bucket)
 
@@ -213,7 +219,7 @@ medium.log <- tic.log()
 # [1] "master multicore list: 29.131 sec elapsed"
 # 
 # [[4]]
-# [1] "sge list: 74.845 sec elapsed"
+# [1] "sge list: 69.678 sec elapsed"
 
 #large size times ----
 
@@ -281,4 +287,4 @@ large.log <- tic.log()
 # [1] "master multicore list: 928.541 sec elapsed"
 #
 # [[2]]
-# [1] "sge list: 595.374 sec elapsed"
+# [1] "sge list: 287.607 sec elapsed"
