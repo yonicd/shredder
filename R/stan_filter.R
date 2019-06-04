@@ -22,8 +22,17 @@
 #' @importFrom stringi stri_extract_all_regex
 #' @importFrom purrr discard flatten_chr map_df map_dfc map
 stan_filter <- function(object, ...,chain = 1){
-  
-  check_stanfit(object)
+  UseMethod('stan_filter',object)
+}
+
+#' @export   
+stan_filter.brmsfit <- function(object, ...,chain = 1){
+  object$fit <- stan_filter(object$fit,...,chain = chain)
+  object
+}
+
+#' @export   
+stan_filter.stanfit <- function(object, ...,chain = 1){
   
   warm_x <- seq_len(object@sim$warmup)
   iter_x <- seq_len(object@sim$iter)[-warm_x]

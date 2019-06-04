@@ -21,8 +21,26 @@
 #' @export 
 #' @importFrom purrr map_dbl map
 stan_split <- function(object, ncut = 10, inc_warmup = TRUE){
+  UseMethod('stan_split',object)
+}
+
+#' @export  
+stan_split.brmsfit <- function(object, ncut = 10, inc_warmup = TRUE){
   
-  check_stanfit(object)
+  fit_list <- stan_split(object$fit, ncut = ncut, inc_warmup = inc_warmup)
+  
+  list_ret <- vector('list',length(fit_list))
+  
+  for(i in seq_along(list_ret)){
+    list_ret[[i]] <- object
+    list_ret[[i]]$fit <- fit_list[[i]]
+  }
+  
+  list_ret
+}
+
+#' @export
+stan_split.stanfit <- function(object, ncut = 10, inc_warmup = TRUE){
   
   N <- unique(purrr::map_dbl(object@stan_args,.f=function(x) x$iter - x$warmup))
   

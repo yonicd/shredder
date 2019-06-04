@@ -21,8 +21,18 @@
 #' @export 
 #' @importFrom purrr map
 stan_slice <- function(object,..., inc_warmup = TRUE){
+  UseMethod('stan_slice',object)
+}
+
+#' @export 
+stan_slice.brmsfit <- function(object,..., inc_warmup = TRUE){
+  object$fit <- stan_slice(object$fit,...,inc_warmup = inc_warmup)
+  object
+}
+
+#' @export 
+stan_slice.stanfit <- function(object,..., inc_warmup = TRUE){
   
-  check_stanfit(object)
   object <- clear_summary(object)
   
   dots_list <- list(...)
@@ -79,3 +89,4 @@ stan_slice <- function(object,..., inc_warmup = TRUE){
   object
   
 }
+

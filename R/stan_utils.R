@@ -35,8 +35,16 @@ stan_trim_postwarm <- function(x,idx){
 #' @family utility
 #' @export 
 stan_names <- function(x,expand = FALSE){
-  
-  check_stanfit(x)
+  UseMethod('stan_names',x)
+}
+
+#' @export 
+stan_names.brmsfit <- function(x,expand = FALSE){
+  stan_names(x$fit,expand=expand)
+}
+
+#' @export 
+stan_names.stanfit <- function(x,expand = FALSE){
   
   if(expand){
     
