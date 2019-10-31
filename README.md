@@ -1,8 +1,7 @@
 # shredder
 
 <!-- badges: start -->
-[![Build
-Status](https://travis.metrumrg.com/yoni/shredder.svg?token=tfrDuc83e84K9CqJKyCs&branch=master)](https://travis.metrumrg.com/yoni/shredder)
+[![Build Status](https://travis.metrumrg.com/incubator/shredder.svg?token=tfrDuc83e84K9CqJKyCs&branch=master)](https://travis.metrumrg.com/incubator/shredder)
 [![Covrpage
 Summary](https://img.shields.io/badge/covrpage-Last_Build_2019_05_22-brightgreen.svg)](http://tinyurl.com/y3zvyrpx)
 [![Project Status: WIP – Initial development is in progress, but there
