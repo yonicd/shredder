@@ -13,9 +13,6 @@ The goal of shredder is to apply tidylike verbs to rstan simulation
 objects. The usage is similar to the `dplyr` verbs, the input is a
 stanfit object and the output is a manipulated stanfit object.
 
-It is very powerful to use with [`tidybayes`](#tidybayes) verbs to
-manipulate the shape of the output.
-
 > Disclaimer: this is experimental, use deliberately, with caution and
 > not on client
 projects
