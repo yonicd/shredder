@@ -69,7 +69,7 @@ stan_starts_with <- function (match, ignore.case = TRUE,pars = peek_pars()) {
     match <- tolower(match)
   }
   
-  grep_pars(sprintf('^%s',match), pars,value=TRUE)
+  grep_pars(sprintf('^(%s)',match), pars,value=TRUE)
 }
 
 #' @export
@@ -82,5 +82,5 @@ stan_ends_with <- function (match, ignore.case = TRUE,pars = peek_pars()) {
     match <- tolower(match)
   }
   
-  grep_pars(sprintf('%s$',match), pars,value=TRUE)
+  grep_pars(sprintf('(%s)$',match), pars,value=TRUE)
 }

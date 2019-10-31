@@ -9,3 +9,4 @@
 ^Makevars\.R$
 ^__metrumrg_com\.ca-bundle$
 ^benchmark\.R$
+^\.Rprofile$

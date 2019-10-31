@@ -14,10 +14,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(shredder)
-```
-
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
@@ -31,9 +27,15 @@ library(rstan)
 rats <- shredder::rats_example(nCores = 1)
 ```
 
+<details>
+<summary> Standard Output </summary>
+
 ```{r}
 rats
 ```
+
+</details>
+<br>
 
 ## Pars
 
@@ -71,10 +73,20 @@ rats%>%
 
 ### Select with Partials
 
+<details>
+<summary> Select all Parameters that contain "alpha" </summary>
+
+
 ```{r}
 rats%>%
   stan_select(stan_contains('alpha'))
 
+```
+
+</details>
+<br>
+ 
+```{r}
 rats%>%
   stan_select(stan_contains('alpha\\[1\\]'))
 
@@ -92,21 +104,54 @@ rats%>%
 
 ### Subsetting post warmup samples
 
+<details>
+<summary> First 50 with warmup samples </summary>
+
 ```{r}
 
   rats%>%
     stan_slice(1:50,inc_warmup = TRUE)
 
+```
+
+</details>
+<br>
+
+<details>
+<summary> First 50 draws from each chain <em>without</em> warmup samples </summary>
+
+```{r}
   rats%>%
     stan_slice(1:50,inc_warmup = FALSE)
 
+```
+
+</details>
+<br>
+
+<details>
+<summary> Sample 100 draws from each Chain </summary>
+
+```{r}
   rats%>%
     stan_sample_n(100)
 
+```
+
+</details>
+<br>
+
+<details>
+<summary> Sample 50% of the Samples From each Chain </summary>
+
+```{r}
   rats%>%
     stan_sample_frac(0.5)
 
 ```
+
+</details>
+<br>
 
 ### Select and Slice
 
@@ -130,15 +175,37 @@ rats%>%
 
 ### Split
 
+<details>
+<summary> Split to 10 pieces <em>with</em> warmup </summary>
+
 ```{r}
 
 rats%>%
     stan_split(inc_warmup = TRUE)
+```
 
+</details>
+<br>
+
+<details>
+<summary> Split to 10 pieces <em>with</em> warmup </summary>
+
+```{r}
 rats%>%
     stan_split(inc_warmup = FALSE)
+```
 
+</details>
+<br>
+
+<details>
+<summary> Split to 4 pieces <em>without</em> warmup </summary>
+
+```{r}
 rats%>%
     stan_split(ncut = 4, inc_warmup = FALSE)
 
 ```
+
+</details>
+<br>
