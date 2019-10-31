@@ -1,7 +1,6 @@
 # shredder
 
 <!-- badges: start -->
-[![Build Status](https://travis.metrumrg.com/incubator/shredder.svg?token=tfrDuc83e84K9CqJKyCs&branch=master)](https://travis.metrumrg.com/incubator/shredder)
 [![Covrpage
 Summary](https://img.shields.io/badge/covrpage-Last_Build_2019_05_22-brightgreen.svg)](http://tinyurl.com/y3zvyrpx)
 [![Project Status: WIP – Initial development is in progress, but there
@@ -10,15 +9,13 @@ public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostat
 <!-- badges: end -->
 
 The goal of shredder is to apply tidylike verbs to rstan simulation
-objects. The usage is similar to the `dplyr` verbs, the input is a
+objects. The usage is similar to the [dplyr](https://dplyr.tidyverse.org/) verbs, the input is a
 stanfit object and the output is a manipulated stanfit object.
 
-> Disclaimer: this is experimental, use deliberately, with caution and
-> not on client
-projects
+This package is also a good way to integrate [tidybayes](https://mjskay.github.io/tidybayes/) into a workflow
 
-[proposal](https://docs.google.com/document/d/1_xFfVPPmPMQoFwpyGoL4N6kGNXLY0hZSEtmSiY03IXY/edit)
-for tools committee
+
+> Disclaimer: this is experimental, use deliberately, with caution and not on client projects
 
 ## Installation
 
@@ -36,14 +33,14 @@ remotes::install_github(
 
   - Dimension
       - pars:
-          - `stan_select` : extract specific pars
-          - `stan_contains`, `stan_starts_with`,`stan_ends_with`:
-            partial par extractions (used within `stan_select`)
-          - `stan_names` : return names within the stanfit object
+          - `shredder::stan_select` : extract specific pars
+          - `shredder::stan_contains`, `shredder::stan_starts_with`,`shredder::stan_ends_with`:
+            partial par extractions (used within `shredder::stan_select`)
+          - `shredder::stan_names` : return names within the stanfit object
       - post-warmup samples
-          - `stan_slice` : extract specific samples by index
-          - `stan_sample_n` : extract random n samples
-          - `stan_sample_frac` : extract fraction of total samples
-          - `stan_filter` : extract subset of samples conditional on
+          - `shredder::stan_slice` : extract specific samples by index
+          - `shredder::stan_sample_n` : extract random n samples
+          - `shredder::stan_sample_frac` : extract fraction of total samples
+          - `shredder::stan_filter` : extract subset of samples conditional on
             filter of parameter values
-          - `stan_split` : create a list with ncut slices of the samples
+          - `shredder::stan_split` : create a list with ncut slices of the samples

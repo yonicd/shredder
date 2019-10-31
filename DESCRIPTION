@@ -7,6 +7,7 @@ Description: Verbs to manipulate stanfit class objects returned by rstan.
 Depends: R (>= 3.2.0)
 Imports: rlang, stringi, purrr, checkmate, rstan, parallel
 Suggests: 
+    tidybayes,
     knitr,
     rmarkdown,
     testthat
