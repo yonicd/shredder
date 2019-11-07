@@ -43,4 +43,3 @@ remotes::install_github(
           - `shredder::stan_sample_frac` : extract fraction of total samples
           - `shredder::stan_filter` : extract subset of samples conditional on
             filter of parameter values
-          - `shredder::stan_split` : create a list with ncut slices of the samples

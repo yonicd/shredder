@@ -1,6 +1,6 @@
-pandoc: '2.7'
+pandoc: 1.19.2.1
 pkgdown: 1.1.0.9000
-pkgdown_sha: ~
+pkgdown_sha: a5af998a70078bf67fc2da191d706582a6c24126
 articles:
   Usage: Usage.html
   tests_and_coverage: tests_and_coverage.html
