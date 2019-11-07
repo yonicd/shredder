@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shredder</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.8</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.9</span>
       </span>
     </div>
 
@@ -125,14 +125,14 @@ rats<span class="op">%&gt;%</span>
 <span class="co">#&gt; # A tibble: 8 x 5</span>
 <span class="co">#&gt;   .chain .iteration .draw mu_alpha mu_beta</span>
 <span class="co">#&gt;    &lt;int&gt;      &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;</span>
-<span class="co">#&gt; 1      1          1     1     246.    6.07</span>
-<span class="co">#&gt; 2      1          2     2     241.    6.09</span>
-<span class="co">#&gt; 3      2          1     3     245.    6.08</span>
-<span class="co">#&gt; 4      2          2     4     247.    6.19</span>
-<span class="co">#&gt; 5      3          1     5     243.    6.07</span>
-<span class="co">#&gt; 6      3          2     6     240.    6.22</span>
-<span class="co">#&gt; 7      4          1     7     242.    6.23</span>
-<span class="co">#&gt; 8      4          2     8     241.    5.96</span>
+<span class="co">#&gt; 1      1          1     1     244.    6.11</span>
+<span class="co">#&gt; 2      1          2     2     244.    6.16</span>
+<span class="co">#&gt; 3      2          1     3     242.    6.12</span>
+<span class="co">#&gt; 4      2          2     4     241.    6.19</span>
+<span class="co">#&gt; 5      3          1     5     242.    6.25</span>
+<span class="co">#&gt; 6      3          2     6     245.    6.10</span>
+<span class="co">#&gt; 7      4          1     7     244.    6.20</span>
+<span class="co">#&gt; 8      4          2     8     241.    6.17</span>
 
 rats<span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/stan_sample.html">stan_sample_n</a></span>(<span class="dv">2</span>)<span class="op">%&gt;%</span>
@@ -141,16 +141,16 @@ rats<span class="op">%&gt;%</span>
 <span class="co">#&gt; # Groups:   i [30]</span>
 <span class="co">#&gt;        i alpha .chain .iteration .draw  beta</span>
 <span class="co">#&gt;    &lt;int&gt; &lt;dbl&gt;  &lt;int&gt;      &lt;int&gt; &lt;int&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt;  1     1  241.      1          1     1  5.97</span>
-<span class="co">#&gt;  2     1  234.      1          2     2  6.32</span>
-<span class="co">#&gt;  3     1  236.      2          1     3  5.92</span>
-<span class="co">#&gt;  4     1  236.      2          2     4  5.93</span>
-<span class="co">#&gt;  5     1  241.      3          1     5  6.11</span>
-<span class="co">#&gt;  6     1  237.      3          2     6  5.91</span>
-<span class="co">#&gt;  7     1  242.      4          1     7  5.97</span>
-<span class="co">#&gt;  8     1  242.      4          2     8  6.44</span>
-<span class="co">#&gt;  9     2  246.      1          1     1  7.19</span>
-<span class="co">#&gt; 10     2  250.      1          2     2  7.01</span>
+<span class="co">#&gt;  1     1  233.      1          1     1  5.66</span>
+<span class="co">#&gt;  2     1  236.      1          2     2  6.26</span>
+<span class="co">#&gt;  3     1  243.      2          1     3  5.95</span>
+<span class="co">#&gt;  4     1  238.      2          2     4  6.17</span>
+<span class="co">#&gt;  5     1  240.      3          1     5  6.09</span>
+<span class="co">#&gt;  6     1  236.      3          2     6  6.08</span>
+<span class="co">#&gt;  7     1  235.      4          1     7  6.39</span>
+<span class="co">#&gt;  8     1  240.      4          2     8  6.04</span>
+<span class="co">#&gt;  9     2  247.      1          1     1  6.39</span>
+<span class="co">#&gt; 10     2  245.      1          2     2  6.83</span>
 <span class="co">#&gt; # … with 230 more rows</span></code></pre></div>
 </div>
 <div id="gather" class="section level3">
@@ -182,21 +182,21 @@ rats<span class="op">%&gt;%</span>
 <span class="co">#&gt;    .chain .iteration .draw .variable .value</span>
 <span class="co">#&gt;     &lt;int&gt;      &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;dbl&gt;</span>
 <span class="co">#&gt;  1      1          1     1 mu_alpha  240.  </span>
-<span class="co">#&gt;  2      1          2     2 mu_alpha  243.  </span>
-<span class="co">#&gt;  3      2          1     3 mu_alpha  238.  </span>
-<span class="co">#&gt;  4      2          2     4 mu_alpha  242.  </span>
-<span class="co">#&gt;  5      3          1     5 mu_alpha  243.  </span>
-<span class="co">#&gt;  6      3          2     6 mu_alpha  242.  </span>
+<span class="co">#&gt;  2      1          2     2 mu_alpha  247.  </span>
+<span class="co">#&gt;  3      2          1     3 mu_alpha  240.  </span>
+<span class="co">#&gt;  4      2          2     4 mu_alpha  239.  </span>
+<span class="co">#&gt;  5      3          1     5 mu_alpha  240.  </span>
+<span class="co">#&gt;  6      3          2     6 mu_alpha  243.  </span>
 <span class="co">#&gt;  7      4          1     7 mu_alpha  241.  </span>
-<span class="co">#&gt;  8      4          2     8 mu_alpha  242.  </span>
-<span class="co">#&gt;  9      1          1     1 mu_beta     6.25</span>
-<span class="co">#&gt; 10      1          2     2 mu_beta     6.25</span>
-<span class="co">#&gt; 11      2          1     3 mu_beta     6.33</span>
-<span class="co">#&gt; 12      2          2     4 mu_beta     6.09</span>
-<span class="co">#&gt; 13      3          1     5 mu_beta     6.30</span>
-<span class="co">#&gt; 14      3          2     6 mu_beta     6.23</span>
-<span class="co">#&gt; 15      4          1     7 mu_beta     6.37</span>
-<span class="co">#&gt; 16      4          2     8 mu_beta     6.27</span>
+<span class="co">#&gt;  8      4          2     8 mu_alpha  241.  </span>
+<span class="co">#&gt;  9      1          1     1 mu_beta     6.14</span>
+<span class="co">#&gt; 10      1          2     2 mu_beta     6.19</span>
+<span class="co">#&gt; 11      2          1     3 mu_beta     6.18</span>
+<span class="co">#&gt; 12      2          2     4 mu_beta     6.18</span>
+<span class="co">#&gt; 13      3          1     5 mu_beta     6.25</span>
+<span class="co">#&gt; 14      3          2     6 mu_beta     6.15</span>
+<span class="co">#&gt; 15      4          1     7 mu_beta     6.13</span>
+<span class="co">#&gt; 16      4          2     8 mu_beta     6.40</span>
 
 rats<span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/stan_sample.html">stan_sample_n</a></span>(<span class="dv">2</span>)<span class="op">%&gt;%</span>
@@ -205,16 +205,16 @@ rats<span class="op">%&gt;%</span>
 <span class="co">#&gt; # Groups:   i, .variable [60]</span>
 <span class="co">#&gt;        i .chain .iteration .draw .variable .value</span>
 <span class="co">#&gt;    &lt;int&gt;  &lt;int&gt;      &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt;  1     1      1          1     1 alpha       240.</span>
-<span class="co">#&gt;  2     1      1          2     2 alpha       241.</span>
-<span class="co">#&gt;  3     1      2          1     3 alpha       239.</span>
-<span class="co">#&gt;  4     1      2          2     4 alpha       243.</span>
-<span class="co">#&gt;  5     1      3          1     5 alpha       239.</span>
-<span class="co">#&gt;  6     1      3          2     6 alpha       234.</span>
-<span class="co">#&gt;  7     1      4          1     7 alpha       239.</span>
-<span class="co">#&gt;  8     1      4          2     8 alpha       241.</span>
-<span class="co">#&gt;  9     2      1          1     1 alpha       249.</span>
-<span class="co">#&gt; 10     2      1          2     2 alpha       246.</span>
+<span class="co">#&gt;  1     1      1          1     1 alpha       245.</span>
+<span class="co">#&gt;  2     1      1          2     2 alpha       235.</span>
+<span class="co">#&gt;  3     1      2          1     3 alpha       237.</span>
+<span class="co">#&gt;  4     1      2          2     4 alpha       240.</span>
+<span class="co">#&gt;  5     1      3          1     5 alpha       238.</span>
+<span class="co">#&gt;  6     1      3          2     6 alpha       241.</span>
+<span class="co">#&gt;  7     1      4          1     7 alpha       243.</span>
+<span class="co">#&gt;  8     1      4          2     8 alpha       240.</span>
+<span class="co">#&gt;  9     2      1          1     1 alpha       247.</span>
+<span class="co">#&gt; 10     2      1          2     2 alpha       249.</span>
 <span class="co">#&gt; # … with 470 more rows</span></code></pre></div>
 </div>
 </div>

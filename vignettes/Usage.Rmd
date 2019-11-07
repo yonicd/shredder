@@ -27,15 +27,20 @@ library(rstan)
 rats <- shredder::rats_example(nCores = 1)
 ```
 
-<details>
-<summary> Standard Output </summary>
-
-```{r}
+```{r,eval = FALSE}
 rats
 ```
 
-</details>
-<br>
+```{r,echo = FALSE}
+rats%>%
+  details::details(summary = 'Standard Output')
+```
+
+```{r,echo=FALSE}
+details::details(system.file('rats.stan',package='shredder'),
+                 summary = 'The Stan Script',lang = 'c')
+```
+
 
 ## Pars
 
@@ -73,19 +78,20 @@ rats%>%
 
 ### Select with Partials
 
-<details>
-<summary> Select all Parameters that contain "alpha" </summary>
 
-
-```{r}
+```{r,eval=FALSE}
 rats%>%
   stan_select(stan_contains('alpha'))
 
 ```
 
-</details>
-<br>
- 
+```{r,echo = FALSE}
+rats%>%
+  stan_select(stan_contains('alpha'))%>%
+  details::details(summary = 'Select all Parameters that contain "alpha"')
+
+```
+
 ```{r}
 rats%>%
   stan_select(stan_contains('alpha\\[1\\]'))
@@ -104,54 +110,62 @@ rats%>%
 
 ### Subsetting post warmup samples
 
-<details>
-<summary> First 50 with warmup samples </summary>
-
-```{r}
+```{r,eval=FALSE}
 
   rats%>%
     stan_slice(1:50,inc_warmup = TRUE)
 
 ```
 
-</details>
-<br>
+```{r,echo=FALSE}
 
-<details>
-<summary> First 50 draws from each chain <em>without</em> warmup samples </summary>
+  rats%>%
+    stan_slice(1:50,inc_warmup = TRUE)%>%
+  details::details(summary = 'First 50 with warmup samples')
 
-```{r}
+```
+
+```{r,eval=FALSE}
   rats%>%
     stan_slice(1:50,inc_warmup = FALSE)
 
 ```
 
-</details>
-<br>
 
-<details>
-<summary> Sample 100 draws from each Chain </summary>
+```{r,echo=FALSE}
+  rats%>%
+    stan_slice(1:50,inc_warmup = FALSE)%>%
+  details::details(summary = 'First 50 draws from each chain <em>without</em> warmup samples')
 
-```{r}
+```
+
+```{r,eval=FALSE}
   rats%>%
     stan_sample_n(100)
 
 ```
 
-</details>
-<br>
+```{r,echo=FALSE}
+  rats%>%
+    stan_sample_n(100)%>%
+  details::details(summary = 'Sample 100 draws from each Chain')
 
-<details>
-<summary> Sample 50% of the Samples From each Chain </summary>
+```
 
-```{r}
+```{r,eval=FALSE}
+
   rats%>%
     stan_sample_frac(0.5)
 
 ```
 
-</details>
-<br>
+```{r,echo=FALSE}
+
+  rats%>%
+    stan_sample_frac(0.5)%>%
+    details::details(summary = 'Sample 50% of the Samples From each Chain')
+
+```
 
 ### Select and Slice
 
