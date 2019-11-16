@@ -20,11 +20,11 @@ testthat::describe('filters',{
   })
   
   it('no samples',{
-    testthat::expect_message(rats%>%stan_filter(`alpha[1]` < 6),regexp = 'no samples')
+    testthat::expect_warning(rats%>%stan_filter(`alpha[1]` < 6),regexp = 'no samples')
   })
   
-  it('no pars',{
-    testthat::expect_message(rats%>%stan_filter(bad < 6),regexp = 'no pars')
+  it('invalid pars',{
+    testthat::expect_error(rats%>%stan_filter(bad < 6),regexp = 'Invalid paratameter names')
   })
   
 })

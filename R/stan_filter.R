@@ -47,8 +47,9 @@ stan_filter.stanfit <- function(object, ...,chain = 1){
   
   idcs <- c(idcs_pars_oi,idcs_fnames_oi)
   
-  if(!length(idcs))
-    return(message('no pars selected'))
+  if(!length(idcs)){
+    stop('Invalid paratameter names selected\nUse stan_names(object) to list parameter names',call. = FALSE)
+  }
   
   samp_df <- purrr::map_df(object@sim$samples[chain],.f=function(x,idc,warm_x){
     ret <- purrr::map_dfc(x[gsub('`','',idc)],identity)
@@ -58,8 +59,10 @@ stan_filter.stanfit <- function(object, ...,chain = 1){
     ret
   },idc=idcs,warm_x = warm_x)
   
-  if(!length(samp_df$n_))
-    return(message('Boolean returned no samples'))
+  if(!length(samp_df$n_)){
+    warning('Boolean returned no samples',call. = FALSE)
+    return(object)
+  }
   
   inits_x <- samp_df$n_ - length(warm_x)
   
