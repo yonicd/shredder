@@ -14,10 +14,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(shredder)
-```
-
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
@@ -31,9 +27,20 @@ library(rstan)
 rats <- shredder::rats_example(nCores = 1)
 ```
 
-```{r}
+```{r,eval = FALSE}
 rats
 ```
+
+```{r,echo = FALSE}
+rats%>%
+  details::details(summary = 'Standard Output')
+```
+
+```{r,echo=FALSE}
+details::details(system.file('rats.stan',package='shredder'),
+                 summary = 'The Stan Script',lang = 'c')
+```
+
 
 ## Pars
 
@@ -71,10 +78,21 @@ rats%>%
 
 ### Select with Partials
 
-```{r}
+
+```{r,eval=FALSE}
 rats%>%
   stan_select(stan_contains('alpha'))
 
+```
+
+```{r,echo = FALSE}
+rats%>%
+  stan_select(stan_contains('alpha'))%>%
+  details::details(summary = 'Select all Parameters that contain "alpha"')
+
+```
+
+```{r}
 rats%>%
   stan_select(stan_contains('alpha\\[1\\]'))
 
@@ -92,19 +110,60 @@ rats%>%
 
 ### Subsetting post warmup samples
 
-```{r}
+```{r,eval=FALSE}
 
   rats%>%
     stan_slice(1:50,inc_warmup = TRUE)
 
+```
+
+```{r,echo=FALSE}
+
+  rats%>%
+    stan_slice(1:50,inc_warmup = TRUE)%>%
+  details::details(summary = 'First 50 with warmup samples')
+
+```
+
+```{r,eval=FALSE}
   rats%>%
     stan_slice(1:50,inc_warmup = FALSE)
 
+```
+
+
+```{r,echo=FALSE}
+  rats%>%
+    stan_slice(1:50,inc_warmup = FALSE)%>%
+  details::details(summary = 'First 50 draws from each chain <em>without</em> warmup samples')
+
+```
+
+```{r,eval=FALSE}
   rats%>%
     stan_sample_n(100)
 
+```
+
+```{r,echo=FALSE}
+  rats%>%
+    stan_sample_n(100)%>%
+  details::details(summary = 'Sample 100 draws from each Chain')
+
+```
+
+```{r,eval=FALSE}
+
   rats%>%
     stan_sample_frac(0.5)
+
+```
+
+```{r,echo=FALSE}
+
+  rats%>%
+    stan_sample_frac(0.5)%>%
+    details::details(summary = 'Sample 50% of the Samples From each Chain')
 
 ```
 
@@ -126,19 +185,4 @@ rats%>%
  rats%>%
    stan_select(mu_alpha,mu_beta)%>%
    stan_filter(mu_beta < 6)
-```
-
-### Split
-
-```{r}
-
-rats%>%
-    stan_split(inc_warmup = TRUE)
-
-rats%>%
-    stan_split(inc_warmup = FALSE)
-
-rats%>%
-    stan_split(ncut = 4, inc_warmup = FALSE)
-
 ```

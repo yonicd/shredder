@@ -52,8 +52,10 @@ stan_names.stanfit <- function(x,expand = FALSE){
     
   }else{
     
-    x@sim$pars_oi
+    # This is a problem sometimes
+      #x@sim$pars_oi
     
+    unique(gsub('\\[(.*?)$','',x@sim$fnames_oi))
   }
 }
 

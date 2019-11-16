@@ -23,6 +23,6 @@ check_stanfit <- function(x){
 #' @importFrom checkmate assert checkClass
 check_brms <- function(x){
   checkmate::assert(
-    checkmate::checkClass(x, "brms")
+    checkmate::checkClass(x, "brmsfit")
   )
 }

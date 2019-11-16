@@ -26,7 +26,4 @@ rats\%>\%stan_names()
 rats\%>\%stan_names(expand = TRUE)
 
 }
-\seealso{
-Other utility: \code{\link{stan_split}}
-}
 \concept{utility}

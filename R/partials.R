@@ -69,7 +69,11 @@ stan_starts_with <- function (match, ignore.case = TRUE,pars = peek_pars()) {
     match <- tolower(match)
   }
   
-  grep_pars(sprintf('^%s',match), pars,value=TRUE)
+  match_list <- strsplit(match,'\\|')[[1]]
+  
+  match_chr <- paste0(sapply(match_list,function(x) sprintf("^(%s)", x),USE.NAMES = FALSE),collapse = '|')
+  
+  grep_pars(match_chr, pars,value=TRUE)
 }
 
 #' @export
@@ -82,5 +86,10 @@ stan_ends_with <- function (match, ignore.case = TRUE,pars = peek_pars()) {
     match <- tolower(match)
   }
   
-  grep_pars(sprintf('%s$',match), pars,value=TRUE)
+  match_list <- strsplit(match,'\\|')[[1]]
+  
+  match_chr <- paste0(sapply(match_list,function(x) sprintf("(%s)$", x),USE.NAMES = FALSE),collapse = '|')
+  
+  grep_pars(match_chr, pars,value=TRUE)
+  
 }

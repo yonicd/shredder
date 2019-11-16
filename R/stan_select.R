@@ -23,11 +23,11 @@ stan_select <- function(object,...){
   UseMethod('stan_select',object)
 }
 
-# @export 
-# stan_select.brmsfit <- function(object,...){
-#   object$fit <- stan_select(object$fit,...)
-#   object
-# }
+#' @export 
+stan_select.brmsfit <- function(object,...){
+  object$fit <- stan_select(object$fit,...)
+  object
+}
 
 #' @export
 stan_select.stanfit <- function(object, ...){
