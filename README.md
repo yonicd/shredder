@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 [![Covrpage
-Summary](https://img.shields.io/badge/covrpage-Last_Build_2019_05_22-brightgreen.svg)](http://tinyurl.com/y3zvyrpx)
+Summary](https://img.shields.io/badge/covrpage-Last_Build_2019_11_17-brightgreen.svg)](http://tinyurl.com/y3zvyrpx)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
@@ -23,6 +23,8 @@ remotes::install_github('metrumreseaerchgroup/shredder')
 ## Verbs
 
   - Dimension
+      - chains
+          - `shredder::stan_keep` : extract specific chains
       - pars:
           - `shredder::stan_select` : extract specific pars
           - `shredder::stan_contains`, `shredder::stan_starts_with`,`shredder::stan_ends_with`:

@@ -1,5 +1,5 @@
 ---
-title: "Usage"
+title: "Working with rstan"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Usage}
@@ -8,9 +8,19 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+stopifnot(require(knitr))
+options(width = 90)
+opts_chunk$set(
+  comment = NA,
+  message = FALSE,
+  warning = FALSE,
+  eval = TRUE,
+  dev = "png",
+  dpi = 150,
+  fig.asp = 0.8,
+  fig.width = 5,
+  out.width = "60%",
+  fig.align = "center"
 )
 ```
 
@@ -160,8 +170,7 @@ rats%>%
 ```
 
 ```{r,echo=FALSE}
-
-  rats%>%
+rats%>%
     stan_sample_frac(0.5)%>%
     details::details(summary = 'Sample 50% of the Samples From each Chain')
 
@@ -170,19 +179,42 @@ rats%>%
 ### Select and Slice
 
 ```{r}
-  rats%>%
+rats%>%
     stan_select(mu_alpha)%>%
     stan_slice(1:50)
 
 ```
 
-### Filter
+### Keep Chains
 
 ```{r}
 rats%>%
-   stan_select(mu_alpha,mu_beta)
+   stan_keep(chains = 1)
    
- rats%>%
+rats%>%
+   stan_keep(chains = c(1,3))
+```
+
+
+### Filter
+
+Users can filter conditionally on posterior samples in a chain, then those sample indicies will be removed from all the chains.
+
+ > Be aware that there is an assumption of equal chain sizes in rstan summary functions. While it is possible to apply the filter within each chain this creates uneven chain sizes which breaks downstream rstan summary functions.
+
+```{r}
+rats%>%
    stan_select(mu_alpha,mu_beta)%>%
    stan_filter(mu_beta < 6)
+ 
+```
+
+To verify that the filter does work properly we can subset to a single chain and apply the filter.
+
+```{r}
+ rats%>%
+   stan_keep(chains = 1)%>%
+   stan_select(mu_alpha,mu_beta)%>%
+   stan_filter(mu_beta < 6)
+ 
 ```

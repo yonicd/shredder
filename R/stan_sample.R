@@ -79,6 +79,8 @@ stan_sample_frac.stanfit <- function(object, size, weight = NULL, inc_warmup = T
 #' @importFrom purrr map
 stan_sample <- function(object, samp, warm_x, inc_warmup){
   
+  on.exit({clear_summary(object)},add = TRUE)
+  
   inits_x <- samp - length(warm_x)
   
   object@sim$iter  <- length(samp)

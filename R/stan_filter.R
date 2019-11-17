@@ -34,6 +34,8 @@ stan_filter.brmsfit <- function(object, ...,chain = 1){
 #' @export   
 stan_filter.stanfit <- function(object, ...,chain = 1){
   
+  on.exit({clear_summary(object)},add = TRUE)
+  
   warm_x <- seq_len(object@sim$warmup)
   iter_x <- seq_len(object@sim$iter)[-warm_x]
   
@@ -48,7 +50,15 @@ stan_filter.stanfit <- function(object, ...,chain = 1){
   idcs <- c(idcs_pars_oi,idcs_fnames_oi)
   
   if(!length(idcs)){
-    stop('Invalid paratameter names selected\nUse stan_names(object) to list parameter names',call. = FALSE)
+    stop('Invalid parameter names selected\nUse stan_names(object) to list parameter names',call. = FALSE)
+  }
+  
+  if(!chain%in%chain_ids(object)){
+    stop(sprintf(
+      'Invalid chain number "%s", expected "%s"',
+      chain, paste0(chain_ids(object),collapse = ', ')
+      ),
+      call. = FALSE)
   }
   
   samp_df <- purrr::map_df(object@sim$samples[chain],.f=function(x,idc,warm_x){

@@ -24,7 +24,11 @@ testthat::describe('filters',{
   })
   
   it('invalid pars',{
-    testthat::expect_error(rats%>%stan_filter(bad < 6),regexp = 'Invalid paratameter names')
+    testthat::expect_error(rats%>%stan_filter(bad < 6),regexp = 'Invalid parameter names')
+  })
+  
+  it('invalid chain',{
+    testthat::expect_error(rats%>%stan_filter(mu_beta < 6,chain=6),regexp = 'Invalid chain number')
   })
   
 })
