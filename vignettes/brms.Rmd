@@ -52,10 +52,8 @@ fit <- brm(bf(symptom_post ~ group, sigma ~ group),
 ```
 
 ```{r,echo = FALSE}
-details::details(fit,summary = 'Click to See Model Summary')
+print(fit,digits = 5)
 ```
-
-## Default Diagnostic Output
 
 ```{r}
 fit%>%
@@ -65,32 +63,58 @@ fit%>%
 ## Select first 100 Posterior Samples from each Chain
 
 ```{r}
-fit%>%
-  stan_slice(1:100)%>%
+fit_slice <- fit%>%stan_slice(1:100)
+```
+
+```{r,echo = FALSE}
+print(fit_slice,digits = 5)
+```
+
+```{r}
+fit_slice%>%
   plot(N = 2, ask = FALSE)
 ```
 
 ## Sample 25% of Posterior Samples from each Chain
 
 ```{r}
-fit%>%
-  stan_sample_frac(0.25)%>%
+fit_sample <- fit%>%
+  stan_sample_frac(0.25)
+```
+
+```{r,echo = FALSE}
+print(fit_sample,digits = 5)
+```
+
+```{r}
+fit_sample%>%
   plot(N = 2, ask = FALSE)
 ```
 
 ## Filter Posterior Samples by Conditional
 
 ```{r}
-fit%>%
-  stan_filter(b_grouptreat>=2)%>%
+fit_filter <- fit%>%
+  stan_filter(b_grouptreat>=2)
+```
+
+```{r,echo = FALSE}
+print(fit_filter,digits = 5)
+```
+
+```{r}
+fit_filter%>%
   plot(N = 2, ask = FALSE)
 ```
 
 ## Filter Posterior Samples by Conditional Subset Chain
 
 ```{r}
-fit%>%
+fit_filter_chain <- fit%>%
   stan_filter(b_grouptreat>=2)%>%
-  stan_keep(chains = 1)%>%
-  plot(N = 2, ask = FALSE)
+  stan_keep(chains = 1)
+```
+
+```{r,echo = FALSE}
+  print(fit_filter_chain,digits = 5)
 ```
