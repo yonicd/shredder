@@ -27,8 +27,24 @@
 #' @family filtering
 #' @export 
 stan_sample_n <- function(object, size, weight = NULL, inc_warmup = TRUE){
+  UseMethod('stan_sample_n',object)
+}
+
+#' @rdname stan_sample
+#' @export 
+stan_sample_frac <- function(object, size, weight = NULL, inc_warmup = TRUE){
+  UseMethod('stan_sample_frac',object)
+}
+
+#' @export 
+stan_sample_n.brmsfit <- function(object, size, weight = NULL, inc_warmup = TRUE){
+  object$fit <- stan_sample_n(object$fit,size=size,weight=weight,inc_warmup=inc_warmup)
+  object
+}
+
+#' @export 
+stan_sample_n.stanfit <- function(object, size, weight = NULL, inc_warmup = TRUE){
   
-  check_stanfit(object)
   object <- clear_summary(object)
   
   warm_x <- seq_len(object@sim$warmup)
@@ -40,11 +56,15 @@ stan_sample_n <- function(object, size, weight = NULL, inc_warmup = TRUE){
   
 }
 
-#' @rdname stan_sample
+#' @export 
+stan_sample_frac.brmsfit <- function(object, size, weight = NULL, inc_warmup = TRUE){
+  object$fit <- stan_sample_frac(object$fit,size=size,weight=weight,inc_warmup=inc_warmup)
+  object
+}
+
 #' @export
-stan_sample_frac <- function(object, size, weight = NULL, inc_warmup = TRUE){
+stan_sample_frac.stanfit <- function(object, size, weight = NULL, inc_warmup = TRUE){
   
-  check_stanfit(object)
   object <- clear_summary(object)
   
   warm_x <- seq_len(object@sim$warmup)
@@ -58,6 +78,8 @@ stan_sample_frac <- function(object, size, weight = NULL, inc_warmup = TRUE){
 
 #' @importFrom purrr map
 stan_sample <- function(object, samp, warm_x, inc_warmup){
+  
+  on.exit({clear_summary(object)},add = TRUE)
   
   inits_x <- samp - length(warm_x)
   

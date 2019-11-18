@@ -19,7 +19,7 @@ navbar:
       href: http://twitter.com/MetrumRG
 
 reference:
-  - title: "Selecting Paramters"
+  - title: "Selecting Parameters"
     contents:
       - has_concept("subsetting")
   - title: "Filtering Post-Warmup Samples"
@@ -34,7 +34,8 @@ reference:
 articles:
   - title: "Usage"
     contents:
-      - Usage
+      - rstan
+      - brms
   - title: "Extending"
     contents:
       - tidybayes

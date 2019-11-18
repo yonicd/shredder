@@ -22,8 +22,19 @@
 #' @importFrom stringi stri_extract_all_regex
 #' @importFrom purrr discard flatten_chr map_df map_dfc map
 stan_filter <- function(object, ...,chain = 1){
+  UseMethod('stan_filter',object)
+}
+
+#' @export   
+stan_filter.brmsfit <- function(object, ...,chain = 1){
+  object$fit <- stan_filter(object$fit,...,chain = chain)
+  object
+}
+
+#' @export   
+stan_filter.stanfit <- function(object, ...,chain = 1){
   
-  check_stanfit(object)
+  on.exit({clear_summary(object)},add = TRUE)
   
   warm_x <- seq_len(object@sim$warmup)
   iter_x <- seq_len(object@sim$iter)[-warm_x]
@@ -38,8 +49,17 @@ stan_filter <- function(object, ...,chain = 1){
   
   idcs <- c(idcs_pars_oi,idcs_fnames_oi)
   
-  if(!length(idcs))
-    return(message('no pars selected'))
+  if(!length(idcs)){
+    stop('Invalid parameter names selected\nUse stan_names(object) to list parameter names',call. = FALSE)
+  }
+  
+  if(!chain%in%chain_ids(object)){
+    stop(sprintf(
+      'Invalid chain number "%s", expected "%s"',
+      chain, paste0(chain_ids(object),collapse = ', ')
+      ),
+      call. = FALSE)
+  }
   
   samp_df <- purrr::map_df(object@sim$samples[chain],.f=function(x,idc,warm_x){
     ret <- purrr::map_dfc(x[gsub('`','',idc)],identity)
@@ -49,8 +69,10 @@ stan_filter <- function(object, ...,chain = 1){
     ret
   },idc=idcs,warm_x = warm_x)
   
-  if(!length(samp_df$n_))
-    return(message('Boolean returned no samples'))
+  if(!length(samp_df$n_)){
+    warning('Boolean returned no samples',call. = FALSE)
+    return(object)
+  }
   
   inits_x <- samp_df$n_ - length(warm_x)
   

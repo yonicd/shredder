@@ -19,9 +19,20 @@
 #' @export 
 #' @importFrom rlang enquos quo_text eval_tidy
 #' @importFrom purrr map
-stan_select <- function(object, ...){
+stan_select <- function(object,...){
+  UseMethod('stan_select',object)
+}
+
+#' @export 
+stan_select.brmsfit <- function(object,...){
+  object$fit <- stan_select(object$fit,...)
+  object
+}
+
+#' @export
+stan_select.stanfit <- function(object, ...){
   
-  check_stanfit(object)
+  on.exit({clear_summary(object)},add = TRUE)
   
   all_pars <- union(object@sim$pars_oi,object@sim$fnames_oi)
   
@@ -75,9 +86,6 @@ stan_select <- function(object, ...){
     attr(new_samples[[i]],'sampler_params') <- attr(object@sim$samples[[i]],'sampler_params')
   
   object@sim$samples <- new_samples
-  
-  if(exists('summary',envir = object@.MISC))
-    rm(list = 'summary',envir = object@.MISC)
   
   object
   

@@ -79,17 +79,26 @@ populate <- function(env){
     
     if(grepl('%>%',fun)){
       fun1 <- strsplit(fun,'%>%')[[1]]
-      
-      comp <- names(formals(fun1[length(fun1)]))      
+      comp <- names(formals(fun1[length(fun1)]))
+      no_dots <- !grepl('...',comp,fixed = TRUE)
+      comp[no_dots] <- sprintf('%s = ',comp[no_dots])
     }
 
-    if(grepl('stan_select$',fun)){
+    if(grepl('stan_(select|filter)$',fun)){
 
       object <- get(gsub('%>%(.*?)$','',fun),envir = globalenv())
-      
-      if(check_stanfit(object)){
+
+      if(inherits(object,'stanfit')){
         
         comp <- union(object@sim$pars_oi,object@sim$fnames_oi)
+        
+        assign('pars',comp,envir = pars_env)  
+        
+      }
+      
+      if(inherits(object,'brmsfit')){
+        
+        comp <- union(object$fit@sim$pars_oi,object$fit@sim$fnames_oi)
         
         assign('pars',comp,envir = pars_env)  
         

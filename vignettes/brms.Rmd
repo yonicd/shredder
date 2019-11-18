@@ -1,0 +1,120 @@
+---
+title: "Working With brms"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Usage With brms Package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+stopifnot(require(knitr))
+options(width = 90)
+opts_chunk$set(
+  comment = NA,
+  message = FALSE,
+  warning = FALSE,
+  eval = TRUE,
+  dev = "png",
+  dpi = 150,
+  fig.asp = 0.8,
+  fig.width = 5,
+  out.width = "60%",
+  fig.align = "center"
+)
+```
+
+```{r setup}
+library(shredder)
+library(brms)
+```
+
+## Generate Data
+
+```{r}
+group <- rep(c("treat", "placebo"), 
+             each = 30)
+
+symptom_post <- c(
+  rnorm(30, mean = 1, sd = 2), 
+  rnorm(30, mean = 0, sd = 1)
+)
+
+dat1 <- data.frame(group, symptom_post)
+```
+
+## Run Model
+
+```{r,results='hide'}
+fit <- brm(bf(symptom_post ~ group, sigma ~ group), 
+           data = dat1, 
+           family = gaussian())
+```
+
+```{r,echo = FALSE}
+print(fit,digits = 5)
+```
+
+```{r}
+fit%>%
+  plot(N = 2, ask = FALSE)
+```
+
+## Select first 100 Posterior Samples from each Chain
+
+```{r}
+fit_slice <- fit%>%stan_slice(1:100)
+```
+
+```{r,echo = FALSE}
+print(fit_slice,digits = 5)
+```
+
+```{r}
+fit_slice%>%
+  plot(N = 2, ask = FALSE)
+```
+
+## Sample 25% of Posterior Samples from each Chain
+
+```{r}
+fit_sample <- fit%>%
+  stan_sample_frac(0.25)
+```
+
+```{r,echo = FALSE}
+print(fit_sample,digits = 5)
+```
+
+```{r}
+fit_sample%>%
+  plot(N = 2, ask = FALSE)
+```
+
+## Filter Posterior Samples by Conditional
+
+```{r}
+fit_filter <- fit%>%
+  stan_filter(b_grouptreat>=2)
+```
+
+```{r,echo = FALSE}
+print(fit_filter,digits = 5)
+```
+
+```{r}
+fit_filter%>%
+  plot(N = 2, ask = FALSE)
+```
+
+## Filter Posterior Samples by Conditional Subset Chain
+
+```{r}
+fit_filter_chain <- fit%>%
+  stan_filter(b_grouptreat>=2)%>%
+  stan_keep(chains = 1)
+```
+
+```{r,echo = FALSE}
+  print(fit_filter_chain,digits = 5)
+```

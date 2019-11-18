@@ -18,39 +18,8 @@ stan_trim_postwarm <- function(x,idx){
   
 }
 
-#' @title The Par Names of a Stanfit Object
-#' @description Functions to get the names of a stanfit object.
-#' @param x a stanfit object
-#' @param expand logical, if TRUE par names are returned including dimesnion 
-#'   indicies (fnames_oi), Default: FALSE
-#' @examples 
-#' rats <- rats_example(nCores = 1)
-#' 
-#' rats%>%stan_names()
-#' 
-#' rats%>%stan_names(expand = TRUE)
-#' 
-#' @return character
-#' @rdname stan_names
-#' @family utility
-#' @export 
-stan_names <- function(x,expand = FALSE){
-  
-  check_stanfit(x)
-  
-  if(expand){
-    
-    x@sim$fnames_oi
-    
-  }else{
-    
-    x@sim$pars_oi
-    
-  }
-}
-
 clear_summary <- function(object){
-  
+  check_stanfit(object)
   if(exists('summary',envir = object@`.MISC`))
     rm('summary',envir = object@`.MISC`)
   
@@ -59,6 +28,7 @@ clear_summary <- function(object){
 
 #' @importFrom purrr rerun
 reset_perm <- function(object,inits_x){
+  check_stanfit(object)
   nx <- length(inits_x)
   nc <- length(object@sim$permutation)
   object@sim$permutation <- purrr::rerun(nc,sample(seq_len(nx),size = nx))
@@ -66,7 +36,7 @@ reset_perm <- function(object,inits_x){
 }
 
 find_fnames <- function(object,pars){
-  
+  check_stanfit(object)
   f_names <- intersect(object@sim$fnames_oi,grep('\\[',pars,value = TRUE))
   
   if(length(f_names)){
@@ -101,4 +71,9 @@ grep_ext <- function(pattern,x,...){
 
 grepl_ext <- function(pattern,x,...){
   grepl(sprintf('^(%s)',paste0(sprintf('\\b%s\\b',pattern),collapse = '|')),x = x,...)
+}
+
+chain_ids <- function(object){
+  check_stanfit(object)
+  sapply(object@stan_args, function(x) x$chain_id)
 }

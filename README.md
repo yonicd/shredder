@@ -2,36 +2,29 @@
 
 <!-- badges: start -->
 [![Covrpage
-Summary](https://img.shields.io/badge/covrpage-Last_Build_2019_05_22-brightgreen.svg)](http://tinyurl.com/y3zvyrpx)
-[![Project Status: WIP – Initial development is in progress, but there
-has not yet been a stable, usable release suitable for the
-public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+Summary](https://img.shields.io/badge/covrpage-Last_Build_2019_11_17-brightgreen.svg)](http://tinyurl.com/y3zvyrpx)
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
-The goal of shredder is to apply tidylike verbs to rstan simulation
-objects. The usage is similar to the [dplyr](https://dplyr.tidyverse.org/) verbs, the input is a
-stanfit object and the output is a manipulated stanfit object.
+The goal of shredder is to apply tidylike verbs to rstan simulation objects. The usage is similar to the [dplyr](https://dplyr.tidyverse.org/) verbs. 
+
+The verbs are `S3` methods that have built in suport for `stanfit` and `brmsfit` class objects and the output is the manipulated object remaining in the same class.
 
 This package is also a good way to integrate [tidybayes](https://mjskay.github.io/tidybayes/) into a workflow
 
-
-> Disclaimer: this is experimental, use deliberately, with caution and not on client projects
+> Important: The shredder API is still maturing. Please see ?shredder::lifecycle for the list of functions that are considered stable.
 
 ## Installation
 
-You can install shredder from `GHE` with:
-
 ``` r
-remotes::install_github(
-  repo = 'yoni/shredder',
-  host = 'ghe.metrumrg.com/api/v3',
-  auth_token = Sys.getenv('GHE_PAT')
-)
+remotes::install_github('metrumreseaerchgroup/shredder')
 ```
 
 ## Verbs
 
   - Dimension
+      - chains
+          - `shredder::stan_keep` : extract specific chains
       - pars:
           - `shredder::stan_select` : extract specific pars
           - `shredder::stan_contains`, `shredder::stan_starts_with`,`shredder::stan_ends_with`:

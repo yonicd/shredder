@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">shredder</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.9</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -79,20 +79,16 @@
 <a href="#shredder" class="anchor"></a>shredder</h1></div>
 <!-- badges: start -->
 
-<p>The goal of shredder is to apply tidylike verbs to rstan simulation objects. The usage is similar to the <a href="https://dplyr.tidyverse.org/">dplyr</a> verbs, the input is a stanfit object and the output is a manipulated stanfit object.</p>
+<p>The goal of shredder is to apply tidylike verbs to rstan simulation objects. The usage is similar to the <a href="https://dplyr.tidyverse.org/">dplyr</a> verbs.</p>
+<p>The verbs are <code>S3</code> methods that have built in suport for <code>stanfit</code> and <code>brmsfit</code> class objects and the output is the manipulated object remaining in the same class.</p>
 <p>This package is also a good way to integrate <a href="https://mjskay.github.io/tidybayes/">tidybayes</a> into a workflow</p>
 <blockquote>
-<p>Disclaimer: this is experimental, use deliberately, with caution and not on client projects</p>
+<p>Important: The shredder API is still maturing. Please see ?shredder::lifecycle for the list of functions that are considered stable.</p>
 </blockquote>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install shredder from <code>GHE</code> with:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">remotes<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(</a>
-<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">repo =</span> <span class="st">'yoni/shredder'</span>,</a>
-<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">host =</span> <span class="st">'ghe.metrumrg.com/api/v3'</span>,</a>
-<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">auth_token =</span> <span class="kw">Sys.getenv</span>(<span class="st">'GHE_PAT'</span>)</a>
-<a class="sourceLine" id="cb1-5" title="5">)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">remotes<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">'metrumreseaerchgroup/shredder'</span>)</a></code></pre></div>
 </div>
 <div id="verbs" class="section level2">
 <h2 class="hasAnchor">
@@ -100,6 +96,12 @@
 <ul>
 <li>Dimension
 <ul>
+<li>chains
+<ul>
+<li>
+<code><a href="reference/stan_keep.html">shredder::stan_keep</a></code> : extract specific chains</li>
+</ul>
+</li>
 <li>pars:
 <ul>
 <li>
@@ -156,8 +158,8 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="http://tinyurl.com/y3zvyrpx"><img src="https://img.shields.io/badge/covrpage-Last_Build_2019_05_22-brightgreen.svg" alt="Covrpage Summary"></a></li>
-<li><a href="https://www.repostatus.org/#wip"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
+<li><a href="http://tinyurl.com/y3zvyrpx"><img src="https://img.shields.io/badge/covrpage-Last_Build_2019_11_17-brightgreen.svg" alt="Covrpage Summary"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 </ul>
 </div>
 </div>
