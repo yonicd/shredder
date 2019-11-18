@@ -42,37 +42,55 @@ stan_filter_ <- function(object, ..., chains = NULL){
                              ret
                            },idc=idcs,warm_x = warm_x,.id = 'chain')
   
+  
   if(!length(samp_df$n_)){
-    warning('Boolean returned no samples',call. = FALSE)
+    warning('filter returned no samples',call. = FALSE)
     return(object)
   }
   
-  samp_df_chain <- split(samp_df, samp_df$chain)
+  n_chain <- split(samp_df$n_, samp_df$chain)
   
+  if(!identical(length(n_chain),length(shredder:::chain_ids(object)))){
+    miss_id <- shredder:::chain_ids(object)[!shredder:::chain_ids(object)%in%as.numeric(names(n_chain))]
+
+    warning(sprintf('filter returned no samples for chains: %s',
+                    paste0(miss_id,collapse = ', ')
+                    ),call. = FALSE)
+    
+    object <- stan_retain(object,as.numeric(names(n_chain)))
+  }
+    
   inits_x <- samp_df$n_ - length(warm_x)
   
   init_x_chain <- split(inits_x, samp_df$chain)
   
-  n_chain <- split(samp_df$n_, samp_df$chain)
+  init_x_chain <- purrr::modify(init_x_chain,.f=function(x,m){
+    x[1:m]
+  } , m = min(sapply(n_chain,length)))
+  
+  n_chain <- purrr::modify(n_chain,.f=function(x,m){
+    x[1:m]
+  } , m = min(sapply(n_chain,length)))
   
   samp_chain <- purrr::map(n_chain,.f = function(x,w) c(w,x), w = warm_x)
   
   iter_chain <- purrr::map(samp_chain,length)
-  
-  object@sim$iter <- length(warm_x) + length(unlist(n_chain))
+
+  object@sim$iter <- unique(sapply(samp_chain,length))
   
   object@stan_args <- purrr::map2(object@stan_args,iter_chain,.f=function(x,i){
     x$iter <- i
     x
   })
   
-  object@inits <- purrr::map2(object@inits,init_x_chain, stan_trim_postwarm)
+  #object@inits <- purrr::map2(object@inits,init_x_chain, shredder:::stan_trim_postwarm)
   
   object@sim$permutation <- purrr::map2(object@sim$permutation,init_x_chain, .f = function(y,idx) y[idx])
   
-  object@sim$samples <- purrr::map2(object@sim$samples,samp_chain,stan_subset)
+  object@sim$samples <- purrr::map2(object@sim$samples,samp_chain,shredder:::stan_subset)
   
-  object@sim$n_save <- as.numeric(length(warm_x) + purrr::map_dbl(n_chain,length))
+  #as.numeric(length(warm_x) + purrr::map_dbl(n_chain,length))
+  object@sim$n_save <- as.numeric(iter_chain)
   
   object
   

@@ -6,7 +6,7 @@ stan_subset <- function(x,idx){
   obj <- attr(x,"sampler_params")
   sub_obj <- purrr::map(obj,.f=function(y,idx) y[idx],idx=idx)
   attr(x,"sampler_params") <- sub_obj
-
+  
   x
   
 }

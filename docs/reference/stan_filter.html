@@ -121,7 +121,7 @@ where conditions are true." />
 where conditions are true.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>stan_filter</span>(<span class='no'>object</span>, <span class='no'>...</span>, <span class='kw'>chain</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>stan_filter</span>(<span class='no'>object</span>, <span class='no'>...</span>, <span class='kw'>permuted</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -135,14 +135,31 @@ where conditions are true.</p>
       <td><p>Logical predicates defined in terms of the parameters in object</p></td>
     </tr>
     <tr>
-      <th>chain</th>
-      <td><p>numeric, chain to apply filter predicated on, Default: 1</p></td>
+      <th>permuted</th>
+      <td><p>A logical scalar indicating whether the draws after the warmup
+period in each chain should be permuted and merged, Default: TRUE</p></td>
+    </tr>
+    <tr>
+      <th>chains</th>
+      <td><p>numeric, chains to apply filter predicated on,
+if NULL then all chains are filtered, Default: NULL</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>stanfit object</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <ul>
+<li><p>If no elements are returned for any chain then <code>NULL</code> is returned with a warning.</p></li>
+<li><p>If there is a chain that results in no samples then the chain is dropped with a warning.</p></li>
+<li><p>If permuted is FALSE then uneven chains may be returned depending on the result of the filter.</p></li>
+<li><p>To comply with <a href='http://www.rdocumentation.org/packages/rstan/topics/stanfit-method-extract'>extract</a> with <code>permuted=TRUE</code> chains in which chaines are
+assumed to be of equal size.</p><ul>
+<li><p>Chain size returned is the length of the shortest filtered chain.</p></li>
+</ul></li>
+</ul>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other filtering: <code><a href='stan_sample.html'>stan_sample_n</a></code>,
@@ -160,21 +177,35 @@ where conditions are true.</p>
 #&gt; mu_alpha 242.45    0.04 2.68 237.17 240.65 242.43 244.22 247.79  5295    1
 #&gt; mu_beta    6.19    0.00 0.11   5.98   6.11   6.19   6.26   6.40  4302    1
 #&gt; 
-#&gt; Samples were drawn using  at Sun Nov 17 12:01:18 2019.
+#&gt; Samples were drawn using  at Mon Nov 18 14:29:45 2019.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>
 <span class='no'>rats</span><span class='kw'>%&gt;%</span>
   <span class='fu'><a href='stan_select.html'>stan_select</a></span>(<span class='no'>mu_alpha</span>,<span class='no'>mu_beta</span>)<span class='kw'>%&gt;%</span>
   <span class='fu'>stan_filter</span>(<span class='no'>mu_beta</span> <span class='kw'>&lt;</span> <span class='fl'>6</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
-#&gt; 4 chains, each with iter=1047; warmup=1000; thin=1; 
-#&gt; post-warmup draws per chain=47, total post-warmup draws=188.
+#&gt; 4 chains, each with iter=1032; warmup=1000; thin=1; 
+#&gt; post-warmup draws per chain=32, total post-warmup draws=128.
 #&gt; 
-#&gt;            mean se_mean   sd  2.5%    25%    50%    75%  97.5% n_eff Rhat
-#&gt; mu_alpha 242.51    0.18 2.62 236.9 240.85 242.67 243.93 247.78   201 0.99
-#&gt; mu_beta    6.12    0.07 0.13   5.9   6.00   6.12   6.22   6.38     4 1.44
+#&gt;            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
+#&gt; mu_alpha 242.40    0.23 2.60 236.46 241.01 242.67 244.08 246.88   127 1.02
+#&gt; mu_beta    5.95    0.01 0.05   5.83   5.94   5.97   5.98   6.00    86 1.04
 #&gt; 
-#&gt; Samples were drawn using  at Sun Nov 17 12:01:18 2019.
+#&gt; Samples were drawn using  at Mon Nov 18 14:29:45 2019.
+#&gt; For each parameter, n_eff is a crude measure of effective sample size,
+#&gt; and Rhat is the potential scale reduction factor on split chains (at 
+#&gt; convergence, Rhat=1).</div><div class='input'>
+<span class='no'>rats</span><span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='stan_select.html'>stan_select</a></span>(<span class='no'>mu_alpha</span>,<span class='no'>mu_beta</span>)<span class='kw'>%&gt;%</span>
+  <span class='fu'>stan_filter</span>(<span class='no'>mu_beta</span> <span class='kw'>&lt;</span> <span class='fl'>6</span>, <span class='kw'>permuted</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
+#&gt; 4 chains, each with iter=1040; warmup=1000; thin=1; 
+#&gt; post-warmup draws per chain=47, total post-warmup draws=160.
+#&gt; 
+#&gt;            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
+#&gt; mu_alpha 242.24    0.25 2.68 236.73 240.43 242.41 243.94 247.21   113 1.03
+#&gt; mu_beta    5.95    0.00 0.05   5.83   5.94   5.97   5.98   6.00   101 1.03
+#&gt; 
+#&gt; Samples were drawn using  at Mon Nov 18 14:29:45 2019.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>  
@@ -185,6 +216,7 @@ where conditions are true.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>

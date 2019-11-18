@@ -4,14 +4,18 @@
 \alias{stan_filter}
 \title{Return post-warmup samples with matching conditions}
 \usage{
-stan_filter(object, ..., chain = 1)
+stan_filter(object, ..., permuted = TRUE)
 }
 \arguments{
 \item{object}{stanfit object}
 
 \item{\dots}{Logical predicates defined in terms of the parameters in object}
 
-\item{chain}{numeric, chain to apply filter predicated on, Default: 1}
+\item{permuted}{A logical scalar indicating whether the draws after the warmup
+period in each chain should be permuted and merged, Default: TRUE}
+
+\item{chains}{numeric, chains to apply filter predicated on,
+if NULL then all chains are filtered, Default: NULL}
 }
 \value{
 stanfit object
@@ -19,6 +23,18 @@ stanfit object
 \description{
 Use stan_filter() to choose indicies of samples across parameters
 where conditions are true.
+}
+\details{
+\itemize{
+\item If no elements are returned for any chain then \code{NULL} is returned with a warning.
+\item If there is a chain that results in no samples then the chain is dropped with a warning.
+\item If permuted is FALSE then uneven chains may be returned depending on the result of the filter.
+\item To comply with \link[rstan:extract]{extract} with \code{permuted=TRUE} chains in which chaines are
+assumed to be of equal size.
+\itemize{
+\item Chain size returned is the length of the shortest filtered chain.
+}
+}
 }
 \examples{
 rats <- rats_example(nCores = 1)
@@ -29,6 +45,10 @@ rats\%>\%
 rats\%>\%
   stan_select(mu_alpha,mu_beta)\%>\%
   stan_filter(mu_beta < 6)
+  
+rats\%>\%
+  stan_select(mu_alpha,mu_beta)\%>\%
+  stan_filter(mu_beta < 6, permuted = FALSE)
   
 }
 \seealso{

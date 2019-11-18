@@ -116,10 +116,10 @@ Samples: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI Eff.Sample    Rhat
-Intercept         0.20974   0.18734 -0.16995  0.58045       4871 1.00014
-sigma_Intercept  -0.01457   0.12937 -0.25371  0.25910       3443 0.99990
-grouptreat        1.14936   0.43732  0.30668  2.04215       2412 0.99968
-sigma_grouptreat  0.77187   0.18551  0.40895  1.14763       3671 1.00025
+Intercept         0.01027   0.20784 -0.40440  0.42267       4527 1.00004
+sigma_Intercept   0.11407   0.13393 -0.12910  0.39634       3262 1.00097
+grouptreat        1.28662   0.49748  0.30889  2.28151       2933 1.00162
+sigma_grouptreat  0.77164   0.18749  0.39934  1.14317       3272 1.00084
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
@@ -142,10 +142,10 @@ Samples: 4 chains, each with iter = 1100; warmup = 1000; thin = 1;
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI Eff.Sample    Rhat
-Intercept         0.20603   0.18938 -0.17229  0.55380        404 1.00237
-sigma_Intercept  -0.01765   0.13205 -0.27242  0.26834        267 1.01300
-grouptreat        1.17670   0.43148  0.39742  2.03250        286 0.99335
-sigma_grouptreat  0.76882   0.19112  0.39986  1.19404        333 0.99934
+Intercept         0.01027   0.18592 -0.36801  0.38544        440 0.99761
+sigma_Intercept   0.10454   0.12931 -0.12454  0.34959        377 0.99532
+grouptreat        1.27984   0.47398  0.42062  2.11409        357 1.01209
+sigma_grouptreat  0.77950   0.17700  0.44493  1.14552        344 0.99818
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
@@ -169,10 +169,10 @@ Samples: 4 chains, each with iter = 1250; warmup = 1000; thin = 1;
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI Eff.Sample    Rhat
-Intercept         0.21199   0.18481 -0.15830  0.58403        943 0.99885
-sigma_Intercept  -0.01226   0.13123 -0.25055  0.25416        875 0.99996
-grouptreat        1.14002   0.42701  0.31862  1.98439       1056 0.99911
-sigma_grouptreat  0.77015   0.18437  0.41410  1.13719        957 0.99954
+Intercept         0.01096   0.20496 -0.39277  0.42267        970 1.00205
+sigma_Intercept   0.11702   0.13273 -0.11963  0.41012        949 1.00616
+grouptreat        1.28237   0.49328  0.32380  2.23726       1008 0.99896
+sigma_grouptreat  0.76845   0.19156  0.37881  1.14457        949 1.00227
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
@@ -191,15 +191,15 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 Formula: symptom_post ~ group 
          sigma ~ group
    Data: dat1 (Number of observations: 60) 
-Samples: 4 chains, each with iter = 1038; warmup = 1000; thin = 1;
-         total post-warmup samples = 152
+Samples: 4 chains, each with iter = 1064; warmup = 1000; thin = 1;
+         total post-warmup samples = 256
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI Eff.Sample    Rhat
-Intercept         0.13661   0.21084 -0.24887  0.53063         23 1.11967
-sigma_Intercept   0.00146   0.14427 -0.29134  0.26837        171 0.98707
-grouptreat        1.43811   0.58138  0.37853  2.33503          4 1.49889
-sigma_grouptreat  0.76933   0.20225  0.43258  1.21535        164 0.98340
+Intercept        -0.16357   0.19304 -0.56105  0.19018        215 1.00059
+sigma_Intercept   0.12529   0.13731 -0.14270  0.40252        207 1.00542
+grouptreat        2.24700   0.20834  2.01055  2.82100        178 0.99881
+sigma_grouptreat  0.80708   0.19791  0.41101  1.17686        232 0.99078
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
@@ -213,25 +213,28 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <a href="#filter-posterior-samples-by-conditional-subset-chain" class="anchor"></a>Filter Posterior Samples by Conditional Subset Chain</h2>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">fit_filter_chain &lt;-<span class="st"> </span>fit<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb15-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/stan_filter.html">stan_filter</a></span>(b_grouptreat<span class="op">&gt;=</span><span class="dv">2</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="st">  </span><span class="kw"><a href="../reference/stan_keep.html">stan_keep</a></span>(<span class="dt">chains =</span> <span class="dv">1</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb15-3" title="3"><span class="st">  </span><span class="kw"><a href="../reference/stan_retain.html">stan_retain</a></span>(<span class="dt">chains =</span> <span class="dv">1</span>)</a></code></pre></div>
 <pre><code> Family: gaussian 
   Links: mu = identity; sigma = log 
 Formula: symptom_post ~ group 
          sigma ~ group
    Data: dat1 (Number of observations: 60) 
-Samples: 1 chains, each with iter = 1038; warmup = 1000; thin = 1;
-         total post-warmup samples = 38
+Samples: 1 chains, each with iter = 1064; warmup = 1000; thin = 1;
+         total post-warmup samples = 64
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI Eff.Sample    Rhat
-Intercept        -0.01059   0.18756 -0.36581  0.30468         31 0.98812
-sigma_Intercept   0.02132   0.15600 -0.34953  0.21698         41 0.98238
-grouptreat        2.16330   0.13252  2.00818  2.48511         36 0.98212
-sigma_grouptreat  0.79642   0.18198  0.48437  1.23424         42 1.00071
+Intercept        -0.14177   0.18906 -0.55238  0.21160         52 1.01743
+sigma_Intercept   0.10701   0.12342 -0.12401  0.33862         54 0.98556
+grouptreat        2.21724   0.17174  2.02460  2.62651         49 0.98789
+sigma_grouptreat  0.82247   0.17687  0.50765  1.14057         46 0.98425
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">fit_filter_chain<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="st">  </span><span class="kw">plot</span>(<span class="dt">N =</span> <span class="dv">2</span>, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="brms_files/figure-html/unnamed-chunk-17-1.png" width="60%" style="display: block; margin: auto;"><img src="brms_files/figure-html/unnamed-chunk-17-2.png" width="60%" style="display: block; margin: auto;"></p>
 </div>
   </div>
 

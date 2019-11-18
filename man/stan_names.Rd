@@ -27,6 +27,6 @@ rats\%>\%stan_names(expand = TRUE)
 
 }
 \seealso{
-Other utility: \code{\link{stan_keep}}
+Other utility: \code{\link{stan_retain}}
 }
 \concept{utility}

@@ -185,35 +185,23 @@ rats%>%
 
 ```
 
-### Keep Chains
+### Retain Chains
 
 ```{r}
 rats%>%
-   stan_keep(chains = 1)
+   stan_retain(chains = 1)
    
 rats%>%
-   stan_keep(chains = c(1,3))
+   stan_retain(chains = c(1,3))
 ```
 
 
 ### Filter
 
-Users can filter conditionally on posterior samples in a chain, then those sample indicies will be removed from all the chains.
-
- > Be aware that there is an assumption of equal chain sizes in rstan summary functions. While it is possible to apply the filter within each chain this creates uneven chain sizes which breaks downstream rstan summary functions.
+Users can filter conditionally on posterior samples. The function will locate the indicies that the logical expression returns for each chain. Due to a constraint in `rstan::extract` with `permuted=FALSE` chains are assumed to be of equal size. To keep this assumption the chain size returned is the length of the shortest conditional chain. If there is a chain that results in no samples then the chain is dropped with a warning. If no elements are returned for any chain then `NULL` is returned.
 
 ```{r}
 rats%>%
-   stan_select(mu_alpha,mu_beta)%>%
-   stan_filter(mu_beta < 6)
- 
-```
-
-To verify that the filter does work properly we can subset to a single chain and apply the filter.
-
-```{r}
- rats%>%
-   stan_keep(chains = 1)%>%
    stan_select(mu_alpha,mu_beta)%>%
    stan_filter(mu_beta < 6)
  
