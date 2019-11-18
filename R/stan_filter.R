@@ -3,8 +3,20 @@
 #'   where conditions are true.
 #' @param object stanfit object
 #' @param \dots Logical predicates defined in terms of the parameters in object
-#' @param chain numeric, chain to apply filter predicated on, Default: 1
+#' @param chains numeric, chains to apply filter predicated on, 
+#' if NULL then all chains are filtered, Default: NULL
+#' @param permuted A logical scalar indicating whether the draws after the warmup 
+#' period in each chain should be permuted and merged, Default: TRUE
 #' @return stanfit object
+#' @details 
+#' 
+#' - If no elements are returned for any chain then `NULL` is returned with a warning.
+#' - If there is a chain that results in no samples then the chain is dropped with a warning.
+#' - If permuted is FALSE then uneven chains may be returned depending on the result of the filter.
+#' - To comply with [extract][rstan::extract] with `permuted=TRUE` chains in which chaines are 
+#' assumed to be of equal size. 
+#'   - Chain size returned is the length of the shortest filtered chain. 
+#' 
 #' @examples 
 #' rats <- rats_example(nCores = 1)
 #' 
@@ -15,82 +27,109 @@
 #'   stan_select(mu_alpha,mu_beta)%>%
 #'   stan_filter(mu_beta < 6)
 #'   
+#' rats%>%
+#'   stan_select(mu_alpha,mu_beta)%>%
+#'   stan_filter(mu_beta < 6, permuted = FALSE)
+#'   
 #' @rdname stan_filter
 #' @family filtering
 #' @export 
 #' @importFrom rlang quo_squash quo
 #' @importFrom stringi stri_extract_all_regex
-#' @importFrom purrr discard flatten_chr map_df map_dfc map
-stan_filter <- function(object, ...,chain = 1){
+#' @importFrom purrr discard flatten_chr map_df map_dfc modify map map2
+stan_filter <- function(object, ..., permuted = TRUE){
   UseMethod('stan_filter',object)
 }
 
 #' @export   
-stan_filter.brmsfit <- function(object, ...,chain = 1){
-  object$fit <- stan_filter(object$fit,...,chain = chain)
+stan_filter.brmsfit <- function(object, ..., permuted = TRUE){
+  object$fit <- stan_filter(object$fit,..., permuted = permuted)
   object
 }
 
 #' @export   
-stan_filter.stanfit <- function(object, ...,chain = 1){
+stan_filter.stanfit <- function(object, ..., permuted = TRUE){
   
   on.exit({clear_summary(object)},add = TRUE)
+
+    warm_x <- seq_len(object@sim$warmup)
+    iter_x <- seq_len(object@sim$iter)[-warm_x]
+    
+    squish <- rlang::quo_squash(rlang::quo(...))
+    
+    idcs_fnames_oi <- stringi::stri_extract_all_regex(as.character(squish),pattern = '`(.*?)`')%>%
+      purrr::discard(is.na)%>%
+      purrr::flatten_chr()
+    
+    idcs_pars_oi <- intersect(as.character(squish),stan_names(object))
+    
+    idcs <- c(idcs_pars_oi,idcs_fnames_oi)
+    
+    if(!length(idcs)){
+      stop('Invalid parameter names selected\nUse stan_names(object) to list parameter names',call. = FALSE)
+    }
+    
+    samp_df <- purrr::map_df(object@sim$samples,
+                             .f = function(X,idc, warm_x){
+                               ret <- purrr::map_dfc(X[gsub('`','',idc)],identity)
+                               ret$n_ <- 1:nrow(ret)
+                               ret <- ret[-warm_x,]
+                               ret <- ret%>%subset({eval(squish)})
+                               ret
+                             },idc=idcs,warm_x = warm_x,.id = 'chain')
+    
+    
+    if(!length(samp_df$n_)){
+      warning('filter returned no samples',call. = FALSE)
+      return(NULL)
+    }
+    
+    n_chain <- split(samp_df$n_, samp_df$chain)
+
+    if(!identical(length(n_chain),length(chain_ids(object)))){
+      
+        miss_id <- chain_ids(object)[!chain_ids(object)%in%as.numeric(names(n_chain))]
+        
+        warning(sprintf('filter returned no samples for chains: %s',
+                        paste0(miss_id,collapse = ', ')
+        ),call. = FALSE)
+        
+        object <- stan_retain(object,as.numeric(names(n_chain)))
+    }
+
+    inits_x <- samp_df$n_ - length(warm_x)
+    
+    init_x_chain <- split(inits_x, samp_df$chain)
+    
+    if(permuted){
+      
+      init_x_chain <- purrr::modify(init_x_chain,.f=function(x,m){
+        x[1:m]
+      } , m = min(sapply(n_chain,length)))      
   
-  warm_x <- seq_len(object@sim$warmup)
-  iter_x <- seq_len(object@sim$iter)[-warm_x]
-  
-  squish <- rlang::quo_squash(rlang::quo(...))
-  
-  idcs_fnames_oi <- stringi::stri_extract_all_regex(as.character(squish),pattern = '`(.*?)`')%>%
-    purrr::discard(is.na)%>%
-    purrr::flatten_chr()
-  
-  idcs_pars_oi <- intersect(as.character(squish),stan_names(object))
-  
-  idcs <- c(idcs_pars_oi,idcs_fnames_oi)
-  
-  if(!length(idcs)){
-    stop('Invalid parameter names selected\nUse stan_names(object) to list parameter names',call. = FALSE)
+      n_chain <- purrr::modify(n_chain,.f=function(x,m){
+        x[1:m]
+      } , m = min(sapply(n_chain,length)))
+          
+    }
+
+    samp_chain <- purrr::map(n_chain,.f = function(x,w) c(w,x), w = warm_x)
+    
+    iter_chain <- purrr::map(samp_chain,length)
+    
+    object@sim$iter <- length(warm_x) + mean(sapply(init_x_chain,length))
+
+    object@stan_args <- purrr::map2(object@stan_args,iter_chain,.f=function(x,i){
+      x$iter <- i
+      x
+    })
+    
+    object@sim$permutation <- purrr::map2(object@sim$permutation,init_x_chain, .f = function(y,idx) y[idx])
+    
+    object@sim$samples <- purrr::map2(object@sim$samples,samp_chain,stan_subset)
+    
+    object@sim$n_save <- as.numeric(iter_chain)
+    
+    object
+    
   }
-  
-  if(!chain%in%chain_ids(object)){
-    stop(sprintf(
-      'Invalid chain number "%s", expected "%s"',
-      chain, paste0(chain_ids(object),collapse = ', ')
-      ),
-      call. = FALSE)
-  }
-  
-  samp_df <- purrr::map_df(object@sim$samples[chain],.f=function(x,idc,warm_x){
-    ret <- purrr::map_dfc(x[gsub('`','',idc)],identity)
-    ret$n_ <- 1:nrow(ret)
-    ret <- ret[-warm_x,]
-    ret <- ret%>%subset({eval(squish)})
-    ret
-  },idc=idcs,warm_x = warm_x)
-  
-  if(!length(samp_df$n_)){
-    warning('Boolean returned no samples',call. = FALSE)
-    return(object)
-  }
-  
-  inits_x <- samp_df$n_ - length(warm_x)
-  
-  samp <- c(warm_x,samp_df$n_) 
-  
-  object@sim$iter <- length(samp)
-  
-  object@stan_args <- purrr::map(object@stan_args,.f=function(x,i){
-    x$iter <- i
-    x
-  },i = object@sim$iter)
-  
-  object@inits <- purrr::map(object@inits,stan_trim_postwarm,idx=inits_x)
-  object@sim$permutation <- purrr::map(object@sim$permutation,.f = function(y,idx) y[idx] , idx=inits_x)
-  
-  object@sim$samples <- purrr::map(object@sim$samples,stan_subset,idx=samp)
-  object@sim$n_save <- rep(object@sim$iter,length(object@sim$n_save))
-  
-  object
-  
-}

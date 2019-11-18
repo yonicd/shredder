@@ -112,9 +112,14 @@ fit_filter%>%
 ```{r}
 fit_filter_chain <- fit%>%
   stan_filter(b_grouptreat>=2)%>%
-  stan_keep(chains = 1)
+  stan_retain(chains = 1)
 ```
 
 ```{r,echo = FALSE}
   print(fit_filter_chain,digits = 5)
+```
+
+```{r}
+fit_filter_chain%>%
+  plot(N = 2, ask = FALSE)
 ```
