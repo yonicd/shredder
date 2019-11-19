@@ -9,9 +9,9 @@ Authors@R:
 Description: Verbs to manipulate stanfit class objects returned
     by rstan.
 License: MIT + file LICENSE
-URL: https://ghe.metrumrg.com/internal-projects/shredder
+URL: https://ghe.metrumrg.com/incubator/shredder
 BugReports: 
-    https://ghe.metrumrg.com/internal-projects/shredder/issues
+    https://ghe.metrumrg.com/incubator/shredder/issues
 Depends: 
     R (>= 3.2.0)
 Imports: 
