@@ -28,7 +28,7 @@ remotes::install_github('metrumresearchgroup/shredder')
   - Dimension
       - chains
           - `shredder::stan_retain` : extract specific chains
-      - pars:
+      - pars
           - `shredder::stan_select` : extract specific pars
           - `shredder::stan_contains`, `shredder::stan_starts_with`,`shredder::stan_ends_with`:
             partial par extractions (used within `shredder::stan_select`)
