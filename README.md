@@ -20,7 +20,7 @@ __Important__: The __shredder__ API is still maturing. Please see `?shredder::li
 ## Installation
 
 ``` r
-remotes::install_github('metrumreseaerchgroup/shredder')
+remotes::install_github('metrumresearchgroup/shredder')
 ```
 
 ## Current Verbs
