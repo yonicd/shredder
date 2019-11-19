@@ -80,20 +80,26 @@
 <a href="#shredder" class="anchor"></a>shredder</h1></div>
 <!-- badges: start -->
 
-<p>The goal of shredder is to apply tidylike verbs to rstan simulation objects. The usage is similar to the <a href="https://dplyr.tidyverse.org/">dplyr</a> verbs.</p>
-<p>The verbs are <code>S3</code> methods that have built in suport for <code>stanfit</code> and <code>brmsfit</code> class objects and the output is the manipulated object remaining in the same class.</p>
-<p>This package is also a good way to integrate <a href="https://mjskay.github.io/tidybayes/">tidybayes</a> into a workflow</p>
-<blockquote>
-<p>Important: The shredder API is still maturing. Please see ?shredder::lifecycle for the list of functions that are considered stable.</p>
-</blockquote>
+<p>The goal of <strong>shredder</strong> is to apply tidy-like verbs to rstan simulation objects.</p>
+<ul>
+<li>With these new verbs users can:
+<ul>
+<li>Manipulate fit objects without needing to convert arrays into recatangular form.</li>
+<li>Generate task specifc subsets of the parent fit object for fit diagnostics and post-processing</li>
+<li>Use pipe operators to create more user-friendly workflows</li>
+</ul>
+</li>
+<li>The verbs are <code>S3</code> methods that have built-in support for the <code>stanfit</code> and <code>brmsfit</code> classes.</li>
+</ul>
+<p><strong>Important</strong>: The <strong>shredder</strong> API is still maturing. Please see <code><a href="reference/lifecycle.html">?shredder::lifecycle</a></code> for the list of functions that are considered stable.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">remotes<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">'metrumreseaerchgroup/shredder'</span>)</a></code></pre></div>
 </div>
-<div id="verbs" class="section level2">
+<div id="current-verbs" class="section level2">
 <h2 class="hasAnchor">
-<a href="#verbs" class="anchor"></a>Verbs</h2>
+<a href="#current-verbs" class="anchor"></a>Current Verbs</h2>
 <ul>
 <li>Dimension
 <ul>

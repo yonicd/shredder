@@ -6,13 +6,16 @@ Summary](https://img.shields.io/badge/covrpage-Last_Build_2019_11_18-brightgreen
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
-The goal of shredder is to apply tidylike verbs to rstan simulation objects. The usage is similar to the [dplyr](https://dplyr.tidyverse.org/) verbs. 
+The goal of __shredder__ is to apply tidy-like verbs to rstan simulation objects. 
 
-The verbs are `S3` methods that have built in suport for `stanfit` and `brmsfit` class objects and the output is the manipulated object remaining in the same class.
+  - With these new verbs users can: 
+    - Manipulate fit objects without needing to convert arrays into recatangular form.
+    - Generate task specifc subsets of the parent fit object for fit diagnostics and post-processing
+    - Use pipe operators to create more user-friendly workflows
+    
+  - The verbs are `S3` methods that have built-in support for the `stanfit` and `brmsfit` classes.
 
-This package is also a good way to integrate [tidybayes](https://mjskay.github.io/tidybayes/) into a workflow
-
-> Important: The shredder API is still maturing. Please see ?shredder::lifecycle for the list of functions that are considered stable.
+__Important__: The __shredder__ API is still maturing. Please see `?shredder::lifecycle` for the list of functions that are considered stable.
 
 ## Installation
 
@@ -20,7 +23,7 @@ This package is also a good way to integrate [tidybayes](https://mjskay.github.i
 remotes::install_github('metrumreseaerchgroup/shredder')
 ```
 
-## Verbs
+## Current Verbs
 
   - Dimension
       - chains
