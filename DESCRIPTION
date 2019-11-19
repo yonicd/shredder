@@ -1,23 +1,40 @@
-Package: shredder
 Type: Package
+Package: shredder
 Title: Tidylike Verbs for Stan
 Version: 0.1.0
-Authors@R: person("Jonathan Sidi",role=c("aut","cre"),email="yonis@metrumrg.com")
-Description: Verbs to manipulate stanfit class objects returned by rstan.
-Depends: R (>= 3.2.0)
-Imports: rlang, stringi, purrr, checkmate, rstan, parallel, rematch2
+Authors@R: 
+    person(given = "Jonathan Sidi",
+           role = c("aut", "cre"),
+           email = "yonis@metrumrg.com")
+Description: Verbs to manipulate stanfit class objects returned
+    by rstan.
+License: MIT + file LICENSE
+URL: https://ghe.metrumrg.com/internal-projects/shredder
+BugReports: 
+    https://ghe.metrumrg.com/internal-projects/shredder/issues
+Depends: 
+    R (>= 3.2.0)
+Imports: 
+    checkmate,
+    lifecycle,
+    parallel,
+    purrr,
+    rematch2,
+    rlang,
+    rstan,
+    stringi
 Suggests: 
     brms,
     details,
-    tidybayes,
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    tidybayes
+VignetteBuilder: 
+    knitr
+RdMacros: 
+    lifecycle
 Encoding: UTF-8
 LazyData: true
-URL: https://ghe.metrumrg.com/internal-projects/shredder
-BugReports: https://ghe.metrumrg.com/internal-projects/shredder/issues
-RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
-License: MIT + file LICENSE
-VignetteBuilder: knitr
+RoxygenNote: 6.1.1

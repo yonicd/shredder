@@ -13,9 +13,6 @@ stan_filter(object, ..., permuted = TRUE)
 
 \item{permuted}{A logical scalar indicating whether the draws after the warmup
 period in each chain should be permuted and merged, Default: TRUE}
-
-\item{chains}{numeric, chains to apply filter predicated on,
-if NULL then all chains are filtered, Default: NULL}
 }
 \value{
 stanfit object

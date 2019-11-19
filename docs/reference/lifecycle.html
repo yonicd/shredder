@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • shredder</title>
+<title>Life cycle of the shredder package — lifecycle • shredder</title>
 
 <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
 
@@ -34,7 +34,16 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Life cycle of the shredder package — lifecycle" />
+<meta property="og:description" content="
+The shredder package is currently maturing. Unless otherwise stated,
+this applies to all its exported functions. Maturing functions are
+susceptible to API changes. Only use these in packages if you're
+prepared to make changes as the package evolves. See sections below
+for a list of functions marked as stable.
+The documentation pages of retired functions contain life cycle
+sections that explain the reasons for their retirements." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -51,7 +60,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -106,117 +115,48 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Life cycle of the shredder package</h1>
+    <small class="dont-index">Source: <a href='https://ghe.metrumrg.com/internal-projects/shredder/blob/master/R/lifecycle.R'><code>R/lifecycle.R</code></a></small>
+    <div class="hidden name"><code>lifecycle.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p><a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a></p>
+<p>The shredder package is currently maturing. Unless otherwise stated,
+this applies to all its exported functions. Maturing functions are
+susceptible to API changes. Only use these in packages if you're
+prepared to make changes as the package evolves. See sections below
+for a list of functions marked as stable.</p>
+<p>The documentation pages of retired functions contain life cycle
+sections that explain the reasons for their retirements.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-selecting-parameters" class="hasAnchor"><a href="#section-selecting-parameters" class="anchor"></a>Selecting Parameters</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="stan_partials.html">stan_contains()</a></code> <code><a href="stan_partials.html">stan_starts_with()</a></code> <code><a href="stan_partials.html">stan_ends_with()</a></code> </p>
-        </td>
-        <td><p>Partial match functions for stanfit objects</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="stan_select.html">stan_select()</a></code> </p>
-        </td>
-        <td><p>Select parameters by name</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-filtering-post-warmup-samples" class="hasAnchor"><a href="#section-filtering-post-warmup-samples" class="anchor"></a>Filtering Post-Warmup Samples</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="stan_filter.html">stan_filter()</a></code> </p>
-        </td>
-        <td><p>Return post-warmup samples with matching conditions</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="stan_sample.html">stan_sample_n()</a></code> <code><a href="stan_sample.html">stan_sample_frac()</a></code> </p>
-        </td>
-        <td><p>Sample n post-warumps samples from a stanfit object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="stan_slice.html">stan_slice()</a></code> </p>
-        </td>
-        <td><p>Choose post-warumps samples by position</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-shredder-utilities" class="hasAnchor"><a href="#section-shredder-utilities" class="anchor"></a>Shredder Utilities</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="stan_names.html">stan_names()</a></code> </p>
-        </td>
-        <td><p>The Par Names of a Stanfit Object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="stan_retain.html">stan_retain()</a></code> </p>
-        </td>
-        <td><p>Return object with specific chains</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-examples" class="hasAnchor"><a href="#section-examples" class="anchor"></a>Examples</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="rat_data.html">rat_data</a></code> </p>
-        </td>
-        <td><p>Rats model data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rats_example.html">rats_example()</a></code> </p>
-        </td>
-        <td><p>Rats model</p></td>
-      </tr>
-    </tbody>
-    </table>
+
+    <h2 class="hasAnchor" id="stable-functions"><a class="anchor" href="#stable-functions"></a>Stable functions</h2>
+
+    
+    <p><a href='https://www.tidyverse.org/lifecycle/#stable'><img src='figures/lifecycle-stable.svg' alt='Stable lifecycle'></a></p><ul>
+<li><p><code><a href='stan_retain.html'>stan_retain()</a></code></p></li>
+<li><p><code><a href='stan_select.html'>stan_select()</a></code></p></li>
+<li><p><code><a href='stan_partials.html'>stan_contains()</a></code>, <code><a href='stan_partials.html'>stan_starts_with()</a></code>, <code><a href='stan_partials.html'>stan_ends_with()</a></code></p></li>
+<li><p><code><a href='stan_names.html'>stan_names()</a></code></p></li>
+<li><p><code><a href='stan_slice.html'>stan_slice()</a></code></p></li>
+<li><p><code><a href='stan_sample.html'>stan_sample_n()</a></code>, <code><a href='stan_sample.html'>stan_sample_frac()</a></code></p></li>
+</ul>
+    <p><a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a></p><ul>
+<li><p><code><a href='stan_filter.html'>stan_filter()</a></code></p></li>
+</ul>
+
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-selecting-parameters">Selecting Parameters</a></li>
-      <li><a href="#section-filtering-post-warmup-samples">Filtering Post-Warmup Samples</a></li>
-      <li><a href="#section-shredder-utilities">Shredder Utilities</a></li>
-      <li><a href="#section-examples">Examples</a></li>
+      <li><a href="#stable-functions">Stable functions</a></li>
     </ul>
+
   </div>
 </div>
 

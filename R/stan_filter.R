@@ -3,8 +3,6 @@
 #'   where conditions are true.
 #' @param object stanfit object
 #' @param \dots Logical predicates defined in terms of the parameters in object
-#' @param chains numeric, chains to apply filter predicated on, 
-#' if NULL then all chains are filtered, Default: NULL
 #' @param permuted A logical scalar indicating whether the draws after the warmup 
 #' period in each chain should be permuted and merged, Default: TRUE
 #' @return stanfit object

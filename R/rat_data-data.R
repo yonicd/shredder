@@ -1,4 +1,4 @@
-#' @title rats model data
+#' @title Rats model data
 #' @description Data used in rats example model
 #' @format An object of class \code{"list"}:
 #' \describe{

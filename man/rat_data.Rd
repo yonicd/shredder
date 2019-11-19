@@ -3,7 +3,7 @@
 \docType{data}
 \name{rat_data}
 \alias{rat_data}
-\title{rats model data}
+\title{Rats model data}
 \format{An object of class \code{"list"}:
 \describe{
 \item{\code{N}}{integer Number of subjects}
