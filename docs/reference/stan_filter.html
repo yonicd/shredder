@@ -88,7 +88,7 @@ where conditions are true." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://ghe.metrumrg.com/internal-projects/shredder">
+  <a href="https://ghe.metrumrg.com/incubator/shredder">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -112,7 +112,7 @@ where conditions are true." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Return post-warmup samples with matching conditions</h1>
-    <small class="dont-index">Source: <a href='https://ghe.metrumrg.com/internal-projects/shredder/blob/master/R/stan_filter.R'><code>R/stan_filter.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://ghe.metrumrg.com/incubator/shredder/blob/master/R/stan_filter.R'><code>R/stan_filter.R</code></a></small>
     <div class="hidden name"><code>stan_filter.Rd</code></div>
     </div>
 
@@ -161,14 +161,11 @@ assumed to be of equal size.</p><ul>
   <code><a href='stan_slice.html'>stan_slice</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>rats</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rats_example.html'>rats_example</a></span>(<span class='kw'>nCores</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; <span class='message'>rstan (Version 2.19.2, GitRev: 2e1f913d3ca3)</span></div><div class='output co'>#&gt; <span class='message'>For execution on a local, multicore CPU with excess RAM we recommend calling</span>
-#&gt; <span class='message'>options(mc.cores = parallel::detectCores()).</span>
-#&gt; <span class='message'>To avoid recompilation of unchanged Stan programs, we recommend calling</span>
-#&gt; <span class='message'>rstan_options(auto_write = TRUE)</span></div><div class='output co'>#&gt; 
+    <pre class="examples"><div class='input'><span class='no'>rats</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rats_example.html'>rats_example</a></span>(<span class='kw'>nCores</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; 
 #&gt; SAMPLING FOR MODEL 'rats' NOW (CHAIN 1).
 #&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 3.8e-05 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.38 seconds.
+#&gt; Chain 1: Gradient evaluation took 6.1e-05 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.61 seconds.
 #&gt; Chain 1: Adjust your expectations accordingly!
 #&gt; Chain 1: 
 #&gt; Chain 1: 
@@ -185,15 +182,15 @@ assumed to be of equal size.</p><ul>
 #&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 0.537322 seconds (Warm-up)
-#&gt; Chain 1:                0.42192 seconds (Sampling)
-#&gt; Chain 1:                0.959242 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 0.530683 seconds (Warm-up)
+#&gt; Chain 1:                0.413806 seconds (Sampling)
+#&gt; Chain 1:                0.944489 seconds (Total)
 #&gt; Chain 1: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'rats' NOW (CHAIN 2).
 #&gt; Chain 2: 
-#&gt; Chain 2: Gradient evaluation took 2.8e-05 seconds
-#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.28 seconds.
+#&gt; Chain 2: Gradient evaluation took 2.4e-05 seconds
+#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.24 seconds.
 #&gt; Chain 2: Adjust your expectations accordingly!
 #&gt; Chain 2: 
 #&gt; Chain 2: 
@@ -210,15 +207,15 @@ assumed to be of equal size.</p><ul>
 #&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 0.80028 seconds (Warm-up)
-#&gt; Chain 2:                0.58347 seconds (Sampling)
-#&gt; Chain 2:                1.38375 seconds (Total)
+#&gt; Chain 2:  Elapsed Time: 0.786638 seconds (Warm-up)
+#&gt; Chain 2:                0.556149 seconds (Sampling)
+#&gt; Chain 2:                1.34279 seconds (Total)
 #&gt; Chain 2: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'rats' NOW (CHAIN 3).
 #&gt; Chain 3: 
-#&gt; Chain 3: Gradient evaluation took 2e-05 seconds
-#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.2 seconds.
+#&gt; Chain 3: Gradient evaluation took 2.1e-05 seconds
+#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.21 seconds.
 #&gt; Chain 3: Adjust your expectations accordingly!
 #&gt; Chain 3: 
 #&gt; Chain 3: 
@@ -235,15 +232,15 @@ assumed to be of equal size.</p><ul>
 #&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 3: 
-#&gt; Chain 3:  Elapsed Time: 0.847369 seconds (Warm-up)
-#&gt; Chain 3:                0.240635 seconds (Sampling)
-#&gt; Chain 3:                1.088 seconds (Total)
+#&gt; Chain 3:  Elapsed Time: 0.792934 seconds (Warm-up)
+#&gt; Chain 3:                0.22338 seconds (Sampling)
+#&gt; Chain 3:                1.01631 seconds (Total)
 #&gt; Chain 3: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'rats' NOW (CHAIN 4).
 #&gt; Chain 4: 
-#&gt; Chain 4: Gradient evaluation took 2e-05 seconds
-#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.2 seconds.
+#&gt; Chain 4: Gradient evaluation took 2.1e-05 seconds
+#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.21 seconds.
 #&gt; Chain 4: Adjust your expectations accordingly!
 #&gt; Chain 4: 
 #&gt; Chain 4: 
@@ -260,9 +257,9 @@ assumed to be of equal size.</p><ul>
 #&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 4: 
-#&gt; Chain 4:  Elapsed Time: 0.598455 seconds (Warm-up)
-#&gt; Chain 4:                0.312637 seconds (Sampling)
-#&gt; Chain 4:                0.911092 seconds (Total)
+#&gt; Chain 4:  Elapsed Time: 0.557084 seconds (Warm-up)
+#&gt; Chain 4:                0.303591 seconds (Sampling)
+#&gt; Chain 4:                0.860675 seconds (Total)
 #&gt; Chain 4: </div><div class='input'>
 <span class='no'>rats</span><span class='kw'>%&gt;%</span>
   <span class='fu'><a href='stan_select.html'>stan_select</a></span>(<span class='no'>mu_alpha</span>,<span class='no'>mu_beta</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
@@ -273,7 +270,7 @@ assumed to be of equal size.</p><ul>
 #&gt; mu_alpha 242.45    0.04 2.68 237.17 240.65 242.43 244.22 247.79  5295    1
 #&gt; mu_beta    6.19    0.00 0.11   5.98   6.11   6.19   6.26   6.40  4302    1
 #&gt; 
-#&gt; Samples were drawn using  at Tue Nov 19 08:22:44 2019.
+#&gt; Samples were drawn using  at Tue Nov 19 12:54:01 2019.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>
@@ -287,7 +284,7 @@ assumed to be of equal size.</p><ul>
 #&gt; mu_alpha 242.40    0.23 2.60 236.46 241.01 242.67 244.08 246.88   127 1.02
 #&gt; mu_beta    5.95    0.01 0.05   5.83   5.94   5.97   5.98   6.00    86 1.04
 #&gt; 
-#&gt; Samples were drawn using  at Tue Nov 19 08:22:44 2019.
+#&gt; Samples were drawn using  at Tue Nov 19 12:54:01 2019.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>
@@ -301,7 +298,23 @@ assumed to be of equal size.</p><ul>
 #&gt; mu_alpha 242.24    0.25 2.68 236.73 240.43 242.41 243.94 247.21   113 1.03
 #&gt; mu_beta    5.95    0.00 0.05   5.83   5.94   5.97   5.98   6.00   101 1.03
 #&gt; 
-#&gt; Samples were drawn using  at Tue Nov 19 08:22:44 2019.
+#&gt; Samples were drawn using  at Tue Nov 19 12:54:01 2019.
+#&gt; For each parameter, n_eff is a crude measure of effective sample size,
+#&gt; and Rhat is the potential scale reduction factor on split chains (at 
+#&gt; convergence, Rhat=1).</div><div class='input'>
+<span class='no'>rats</span><span class='kw'>%&gt;%</span>
+ <span class='fu'><a href='stan_select.html'>stan_select</a></span>(<span class='no'>`alpha[1]`</span>,<span class='no'>`alpha[2]`</span>,<span class='no'>mu_alpha</span>,<span class='no'>mu_beta</span>)<span class='kw'>%&gt;%</span>
+ <span class='fu'>stan_filter</span>(<span class='no'>mu_beta</span> <span class='kw'>&lt;</span> <span class='fl'>6</span> <span class='kw'>&amp;</span> <span class='no'>`alpha[1]`</span> <span class='kw'>&gt;</span> <span class='fl'>240</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
+#&gt; 4 chains, each with iter=1017; warmup=1000; thin=1; 
+#&gt; post-warmup draws per chain=17, total post-warmup draws=68.
+#&gt; 
+#&gt;            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
+#&gt; alpha[1] 242.48    0.19 1.62 240.26 241.45 242.05 243.43 246.02    73 0.98
+#&gt; alpha[2] 248.01    0.67 3.09 242.59 246.03 247.87 250.09 253.86    22 1.14
+#&gt; mu_alpha 242.08    0.26 2.60 236.62 240.55 242.08 243.41 247.54    97 1.03
+#&gt; mu_beta    5.95    0.01 0.05   5.83   5.94   5.97   5.98   6.00    52 1.00
+#&gt; 
+#&gt; Samples were drawn using  at Tue Nov 19 12:54:01 2019.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>  

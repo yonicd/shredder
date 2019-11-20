@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 [![Covrpage
-Summary](https://img.shields.io/badge/covrpage-Last_Build_2019_11_18-brightgreen.svg)](http://tinyurl.com/y3zvyrpx)
+Summary](https://img.shields.io/badge/covrpage-Last_Build_2019_11_19-brightgreen.svg)](http://tinyurl.com/y3zvyrpx)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 

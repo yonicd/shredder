@@ -47,6 +47,10 @@ rats\%>\%
   stan_select(mu_alpha,mu_beta)\%>\%
   stan_filter(mu_beta < 6, permuted = FALSE)
   
+rats\%>\%
+ stan_select(`alpha[1]`,`alpha[2]`,mu_alpha,mu_beta)\%>\%
+ stan_filter(mu_beta < 6 & `alpha[1]` > 240)
+  
 }
 \seealso{
 Other filtering: \code{\link{stan_sample_n}},
