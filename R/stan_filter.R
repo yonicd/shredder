@@ -29,12 +29,16 @@
 #'   stan_select(mu_alpha,mu_beta)%>%
 #'   stan_filter(mu_beta < 6, permuted = FALSE)
 #'   
+#' rats%>%
+#'  stan_select(`alpha[1]`,`alpha[2]`,mu_alpha,mu_beta)%>%
+#'  stan_filter(mu_beta < 6 & `alpha[1]` > 240)
+#'   
 #' @rdname stan_filter
 #' @family filtering
 #' @export 
 #' @importFrom rlang quo_squash quo
 #' @importFrom stringi stri_extract_all_regex
-#' @importFrom purrr discard flatten_chr map_df map_dfc modify map map2
+#' @importFrom purrr map_df map_dfc modify map map2
 stan_filter <- function(object, ..., permuted = TRUE){
   UseMethod('stan_filter',object)
 }
@@ -54,15 +58,15 @@ stan_filter.stanfit <- function(object, ..., permuted = TRUE){
     iter_x <- seq_len(object@sim$iter)[-warm_x]
     
     squish <- rlang::quo_squash(rlang::quo(...))
+    squish_chr <- as.character(squish)
+    squish_chr <- gsub('[`]','',squish_chr)
     
-    idcs_fnames_oi <- stringi::stri_extract_all_regex(as.character(squish),pattern = '`(.*?)`')%>%
-      purrr::discard(is.na)%>%
-      purrr::flatten_chr()
+    model_names <- paste0(pars_regex(stan_names(object,expand = TRUE)),collapse = '|')
     
-    idcs_pars_oi <- intersect(as.character(squish),stan_names(object))
-    
-    idcs <- c(idcs_pars_oi,idcs_fnames_oi)
-    
+    idcs <- stringi::stri_extract_all_regex(squish_chr,model_names)
+    idcs <- unique(unlist(idcs))
+    idcs <- idcs[!is.na(idcs)]
+
     if(!length(idcs)){
       stop('Invalid parameter names selected\nUse stan_names(object) to list parameter names',call. = FALSE)
     }
@@ -72,7 +76,7 @@ stan_filter.stanfit <- function(object, ..., permuted = TRUE){
                                ret <- purrr::map_dfc(X[gsub('`','',idc)],identity)
                                ret$n_ <- 1:nrow(ret)
                                ret <- ret[-warm_x,]
-                               ret <- ret%>%subset({eval(squish)})
+                               ret <- subset(ret,{eval(squish)})
                                ret
                              },idc=idcs,warm_x = warm_x,.id = 'chain')
     

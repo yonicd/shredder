@@ -23,6 +23,13 @@ testthat::describe('filters',{
     testthat::expect_equal(length(x@sim$samples[[1]]$mu_beta),1492)
   })
   
+  it('compound query',{
+    x <- rats%>%
+      stan_select(`alpha[1]`,`alpha[2]`,mu_alpha,mu_beta)%>%
+      stan_filter(mu_beta < 6 & `alpha[1]` > 240)
+    testthat::expect_equal(length(x@sim$samples[[1]]$mu_beta),1017)
+  })
+  
   it('no samples',{
     testthat::expect_warning(rats%>%stan_filter(`alpha[1]` < 6),regexp = 'no samples')
   })

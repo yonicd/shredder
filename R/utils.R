@@ -26,3 +26,9 @@ check_brms <- function(x){
     checkmate::checkClass(x, "brmsfit")
   )
 }
+
+pars_regex <- function(x){
+  x <- gsub('\\[','\\\\[',x)
+  x <- gsub('\\]','\\\\]',x)
+  x
+}

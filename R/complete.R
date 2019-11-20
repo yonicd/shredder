@@ -74,19 +74,21 @@ populate <- function(env){
   
   comp <- NULL
   
-  if(this_ns=='shredder'){
+  if('shredder'%in%this_ns){
     
-    
-    if(grepl('%>%',fun)){
-      fun1 <- strsplit(fun,'%>%')[[1]]
-      comp <- names(formals(fun1[length(fun1)]))
-      no_dots <- !grepl('...',comp,fixed = TRUE)
-      comp[no_dots] <- sprintf('%s = ',comp[no_dots])
-    }
+    fun1 <- strsplit(fun,'%>%')[[1]]
+    fun_tail <- fun1[length(fun1)]
+    fun_head <- fun1[1]
+    comp <- names(formals(fun_tail))
+    no_dots <- !grepl('...',comp,fixed = TRUE)
+    comp[no_dots] <- sprintf('%s = ',comp[no_dots])
 
-    if(grepl('stan_(select|filter)$',fun)){
-
-      object <- get(gsub('%>%(.*?)$','',fun),envir = globalenv())
+    if(grepl('stan_(select|filter)$',fun_tail)){
+      
+      object <- NULL
+      
+      if(fun_head%in%ls(envir = globalenv()))
+        object <- get(fun_head,envir = globalenv())
 
       if(inherits(object,'stanfit')){
         
@@ -107,7 +109,7 @@ populate <- function(env){
     }
     
   }
-  
+
   return(comp)
   
 }
