@@ -10,3 +10,4 @@
 ^__metrumrg_com\.ca-bundle$
 ^benchmark\.R$
 ^\.Rprofile$
+^README\.Rmd$

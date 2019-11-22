@@ -6,14 +6,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Working With brms • shredder</title>
-<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.1/clipboard.min.js" integrity="sha256-hIvIxeqhGZF+VVeM55k0mJvWpQ6gTkWk3Emc+NmowYA=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Working With brms">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shredder</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -52,8 +52,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://ghe.metrumrg.com/internal-projects/shredder">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://ghe.metrumrg.com/incubator/shredder">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -72,40 +72,41 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Working With brms</h1>
             
       
-      <small class="dont-index">Source: <a href="https://ghe.metrumrg.com/internal-projects/shredder/blob/master/vignettes/brms.Rmd"><code>vignettes/brms.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://ghe.metrumrg.com/incubator/shredder/blob/master/vignettes/brms.Rmd"><code>vignettes/brms.Rmd</code></a></small>
       <div class="hidden name"><code>brms.Rmd</code></div>
 
     </div>
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(shredder)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(brms)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(shredder)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(brms)</a></code></pre></div>
 <div id="generate-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#generate-data" class="anchor"></a>Generate Data</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">group &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">"treat"</span>, <span class="st">"placebo"</span>), </a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">group &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"treat"</span>, <span class="st">"placebo"</span>), </a>
 <a class="sourceLine" id="cb2-2" title="2">             <span class="dt">each =</span> <span class="dv">30</span>)</a>
 <a class="sourceLine" id="cb2-3" title="3"></a>
-<a class="sourceLine" id="cb2-4" title="4">symptom_post &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb2-5" title="5">  <span class="kw">rnorm</span>(<span class="dv">30</span>, <span class="dt">mean =</span> <span class="dv">1</span>, <span class="dt">sd =</span> <span class="dv">2</span>), </a>
-<a class="sourceLine" id="cb2-6" title="6">  <span class="kw">rnorm</span>(<span class="dv">30</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2-4" title="4">symptom_post &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(</a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="dv">30</span>, <span class="dt">mean =</span> <span class="dv">1</span>, <span class="dt">sd =</span> <span class="dv">2</span>), </a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="dv">30</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb2-7" title="7">)</a>
 <a class="sourceLine" id="cb2-8" title="8"></a>
-<a class="sourceLine" id="cb2-9" title="9">dat1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(group, symptom_post)</a></code></pre></div>
+<a class="sourceLine" id="cb2-9" title="9">dat1 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(group, symptom_post)</a></code></pre></div>
 </div>
 <div id="run-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#run-model" class="anchor"></a>Run Model</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">fit &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/brms/topics/brm">brm</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/brms/topics/brmsformula">bf</a></span>(symptom_post <span class="op">~</span><span class="st"> </span>group, sigma <span class="op">~</span><span class="st"> </span>group), </a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">fit &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(<span class="kw"><a href="https://rdrr.io/pkg/brms/man/brmsformula.html">bf</a></span>(symptom_post <span class="op">~</span><span class="st"> </span>group, sigma <span class="op">~</span><span class="st"> </span>group), </a>
 <a class="sourceLine" id="cb3-2" title="2">           <span class="dt">data =</span> dat1, </a>
-<a class="sourceLine" id="cb3-3" title="3">           <span class="dt">family =</span> <span class="kw">gaussian</span>())</a></code></pre></div>
+<a class="sourceLine" id="cb3-3" title="3">           <span class="dt">family =</span> <span class="kw"><a href="https://rdrr.io/r/stats/family.html">gaussian</a></span>())</a></code></pre></div>
 <pre><code> Family: gaussian 
   Links: mu = identity; sigma = log 
 Formula: symptom_post ~ group 
@@ -116,16 +117,16 @@ Samples: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI Eff.Sample    Rhat
-Intercept         0.01027   0.20784 -0.40440  0.42267       4527 1.00004
-sigma_Intercept   0.11407   0.13393 -0.12910  0.39634       3262 1.00097
-grouptreat        1.28662   0.49748  0.30889  2.28151       2933 1.00162
-sigma_grouptreat  0.77164   0.18749  0.39934  1.14317       3272 1.00084
+Intercept        -0.19625   0.20812 -0.60404  0.20344       3944 0.99998
+sigma_Intercept   0.11476   0.13064 -0.12543  0.38149       3136 0.99982
+grouptreat        1.45582   0.37031  0.75162  2.18264       3291 0.99934
+sigma_grouptreat  0.37435   0.18853  0.01256  0.73583       3707 0.99992
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">fit<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="st">  </span><span class="kw">plot</span>(<span class="dt">N =</span> <span class="dv">2</span>, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb5-2" title="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="dt">N =</span> <span class="dv">2</span>, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="brms_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;"><img src="brms_files/figure-html/unnamed-chunk-5-2.png" width="60%" style="display: block; margin: auto;"></p>
 </div>
 <div id="select-first-100-posterior-samples-from-each-chain" class="section level2">
@@ -142,16 +143,16 @@ Samples: 4 chains, each with iter = 1100; warmup = 1000; thin = 1;
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI Eff.Sample    Rhat
-Intercept         0.01027   0.18592 -0.36801  0.38544        440 0.99761
-sigma_Intercept   0.10454   0.12931 -0.12454  0.34959        377 0.99532
-grouptreat        1.27984   0.47398  0.42062  2.11409        357 1.01209
-sigma_grouptreat  0.77950   0.17700  0.44493  1.14552        344 0.99818
+Intercept        -0.19684   0.21749 -0.62377  0.19696        374 1.00407
+sigma_Intercept   0.12740   0.12423 -0.11454  0.38071        356 0.99759
+grouptreat        1.45712   0.37856  0.71867  2.13726        213 0.99599
+sigma_grouptreat  0.36168   0.17919  0.01457  0.67850        311 1.00087
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">fit_slice<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="st">  </span><span class="kw">plot</span>(<span class="dt">N =</span> <span class="dv">2</span>, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb8-2" title="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="dt">N =</span> <span class="dv">2</span>, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="brms_files/figure-html/unnamed-chunk-8-1.png" width="60%" style="display: block; margin: auto;"><img src="brms_files/figure-html/unnamed-chunk-8-2.png" width="60%" style="display: block; margin: auto;"></p>
 </div>
 <div id="sample-25-of-posterior-samples-from-each-chain" class="section level2">
@@ -169,16 +170,16 @@ Samples: 4 chains, each with iter = 1250; warmup = 1000; thin = 1;
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI Eff.Sample    Rhat
-Intercept         0.01096   0.20496 -0.39277  0.42267        970 1.00205
-sigma_Intercept   0.11702   0.13273 -0.11963  0.41012        949 1.00616
-grouptreat        1.28237   0.49328  0.32380  2.23726       1008 0.99896
-sigma_grouptreat  0.76845   0.19156  0.37881  1.14457        949 1.00227
+Intercept        -0.19768   0.21551 -0.62677  0.23708       1038 0.99799
+sigma_Intercept   0.11815   0.13085 -0.12824  0.38389        931 1.00313
+grouptreat        1.44386   0.37259  0.71813  2.14863       1036 0.99918
+sigma_grouptreat  0.36793   0.18232  0.01096  0.71443        946 1.00190
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">fit_sample<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw">plot</span>(<span class="dt">N =</span> <span class="dv">2</span>, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="dt">N =</span> <span class="dv">2</span>, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="brms_files/figure-html/unnamed-chunk-11-1.png" width="60%" style="display: block; margin: auto;"><img src="brms_files/figure-html/unnamed-chunk-11-2.png" width="60%" style="display: block; margin: auto;"></p>
 </div>
 <div id="filter-posterior-samples-by-conditional" class="section level2">
@@ -191,21 +192,21 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 Formula: symptom_post ~ group 
          sigma ~ group
    Data: dat1 (Number of observations: 60) 
-Samples: 4 chains, each with iter = 1064; warmup = 1000; thin = 1;
-         total post-warmup samples = 256
+Samples: 4 chains, each with iter = 1067; warmup = 1000; thin = 1;
+         total post-warmup samples = 268
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI Eff.Sample    Rhat
-Intercept        -0.16357   0.19304 -0.56105  0.19018        215 1.00059
-sigma_Intercept   0.12529   0.13731 -0.14270  0.40252        207 1.00542
-grouptreat        2.24700   0.20834  2.01055  2.82100        178 0.99881
-sigma_grouptreat  0.80708   0.19791  0.41101  1.17686        232 0.99078
+Intercept        -0.41330   0.18610 -0.76146 -0.07538        220 1.02837
+sigma_Intercept   0.13354   0.13348 -0.10926  0.39088        239 0.99356
+grouptreat        2.16782   0.14357  2.00598  2.50428        155 1.02860
+sigma_grouptreat  0.40652   0.19385 -0.00398  0.75817        261 0.99350
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">fit_filter<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="st">  </span><span class="kw">plot</span>(<span class="dt">N =</span> <span class="dv">2</span>, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb14-2" title="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="dt">N =</span> <span class="dv">2</span>, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="brms_files/figure-html/unnamed-chunk-14-1.png" width="60%" style="display: block; margin: auto;"><img src="brms_files/figure-html/unnamed-chunk-14-2.png" width="60%" style="display: block; margin: auto;"></p>
 </div>
 <div id="filter-posterior-samples-by-conditional-subset-chain" class="section level2">
@@ -219,21 +220,21 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 Formula: symptom_post ~ group 
          sigma ~ group
    Data: dat1 (Number of observations: 60) 
-Samples: 1 chains, each with iter = 1064; warmup = 1000; thin = 1;
-         total post-warmup samples = 64
+Samples: 1 chains, each with iter = 1067; warmup = 1000; thin = 1;
+         total post-warmup samples = 67
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI Eff.Sample    Rhat
-Intercept        -0.14177   0.18906 -0.55238  0.21160         52 1.01743
-sigma_Intercept   0.10701   0.12342 -0.12401  0.33862         54 0.98556
-grouptreat        2.21724   0.17174  2.02460  2.62651         49 0.98789
-sigma_grouptreat  0.82247   0.17687  0.50765  1.14057         46 0.98425
+Intercept        -0.44109   0.18687 -0.76158 -0.05817         55 0.99608
+sigma_Intercept   0.12993   0.12645 -0.06913  0.37896         38 1.02468
+grouptreat        2.15387   0.12995  2.00898  2.51245         55 0.98593
+sigma_grouptreat  0.38141   0.18219  0.06896  0.74487         95 0.99876
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">fit_filter_chain<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-2" title="2"><span class="st">  </span><span class="kw">plot</span>(<span class="dt">N =</span> <span class="dv">2</span>, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb17-2" title="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="dt">N =</span> <span class="dv">2</span>, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="brms_files/figure-html/unnamed-chunk-17-1.png" width="60%" style="display: block; margin: auto;"><img src="brms_files/figure-html/unnamed-chunk-17-2.png" width="60%" style="display: block; margin: auto;"></p>
 </div>
   </div>
@@ -257,18 +258,20 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Jonathan Sidi.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
 </div>
 
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

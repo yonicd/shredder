@@ -1,13 +1,12 @@
 Type: Package
 Package: shredder
-Title: Tidylike Verbs for Stan
+Title: Rstan Manipulation API
 Version: 0.1.0
 Authors@R: 
     person(given = "Jonathan Sidi",
            role = c("aut", "cre"),
            email = "yonis@metrumrg.com")
-Description: Verbs to manipulate stanfit class objects returned
-    by rstan.
+Description: API that incites exploration and iteration of rstan simulation objects using tidy-like verbs.
 License: MIT + file LICENSE
 URL: https://ghe.metrumrg.com/incubator/shredder
 BugReports: 
