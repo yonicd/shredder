@@ -15,7 +15,6 @@ Depends:
     R (>= 3.2.0)
 Imports: 
     checkmate,
-    lifecycle,
     parallel,
     purrr,
     rematch2,
@@ -31,8 +30,6 @@ Suggests:
     tidybayes
 VignetteBuilder: 
     knitr
-RdMacros: 
-    lifecycle
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

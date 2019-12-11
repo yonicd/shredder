@@ -7,8 +7,6 @@
 
 [![Covrpage
 Summary](https://img.shields.io/badge/covrpage-Last_Build_2019_11_19-brightgreen.svg)](http://tinyurl.com/y3zvyrpx)
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
 The goal of **shredder** is to create an API that incites exploration
@@ -24,11 +22,12 @@ and iteration of rstan simulation objects.
         as `rstan` and `brms`.
   - RStudio specific feature: Tab autocomplete in
     `shredder::stan_select` and `shredder::stan_filter` for the
-    parameter names stored in the fit object.
+    parameter names stored in the fit
+object.
 
-**Important**: The **shredder** API is still maturing as we continue to
-learn and improve. Please see `?shredder::lifecycle` for the list of
-functions that are considered stable.
+## This package should be considered a thought experiment that we are interested to get feedback around the implementation and whether it can help solve your problems.
+
+## It is under development and the API will break as we better understand the problems it is attempting to solve. Use at your own risk.
 
 ## Installation
 
