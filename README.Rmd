@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Covrpage
 Summary](https://img.shields.io/badge/covrpage-Last_Build_2019_11_19-brightgreen.svg)](http://tinyurl.com/y3zvyrpx)
-[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
 The goal of __shredder__ is to create an API that incites exploration and iteration of rstan simulation objects. 
@@ -28,8 +28,9 @@ The goal of __shredder__ is to create an API that incites exploration and iterat
     - Generate task specifc subsets of the parent fit object for fit diagnostics and post-processing
     - Use pipe operators to create more user-friendly workflows
     - Manipulate various classes that contain a `stanfit` object, such as `rstan` and `brms`.
-    
-__Important__: The __shredder__ API is still maturing. Please see `?shredder::lifecycle` for the list of functions that are considered stable.
+  - RStudio specific feature: Tab autocomplete in `shredder::stan_select` and `shredder::stan_filter` for the parameter names stored in the fit object.
+  
+__Important__: The __shredder__ API is still maturing as we continue to learn and improve. Please see `?shredder::lifecycle` for the list of functions that are considered stable.
 
 ## Installation
 
