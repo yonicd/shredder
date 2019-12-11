@@ -1,6 +1,12 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+## This package should be considered a thought experiment that we are interested to get feedback around the implementation and whether it can help solve your problems.
+
+## It is under development and the API will break as we better understand the problems it is attempting to solve. Use at your own risk.
+
+<hr>
+
 # shredder
 
 <!-- badges: start -->
@@ -22,12 +28,7 @@ and iteration of rstan simulation objects.
         as `rstan` and `brms`.
   - RStudio specific feature: Tab autocomplete in
     `shredder::stan_select` and `shredder::stan_filter` for the
-    parameter names stored in the fit
-object.
-
-## This package should be considered a thought experiment that we are interested to get feedback around the implementation and whether it can help solve your problems.
-
-## It is under development and the API will break as we better understand the problems it is attempting to solve. Use at your own risk.
+    parameter names stored in the fit object.
 
 ## Installation
 
