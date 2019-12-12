@@ -6,11 +6,12 @@ Authors@R:
     person(given = "Jonathan Sidi",
            role = c("aut", "cre"),
            email = "yonis@metrumrg.com")
-Description: API that incites exploration and iteration of rstan simulation objects using tidy-like verbs.
+Description: API that incites exploration and iteration of rstan simulation 
+  objects using tidy-like verbs.
 License: MIT + file LICENSE
-URL: https://ghe.metrumrg.com/incubator/shredder
+URL: https://github.com/metrumresearchgroup/shredder
 BugReports: 
-    https://ghe.metrumrg.com/incubator/shredder/issues
+    https://github.com/metrumresearchgroup/shredder/issues
 Depends: 
     R (>= 3.2.0)
 Imports: 

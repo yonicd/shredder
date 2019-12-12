@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Working With brms • shredder</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -117,10 +117,10 @@ Samples: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI Eff.Sample    Rhat
-Intercept        -0.19625   0.20812 -0.60404  0.20344       3944 0.99998
-sigma_Intercept   0.11476   0.13064 -0.12543  0.38149       3136 0.99982
-grouptreat        1.45582   0.37031  0.75162  2.18264       3291 0.99934
-sigma_grouptreat  0.37435   0.18853  0.01256  0.73583       3707 0.99992
+Intercept         0.30488   0.15692 -0.00771  0.60978       5473 0.99929
+sigma_Intercept  -0.16113   0.13582 -0.40607  0.13028       2990 1.00009
+grouptreat        0.77569   0.45365 -0.11526  1.66224       2334 1.00026
+sigma_grouptreat  1.00180   0.19221  0.60599  1.37407       2760 0.99992
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
@@ -143,10 +143,10 @@ Samples: 4 chains, each with iter = 1100; warmup = 1000; thin = 1;
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI Eff.Sample    Rhat
-Intercept        -0.19684   0.21749 -0.62377  0.19696        374 1.00407
-sigma_Intercept   0.12740   0.12423 -0.11454  0.38071        356 0.99759
-grouptreat        1.45712   0.37856  0.71867  2.13726        213 0.99599
-sigma_grouptreat  0.36168   0.17919  0.01457  0.67850        311 1.00087
+Intercept         0.30312   0.15587 -0.00396  0.59558        633 0.99513
+sigma_Intercept  -0.15920   0.13425 -0.38586  0.12793        281 1.00668
+grouptreat        0.78512   0.49101 -0.14536  1.72372        227 1.00200
+sigma_grouptreat  1.01027   0.18782  0.63419  1.37332        347 0.99984
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
@@ -170,10 +170,10 @@ Samples: 4 chains, each with iter = 1250; warmup = 1000; thin = 1;
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI Eff.Sample    Rhat
-Intercept        -0.19768   0.21551 -0.62677  0.23708       1038 0.99799
-sigma_Intercept   0.11815   0.13085 -0.12824  0.38389        931 1.00313
-grouptreat        1.44386   0.37259  0.71813  2.14863       1036 0.99918
-sigma_grouptreat  0.36793   0.18232  0.01096  0.71443        946 1.00190
+Intercept         0.30142   0.15811 -0.01504  0.59517       1013 0.99799
+sigma_Intercept  -0.15570   0.14170 -0.40916  0.13753       1048 1.00111
+grouptreat        0.76549   0.45218 -0.14535  1.61899       1014 0.99792
+sigma_grouptreat  0.99573   0.19814  0.59187  1.37332       1003 1.00041
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
@@ -192,15 +192,15 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 Formula: symptom_post ~ group 
          sigma ~ group
    Data: dat1 (Number of observations: 60) 
-Samples: 4 chains, each with iter = 1067; warmup = 1000; thin = 1;
-         total post-warmup samples = 268
+Samples: 4 chains, each with iter = 1002; warmup = 1000; thin = 1;
+         total post-warmup samples = 8
 
 Population-Level Effects: 
-                 Estimate Est.Error l-95% CI u-95% CI Eff.Sample    Rhat
-Intercept        -0.41330   0.18610 -0.76146 -0.07538        220 1.02837
-sigma_Intercept   0.13354   0.13348 -0.10926  0.39088        239 0.99356
-grouptreat        2.16782   0.14357  2.00598  2.50428        155 1.02860
-sigma_grouptreat  0.40652   0.19385 -0.00398  0.75817        261 0.99350
+                 Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
+Intercept         0.23635   0.12541 -0.00134  0.35504          7  Inf
+sigma_Intercept  -0.12321   0.11412 -0.25984  0.03995          7  Inf
+grouptreat        2.12654   0.07375  2.01831  2.23310          7  Inf
+sigma_grouptreat  1.13992   0.14574  0.88566  1.30407          7  Inf
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
@@ -220,15 +220,15 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 Formula: symptom_post ~ group 
          sigma ~ group
    Data: dat1 (Number of observations: 60) 
-Samples: 1 chains, each with iter = 1067; warmup = 1000; thin = 1;
-         total post-warmup samples = 67
+Samples: 1 chains, each with iter = 1002; warmup = 1000; thin = 1;
+         total post-warmup samples = 2
 
 Population-Level Effects: 
-                 Estimate Est.Error l-95% CI u-95% CI Eff.Sample    Rhat
-Intercept        -0.44109   0.18687 -0.76158 -0.05817         55 0.99608
-sigma_Intercept   0.12993   0.12645 -0.06913  0.37896         38 1.02468
-grouptreat        2.15387   0.12995  2.00898  2.51245         55 0.98593
-sigma_grouptreat  0.38141   0.18219  0.06896  0.74487         95 0.99876
+                 Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
+Intercept         0.24928   0.04560  0.21865  0.27992          1  Inf
+sigma_Intercept  -0.25419   0.01229 -0.26244 -0.24594          1  Inf
+grouptreat        2.06312   0.07940  2.00978  2.11646          1  Inf
+sigma_grouptreat  1.16762   0.06650  1.12295  1.21229          1  Inf
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 

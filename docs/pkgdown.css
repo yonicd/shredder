@@ -17,6 +17,10 @@ html, body {
   height: 100%;
 }
 
+img.logo{
+    display:none;
+}
+
 body > .container {
   display: flex;
   height: 100%;
