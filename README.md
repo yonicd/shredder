@@ -60,3 +60,9 @@ remotes::install_github('metrumresearchgroup/shredder')
             samples
           - `shredder::stan_filter` : extract subset of samples
             conditional on filter of parameter values
+
+## Code of Conduct
+
+Please note that the ‘shredder’ project is released with a [Contributor
+Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project,
+you agree to abide by its terms.
