@@ -1,16 +1,14 @@
-# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
-
 language: r
 cache: packages
 dist: bionic
 os:
 - linux
-
 addons:
-   apt:
+  apt:
     packages:
-     - g++
-
+    - g++
+r_packages:
+- devtools
 r_github_packages:
 - metrumresearchgroup/covrpage
 - metrumresearchgroup/pkgdown
@@ -26,3 +24,6 @@ deploy:
   local-dir: docs
   on:
     branch: master
+env:
+  global:
+    secure: 4LPXd8a8KVc7A1ojtvc2P8p33Y8zEhTXpDK3CpNJ3xV5QF/zDnqAybDjG8tBjIKfU72fMfnrk6ON7l785zrjp0ADfIcy26IMTi/Orq5OWl6wm9RSZ39ZzmCmQmPNHOxHoK2rkX3cAYcCqbu8vBmSYdUuYguM5pTjdMGuJrWcmxdywzEO0dKemwNyG4EAmxxwit/2/gttYCzELQOFQQ3Wgkpuyj+7J1cPYQg5/BGOcyjVXYaSwBP3F8AzGnyTamzIde1jVFur8wZBnWScRRSHwzLN01kh8kaY6K6h4xbRZGLCAWRXgHWcuEtRl5/dQAavkg3Sei0DqJvADmGXOwEljmgvgEz0qvx+kQ05sNOzVeKbRv2BharBdJnxETItiQudK/XWEmcRKSRQz3+DulJNl39BWZ7B3b6QJqGC5KbhhMgqdx144fpI9EV/c2iK6eeLLEzRYUp40wZqkcdR40ohV/OsYvvwwbVABI7th3wAycU5m8XK/RKfWzt1PI+HArKEp3gVgnW75jwrjXMkwkvlmr1zx8l9nS/EVV4kC5yClbnWLmpwFk+nmAooZUEmmTVAMd9I7dtmblYKS3Rib9ypivNcPmWTPiWrQsdnxnmAQ6V81TGks3olcG/iMcDMIWg5XIXqtZ8WSOKa39T15tUmq6C+EyWTizbTi92IEf43sN0=

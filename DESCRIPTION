@@ -23,6 +23,7 @@ Imports:
     rstan,
     stringi
 Suggests: 
+    covr,
     brms,
     details,
     knitr,

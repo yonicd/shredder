@@ -11,3 +11,4 @@
 ^benchmark\.R$
 ^\.Rprofile$
 ^README\.Rmd$
+^codecov\.yml$
