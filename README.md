@@ -24,7 +24,7 @@ and iteration of rstan simulation objects.
 
   - With this API users can:
       - Manipulate fit objects without needing to convert arrays into
-        recatangular form.
+        rectangular form.
       - Generate task specifc subsets of the parent fit object for fit
         diagnostics and post-processing
       - Use pipe operators to create more user-friendly workflows

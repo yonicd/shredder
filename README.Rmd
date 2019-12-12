@@ -30,7 +30,7 @@ Summary](https://img.shields.io/badge/covrpage-Last_Build_2019_12_11-brightgreen
 The goal of __shredder__ is to create an API that incites exploration and iteration of rstan simulation objects. 
 
   - With this API users can: 
-    - Manipulate fit objects without needing to convert arrays into recatangular form.
+    - Manipulate fit objects without needing to convert arrays into rectangular form.
     - Generate task specifc subsets of the parent fit object for fit diagnostics and post-processing
     - Use pipe operators to create more user-friendly workflows
     - Manipulate various classes that contain a `stanfit` object, such as `rstan` and `brms`.

@@ -6,9 +6,5 @@
 ^docs$
 ^pkgdown$
 ^\.travis\.yml$
-^Makevars\.R$
-^__metrumrg_com\.ca-bundle$
-^benchmark\.R$
-^\.Rprofile$
 ^README\.Rmd$
 ^codecov\.yml$

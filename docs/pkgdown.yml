@@ -1,9 +1,0 @@
-pandoc: '2.7'
-pkgdown: 1.4.1.9000
-pkgdown_sha: ~
-articles:
-  brms: brms.html
-  rstan: rstan.html
-  tests_and_coverage: tests_and_coverage.html
-  tidybayes: tidybayes.html
-
