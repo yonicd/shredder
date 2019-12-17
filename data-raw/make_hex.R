@@ -29,6 +29,7 @@ stan_logo_art <- image_compose(stan_logo, stan_logo_mask, "CopyOpacity") %>%
   image_scale("50%")
 
 bg_color <- "#ede6f2"
+bg_color2 <- "#f6f3f9"
 fg_color <- "#042a2b"
 fgd_color1 <- "#772e25"
 fgd_color2 <- "#411815"
@@ -71,14 +72,16 @@ shred_hex_gh <- shred_hex %>%
 gh_logo <- bunny::github %>%
   image_scale("40x40")
 
-shred_ghcard <- image_canvas_ghcard(fill_color = bg_color) %>%
+shred_ghcard <- image_canvas_ghcard(fill_color = bg_color2) %>%
   image_composite(shred_hex_gh, gravity = "East", offset = "+100+0") %>%
-  image_annotate("STAN models. Sliced.", gravity = "West", location = "+60-30",
-                 color=fg_color, size=60, font="Aller", weight = 700) %>%
+  image_annotate("Stan ", gravity = "West", location = "+60-30", 
+                 style = "italic", color=fg_color, size=65, font="Volkhov", weight = 700) %>%   
+  image_annotate("models. Sliced.", gravity = "West", location = "+210-30",
+                 color=fg_color, size=60, font="Volkhov", weight = 500) %>%
   image_compose(gh_logo, gravity="West", offset = "+60+40") %>%
   image_annotate("metrumresearchgroup/shredder", gravity="West", 
                  location="+110+45", size=38, font="Ubuntu Mono") %>%
-  image_border_ghcard(bg_color)
+  image_border_ghcard(bg_color2)
 
 shred_ghcard %>%
   image_write("data-raw/shred_ghcard.png", density = 600)
