@@ -7,7 +7,7 @@
 
 <hr>
 
-# shredder <img src="man/figures/logo.png" align="right" />
+# shredder <img src="man/figures/logo.png" align="right" class="logo"/>
 
 <!-- badges: start -->
 

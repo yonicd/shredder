@@ -45,3 +45,5 @@ articles:
 template:
   params:
     bootswatch: flatly
+hexURL:
+  https://github.com/metrumresearchgroup/shredder/blob/master/man/figures/logo.png?raw=true

@@ -48,7 +48,8 @@ dat1 <- data.frame(group, symptom_post)
 ```{r,results='hide'}
 fit <- brm(bf(symptom_post ~ group, sigma ~ group), 
            data = dat1, 
-           family = gaussian())
+           family = gaussian(),
+           seed = 1234)
 ```
 
 ```{r,echo = FALSE}
@@ -75,19 +76,19 @@ fit_slice%>%
   plot(N = 2, ask = FALSE)
 ```
 
-## Sample 25% of Posterior Samples from each Chain
+## Thin 25% of Posterior Samples from each Chain
 
 ```{r}
-fit_sample <- fit%>%
-  stan_sample_frac(0.25)
+fit_thin <- fit%>%
+  stan_thin_frac(0.25)
 ```
 
 ```{r,echo = FALSE}
-print(fit_sample,digits = 5)
+print(fit_thin,digits = 5)
 ```
 
 ```{r}
-fit_sample%>%
+fit_thin%>%
   plot(N = 2, ask = FALSE)
 ```
 

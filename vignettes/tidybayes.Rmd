@@ -33,11 +33,11 @@ rats%>%
   tidybayes::spread_draws(mu_alpha,mu_beta)
 
 rats%>%
-  stan_sample_n(2)%>%
+  stan_thin_n(20)%>%
   tidybayes::spread_draws(mu_alpha,mu_beta)
 
 rats%>%
-  stan_sample_n(2)%>%
+  stan_thin_n(20)%>%
   tidybayes::spread_draws(alpha[i],beta[i])
 
 ```
@@ -49,10 +49,10 @@ rats%>%
   tidybayes::gather_draws(mu_alpha,mu_beta)
 
 rats%>%
-  stan_sample_n(2)%>%
+  stan_thin_n(20)%>%
   tidybayes::gather_draws(mu_alpha,mu_beta)
 
 rats%>%
-  stan_sample_n(2)%>%
+  stan_thin_n(20)%>%
   tidybayes::gather_draws(alpha[i],beta[i])
 ```
