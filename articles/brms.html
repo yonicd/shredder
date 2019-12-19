@@ -6,12 +6,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Working With brms • shredder</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Working With brms">
 <meta property="og:description" content="">
+<meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -117,10 +124,10 @@ Samples: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI    Rhat Bulk_ESS Tail_ESS
-Intercept        -0.23806   0.18080 -0.58694  0.12549 0.99979     5396     3137
-sigma_Intercept  -0.04258   0.13114 -0.27458  0.23118 1.00217     3542     2530
-grouptreat        1.57294   0.36973  0.85966  2.30179 1.00193     2782     2409
-sigma_grouptreat  0.56264   0.18709  0.18517  0.93210 1.00072     3230     2393
+Intercept         0.28047   0.18874 -0.09950  0.64726 1.00000     4948     3203
+sigma_Intercept   0.02888   0.13461 -0.21728  0.29310 1.00303     3634     2427
+grouptreat        0.92949   0.39840  0.13266  1.71248 1.00038     2969     2380
+sigma_grouptreat  0.60973   0.18844  0.24811  0.98708 1.00052     3358     2642
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
@@ -143,10 +150,10 @@ Samples: 4 chains, each with iter = 1100; warmup = 1000; thin = 1;
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI    Rhat Bulk_ESS Tail_ESS
-Intercept        -0.23321   0.17093 -0.57676  0.08877 1.00571      614      327
-sigma_Intercept  -0.05084   0.12984 -0.28636  0.21536 1.01508      350      289
-grouptreat        1.58495   0.37369  0.79734  2.36639 1.00611      249      217
-sigma_grouptreat  0.57359   0.19076  0.19047  0.93382 1.03685      270      268
+Intercept         0.27293   0.19240 -0.13278  0.63153 0.99983      542      283
+sigma_Intercept   0.02866   0.13558 -0.21214  0.29954 1.01874      263      191
+grouptreat        0.94252   0.40920  0.13264  1.75582 1.00347      338      204
+sigma_grouptreat  0.61126   0.18288  0.27369  0.94435 1.00818      250      295
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
@@ -170,10 +177,10 @@ Samples: 4 chains, each with iter = 1250; warmup = 1000; thin = 1;
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI    Rhat Bulk_ESS Tail_ESS
-Intercept        -0.23391   0.18427 -0.58518  0.14666 0.99874     1079      954
-sigma_Intercept  -0.03894   0.13139 -0.27123  0.24407 1.00165      992      926
-grouptreat        1.58764   0.37780  0.86756  2.34525 0.99804     1143      993
-sigma_grouptreat  0.55727   0.18217  0.17805  0.89588 1.00159     1025      954
+Intercept         0.28282   0.18704 -0.09777  0.65744 0.99837      994      913
+sigma_Intercept   0.02899   0.13502 -0.20634  0.28927 1.00224     1047      993
+grouptreat        0.93516   0.40045  0.14409  1.69796 1.00180     1081      991
+sigma_grouptreat  0.61271   0.18347  0.26250  0.96756 1.00238      921      952
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
@@ -192,15 +199,15 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 Formula: symptom_post ~ group 
          sigma ~ group
    Data: dat1 (Number of observations: 60) 
-Samples: 4 chains, each with iter = 1104; warmup = 1000; thin = 1;
-         total post-warmup samples = 416
+Samples: 3 chains, each with iter = 1004; warmup = 1000; thin = 1;
+         total post-warmup samples = 12
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI    Rhat Bulk_ESS Tail_ESS
-Intercept        -0.40443   0.16352 -0.73600 -0.09301 0.99634      311      285
-sigma_Intercept  -0.02871   0.14115 -0.26987  0.27963 1.00113      343      212
-grouptreat        2.19652   0.18657  2.00785  2.67700 0.99966      412      392
-sigma_grouptreat  0.56543   0.19013  0.21007  0.95180 1.00137      354      371
+Intercept        -0.13283   0.20123 -0.44069  0.22150 1.03030       12       12
+sigma_Intercept   0.09674   0.09420 -0.07153  0.20830 1.51506       12       12
+grouptreat        2.11402   0.12413  2.00594  2.38735 1.00478       12       12
+sigma_grouptreat  0.61756   0.13492  0.37641  0.83507 1.08364       12       12
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
@@ -220,15 +227,15 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 Formula: symptom_post ~ group 
          sigma ~ group
    Data: dat1 (Number of observations: 60) 
-Samples: 1 chains, each with iter = 1104; warmup = 1000; thin = 1;
-         total post-warmup samples = 104
+Samples: 1 chains, each with iter = 1004; warmup = 1000; thin = 1;
+         total post-warmup samples = 4
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI    Rhat Bulk_ESS Tail_ESS
-Intercept        -0.39128   0.15407 -0.68560 -0.11384 0.99642       62       53
-sigma_Intercept  -0.03571   0.12260 -0.24068  0.20185 0.99699       75       67
-grouptreat        2.17525   0.15029  2.00875  2.60457 1.00291       95      114
-sigma_grouptreat  0.55909   0.19529  0.18145  0.95709 1.01208       51       53
+Intercept        -0.07052   0.11807 -0.13304  0.08925 1.90251        4        4
+sigma_Intercept   0.13052   0.08742  0.01706  0.20771 1.90251        4        4
+grouptreat        2.05595   0.03077  2.02099  2.09092 0.90585        4        4
+sigma_grouptreat  0.62858   0.03706  0.58582  0.66992 2.49796        4        4
 
 Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 is a crude measure of effective sample size, and Rhat is the potential 
