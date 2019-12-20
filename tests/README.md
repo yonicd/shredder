@@ -1,6 +1,6 @@
 Tests and Coverage
 ================
-11 December, 2019 18:50:57
+19 December, 2019 19:00:51
 
   - [Coverage](#coverage)
   - [Unit Tests](#unit-tests)
@@ -15,13 +15,13 @@ Coverage summary is created using the
 
 | Object                                   | Coverage (%) |
 | :--------------------------------------- | :----------: |
-| shredder                                 |    76.56     |
+| shredder                                 |    73.90     |
 | [R/rats\_example.R](../R/rats_example.R) |     0.00     |
 | [R/complete.R](../R/complete.R)          |    12.50     |
 | [R/zzz.R](../R/zzz.R)                    |    50.00     |
+| [R/stan\_thin.R](../R/stan_thin.R)       |    57.14     |
 | [R/utils.R](../R/utils.R)                |    66.67     |
 | [R/stan\_names.R](../R/stan_names.R)     |    80.00     |
-| [R/stan\_sample.R](../R/stan_sample.R)   |    89.74     |
 | [R/stan\_retain.R](../R/stan_retain.R)   |    91.30     |
 | [R/stan\_slice.R](../R/stan_slice.R)     |    93.94     |
 | [R/stan\_select.R](../R/stan_select.R)   |    94.59     |
@@ -39,60 +39,60 @@ package.
 
 | file                                        |  n |  time | error | failed | skipped | warning |
 | :------------------------------------------ | -: | ----: | ----: | -----: | ------: | ------: |
-| [test-filter.R](testthat/test-filter.R)     |  7 | 0.078 |     0 |      0 |       0 |       0 |
-| [test-names.R](testthat/test-names.R)       |  2 | 0.003 |     0 |      0 |       0 |       0 |
-| [test-retain.R](testthat/test-retain.R)     |  6 | 0.298 |     0 |      0 |       0 |       0 |
-| [test-sampling.R](testthat/test-sampling.R) |  7 | 0.236 |     0 |      0 |       0 |       0 |
-| [test-select.R](testthat/test-select.R)     | 14 | 0.281 |     0 |      0 |       0 |       0 |
-| [test-slice.R](testthat/test-slice.R)       |  5 | 0.275 |     0 |      0 |       0 |       0 |
+| [test-filter.R](testthat/test-filter.R)     |  7 | 0.052 |     0 |      0 |       0 |       0 |
+| [test-names.R](testthat/test-names.R)       |  2 | 0.002 |     0 |      0 |       0 |       0 |
+| [test-retain.R](testthat/test-retain.R)     |  6 | 0.617 |     0 |      0 |       0 |       0 |
+| [test-sampling.R](testthat/test-sampling.R) |  7 | 0.233 |     0 |      0 |       0 |       0 |
+| [test-select.R](testthat/test-select.R)     | 14 | 0.216 |     0 |      0 |       0 |       0 |
+| [test-slice.R](testthat/test-slice.R)       |  5 | 0.774 |     0 |      0 |       0 |       0 |
 
 <details closed>
 
 <summary> Show Detailed Test Results
 </summary>
 
-| file                                            | context | test                               | status | n |  time |
-| :---------------------------------------------- | :------ | :--------------------------------- | :----- | -: | ----: |
-| [test-filter.R](testthat/test-filter.R#L9)      | filter  | filters: default                   | PASS   | 1 | 0.030 |
-| [test-filter.R](testthat/test-filter.R#L14)     | filter  | filters: not permuted              | PASS   | 1 | 0.007 |
-| [test-filter.R](testthat/test-filter.R#L18)     | filter  | filters: not permuted              | PASS   | 1 | 0.007 |
-| [test-filter.R](testthat/test-filter.R#L23)     | filter  | filters: indexed name              | PASS   | 1 | 0.008 |
-| [test-filter.R](testthat/test-filter.R#L30)     | filter  | filters: compound query            | PASS   | 1 | 0.021 |
-| [test-filter.R](testthat/test-filter.R#L34)     | filter  | filters: no samples                | PASS   | 1 | 0.003 |
-| [test-filter.R](testthat/test-filter.R#L38)     | filter  | filters: invalid pars              | PASS   | 1 | 0.002 |
-| [test-names.R](testthat/test-names.R#L9)        | names   | names: default                     | PASS   | 1 | 0.002 |
-| [test-names.R](testthat/test-names.R#L14)       | names   | names: expand                      | PASS   | 1 | 0.001 |
-| [test-retain.R](testthat/test-retain.R#L8)      | retain  | retain: default                    | PASS   | 1 | 0.002 |
-| [test-retain.R](testthat/test-retain.R#L13)     | retain  | retain: null                       | PASS   | 1 | 0.292 |
-| [test-retain.R](testthat/test-retain.R#L18)     | retain  | retain: single                     | PASS   | 1 | 0.001 |
-| [test-retain.R](testthat/test-retain.R#L23)     | retain  | retain: multiple                   | PASS   | 1 | 0.001 |
-| [test-retain.R](testthat/test-retain.R#L28)     | retain  | retain: all                        | PASS   | 1 | 0.001 |
-| [test-retain.R](testthat/test-retain.R#L32)     | retain  | retain: bad                        | PASS   | 1 | 0.001 |
-| [test-sampling.R](testthat/test-sampling.R#L10) | slicing | slice: default                     | PASS   | 1 | 0.201 |
-| [test-sampling.R](testthat/test-sampling.R#L15) | slicing | slice: no warmup                   | PASS   | 1 | 0.002 |
-| [test-sampling.R](testthat/test-sampling.R#L21) | slicing | slice: bad indexs                  | PASS   | 2 | 0.006 |
-| [test-sampling.R](testthat/test-sampling.R#L32) | slicing | sample: sample\_n                  | PASS   | 1 | 0.005 |
-| [test-sampling.R](testthat/test-sampling.R#L37) | slicing | sample: sample\_frac               | PASS   | 1 | 0.018 |
-| [test-sampling.R](testthat/test-sampling.R#L42) | slicing | sample: no warmup                  | PASS   | 1 | 0.004 |
-| [test-select.R](testthat/test-select.R#L6)      | select  | names: no pars                     | PASS   | 1 | 0.002 |
-| [test-select.R](testthat/test-select.R#L11)     | select  | names: single par                  | PASS   | 1 | 0.002 |
-| [test-select.R](testthat/test-select.R#L16)     | select  | names: multiple pars               | PASS   | 1 | 0.001 |
-| [test-select.R](testthat/test-select.R#L21)     | select  | names: par index                   | PASS   | 1 | 0.001 |
-| [test-select.R](testthat/test-select.R#L26)     | select  | names: character pars              | PASS   | 1 | 0.002 |
-| [test-select.R](testthat/test-select.R#L33)     | select  | names: regex character pars        | PASS   | 1 | 0.002 |
-| [test-select.R](testthat/test-select.R#L40)     | select  | names: remove summary              | PASS   | 1 | 0.261 |
-| [test-select.R](testthat/test-select.R#L48)     | select  | partials: no pars                  | PASS   | 1 | 0.002 |
-| [test-select.R](testthat/test-select.R#L53)     | select  | partials: starts\_with             | PASS   | 1 | 0.002 |
-| [test-select.R](testthat/test-select.R#L58)     | select  | partials: ends\_with               | PASS   | 1 | 0.001 |
-| [test-select.R](testthat/test-select.R#L63)     | select  | partials: starts\_contains         | PASS   | 1 | 0.002 |
-| [test-select.R](testthat/test-select.R#L68)     | select  | partials: mixed                    | PASS   | 1 | 0.001 |
-| [test-select.R](testthat/test-select.R#L73)     | select  | partials: par regex index          | PASS   | 1 | 0.001 |
-| [test-select.R](testthat/test-select.R#L78)     | select  | partials: par regex multiple index | PASS   | 1 | 0.001 |
-| [test-slice.R](testthat/test-slice.R#L7)        | slice   | slice: empty                       | PASS   | 1 | 0.264 |
-| [test-slice.R](testthat/test-slice.R#L12)       | slice   | slice: single                      | PASS   | 1 | 0.003 |
-| [test-slice.R](testthat/test-slice.R#L17)       | slice   | slice: single no warmup            | PASS   | 1 | 0.002 |
-| [test-slice.R](testthat/test-slice.R#L22)       | slice   | slice: vector                      | PASS   | 1 | 0.003 |
-| [test-slice.R](testthat/test-slice.R#L27)       | slice   | slice: reset permut                | PASS   | 1 | 0.003 |
+| file                                            | context  | test                               | status | n |  time |
+| :---------------------------------------------- | :------- | :--------------------------------- | :----- | -: | ----: |
+| [test-filter.R](testthat/test-filter.R#L9)      | filter   | filters: default                   | PASS   | 1 | 0.012 |
+| [test-filter.R](testthat/test-filter.R#L14)     | filter   | filters: not permuted              | PASS   | 1 | 0.007 |
+| [test-filter.R](testthat/test-filter.R#L18)     | filter   | filters: not permuted              | PASS   | 1 | 0.008 |
+| [test-filter.R](testthat/test-filter.R#L23)     | filter   | filters: indexed name              | PASS   | 1 | 0.009 |
+| [test-filter.R](testthat/test-filter.R#L30)     | filter   | filters: compound query            | PASS   | 1 | 0.008 |
+| [test-filter.R](testthat/test-filter.R#L34)     | filter   | filters: no samples                | PASS   | 1 | 0.005 |
+| [test-filter.R](testthat/test-filter.R#L38)     | filter   | filters: invalid pars              | PASS   | 1 | 0.003 |
+| [test-names.R](testthat/test-names.R#L9)        | names    | names: default                     | PASS   | 1 | 0.001 |
+| [test-names.R](testthat/test-names.R#L14)       | names    | names: expand                      | PASS   | 1 | 0.001 |
+| [test-retain.R](testthat/test-retain.R#L8)      | retain   | retain: default                    | PASS   | 1 | 0.002 |
+| [test-retain.R](testthat/test-retain.R#L13)     | retain   | retain: null                       | PASS   | 1 | 0.609 |
+| [test-retain.R](testthat/test-retain.R#L18)     | retain   | retain: single                     | PASS   | 1 | 0.002 |
+| [test-retain.R](testthat/test-retain.R#L23)     | retain   | retain: multiple                   | PASS   | 1 | 0.001 |
+| [test-retain.R](testthat/test-retain.R#L28)     | retain   | retain: all                        | PASS   | 1 | 0.001 |
+| [test-retain.R](testthat/test-retain.R#L32)     | retain   | retain: bad                        | PASS   | 1 | 0.002 |
+| [test-sampling.R](testthat/test-sampling.R#L10) | sampling | slice: default                     | PASS   | 1 | 0.195 |
+| [test-sampling.R](testthat/test-sampling.R#L15) | sampling | slice: no warmup                   | PASS   | 1 | 0.003 |
+| [test-sampling.R](testthat/test-sampling.R#L21) | sampling | slice: bad indexs                  | PASS   | 2 | 0.009 |
+| [test-sampling.R](testthat/test-sampling.R#L32) | sampling | thinning: thin\_n                  | PASS   | 1 | 0.005 |
+| [test-sampling.R](testthat/test-sampling.R#L37) | sampling | thinning: thin\_frac               | PASS   | 1 | 0.018 |
+| [test-sampling.R](testthat/test-sampling.R#L42) | sampling | thinning: no warmup                | PASS   | 1 | 0.003 |
+| [test-select.R](testthat/test-select.R#L6)      | select   | names: no pars                     | PASS   | 1 | 0.002 |
+| [test-select.R](testthat/test-select.R#L11)     | select   | names: single par                  | PASS   | 1 | 0.002 |
+| [test-select.R](testthat/test-select.R#L16)     | select   | names: multiple pars               | PASS   | 1 | 0.002 |
+| [test-select.R](testthat/test-select.R#L21)     | select   | names: par index                   | PASS   | 1 | 0.001 |
+| [test-select.R](testthat/test-select.R#L26)     | select   | names: character pars              | PASS   | 1 | 0.001 |
+| [test-select.R](testthat/test-select.R#L33)     | select   | names: regex character pars        | PASS   | 1 | 0.002 |
+| [test-select.R](testthat/test-select.R#L40)     | select   | names: remove summary              | PASS   | 1 | 0.196 |
+| [test-select.R](testthat/test-select.R#L48)     | select   | partials: no pars                  | PASS   | 1 | 0.002 |
+| [test-select.R](testthat/test-select.R#L53)     | select   | partials: starts\_with             | PASS   | 1 | 0.002 |
+| [test-select.R](testthat/test-select.R#L58)     | select   | partials: ends\_with               | PASS   | 1 | 0.001 |
+| [test-select.R](testthat/test-select.R#L63)     | select   | partials: starts\_contains         | PASS   | 1 | 0.001 |
+| [test-select.R](testthat/test-select.R#L68)     | select   | partials: mixed                    | PASS   | 1 | 0.001 |
+| [test-select.R](testthat/test-select.R#L73)     | select   | partials: par regex index          | PASS   | 1 | 0.001 |
+| [test-select.R](testthat/test-select.R#L78)     | select   | partials: par regex multiple index | PASS   | 1 | 0.002 |
+| [test-slice.R](testthat/test-slice.R#L7)        | slice    | slice: empty                       | PASS   | 1 | 0.753 |
+| [test-slice.R](testthat/test-slice.R#L12)       | slice    | slice: single                      | PASS   | 1 | 0.004 |
+| [test-slice.R](testthat/test-slice.R#L17)       | slice    | slice: single no warmup            | PASS   | 1 | 0.002 |
+| [test-slice.R](testthat/test-slice.R#L22)       | slice    | slice: vector                      | PASS   | 1 | 0.003 |
+| [test-slice.R](testthat/test-slice.R#L27)       | slice    | slice: reset permut                | PASS   | 1 | 0.012 |
 
 </details>
 

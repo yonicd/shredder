@@ -12,7 +12,7 @@
 <!-- badges: start -->
 
 [![Covrpage
-Summary](https://img.shields.io/badge/covrpage-Last_Build_2019_12_11-brightgreen.svg)](http://tinyurl.com/s3fr6gn)
+Summary](https://img.shields.io/badge/covrpage-Last_Build_2019_12_19-brightgreen.svg)](http://tinyurl.com/s3fr6gn)
 [![Travis build
 status](https://travis-ci.org/metrumresearchgroup/shredder.svg?branch=master)](https://travis-ci.org/metrumresearchgroup/shredder)
 [![Codecov test
@@ -55,9 +55,10 @@ remotes::install_github('metrumresearchgroup/shredder')
             object
       - post-warmup samples
           - `shredder::stan_slice` : extract specific samples by index
-          - `shredder::stan_sample_n` : extract random n samples
-          - `shredder::stan_sample_frac` : extract fraction of total
-            samples
+          - `shredder::stan_thin_n` : Thin (remove) every n samples from
+            the total samples
+          - `shredder::stan_thin_frac` : Thin (remove) a fraction of
+            total samples.
           - `shredder::stan_filter` : extract subset of samples
             conditional on filter of parameter values
 
