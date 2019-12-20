@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sample n post-warumps samples from a stanfit object — stan_sample_n • shredder</title>
+<title>thin n post-warumps samples from a stanfit object — stan_thin_n • shredder</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,9 +42,9 @@
 
 
 
-<meta property="og:title" content="Sample n post-warumps samples from a stanfit object — stan_sample_n" />
-<meta property="og:description" content="This is a wrapper around sample() to make it easy to select
-random samples from each parameter in a stanfit object." />
+<meta property="og:title" content="thin n post-warumps samples from a stanfit object — stan_thin_n" />
+<meta property="og:description" content="This is a wrapper around stan_slice() to make it easy to
+thin samples from each parameter in a stanfit object." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -78,7 +78,7 @@ random samples from each parameter in a stanfit object." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shredder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -95,6 +95,9 @@ random samples from each parameter in a stanfit object." />
 </li>
 <li>
   <a href="../articles/index.html">Articles</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -123,19 +126,19 @@ random samples from each parameter in a stanfit object." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Sample n post-warumps samples from a stanfit object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/metrumresearchgroup/shredder/blob/master/R/stan_sample.R'><code>R/stan_sample.R</code></a></small>
-    <div class="hidden name"><code>stan_sample.Rd</code></div>
+    <h1>thin n post-warumps samples from a stanfit object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/metrumresearchgroup/shredder/blob/master/R/stan_thin.R'><code>R/stan_thin.R</code></a></small>
+    <div class="hidden name"><code>stan_thin.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This is a wrapper around sample() to make it easy to select
-random samples from each parameter in a stanfit object.</p>
+    <p>This is a wrapper around stan_slice() to make it easy to
+thin samples from each parameter in a stanfit object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>stan_sample_n</span>(<span class='no'>object</span>, <span class='no'>size</span>, <span class='kw'>weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>inc_warmup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>stan_thin_n</span>(<span class='no'>object</span>, <span class='no'>size</span>, <span class='kw'>inc_warmup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>stan_sample_frac</span>(<span class='no'>object</span>, <span class='no'>size</span>, <span class='kw'>weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>inc_warmup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>stan_thin_frac</span>(<span class='no'>object</span>, <span class='no'>size</span>, <span class='kw'>inc_warmup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -146,13 +149,8 @@ random samples from each parameter in a stanfit object.</p>
     </tr>
     <tr>
       <th>size</th>
-      <td><p>numeric, for shredder size of sample, for
-shredder fraction of samples to sample.</p></td>
-    </tr>
-    <tr>
-      <th>weight, </th>
-      <td><p>a vector of probability weights for obtaining the elements of
-the vector being sampled.</p></td>
+      <td><p>numeric, for stan_thin_n size of thin, for
+stan_thin_frac fraction of samples to sample.</p></td>
     </tr>
     <tr>
       <th>inc_warmup</th>
@@ -173,40 +171,40 @@ the vector being sampled.</p></td>
 
 <span class='no'>rats</span><span class='kw'>%&gt;%</span>
   <span class='fu'><a href='stan_select.html'>stan_select</a></span>(<span class='no'>mu_alpha</span>)<span class='kw'>%&gt;%</span>
-  <span class='fu'>stan_sample_n</span>(<span class='fl'>30</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
-#&gt; 4 chains, each with iter=1030; warmup=1000; thin=1; 
-#&gt; post-warmup draws per chain=30, total post-warmup draws=120.
+  <span class='fu'>stan_thin_n</span>(<span class='fl'>30</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
+#&gt; 4 chains, each with iter=1034; warmup=1000; thin=1; 
+#&gt; post-warmup draws per chain=34, total post-warmup draws=136.
 #&gt; 
-#&gt;            mean se_mean   sd  2.5%   25%   50%    75%  97.5% n_eff Rhat
-#&gt; mu_alpha 242.35    0.24 2.68 237.4 240.6 242.2 244.31 246.83   120    1
+#&gt;            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
+#&gt; mu_alpha 242.51    0.22 2.64 237.84 240.75 242.64 244.25 246.82   149    1
 #&gt; 
-#&gt; Samples were drawn using  at Thu Dec 19 23:41:17 2019.
+#&gt; Samples were drawn using  at Fri Dec 20 03:47:37 2019.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>
 <span class='no'>rats</span><span class='kw'>%&gt;%</span>
   <span class='fu'><a href='stan_select.html'>stan_select</a></span>(<span class='no'>mu_alpha</span>)<span class='kw'>%&gt;%</span>
-  <span class='fu'>stan_sample_frac</span>(<span class='fl'>0.5</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
+  <span class='fu'>stan_thin_frac</span>(<span class='fl'>0.5</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
 #&gt; 4 chains, each with iter=1500; warmup=1000; thin=1; 
 #&gt; post-warmup draws per chain=500, total post-warmup draws=2000.
 #&gt; 
-#&gt;            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
-#&gt; mu_alpha 242.49    0.06 2.74 237.01 240.78 242.56 244.26 247.76  2005    1
+#&gt;            mean se_mean   sd  2.5%    25%    50%    75%  97.5% n_eff Rhat
+#&gt; mu_alpha 242.53    0.07 2.74 237.2 240.79 242.56 244.35 247.82  1569    1
 #&gt; 
-#&gt; Samples were drawn using  at Thu Dec 19 23:41:17 2019.
+#&gt; Samples were drawn using  at Fri Dec 20 03:47:37 2019.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>
 <span class='no'>rats</span><span class='kw'>%&gt;%</span>
   <span class='fu'><a href='stan_select.html'>stan_select</a></span>(<span class='no'>mu_alpha</span>)<span class='kw'>%&gt;%</span>
-  <span class='fu'>stan_sample_n</span>(<span class='fl'>30</span>,<span class='kw'>inc_warmup</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
-#&gt; 4 chains, each with iter=30; warmup=0; thin=1; 
-#&gt; post-warmup draws per chain=30, total post-warmup draws=120.
+  <span class='fu'>stan_thin_n</span>(<span class='fl'>30</span>,<span class='kw'>inc_warmup</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
+#&gt; 4 chains, each with iter=34; warmup=0; thin=1; 
+#&gt; post-warmup draws per chain=34, total post-warmup draws=136.
 #&gt; 
 #&gt;            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
-#&gt; mu_alpha 242.92    0.23 2.53 237.66 241.26 242.88 244.35 248.28   119 1.01
+#&gt; mu_alpha 242.51    0.22 2.64 237.84 240.75 242.64 244.25 246.82   149    1
 #&gt; 
-#&gt; Samples were drawn using  at Thu Dec 19 23:41:17 2019.
+#&gt; Samples were drawn using  at Fri Dec 20 03:47:37 2019.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>
