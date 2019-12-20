@@ -151,28 +151,28 @@ rats%>%
 
 ```{r,eval=FALSE}
   rats%>%
-    stan_sample_n(100)
+    stan_thin_n(2)
 
 ```
 
 ```{r,echo=FALSE}
   rats%>%
-    stan_sample_n(100)%>%
-  details::details(summary = 'Sample 100 draws from each Chain')
+    stan_thin_n(2)%>%
+  details::details(summary = 'Thin every other sample')
 
 ```
 
 ```{r,eval=FALSE}
 
   rats%>%
-    stan_sample_frac(0.5)
+    stan_thin_frac(0.5)
 
 ```
 
 ```{r,echo=FALSE}
 rats%>%
-    stan_sample_frac(0.5)%>%
-    details::details(summary = 'Sample 50% of the Samples From each Chain')
+    stan_thin_frac(0.5)%>%
+    details::details(summary = 'Thin 50% of the Samples From each Chain')
 
 ```
 

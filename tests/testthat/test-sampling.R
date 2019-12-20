@@ -1,4 +1,4 @@
-testthat::context('slicing')
+testthat::context('sampling')
 
 rats <- readRDS('../files/rats.Rds')
 
@@ -25,20 +25,20 @@ testthat::describe('slice',{
 })
 
 
-testthat::describe('sample',{
+testthat::describe('thinning',{
   
-  it('sample_n',{
-    x <- rats%>%shredder::stan_sample_n(size = 500)
+  it('thin_n',{
+    x <- rats%>%shredder::stan_thin_n(size = 2)
     testthat::expect_equal(length(x@sim$samples[[1]][[1]]),1500)
   })
   
-  it('sample_frac',{
-    x <- rats%>%shredder::stan_sample_frac(size = 0.25)
+  it('thin_frac',{
+    x <- rats%>%shredder::stan_thin_frac(size = 0.25)
     testthat::expect_equal(length(x@sim$samples[[1]][[1]]),1250)
   })
   
   it('no warmup',{
-    x <- rats%>%shredder::stan_sample_n(size = 500,inc_warmup = FALSE)
+    x <- rats%>%shredder::stan_thin_n(size = 2,inc_warmup = FALSE)
     testthat::expect_equal(length(x@sim$samples[[1]][[1]]),500)
   })
   
