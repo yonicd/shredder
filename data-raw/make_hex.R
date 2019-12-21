@@ -20,15 +20,6 @@ mcmc_plot <- image_read("data-raw/figure6.png") %>%
 ribbon <- image_read('data-raw/hiclipart.com.png')%>%
   image_scale("25%")
 
-stan_logo <- image_read('data-raw/stan_logo.png')
-
-stan_logo%>%
-  image_scale("30%")%>%
-  image_annotate(text = 'a',gravity = 'northwest',location = '+50+20')
-
-image_fill(stan_logo, color = "#ffffff", point = "+250+100", fuzz = 20) %>% 
-  image_scale("30%")
-"#590815"
 dot <- image_read("data-raw/dot.png")
 
 stan_logo_mask <- dot %>% 
@@ -51,10 +42,6 @@ bg_color2 <- "#f6f3f9"
 fg_color <- "#042a2b"
 fgd_color1 <- "#772e25"
 fgd_color2 <- "#411815"
-
-dot_art%>%
-  image_composite(ribbon, gravity = "center", offset = "+0+0") %>%     
-  image_scale("50%")
 
 shred_hex <- 
   image_canvas_hex(fill_color = bg_color, border_color = fg_color, border_size = 7) %>%
