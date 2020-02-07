@@ -19,14 +19,6 @@ stan_trim_postwarm <- function(x,idx){
   
 }
 
-clear_summary <- function(object){
-  check_stanfit(object)
-  if(exists('summary',envir = object@`.MISC`))
-    rm('summary',envir = object@`.MISC`)
-  
-  object
-}
-
 #' @importFrom purrr rerun
 reset_perm <- function(object,inits_x){
   check_stanfit(object)

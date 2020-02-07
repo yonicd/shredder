@@ -1,0 +1,117 @@
+---
+title: "Removing Internal Elements"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Removing Internal Elements}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(shredder)
+library(butcher)
+library(details)
+```
+
+`stanfit` object hold a lot of information and some of the elements that take of most of the memory are not necessarily needed in post-processing. This vignette introduces verbs that can safely remove these elements without corrupting the stanfit object.
+
+```{r,results='hide',message=FALSE}
+rats <- rats_example(nCores = 1)
+
+```
+ 
+```{details, details.summary = 'The Model'}
+rats@stanmodel
+```
+
+```{details, details.summary = 'Model Summary'}
+rats
+```
+
+We use the [butcher](https://tidymodels.github.io/butcher/) package to evaluate the size of each element.
+
+```{r}
+
+rats%>%
+  attributes()%>%
+  butcher::weigh(units = 'MB')
+
+```
+ 
+## stan_axe
+
+`shredder` can remove three elements in the `stanfit` object 
+
+  - The cached fit summary stored in fit@`.MISC`$summary
+  - The cached cpp object stored in fit@.MISC$stan_fit_instance
+  - The stanmodel stored in fit@stanmodel
+ 
+```{r}
+
+summary <- function(x){
+  
+    y <- x%>%
+    attributes()%>%
+    butcher::weigh()
+    
+    s <- y$size
+    
+    data.frame(min = min(s),
+               max = max(s),
+               mean = mean(s), 
+               sd = sd(s), 
+               sum = sum(s))
+    
+  }
+```
+
+```{r}
+butcher_rats <- rats%>%
+  summary()
+
+butcher_fit_instance <- rats%>%
+  stan_axe(what = 'fit_instance')%>%
+  summary()
+
+butcher_stanmodel <- rats%>%
+  stan_axe(what = 'fit_instance')%>%
+  stan_axe(what = 'stanmodel')%>%
+  summary()
+
+butcher_summary <- rats%>%
+  stan_axe(what = 'fit_instance')%>%
+  stan_axe(what = 'stanmodel')%>%
+  stan_axe(what = 'summary')%>%
+  summary()
+
+butcher_params <- rats%>%
+  stan_axe(what = 'fit_instance')%>%
+  stan_axe(what = 'stanmodel')%>%
+  stan_axe(what = 'summary')%>%
+  stan_select(alpha)%>%
+  summary()
+
+```
+  
+## Compare Object Sizes 
+ 
+```{r}
+tbl <- purrr::map_df(
+  list('full' = butcher_rats,
+       'fit_instance' = butcher_fit_instance,
+       'stanmodel' = butcher_stanmodel,
+       'summary' = butcher_summary,
+       'param' = butcher_params),
+  identity,.id='axe')
+```
+ 
+```{r}
+knitr::kable(tbl) 
+```

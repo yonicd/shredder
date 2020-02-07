@@ -96,7 +96,7 @@ fit_thin%>%
 
 ```{r}
 fit_filter <- fit%>%
-  stan_filter(b_grouptreat>=2)
+  stan_filter(b_grouptreat>=1)
 ```
 
 ```{r,echo = FALSE}
@@ -112,7 +112,7 @@ fit_filter%>%
 
 ```{r}
 fit_filter_chain <- fit%>%
-  stan_filter(b_grouptreat>=2)%>%
+  stan_filter(b_grouptreat>=1)%>%
   stan_retain(chains = 1)
 ```
 

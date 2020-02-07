@@ -22,15 +22,7 @@ ribbon <- image_read('data-raw/hiclipart.com.png')%>%
 
 dot <- image_read("data-raw/dot.png")
 
-stan_logo_mask <- dot %>% 
-  image_channel("A") %>% 
-  image_noise() %>% 
-  image_convert(type="Grayscale") %>% 
-  image_morphology("Open", "Diamond:1") %>% 
-  image_threshold("black", "94%")
-
-dot_art <- 
-  dot%>%
+dot_art <- dot%>%
   image_flatten() %>% 
   image_compose(image_canvas(dot, pseudo_image = "gradient:black-white"),
                 "CopyOpacity") %>% 
@@ -44,7 +36,7 @@ fgd_color1 <- "#772e25"
 fgd_color2 <- "#411815"
 
 shred_hex <- 
-  image_canvas_hex(fill_color = bg_color, border_color = fg_color, border_size = 7) %>%
+  image_canvas_hex(fill_color = bg_color, border_color = fg_color, border_size = 5) %>%
   image_composite(image_blank(460, 660, "white"), gravity = "center",offset = "+0+100") %>% 
   image_composite(image_blank(460, 150, bg_color), gravity = "north", offset = "+0-750") %>% 
   image_composite(girl, gravity = "west", offset = "-700+270") %>% 

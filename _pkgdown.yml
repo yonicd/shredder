@@ -36,6 +36,9 @@ articles:
     contents:
       - rstan
       - brms
+  - title: "Utility"
+    contents:
+      - axe
   - title: "Extending"
     contents:
       - tidybayes

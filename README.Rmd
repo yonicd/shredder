@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Covrpage
-Summary](https://img.shields.io/badge/covrpage-Last_Build_2019_12_19-brightgreen.svg)](http://tinyurl.com/s3fr6gn)
+Summary](https://img.shields.io/badge/covrpage-Last_Build_2020_02_07-brightgreen.svg)](http://tinyurl.com/s3fr6gn)
 [![Travis build status](https://travis-ci.org/metrumresearchgroup/shredder.svg?branch=master)](https://travis-ci.org/metrumresearchgroup/shredder)
 [![Codecov test coverage](https://codecov.io/gh/metrumresearchgroup/shredder/branch/master/graph/badge.svg)](https://codecov.io/gh/metrumresearchgroup/shredder?branch=master)
 <!-- badges: end -->
@@ -44,20 +44,21 @@ remotes::install_github('metrumresearchgroup/shredder')
 
 ## Current API Verbs
 
-  - Dimension
-      - chains
-          - `shredder::stan_retain` : extract specific chains
-      - pars
-          - `shredder::stan_select` : extract specific pars
-          - `shredder::stan_contains`, `shredder::stan_starts_with`,`shredder::stan_ends_with`:
-            partial par extractions (used within `shredder::stan_select`)
-          - `shredder::stan_names` : return names within the stanfit object
-      - post-warmup samples
-          - `shredder::stan_slice` : extract specific samples by index
-          - `shredder::stan_thin_n` : Thin (remove) every n samples from the total samples
-          - `shredder::stan_thin_frac` : Thin (remove) a fraction of total samples.
-          - `shredder::stan_filter` : extract subset of samples conditional on
-            filter of parameter values
+  - chains
+      - `shredder::stan_retain` : extract specific chains
+  - pars
+      - `shredder::stan_select` : extract specific pars
+      - `shredder::stan_contains`, `shredder::stan_starts_with`,`shredder::stan_ends_with`:
+        partial par extractions (used within `shredder::stan_select`)
+      - `shredder::stan_names` : return names within the stanfit object
+  - post-warmup samples
+      - `shredder::stan_slice` : extract specific samples by index
+      - `shredder::stan_thin_n` : Thin (remove) every n samples from the total samples
+      - `shredder::stan_thin_frac` : Thin (remove) a fraction of total samples.
+      - `shredder::stan_filter` : extract subset of samples conditional on
+        filter of parameter values
+  - cached elements
+    - `shredder::stan_axe` : remove cached elements for stanfit objects to reduce memory usage
 
 ## Code of Conduct
 
