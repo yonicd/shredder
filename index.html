@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">shredder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -80,18 +80,18 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="this-package-should-be-considered-a-thought-experiment-that-we-are-interested-to-get-feedback-around-the-implementation-and-whether-it-can-help-solve-your-problems-" class="section level2">
+<div id="this-package-should-be-considered-a-thought-experiment-that-we-are-interested-to-get-feedback-around-the-implementation-and-whether-it-can-help-solve-your-problems" class="section level2">
 <h2 class="hasAnchor">
-<a href="#this-package-should-be-considered-a-thought-experiment-that-we-are-interested-to-get-feedback-around-the-implementation-and-whether-it-can-help-solve-your-problems-" class="anchor"></a>This package should be considered a thought experiment that we are interested to get feedback around the implementation and whether it can help solve your problems.</h2>
+<a href="#this-package-should-be-considered-a-thought-experiment-that-we-are-interested-to-get-feedback-around-the-implementation-and-whether-it-can-help-solve-your-problems" class="anchor"></a>This package should be considered a thought experiment that we are interested to get feedback around the implementation and whether it can help solve your problems.</h2>
 </div>
-<div id="it-is-under-development-and-the-api-will-break-as-we-better-understand-the-problems-it-is-attempting-to-solve--use-at-your-own-risk-" class="section level2">
+<div id="it-is-under-development-and-the-api-will-break-as-we-better-understand-the-problems-it-is-attempting-to-solve-use-at-your-own-risk" class="section level2">
 <h2 class="hasAnchor">
-<a href="#it-is-under-development-and-the-api-will-break-as-we-better-understand-the-problems-it-is-attempting-to-solve--use-at-your-own-risk-" class="anchor"></a>It is under development and the API will break as we better understand the problems it is attempting to solve. Use at your own risk.</h2>
+<a href="#it-is-under-development-and-the-api-will-break-as-we-better-understand-the-problems-it-is-attempting-to-solve-use-at-your-own-risk" class="anchor"></a>It is under development and the API will break as we better understand the problems it is attempting to solve. Use at your own risk.</h2>
 <hr>
 </div>
-<div id="shredder" class="section level1">
+<div id="shredder-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#shredder" class="anchor"></a>shredder <img src="reference/figures/logo_ribbon.png" align="right" class="logo">
+<a href="#shredder-" class="anchor"></a>shredder <img src="reference/figures/logo_ribbon.png" align="right" class="logo">
 </h1></div>
 <!-- badges: start -->
 
@@ -110,13 +110,11 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">'metrumresearchgroup/shredder'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">'metrumresearchgroup/shredder'</span>)</a></code></pre></div>
 </div>
 <div id="current-api-verbs" class="section level2">
 <h2 class="hasAnchor">
 <a href="#current-api-verbs" class="anchor"></a>Current API Verbs</h2>
-<ul>
-<li>Dimension
 <ul>
 <li>chains
 <ul>
@@ -146,6 +144,10 @@
 <code><a href="reference/stan_filter.html">shredder::stan_filter</a></code> : extract subset of samples conditional on filter of parameter values</li>
 </ul>
 </li>
+<li>cached elements
+<ul>
+<li>
+<code><a href="reference/stan_axe.html">shredder::stan_axe</a></code> : remove cached elements for stanfit objects to reduce memory usage</li>
 </ul>
 </li>
 </ul>
@@ -199,7 +201,7 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="http://tinyurl.com/s3fr6gn"><img src="https://img.shields.io/badge/covrpage-Last_Build_2019_12_21-brightgreen.svg" alt="Covrpage Summary"></a></li>
+<li><a href="http://tinyurl.com/s3fr6gn"><img src="https://img.shields.io/badge/covrpage-Last_Build_2020_02_07-brightgreen.svg" alt="Covrpage Summary"></a></li>
 <li><a href="https://travis-ci.org/metrumresearchgroup/shredder"><img src="https://travis-ci.org/metrumresearchgroup/shredder.svg?branch=master" alt="Travis build status"></a></li>
 <li><a href="https://codecov.io/gh/metrumresearchgroup/shredder?branch=master"><img src="https://codecov.io/gh/metrumresearchgroup/shredder/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>

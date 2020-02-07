@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • shredder</title>
+<title>Remove elements from stanfit object — stan_axe • shredder</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,9 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Remove elements from stanfit object — stan_axe" />
+<meta property="og:description" content="Safely remove large elements from stanfit objects that are not needed for postprocessing." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -54,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -115,42 +117,56 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Remove elements from stanfit object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/metrumresearchgroup/shredder/blob/master/R/stan_axe.R'><code>R/stan_axe.R</code></a></small>
+    <div class="hidden name"><code>stan_axe.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>Usage</h3>
-      <p class="section-desc"></p>
-
-      <ul>
-        <li><a href="rstan.html">Working with rstan</a></li>
-        <li><a href="brms.html">Working With brms</a></li>
-      </ul>
+    <div class="ref-description">
+    <p>Safely remove large elements from stanfit objects that are not needed for postprocessing.</p>
     </div>
-    <div class="section ">
-      <h3>Utility</h3>
-      <p class="section-desc"></p>
 
-      <ul>
-        <li><a href="axe.html">Removing Internal Elements</a></li>
-      </ul>
-    </div>
-    <div class="section ">
-      <h3>Extending</h3>
-      <p class="section-desc"></p>
+    <pre class="usage"><span class='fu'>stan_axe</span>(<span class='no'>object</span>, <span class='kw'>what</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"summary"</span>, <span class='st'>"fit_instance"</span>, <span class='st'>"stanmodel"</span>))</pre>
 
-      <ul>
-        <li><a href="tidybayes.html">Interacting with tidybayes</a></li>
-      </ul>
-    </div>
-    <div class="section ">
-      <h3>Unit Tests</h3>
-      <p class="section-desc"></p>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>object</th>
+      <td><p>stanfit</p></td>
+    </tr>
+    <tr>
+      <th>what</th>
+      <td><p>name of attribute to remove, Default: c("summary", "fit_instance", "stanmodel")</p></td>
+    </tr>
+    </table>
 
-      <ul>
-        <li><a href="tests_and_coverage.html">Tests and Coverage</a></li>
-      </ul>
-    </div>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>stanfit</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>shredder can remove three elements in the <code>stanfit</code> object</p><ul>
+<li><p>The cached fit summary stored in fit@<code>.MISC</code>$summary</p></li>
+<li><p>The cached cpp object stored in fit@.MISC$stan_fit_instance</p></li>
+<li><p>The stanmodel stored in fit@stanmodel</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other utility: <code><a href='stan_names.html'>stan_names</a></code>,
+  <code><a href='stan_retain.html'>stan_retain</a></code></p></div>
+
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#see-also">See also</a></li>
+    </ul>
+
   </div>
 </div>
 

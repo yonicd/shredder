@@ -70,7 +70,7 @@ where conditions are true." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shredder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -177,55 +177,55 @@ assumed to be of equal size.</p><ul>
 #&gt; 4 chains, each with iter=2000; warmup=1000; thin=1; 
 #&gt; post-warmup draws per chain=1000, total post-warmup draws=4000.
 #&gt; 
-#&gt;            mean se_mean   sd   2.5%    25%    50%    75% 97.5% n_eff Rhat
-#&gt; mu_alpha 242.49    0.04 2.71 237.14 240.78 242.53 244.27 247.8  4647    1
-#&gt; mu_beta    6.19    0.00 0.11   5.97   6.11   6.19   6.26   6.4  3733    1
+#&gt;            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
+#&gt; mu_alpha 242.45    0.04 2.68 237.17 240.65 242.43 244.22 247.79  5295    1
+#&gt; mu_beta    6.19    0.00 0.11   5.98   6.11   6.19   6.26   6.40  4302    1
 #&gt; 
-#&gt; Samples were drawn using  at Sat Dec 21 02:04:29 2019.
+#&gt; Samples were drawn using  at Fri Feb  7 10:20:32 2020.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>
 <span class='no'>rats</span><span class='kw'>%&gt;%</span>
   <span class='fu'><a href='stan_select.html'>stan_select</a></span>(<span class='no'>mu_alpha</span>,<span class='no'>mu_beta</span>)<span class='kw'>%&gt;%</span>
   <span class='fu'>stan_filter</span>(<span class='no'>mu_beta</span> <span class='kw'>&lt;</span> <span class='fl'>6</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
-#&gt; 4 chains, each with iter=1033; warmup=1000; thin=1; 
-#&gt; post-warmup draws per chain=33, total post-warmup draws=132.
+#&gt; 4 chains, each with iter=1032; warmup=1000; thin=1; 
+#&gt; post-warmup draws per chain=32, total post-warmup draws=128.
 #&gt; 
 #&gt;            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
-#&gt; mu_alpha 242.16    0.19 2.63 237.82 240.64 242.30 243.81 247.36   183 0.98
-#&gt; mu_beta    5.95    0.01 0.05   5.83   5.93   5.96   5.98   6.00    76 1.03
+#&gt; mu_alpha 242.40    0.23 2.60 236.46 241.01 242.67 244.08 246.88   127 1.02
+#&gt; mu_beta    5.95    0.01 0.05   5.83   5.94   5.97   5.98   6.00    86 1.04
 #&gt; 
-#&gt; Samples were drawn using  at Sat Dec 21 02:04:29 2019.
+#&gt; Samples were drawn using  at Fri Feb  7 10:20:32 2020.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>
 <span class='no'>rats</span><span class='kw'>%&gt;%</span>
   <span class='fu'><a href='stan_select.html'>stan_select</a></span>(<span class='no'>mu_alpha</span>,<span class='no'>mu_beta</span>)<span class='kw'>%&gt;%</span>
   <span class='fu'>stan_filter</span>(<span class='no'>mu_beta</span> <span class='kw'>&lt;</span> <span class='fl'>6</span>, <span class='kw'>permuted</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
-#&gt; 4 chains, each with iter=1041.5; warmup=1000; thin=1; 
-#&gt; post-warmup draws per chain=47, total post-warmup draws=166.
+#&gt; 4 chains, each with iter=1040; warmup=1000; thin=1; 
+#&gt; post-warmup draws per chain=47, total post-warmup draws=160.
 #&gt; 
 #&gt;            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
-#&gt; mu_alpha 242.35    0.23 2.70 237.18 240.80 242.45 243.92 247.38   141 1.00
-#&gt; mu_beta    5.95    0.00 0.05   5.83   5.93   5.96   5.98   6.00    86 1.02
+#&gt; mu_alpha 242.24    0.25 2.68 236.73 240.43 242.41 243.94 247.21   113 1.03
+#&gt; mu_beta    5.95    0.00 0.05   5.83   5.94   5.97   5.98   6.00   101 1.03
 #&gt; 
-#&gt; Samples were drawn using  at Sat Dec 21 02:04:29 2019.
+#&gt; Samples were drawn using  at Fri Feb  7 10:20:32 2020.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>
 <span class='no'>rats</span><span class='kw'>%&gt;%</span>
  <span class='fu'><a href='stan_select.html'>stan_select</a></span>(<span class='no'>`alpha[1]`</span>,<span class='no'>`alpha[2]`</span>,<span class='no'>mu_alpha</span>,<span class='no'>mu_beta</span>)<span class='kw'>%&gt;%</span>
  <span class='fu'>stan_filter</span>(<span class='no'>mu_beta</span> <span class='kw'>&lt;</span> <span class='fl'>6</span> <span class='kw'>&amp;</span> <span class='no'>`alpha[1]`</span> <span class='kw'>&gt;</span> <span class='fl'>240</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
-#&gt; 4 chains, each with iter=1021; warmup=1000; thin=1; 
-#&gt; post-warmup draws per chain=21, total post-warmup draws=84.
+#&gt; 4 chains, each with iter=1017; warmup=1000; thin=1; 
+#&gt; post-warmup draws per chain=17, total post-warmup draws=68.
 #&gt; 
 #&gt;            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
-#&gt; alpha[1] 242.15    0.14 1.51 240.19 240.91 241.75 243.08 245.11   122 0.99
-#&gt; alpha[2] 247.95    0.30 2.47 242.37 246.40 248.11 249.69 252.18    69 0.98
-#&gt; mu_alpha 242.28    0.31 2.93 236.55 240.62 242.35 243.92 247.38    87 1.00
-#&gt; mu_beta    5.95    0.01 0.04   5.84   5.93   5.96   5.98   6.00    65 1.03
+#&gt; alpha[1] 242.48    0.19 1.62 240.26 241.45 242.05 243.43 246.02    73 0.98
+#&gt; alpha[2] 248.01    0.67 3.09 242.59 246.03 247.87 250.09 253.86    22 1.14
+#&gt; mu_alpha 242.08    0.26 2.60 236.62 240.55 242.08 243.41 247.54    97 1.03
+#&gt; mu_beta    5.95    0.01 0.05   5.83   5.94   5.97   5.98   6.00    52 1.00
 #&gt; 
-#&gt; Samples were drawn using  at Sat Dec 21 02:04:29 2019.
+#&gt; Samples were drawn using  at Fri Feb  7 10:20:32 2020.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>  
