@@ -1,22 +1,16 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## This package should be considered a thought experiment that we are interested to get feedback around the implementation and whether it can help solve your problems.
-
-## It is under development and the API will break as we better understand the problems it is attempting to solve. Use at your own risk.
-
-<hr>
-
 # shredder <img src="man/figures/logo_ribbon.png" align="right" class="logo"/>
 
 <!-- badges: start -->
-
 [![Covrpage
 Summary](https://img.shields.io/badge/covrpage-Last_Build_2020_02_07-brightgreen.svg)](http://tinyurl.com/s3fr6gn)
 [![Travis build
 status](https://travis-ci.org/metrumresearchgroup/shredder.svg?branch=master)](https://travis-ci.org/metrumresearchgroup/shredder)
 [![Codecov test
 coverage](https://codecov.io/gh/metrumresearchgroup/shredder/branch/master/graph/badge.svg)](https://codecov.io/gh/metrumresearchgroup/shredder?branch=master)
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
 The goal of **shredder** is to create an API that incites exploration
