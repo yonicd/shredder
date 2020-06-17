@@ -10,7 +10,7 @@ addons:
 r_packages:
 - devtools
 r_github_packages:
-- metrumresearchgroup/covrpage
+- yonicd/covrpage
 - metrumresearchgroup/pkgdown
 after_success:
 - Rscript -e 'covr::codecov()'
