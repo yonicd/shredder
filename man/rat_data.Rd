@@ -4,14 +4,16 @@
 \name{rat_data}
 \alias{rat_data}
 \title{Rats model data}
-\format{An object of class \code{"list"}:
+\format{
+An object of class \code{"list"}:
 \describe{
 \item{\code{N}}{integer Number of subjects}
 \item{\code{T}}{integer Number of measurements}
 \item{\code{x}}{numeric Day of measurement}
 \item{\code{Y}}{tibble Values of measurements}
 \item{\code{xbar}}{numeric Mean days of measurements}
-}}
+}
+}
 \source{
 \href{https://www.mrc-bsu.cam.ac.uk/wp-content/uploads/WinBUGS_Vol1.pdf}{Data Description},
 \href{https://github.com/stan-dev/example-models/tree/master/bugs_examples/vol1/rats}{Data and Script}
@@ -23,7 +25,8 @@ rat_data
 Data used in rats example model
 }
 \seealso{
-Other examples: \code{\link{rats_example}}
+Other examples: 
+\code{\link{rats_example}()}
 }
 \concept{examples}
 \keyword{datasets}

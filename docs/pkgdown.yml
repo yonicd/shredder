@@ -1,6 +1,6 @@
-pandoc: '2.7'
+pandoc: 2.9.2.1
 pkgdown: 1.4.1.9000
-pkgdown_sha: ~
+pkgdown_sha: 08d56fc764f959e14840670e58df9f05177ef487
 articles:
   axe: axe.html
   brms: brms.html

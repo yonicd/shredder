@@ -54,6 +54,7 @@ rats\%>\%
 
 }
 \seealso{
-Other subsetting: \code{\link{stan_select}}
+Other subsetting: 
+\code{\link{stan_select}()}
 }
 \concept{subsetting}

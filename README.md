@@ -1,16 +1,20 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<hr>
+
 # shredder <img src="man/figures/logo_ribbon.png" align="right" class="logo"/>
 
 <!-- badges: start -->
+
 [![Covrpage
-Summary](https://img.shields.io/badge/covrpage-Last_Build_2020_02_07-brightgreen.svg)](http://tinyurl.com/s3fr6gn)
+Summary](https://img.shields.io/badge/covrpage-Last_Build_2020_06_17-brightgreen.svg)](http://tinyurl.com/s3fr6gn)
 [![Travis build
-status](https://travis-ci.org/metrumresearchgroup/shredder.svg?branch=master)](https://travis-ci.org/metrumresearchgroup/shredder)
+status](https://travis-ci.org/yonicd/shredder.svg?branch=master)](https://travis-ci.org/yonicd/shredder)
 [![Codecov test
-coverage](https://codecov.io/gh/metrumresearchgroup/shredder/branch/master/graph/badge.svg)](https://codecov.io/gh/metrumresearchgroup/shredder?branch=master)
-[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+coverage](https://codecov.io/gh/yonicd/shredder/branch/master/graph/badge.svg)](https://codecov.io/gh/yonicd/shredder?branch=master)
+[![Lifecycle:
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
 The goal of **shredder** is to create an API that incites exploration
@@ -31,7 +35,7 @@ and iteration of rstan simulation objects.
 ## Installation
 
 ``` r
-remotes::install_github('metrumresearchgroup/shredder')
+remotes::install_github('yonicd/shredder')
 ```
 
 ## Current API Verbs

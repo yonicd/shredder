@@ -30,6 +30,7 @@ Run Rats data model
 \link[rstan:stan]{rstan}
 \link[parallel:detectCores]{detectCores}
 
-Other examples: \code{\link{rat_data}}
+Other examples: 
+\code{\link{rat_data}}
 }
 \concept{examples}

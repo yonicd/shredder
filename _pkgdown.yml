@@ -16,7 +16,7 @@ navbar:
       href: articles/index.html
     twitter:
       icon: fa-lg fa-twitter
-      href: http://twitter.com/MetrumRG
+      href: http://twitter.com/yoniceedee
 
 reference:
   - title: "Selecting Parameters"
@@ -49,4 +49,4 @@ template:
   params:
     bootswatch: flatly
 hexURL:
-  https://github.com/metrumresearchgroup/shredder/blob/master/man/figures/logo_ribbon.png?raw=true
+  https://github.com/yonicd/shredder/blob/master/man/figures/logo_ribbon.png?raw=true

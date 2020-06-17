@@ -26,7 +26,8 @@ shredder can remove three elements in the \code{stanfit} object
 }
 }
 \seealso{
-Other utility: \code{\link{stan_names}},
-  \code{\link{stan_retain}}
+Other utility: 
+\code{\link{stan_names}()},
+\code{\link{stan_retain}()}
 }
 \concept{utility}

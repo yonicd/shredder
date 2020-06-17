@@ -61,7 +61,7 @@
   </a>
 </li>
 <li>
-  <a href="http://twitter.com/MetrumRG">
+  <a href="http://twitter.com/yoniceedee">
     <span class="fa fa-lg fa-twitter"></span>
      
   </a>
@@ -76,7 +76,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="axe_files/header-attrs-2.2/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Removing Internal Elements</h1>
@@ -89,234 +89,234 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(shredder)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(butcher)</a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(details)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(shredder)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(butcher)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(details)</span></code></pre></div>
 <p><code>stanfit</code> object hold a lot of information and some of the elements that take of most of the memory are not necessarily needed in post-processing. This vignette introduces verbs that can safely remove these elements without corrupting the stanfit object.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">rats &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rats_example.html">rats_example</a></span>(<span class="dt">nCores =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>rats &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rats_example.html">rats_example</a></span>(<span class="dt">nCores =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre class="details"><code>rats@stanmodel</code></pre>
 <details closed><p><summary><span title="Click to Open"> The Model </span> </summary></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"></a>
-<a class="sourceLine" id="cb4-2" title="2">S4 class stanmodel <span class="st">'rats'</span> coded as follows<span class="op">:</span></a>
-<a class="sourceLine" id="cb4-3" title="3">data {</a>
-<a class="sourceLine" id="cb4-4" title="4">  int<span class="op">&lt;</span>lower=<span class="dv">0</span><span class="op">&gt;</span><span class="st"> </span>N;</a>
-<a class="sourceLine" id="cb4-5" title="5">  int<span class="op">&lt;</span>lower=<span class="dv">0</span><span class="op">&gt;</span><span class="st"> </span>T;</a>
-<a class="sourceLine" id="cb4-6" title="6">  real x[T];</a>
-<a class="sourceLine" id="cb4-7" title="7">  real y[N,T];</a>
-<a class="sourceLine" id="cb4-8" title="8">  real xbar;</a>
-<a class="sourceLine" id="cb4-9" title="9">}</a>
-<a class="sourceLine" id="cb4-10" title="10">parameters {</a>
-<a class="sourceLine" id="cb4-11" title="11">  real alpha[N];</a>
-<a class="sourceLine" id="cb4-12" title="12">  real beta[N];</a>
-<a class="sourceLine" id="cb4-13" title="13"></a>
-<a class="sourceLine" id="cb4-14" title="14">  real mu_alpha;</a>
-<a class="sourceLine" id="cb4-15" title="15">  real mu_beta;          <span class="op">/</span><span class="er">/</span><span class="st"> </span>beta.c <span class="cf">in</span> original bugs model</a>
-<a class="sourceLine" id="cb4-16" title="16"></a>
-<a class="sourceLine" id="cb4-17" title="17">  real<span class="op">&lt;</span>lower=<span class="dv">0</span><span class="op">&gt;</span><span class="st"> </span>sigmasq_y;</a>
-<a class="sourceLine" id="cb4-18" title="18">  real<span class="op">&lt;</span>lower=<span class="dv">0</span><span class="op">&gt;</span><span class="st"> </span>sigmasq_alpha;</a>
-<a class="sourceLine" id="cb4-19" title="19">  real<span class="op">&lt;</span>lower=<span class="dv">0</span><span class="op">&gt;</span><span class="st"> </span>sigmasq_beta;</a>
-<a class="sourceLine" id="cb4-20" title="20">}</a>
-<a class="sourceLine" id="cb4-21" title="21">transformed parameters {</a>
-<a class="sourceLine" id="cb4-22" title="22">  real<span class="op">&lt;</span>lower=<span class="dv">0</span><span class="op">&gt;</span><span class="st"> </span>sigma_y;       <span class="op">/</span><span class="er">/</span><span class="st"> </span>sigma <span class="cf">in</span> original bugs model</a>
-<a class="sourceLine" id="cb4-23" title="23">  real<span class="op">&lt;</span>lower=<span class="dv">0</span><span class="op">&gt;</span><span class="st"> </span>sigma_alpha;</a>
-<a class="sourceLine" id="cb4-24" title="24">  real<span class="op">&lt;</span>lower=<span class="dv">0</span><span class="op">&gt;</span><span class="st"> </span>sigma_beta;</a>
-<a class="sourceLine" id="cb4-25" title="25"></a>
-<a class="sourceLine" id="cb4-26" title="26">  sigma_y =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(sigmasq_y);</a>
-<a class="sourceLine" id="cb4-27" title="27">  sigma_alpha =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(sigmasq_alpha);</a>
-<a class="sourceLine" id="cb4-28" title="28">  sigma_beta =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(sigmasq_beta);</a>
-<a class="sourceLine" id="cb4-29" title="29">}</a>
-<a class="sourceLine" id="cb4-30" title="30">model {</a>
-<a class="sourceLine" id="cb4-31" title="31">  mu_alpha <span class="op">~</span><span class="st"> </span><span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>);</a>
-<a class="sourceLine" id="cb4-32" title="32">  mu_beta <span class="op">~</span><span class="st"> </span><span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>);</a>
-<a class="sourceLine" id="cb4-33" title="33">  sigmasq_y <span class="op">~</span><span class="st"> </span><span class="kw">inv_gamma</span>(<span class="fl">0.001</span>, <span class="fl">0.001</span>);</a>
-<a class="sourceLine" id="cb4-34" title="34">  sigmasq_alpha <span class="op">~</span><span class="st"> </span><span class="kw">inv_gamma</span>(<span class="fl">0.001</span>, <span class="fl">0.001</span>);</a>
-<a class="sourceLine" id="cb4-35" title="35">  sigmasq_beta <span class="op">~</span><span class="st"> </span><span class="kw">inv_gamma</span>(<span class="fl">0.001</span>, <span class="fl">0.001</span>);</a>
-<a class="sourceLine" id="cb4-36" title="36">  alpha <span class="op">~</span><span class="st"> </span><span class="kw">normal</span>(mu_alpha, sigma_alpha); <span class="op">/</span><span class="er">/</span><span class="st"> </span>vectorized</a>
-<a class="sourceLine" id="cb4-37" title="37">  beta <span class="op">~</span><span class="st"> </span><span class="kw">normal</span>(mu_beta, sigma_beta);  <span class="op">/</span><span class="er">/</span><span class="st"> </span>vectorized</a>
-<a class="sourceLine" id="cb4-38" title="38">  <span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>N)</a>
-<a class="sourceLine" id="cb4-39" title="39">    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>T) </a>
-<a class="sourceLine" id="cb4-40" title="40">      y[n,t] <span class="op">~</span><span class="st"> </span><span class="kw">normal</span>(alpha[n] <span class="op">+</span><span class="st"> </span>beta[n] <span class="op">*</span><span class="st"> </span>(x[t] <span class="op">-</span><span class="st"> </span>xbar), sigma_y);</a>
-<a class="sourceLine" id="cb4-41" title="41"></a>
-<a class="sourceLine" id="cb4-42" title="42">}</a>
-<a class="sourceLine" id="cb4-43" title="43">generated quantities {</a>
-<a class="sourceLine" id="cb4-44" title="44">  real alpha0;</a>
-<a class="sourceLine" id="cb4-45" title="45">  alpha0 =<span class="st"> </span>mu_alpha <span class="op">-</span><span class="st"> </span>xbar <span class="op">*</span><span class="st"> </span>mu_beta;</a>
-<a class="sourceLine" id="cb4-46" title="46">} </a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2"></a>S4 class stanmodel <span class="st">'rats'</span> coded as follows<span class="op">:</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>data {</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  int<span class="op">&lt;</span>lower=<span class="dv">0</span><span class="op">&gt;</span><span class="st"> </span>N;</span>
+<span id="cb4-5"><a href="#cb4-5"></a>  int<span class="op">&lt;</span>lower=<span class="dv">0</span><span class="op">&gt;</span><span class="st"> </span>T;</span>
+<span id="cb4-6"><a href="#cb4-6"></a>  real x[T];</span>
+<span id="cb4-7"><a href="#cb4-7"></a>  real y[N,T];</span>
+<span id="cb4-8"><a href="#cb4-8"></a>  real xbar;</span>
+<span id="cb4-9"><a href="#cb4-9"></a>}</span>
+<span id="cb4-10"><a href="#cb4-10"></a>parameters {</span>
+<span id="cb4-11"><a href="#cb4-11"></a>  real alpha[N];</span>
+<span id="cb4-12"><a href="#cb4-12"></a>  real beta[N];</span>
+<span id="cb4-13"><a href="#cb4-13"></a></span>
+<span id="cb4-14"><a href="#cb4-14"></a>  real mu_alpha;</span>
+<span id="cb4-15"><a href="#cb4-15"></a>  real mu_beta;          <span class="op">/</span><span class="er">/</span><span class="st"> </span>beta.c <span class="cf">in</span> original bugs model</span>
+<span id="cb4-16"><a href="#cb4-16"></a></span>
+<span id="cb4-17"><a href="#cb4-17"></a>  real<span class="op">&lt;</span>lower=<span class="dv">0</span><span class="op">&gt;</span><span class="st"> </span>sigmasq_y;</span>
+<span id="cb4-18"><a href="#cb4-18"></a>  real<span class="op">&lt;</span>lower=<span class="dv">0</span><span class="op">&gt;</span><span class="st"> </span>sigmasq_alpha;</span>
+<span id="cb4-19"><a href="#cb4-19"></a>  real<span class="op">&lt;</span>lower=<span class="dv">0</span><span class="op">&gt;</span><span class="st"> </span>sigmasq_beta;</span>
+<span id="cb4-20"><a href="#cb4-20"></a>}</span>
+<span id="cb4-21"><a href="#cb4-21"></a>transformed parameters {</span>
+<span id="cb4-22"><a href="#cb4-22"></a>  real<span class="op">&lt;</span>lower=<span class="dv">0</span><span class="op">&gt;</span><span class="st"> </span>sigma_y;       <span class="op">/</span><span class="er">/</span><span class="st"> </span>sigma <span class="cf">in</span> original bugs model</span>
+<span id="cb4-23"><a href="#cb4-23"></a>  real<span class="op">&lt;</span>lower=<span class="dv">0</span><span class="op">&gt;</span><span class="st"> </span>sigma_alpha;</span>
+<span id="cb4-24"><a href="#cb4-24"></a>  real<span class="op">&lt;</span>lower=<span class="dv">0</span><span class="op">&gt;</span><span class="st"> </span>sigma_beta;</span>
+<span id="cb4-25"><a href="#cb4-25"></a></span>
+<span id="cb4-26"><a href="#cb4-26"></a>  sigma_y =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(sigmasq_y);</span>
+<span id="cb4-27"><a href="#cb4-27"></a>  sigma_alpha =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(sigmasq_alpha);</span>
+<span id="cb4-28"><a href="#cb4-28"></a>  sigma_beta =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(sigmasq_beta);</span>
+<span id="cb4-29"><a href="#cb4-29"></a>}</span>
+<span id="cb4-30"><a href="#cb4-30"></a>model {</span>
+<span id="cb4-31"><a href="#cb4-31"></a>  mu_alpha <span class="op">~</span><span class="st"> </span><span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>);</span>
+<span id="cb4-32"><a href="#cb4-32"></a>  mu_beta <span class="op">~</span><span class="st"> </span><span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>);</span>
+<span id="cb4-33"><a href="#cb4-33"></a>  sigmasq_y <span class="op">~</span><span class="st"> </span><span class="kw">inv_gamma</span>(<span class="fl">0.001</span>, <span class="fl">0.001</span>);</span>
+<span id="cb4-34"><a href="#cb4-34"></a>  sigmasq_alpha <span class="op">~</span><span class="st"> </span><span class="kw">inv_gamma</span>(<span class="fl">0.001</span>, <span class="fl">0.001</span>);</span>
+<span id="cb4-35"><a href="#cb4-35"></a>  sigmasq_beta <span class="op">~</span><span class="st"> </span><span class="kw">inv_gamma</span>(<span class="fl">0.001</span>, <span class="fl">0.001</span>);</span>
+<span id="cb4-36"><a href="#cb4-36"></a>  alpha <span class="op">~</span><span class="st"> </span><span class="kw">normal</span>(mu_alpha, sigma_alpha); <span class="op">/</span><span class="er">/</span><span class="st"> </span>vectorized</span>
+<span id="cb4-37"><a href="#cb4-37"></a>  beta <span class="op">~</span><span class="st"> </span><span class="kw">normal</span>(mu_beta, sigma_beta);  <span class="op">/</span><span class="er">/</span><span class="st"> </span>vectorized</span>
+<span id="cb4-38"><a href="#cb4-38"></a>  <span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>N)</span>
+<span id="cb4-39"><a href="#cb4-39"></a>    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>T) </span>
+<span id="cb4-40"><a href="#cb4-40"></a>      y[n,t] <span class="op">~</span><span class="st"> </span><span class="kw">normal</span>(alpha[n] <span class="op">+</span><span class="st"> </span>beta[n] <span class="op">*</span><span class="st"> </span>(x[t] <span class="op">-</span><span class="st"> </span>xbar), sigma_y);</span>
+<span id="cb4-41"><a href="#cb4-41"></a></span>
+<span id="cb4-42"><a href="#cb4-42"></a>}</span>
+<span id="cb4-43"><a href="#cb4-43"></a>generated quantities {</span>
+<span id="cb4-44"><a href="#cb4-44"></a>  real alpha0;</span>
+<span id="cb4-45"><a href="#cb4-45"></a>  alpha0 =<span class="st"> </span>mu_alpha <span class="op">-</span><span class="st"> </span>xbar <span class="op">*</span><span class="st"> </span>mu_beta;</span>
+<span id="cb4-46"><a href="#cb4-46"></a>} </span></code></pre></div>
 </details><p><br></p>
 <pre class="details"><code>rats</code></pre>
 <details closed><p><summary><span title="Click to Open"> Model Summary </span> </summary></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"></a>
-<a class="sourceLine" id="cb6-2" title="2">Inference <span class="cf">for</span> Stan model<span class="op">:</span><span class="st"> </span>rats.</a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="dv">4</span> chains, each with iter=<span class="dv">2000</span>; warmup=<span class="dv">1000</span>; thin=<span class="dv">1</span>; </a>
-<a class="sourceLine" id="cb6-4" title="4">post<span class="op">-</span>warmup draws per chain=<span class="dv">1000</span>, total post<span class="op">-</span>warmup draws=<span class="fl">4000.</span></a>
-<a class="sourceLine" id="cb6-5" title="5"></a>
-<a class="sourceLine" id="cb6-6" title="6">                 mean se_mean    sd    <span class="fl">2.5</span><span class="op">%     25%</span><span class="st">     </span><span class="dv">50</span><span class="op">%     75%</span></a>
-<a class="sourceLine" id="cb6-7" title="7">alpha[<span class="dv">1</span>]       <span class="fl">239.94</span>    <span class="fl">0.03</span>  <span class="fl">2.65</span>  <span class="fl">234.72</span>  <span class="fl">238.13</span>  <span class="fl">239.94</span>  <span class="fl">241.73</span></a>
-<a class="sourceLine" id="cb6-8" title="8">alpha[<span class="dv">2</span>]       <span class="fl">247.80</span>    <span class="fl">0.04</span>  <span class="fl">2.74</span>  <span class="fl">242.30</span>  <span class="fl">246.01</span>  <span class="fl">247.86</span>  <span class="fl">249.64</span></a>
-<a class="sourceLine" id="cb6-9" title="9">alpha[<span class="dv">3</span>]       <span class="fl">252.44</span>    <span class="fl">0.04</span>  <span class="fl">2.58</span>  <span class="fl">247.22</span>  <span class="fl">250.74</span>  <span class="fl">252.43</span>  <span class="fl">254.13</span></a>
-<a class="sourceLine" id="cb6-10" title="10">alpha[<span class="dv">4</span>]       <span class="fl">232.60</span>    <span class="fl">0.03</span>  <span class="fl">2.71</span>  <span class="fl">227.23</span>  <span class="fl">230.81</span>  <span class="fl">232.61</span>  <span class="fl">234.38</span></a>
-<a class="sourceLine" id="cb6-11" title="11">alpha[<span class="dv">5</span>]       <span class="fl">231.64</span>    <span class="fl">0.03</span>  <span class="fl">2.69</span>  <span class="fl">226.32</span>  <span class="fl">229.85</span>  <span class="fl">231.62</span>  <span class="fl">233.46</span></a>
-<a class="sourceLine" id="cb6-12" title="12">alpha[<span class="dv">6</span>]       <span class="fl">249.75</span>    <span class="fl">0.04</span>  <span class="fl">2.65</span>  <span class="fl">244.39</span>  <span class="fl">248.04</span>  <span class="fl">249.75</span>  <span class="fl">251.49</span></a>
-<a class="sourceLine" id="cb6-13" title="13">alpha[<span class="dv">7</span>]       <span class="fl">228.70</span>    <span class="fl">0.03</span>  <span class="fl">2.69</span>  <span class="fl">223.51</span>  <span class="fl">226.94</span>  <span class="fl">228.64</span>  <span class="fl">230.42</span></a>
-<a class="sourceLine" id="cb6-14" title="14">alpha[<span class="dv">8</span>]       <span class="fl">248.33</span>    <span class="fl">0.04</span>  <span class="fl">2.65</span>  <span class="fl">243.23</span>  <span class="fl">246.52</span>  <span class="fl">248.28</span>  <span class="fl">250.12</span></a>
-<a class="sourceLine" id="cb6-15" title="15">alpha[<span class="dv">9</span>]       <span class="fl">283.27</span>    <span class="fl">0.04</span>  <span class="fl">2.68</span>  <span class="fl">277.83</span>  <span class="fl">281.53</span>  <span class="fl">283.28</span>  <span class="fl">285.08</span></a>
-<a class="sourceLine" id="cb6-16" title="16">alpha[<span class="dv">10</span>]      <span class="fl">219.27</span>    <span class="fl">0.03</span>  <span class="fl">2.62</span>  <span class="fl">213.97</span>  <span class="fl">217.53</span>  <span class="fl">219.26</span>  <span class="fl">221.05</span></a>
-<a class="sourceLine" id="cb6-17" title="17">alpha[<span class="dv">11</span>]      <span class="fl">258.26</span>    <span class="fl">0.03</span>  <span class="fl">2.71</span>  <span class="fl">252.87</span>  <span class="fl">256.49</span>  <span class="fl">258.27</span>  <span class="fl">260.03</span></a>
-<a class="sourceLine" id="cb6-18" title="18">alpha[<span class="dv">12</span>]      <span class="fl">228.14</span>    <span class="fl">0.03</span>  <span class="fl">2.74</span>  <span class="fl">222.81</span>  <span class="fl">226.28</span>  <span class="fl">228.09</span>  <span class="fl">229.98</span></a>
-<a class="sourceLine" id="cb6-19" title="19">alpha[<span class="dv">13</span>]      <span class="fl">242.41</span>    <span class="fl">0.03</span>  <span class="fl">2.71</span>  <span class="fl">237.15</span>  <span class="fl">240.63</span>  <span class="fl">242.41</span>  <span class="fl">244.15</span></a>
-<a class="sourceLine" id="cb6-20" title="20">alpha[<span class="dv">14</span>]      <span class="fl">268.28</span>    <span class="fl">0.04</span>  <span class="fl">2.74</span>  <span class="fl">262.85</span>  <span class="fl">266.42</span>  <span class="fl">268.30</span>  <span class="fl">270.08</span></a>
-<a class="sourceLine" id="cb6-21" title="21">alpha[<span class="dv">15</span>]      <span class="fl">242.79</span>    <span class="fl">0.04</span>  <span class="fl">2.69</span>  <span class="fl">237.54</span>  <span class="fl">241.00</span>  <span class="fl">242.82</span>  <span class="fl">244.60</span></a>
-<a class="sourceLine" id="cb6-22" title="22">alpha[<span class="dv">16</span>]      <span class="fl">245.30</span>    <span class="fl">0.03</span>  <span class="fl">2.64</span>  <span class="fl">240.14</span>  <span class="fl">243.58</span>  <span class="fl">245.29</span>  <span class="fl">247.01</span></a>
-<a class="sourceLine" id="cb6-23" title="23">alpha[<span class="dv">17</span>]      <span class="fl">232.21</span>    <span class="fl">0.04</span>  <span class="fl">2.68</span>  <span class="fl">226.95</span>  <span class="fl">230.44</span>  <span class="fl">232.21</span>  <span class="fl">233.99</span></a>
-<a class="sourceLine" id="cb6-24" title="24">alpha[<span class="dv">18</span>]      <span class="fl">240.47</span>    <span class="fl">0.03</span>  <span class="fl">2.72</span>  <span class="fl">235.21</span>  <span class="fl">238.65</span>  <span class="fl">240.47</span>  <span class="fl">242.28</span></a>
-<a class="sourceLine" id="cb6-25" title="25">alpha[<span class="dv">19</span>]      <span class="fl">253.76</span>    <span class="fl">0.04</span>  <span class="fl">2.68</span>  <span class="fl">248.54</span>  <span class="fl">252.00</span>  <span class="fl">253.79</span>  <span class="fl">255.54</span></a>
-<a class="sourceLine" id="cb6-26" title="26">alpha[<span class="dv">20</span>]      <span class="fl">241.68</span>    <span class="fl">0.03</span>  <span class="fl">2.70</span>  <span class="fl">236.43</span>  <span class="fl">239.86</span>  <span class="fl">241.68</span>  <span class="fl">243.50</span></a>
-<a class="sourceLine" id="cb6-27" title="27">alpha[<span class="dv">21</span>]      <span class="fl">248.52</span>    <span class="fl">0.04</span>  <span class="fl">2.67</span>  <span class="fl">243.26</span>  <span class="fl">246.71</span>  <span class="fl">248.56</span>  <span class="fl">250.26</span></a>
-<a class="sourceLine" id="cb6-28" title="28">alpha[<span class="dv">22</span>]      <span class="fl">225.29</span>    <span class="fl">0.03</span>  <span class="fl">2.62</span>  <span class="fl">220.21</span>  <span class="fl">223.53</span>  <span class="fl">225.30</span>  <span class="fl">227.03</span></a>
-<a class="sourceLine" id="cb6-29" title="29">alpha[<span class="dv">23</span>]      <span class="fl">228.52</span>    <span class="fl">0.03</span>  <span class="fl">2.71</span>  <span class="fl">223.31</span>  <span class="fl">226.76</span>  <span class="fl">228.52</span>  <span class="fl">230.31</span></a>
-<a class="sourceLine" id="cb6-30" title="30">alpha[<span class="dv">24</span>]      <span class="fl">245.13</span>    <span class="fl">0.04</span>  <span class="fl">2.64</span>  <span class="fl">239.73</span>  <span class="fl">243.39</span>  <span class="fl">245.12</span>  <span class="fl">246.86</span></a>
-<a class="sourceLine" id="cb6-31" title="31">alpha[<span class="dv">25</span>]      <span class="fl">234.51</span>    <span class="fl">0.03</span>  <span class="fl">2.60</span>  <span class="fl">229.37</span>  <span class="fl">232.81</span>  <span class="fl">234.48</span>  <span class="fl">236.24</span></a>
-<a class="sourceLine" id="cb6-32" title="32">alpha[<span class="dv">26</span>]      <span class="fl">254.00</span>    <span class="fl">0.03</span>  <span class="fl">2.66</span>  <span class="fl">248.81</span>  <span class="fl">252.22</span>  <span class="fl">254.02</span>  <span class="fl">255.77</span></a>
-<a class="sourceLine" id="cb6-33" title="33">alpha[<span class="dv">27</span>]      <span class="fl">254.33</span>    <span class="fl">0.03</span>  <span class="fl">2.65</span>  <span class="fl">249.18</span>  <span class="fl">252.47</span>  <span class="fl">254.30</span>  <span class="fl">256.17</span></a>
-<a class="sourceLine" id="cb6-34" title="34">alpha[<span class="dv">28</span>]      <span class="fl">243.00</span>    <span class="fl">0.04</span>  <span class="fl">2.65</span>  <span class="fl">237.95</span>  <span class="fl">241.27</span>  <span class="fl">243.02</span>  <span class="fl">244.68</span></a>
-<a class="sourceLine" id="cb6-35" title="35">alpha[<span class="dv">29</span>]      <span class="fl">217.90</span>    <span class="fl">0.03</span>  <span class="fl">2.70</span>  <span class="fl">212.52</span>  <span class="fl">216.02</span>  <span class="fl">217.86</span>  <span class="fl">219.73</span></a>
-<a class="sourceLine" id="cb6-36" title="36">alpha[<span class="dv">30</span>]      <span class="fl">241.38</span>    <span class="fl">0.03</span>  <span class="fl">2.60</span>  <span class="fl">236.25</span>  <span class="fl">239.60</span>  <span class="fl">241.41</span>  <span class="fl">243.14</span></a>
-<a class="sourceLine" id="cb6-37" title="37">beta[<span class="dv">1</span>]          <span class="fl">6.06</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.60</span>    <span class="fl">5.90</span>    <span class="fl">6.06</span>    <span class="fl">6.22</span></a>
-<a class="sourceLine" id="cb6-38" title="38">beta[<span class="dv">2</span>]          <span class="fl">7.05</span>    <span class="fl">0.00</span>  <span class="fl">0.26</span>    <span class="fl">6.54</span>    <span class="fl">6.88</span>    <span class="fl">7.05</span>    <span class="fl">7.22</span></a>
-<a class="sourceLine" id="cb6-39" title="39">beta[<span class="dv">3</span>]          <span class="fl">6.48</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">6.02</span>    <span class="fl">6.32</span>    <span class="fl">6.49</span>    <span class="fl">6.64</span></a>
-<a class="sourceLine" id="cb6-40" title="40">beta[<span class="dv">4</span>]          <span class="fl">5.34</span>    <span class="fl">0.00</span>  <span class="fl">0.26</span>    <span class="fl">4.82</span>    <span class="fl">5.17</span>    <span class="fl">5.34</span>    <span class="fl">5.52</span></a>
-<a class="sourceLine" id="cb6-41" title="41">beta[<span class="dv">5</span>]          <span class="fl">6.57</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">6.10</span>    <span class="fl">6.40</span>    <span class="fl">6.57</span>    <span class="fl">6.72</span></a>
-<a class="sourceLine" id="cb6-42" title="42">beta[<span class="dv">6</span>]          <span class="fl">6.18</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.69</span>    <span class="fl">6.01</span>    <span class="fl">6.18</span>    <span class="fl">6.34</span></a>
-<a class="sourceLine" id="cb6-43" title="43">beta[<span class="dv">7</span>]          <span class="fl">5.98</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.50</span>    <span class="fl">5.81</span>    <span class="fl">5.97</span>    <span class="fl">6.14</span></a>
-<a class="sourceLine" id="cb6-44" title="44">beta[<span class="dv">8</span>]          <span class="fl">6.42</span>    <span class="fl">0.00</span>  <span class="fl">0.25</span>    <span class="fl">5.93</span>    <span class="fl">6.25</span>    <span class="fl">6.42</span>    <span class="fl">6.58</span></a>
-<a class="sourceLine" id="cb6-45" title="45">beta[<span class="dv">9</span>]          <span class="fl">7.06</span>    <span class="fl">0.00</span>  <span class="fl">0.26</span>    <span class="fl">6.56</span>    <span class="fl">6.88</span>    <span class="fl">7.06</span>    <span class="fl">7.23</span></a>
-<a class="sourceLine" id="cb6-46" title="46">beta[<span class="dv">10</span>]         <span class="fl">5.85</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.37</span>    <span class="fl">5.69</span>    <span class="fl">5.85</span>    <span class="fl">6.02</span></a>
-<a class="sourceLine" id="cb6-47" title="47">beta[<span class="dv">11</span>]         <span class="fl">6.80</span>    <span class="fl">0.00</span>  <span class="fl">0.25</span>    <span class="fl">6.31</span>    <span class="fl">6.63</span>    <span class="fl">6.80</span>    <span class="fl">6.97</span></a>
-<a class="sourceLine" id="cb6-48" title="48">beta[<span class="dv">12</span>]         <span class="fl">6.12</span>    <span class="fl">0.00</span>  <span class="fl">0.25</span>    <span class="fl">5.63</span>    <span class="fl">5.95</span>    <span class="fl">6.12</span>    <span class="fl">6.29</span></a>
-<a class="sourceLine" id="cb6-49" title="49">beta[<span class="dv">13</span>]         <span class="fl">6.16</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.69</span>    <span class="fl">6.00</span>    <span class="fl">6.16</span>    <span class="fl">6.33</span></a>
-<a class="sourceLine" id="cb6-50" title="50">beta[<span class="dv">14</span>]         <span class="fl">6.69</span>    <span class="fl">0.00</span>  <span class="fl">0.25</span>    <span class="fl">6.20</span>    <span class="fl">6.52</span>    <span class="fl">6.69</span>    <span class="fl">6.86</span></a>
-<a class="sourceLine" id="cb6-51" title="51">beta[<span class="dv">15</span>]         <span class="fl">5.42</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">4.93</span>    <span class="fl">5.26</span>    <span class="fl">5.42</span>    <span class="fl">5.58</span></a>
-<a class="sourceLine" id="cb6-52" title="52">beta[<span class="dv">16</span>]         <span class="fl">5.93</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.44</span>    <span class="fl">5.76</span>    <span class="fl">5.93</span>    <span class="fl">6.08</span></a>
-<a class="sourceLine" id="cb6-53" title="53">beta[<span class="dv">17</span>]         <span class="fl">6.27</span>    <span class="fl">0.00</span>  <span class="fl">0.23</span>    <span class="fl">5.82</span>    <span class="fl">6.12</span>    <span class="fl">6.27</span>    <span class="fl">6.43</span></a>
-<a class="sourceLine" id="cb6-54" title="54">beta[<span class="dv">18</span>]         <span class="fl">5.84</span>    <span class="fl">0.00</span>  <span class="fl">0.25</span>    <span class="fl">5.35</span>    <span class="fl">5.68</span>    <span class="fl">5.85</span>    <span class="fl">6.01</span></a>
-<a class="sourceLine" id="cb6-55" title="55">beta[<span class="dv">19</span>]         <span class="fl">6.41</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.94</span>    <span class="fl">6.24</span>    <span class="fl">6.41</span>    <span class="fl">6.56</span></a>
-<a class="sourceLine" id="cb6-56" title="56">beta[<span class="dv">20</span>]         <span class="fl">6.05</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.59</span>    <span class="fl">5.90</span>    <span class="fl">6.05</span>    <span class="fl">6.21</span></a>
-<a class="sourceLine" id="cb6-57" title="57">beta[<span class="dv">21</span>]         <span class="fl">6.41</span>    <span class="fl">0.00</span>  <span class="fl">0.25</span>    <span class="fl">5.92</span>    <span class="fl">6.24</span>    <span class="fl">6.41</span>    <span class="fl">6.57</span></a>
-<a class="sourceLine" id="cb6-58" title="58">beta[<span class="dv">22</span>]         <span class="fl">5.86</span>    <span class="fl">0.00</span>  <span class="fl">0.23</span>    <span class="fl">5.41</span>    <span class="fl">5.70</span>    <span class="fl">5.86</span>    <span class="fl">6.01</span></a>
-<a class="sourceLine" id="cb6-59" title="59">beta[<span class="dv">23</span>]         <span class="fl">5.75</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.28</span>    <span class="fl">5.58</span>    <span class="fl">5.74</span>    <span class="fl">5.90</span></a>
-<a class="sourceLine" id="cb6-60" title="60">beta[<span class="dv">24</span>]         <span class="fl">5.89</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.42</span>    <span class="fl">5.73</span>    <span class="fl">5.89</span>    <span class="fl">6.05</span></a>
-<a class="sourceLine" id="cb6-61" title="61">beta[<span class="dv">25</span>]         <span class="fl">6.91</span>    <span class="fl">0.00</span>  <span class="fl">0.26</span>    <span class="fl">6.40</span>    <span class="fl">6.74</span>    <span class="fl">6.91</span>    <span class="fl">7.09</span></a>
-<a class="sourceLine" id="cb6-62" title="62">beta[<span class="dv">26</span>]         <span class="fl">6.55</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">6.08</span>    <span class="fl">6.39</span>    <span class="fl">6.55</span>    <span class="fl">6.71</span></a>
-<a class="sourceLine" id="cb6-63" title="63">beta[<span class="dv">27</span>]         <span class="fl">5.90</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.42</span>    <span class="fl">5.73</span>    <span class="fl">5.90</span>    <span class="fl">6.06</span></a>
-<a class="sourceLine" id="cb6-64" title="64">beta[<span class="dv">28</span>]         <span class="fl">5.85</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.37</span>    <span class="fl">5.68</span>    <span class="fl">5.85</span>    <span class="fl">6.01</span></a>
-<a class="sourceLine" id="cb6-65" title="65">beta[<span class="dv">29</span>]         <span class="fl">5.67</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.19</span>    <span class="fl">5.51</span>    <span class="fl">5.67</span>    <span class="fl">5.83</span></a>
-<a class="sourceLine" id="cb6-66" title="66">beta[<span class="dv">30</span>]         <span class="fl">6.14</span>    <span class="fl">0.00</span>  <span class="fl">0.25</span>    <span class="fl">5.66</span>    <span class="fl">5.97</span>    <span class="fl">6.14</span>    <span class="fl">6.30</span></a>
-<a class="sourceLine" id="cb6-67" title="67">mu_alpha       <span class="fl">242.45</span>    <span class="fl">0.04</span>  <span class="fl">2.68</span>  <span class="fl">237.17</span>  <span class="fl">240.65</span>  <span class="fl">242.43</span>  <span class="fl">244.22</span></a>
-<a class="sourceLine" id="cb6-68" title="68">mu_beta          <span class="fl">6.19</span>    <span class="fl">0.00</span>  <span class="fl">0.11</span>    <span class="fl">5.98</span>    <span class="fl">6.11</span>    <span class="fl">6.19</span>    <span class="fl">6.26</span></a>
-<a class="sourceLine" id="cb6-69" title="69">sigmasq_y       <span class="fl">37.19</span>    <span class="fl">0.13</span>  <span class="fl">5.68</span>   <span class="fl">27.60</span>   <span class="fl">33.20</span>   <span class="fl">36.71</span>   <span class="fl">40.67</span></a>
-<a class="sourceLine" id="cb6-70" title="70">sigmasq_alpha  <span class="fl">216.80</span>    <span class="fl">1.00</span> <span class="fl">63.46</span>  <span class="fl">124.16</span>  <span class="fl">173.10</span>  <span class="fl">205.47</span>  <span class="fl">249.85</span></a>
-<a class="sourceLine" id="cb6-71" title="71">sigmasq_beta     <span class="fl">0.27</span>    <span class="fl">0.00</span>  <span class="fl">0.10</span>    <span class="fl">0.13</span>    <span class="fl">0.21</span>    <span class="fl">0.26</span>    <span class="fl">0.33</span></a>
-<a class="sourceLine" id="cb6-72" title="72">sigma_y          <span class="fl">6.08</span>    <span class="fl">0.01</span>  <span class="fl">0.46</span>    <span class="fl">5.25</span>    <span class="fl">5.76</span>    <span class="fl">6.06</span>    <span class="fl">6.38</span></a>
-<a class="sourceLine" id="cb6-73" title="73">sigma_alpha     <span class="fl">14.58</span>    <span class="fl">0.03</span>  <span class="fl">2.06</span>   <span class="fl">11.14</span>   <span class="fl">13.16</span>   <span class="fl">14.33</span>   <span class="fl">15.81</span></a>
-<a class="sourceLine" id="cb6-74" title="74">sigma_beta       <span class="fl">0.52</span>    <span class="fl">0.00</span>  <span class="fl">0.09</span>    <span class="fl">0.36</span>    <span class="fl">0.45</span>    <span class="fl">0.51</span>    <span class="fl">0.57</span></a>
-<a class="sourceLine" id="cb6-75" title="75">alpha0         <span class="fl">106.36</span>    <span class="fl">0.05</span>  <span class="fl">3.53</span>   <span class="fl">99.55</span>  <span class="fl">104.01</span>  <span class="fl">106.36</span>  <span class="fl">108.69</span></a>
-<a class="sourceLine" id="cb6-76" title="76">lp__          <span class="fl">-438.05</span>    <span class="fl">0.23</span>  <span class="fl">7.05</span> <span class="fl">-453.46</span> <span class="fl">-442.45</span> <span class="fl">-437.57</span> <span class="fl">-433.16</span></a>
-<a class="sourceLine" id="cb6-77" title="77">                <span class="fl">97.5</span>% n_eff Rhat</a>
-<a class="sourceLine" id="cb6-78" title="78">alpha[<span class="dv">1</span>]       <span class="fl">245.15</span>  <span class="dv">7024</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-79" title="79">alpha[<span class="dv">2</span>]       <span class="fl">253.05</span>  <span class="dv">6023</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-80" title="80">alpha[<span class="dv">3</span>]       <span class="fl">257.50</span>  <span class="dv">5059</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-81" title="81">alpha[<span class="dv">4</span>]       <span class="fl">237.94</span>  <span class="dv">7017</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-82" title="82">alpha[<span class="dv">5</span>]       <span class="fl">236.90</span>  <span class="dv">6477</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-83" title="83">alpha[<span class="dv">6</span>]       <span class="fl">255.06</span>  <span class="dv">5331</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-84" title="84">alpha[<span class="dv">7</span>]       <span class="fl">234.05</span>  <span class="dv">7721</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-85" title="85">alpha[<span class="dv">8</span>]       <span class="fl">253.61</span>  <span class="dv">5596</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-86" title="86">alpha[<span class="dv">9</span>]       <span class="fl">288.40</span>  <span class="dv">5129</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-87" title="87">alpha[<span class="dv">10</span>]      <span class="fl">224.29</span>  <span class="dv">6879</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-88" title="88">alpha[<span class="dv">11</span>]      <span class="fl">263.85</span>  <span class="dv">6760</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-89" title="89">alpha[<span class="dv">12</span>]      <span class="fl">233.68</span>  <span class="dv">7475</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-90" title="90">alpha[<span class="dv">13</span>]      <span class="fl">247.83</span>  <span class="dv">6268</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-91" title="91">alpha[<span class="dv">14</span>]      <span class="fl">273.56</span>  <span class="dv">6108</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-92" title="92">alpha[<span class="dv">15</span>]      <span class="fl">248.01</span>  <span class="dv">5881</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-93" title="93">alpha[<span class="dv">16</span>]      <span class="fl">250.63</span>  <span class="dv">6282</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-94" title="94">alpha[<span class="dv">17</span>]      <span class="fl">237.44</span>  <span class="dv">5517</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-95" title="95">alpha[<span class="dv">18</span>]      <span class="fl">245.80</span>  <span class="dv">6733</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-96" title="96">alpha[<span class="dv">19</span>]      <span class="fl">259.13</span>  <span class="dv">5846</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-97" title="97">alpha[<span class="dv">20</span>]      <span class="fl">246.96</span>  <span class="dv">6563</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-98" title="98">alpha[<span class="dv">21</span>]      <span class="fl">253.88</span>  <span class="dv">5708</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-99" title="99">alpha[<span class="dv">22</span>]      <span class="fl">230.43</span>  <span class="dv">6554</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-100" title="100">alpha[<span class="dv">23</span>]      <span class="fl">233.96</span>  <span class="dv">7679</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-101" title="101">alpha[<span class="dv">24</span>]      <span class="fl">250.35</span>  <span class="dv">5278</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-102" title="102">alpha[<span class="dv">25</span>]      <span class="fl">239.55</span>  <span class="dv">5746</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-103" title="103">alpha[<span class="dv">26</span>]      <span class="fl">259.24</span>  <span class="dv">6521</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-104" title="104">alpha[<span class="dv">27</span>]      <span class="fl">259.45</span>  <span class="dv">7077</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-105" title="105">alpha[<span class="dv">28</span>]      <span class="fl">248.30</span>  <span class="dv">5487</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-106" title="106">alpha[<span class="dv">29</span>]      <span class="fl">223.26</span>  <span class="dv">6188</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-107" title="107">alpha[<span class="dv">30</span>]      <span class="fl">246.33</span>  <span class="dv">6561</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-108" title="108">beta[<span class="dv">1</span>]          <span class="fl">6.52</span>  <span class="dv">6351</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-109" title="109">beta[<span class="dv">2</span>]          <span class="fl">7.54</span>  <span class="dv">6081</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-110" title="110">beta[<span class="dv">3</span>]          <span class="fl">6.95</span>  <span class="dv">5675</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-111" title="111">beta[<span class="dv">4</span>]          <span class="fl">5.85</span>  <span class="dv">5389</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-112" title="112">beta[<span class="dv">5</span>]          <span class="fl">7.03</span>  <span class="dv">5753</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-113" title="113">beta[<span class="dv">6</span>]          <span class="fl">6.67</span>  <span class="dv">5846</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-114" title="114">beta[<span class="dv">7</span>]          <span class="fl">6.45</span>  <span class="dv">6277</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-115" title="115">beta[<span class="dv">8</span>]          <span class="fl">6.91</span>  <span class="dv">5725</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-116" title="116">beta[<span class="dv">9</span>]          <span class="fl">7.55</span>  <span class="dv">5306</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-117" title="117">beta[<span class="dv">10</span>]         <span class="fl">6.32</span>  <span class="dv">5511</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-118" title="118">beta[<span class="dv">11</span>]         <span class="fl">7.29</span>  <span class="dv">5720</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-119" title="119">beta[<span class="dv">12</span>]         <span class="fl">6.60</span>  <span class="dv">5937</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-120" title="120">beta[<span class="dv">13</span>]         <span class="fl">6.61</span>  <span class="dv">6602</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-121" title="121">beta[<span class="dv">14</span>]         <span class="fl">7.17</span>  <span class="dv">6294</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-122" title="122">beta[<span class="dv">15</span>]         <span class="fl">5.89</span>  <span class="dv">5773</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-123" title="123">beta[<span class="dv">16</span>]         <span class="fl">6.40</span>  <span class="dv">6010</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-124" title="124">beta[<span class="dv">17</span>]         <span class="fl">6.73</span>  <span class="dv">4764</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-125" title="125">beta[<span class="dv">18</span>]         <span class="fl">6.34</span>  <span class="dv">5926</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-126" title="126">beta[<span class="dv">19</span>]         <span class="fl">6.88</span>  <span class="dv">6205</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-127" title="127">beta[<span class="dv">20</span>]         <span class="fl">6.51</span>  <span class="dv">6409</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-128" title="128">beta[<span class="dv">21</span>]         <span class="fl">6.89</span>  <span class="dv">6100</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-129" title="129">beta[<span class="dv">22</span>]         <span class="fl">6.31</span>  <span class="dv">6723</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-130" title="130">beta[<span class="dv">23</span>]         <span class="fl">6.21</span>  <span class="dv">5846</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-131" title="131">beta[<span class="dv">24</span>]         <span class="fl">6.37</span>  <span class="dv">6067</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-132" title="132">beta[<span class="dv">25</span>]         <span class="fl">7.42</span>  <span class="dv">5229</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-133" title="133">beta[<span class="dv">26</span>]         <span class="fl">7.02</span>  <span class="dv">5256</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-134" title="134">beta[<span class="dv">27</span>]         <span class="fl">6.37</span>  <span class="dv">6120</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-135" title="135">beta[<span class="dv">28</span>]         <span class="fl">6.32</span>  <span class="dv">5674</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-136" title="136">beta[<span class="dv">29</span>]         <span class="fl">6.15</span>  <span class="dv">7156</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-137" title="137">beta[<span class="dv">30</span>]         <span class="fl">6.62</span>  <span class="dv">6008</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-138" title="138">mu_alpha       <span class="fl">247.79</span>  <span class="dv">5295</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-139" title="139">mu_beta          <span class="fl">6.40</span>  <span class="dv">4302</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-140" title="140">sigmasq_y       <span class="fl">49.83</span>  <span class="dv">1942</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-141" title="141">sigmasq_alpha  <span class="fl">371.18</span>  <span class="dv">4027</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-142" title="142">sigmasq_beta     <span class="fl">0.51</span>  <span class="dv">3640</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-143" title="143">sigma_y          <span class="fl">7.06</span>  <span class="dv">1963</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-144" title="144">sigma_alpha     <span class="fl">19.27</span>  <span class="dv">4324</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-145" title="145">sigma_beta       <span class="fl">0.72</span>  <span class="dv">3579</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-146" title="146">alpha0         <span class="fl">113.32</span>  <span class="dv">4815</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-147" title="147">lp__          <span class="fl">-425.80</span>   <span class="dv">978</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-148" title="148"></a>
-<a class="sourceLine" id="cb6-149" title="149">Samples were drawn using <span class="kw">NUTS</span>(diag_e) at Fri Feb  <span class="dv">7</span> <span class="dv">10</span><span class="op">:</span><span class="dv">21</span><span class="op">:</span><span class="dv">29</span> <span class="fl">2020.</span></a>
-<a class="sourceLine" id="cb6-150" title="150">For each parameter, n_eff is a crude measure of effective sample size,</a>
-<a class="sourceLine" id="cb6-151" title="151">and Rhat is the potential scale reduction factor on split <span class="kw">chains</span> (at </a>
-<a class="sourceLine" id="cb6-152" title="152">convergence, <span class="dt">Rhat=</span><span class="dv">1</span>).</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2"></a>Inference <span class="cf">for</span> Stan model<span class="op">:</span><span class="st"> </span>rats.</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="dv">4</span> chains, each with iter=<span class="dv">2000</span>; warmup=<span class="dv">1000</span>; thin=<span class="dv">1</span>; </span>
+<span id="cb6-4"><a href="#cb6-4"></a>post<span class="op">-</span>warmup draws per chain=<span class="dv">1000</span>, total post<span class="op">-</span>warmup draws=<span class="fl">4000.</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a>                 mean se_mean    sd    <span class="fl">2.5</span><span class="op">%     25%</span><span class="st">     </span><span class="dv">50</span><span class="op">%     75%</span><span class="st">   </span><span class="fl">97.5</span>%</span>
+<span id="cb6-7"><a href="#cb6-7"></a>alpha[<span class="dv">1</span>]       <span class="fl">239.93</span>    <span class="fl">0.03</span>  <span class="fl">2.61</span>  <span class="fl">234.75</span>  <span class="fl">238.22</span>  <span class="fl">239.91</span>  <span class="fl">241.71</span>  <span class="fl">244.96</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>alpha[<span class="dv">2</span>]       <span class="fl">247.80</span>    <span class="fl">0.04</span>  <span class="fl">2.70</span>  <span class="fl">242.54</span>  <span class="fl">245.97</span>  <span class="fl">247.79</span>  <span class="fl">249.62</span>  <span class="fl">253.07</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>alpha[<span class="dv">3</span>]       <span class="fl">252.44</span>    <span class="fl">0.04</span>  <span class="fl">2.60</span>  <span class="fl">247.27</span>  <span class="fl">250.72</span>  <span class="fl">252.46</span>  <span class="fl">254.21</span>  <span class="fl">257.55</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>alpha[<span class="dv">4</span>]       <span class="fl">232.56</span>    <span class="fl">0.04</span>  <span class="fl">2.65</span>  <span class="fl">227.48</span>  <span class="fl">230.69</span>  <span class="fl">232.54</span>  <span class="fl">234.34</span>  <span class="fl">237.79</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>alpha[<span class="dv">5</span>]       <span class="fl">231.58</span>    <span class="fl">0.03</span>  <span class="fl">2.73</span>  <span class="fl">226.42</span>  <span class="fl">229.71</span>  <span class="fl">231.56</span>  <span class="fl">233.46</span>  <span class="fl">236.86</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>alpha[<span class="dv">6</span>]       <span class="fl">249.76</span>    <span class="fl">0.04</span>  <span class="fl">2.71</span>  <span class="fl">244.61</span>  <span class="fl">247.94</span>  <span class="fl">249.74</span>  <span class="fl">251.60</span>  <span class="fl">255.03</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>alpha[<span class="dv">7</span>]       <span class="fl">228.66</span>    <span class="fl">0.03</span>  <span class="fl">2.67</span>  <span class="fl">223.37</span>  <span class="fl">226.97</span>  <span class="fl">228.65</span>  <span class="fl">230.47</span>  <span class="fl">233.89</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>alpha[<span class="dv">8</span>]       <span class="fl">248.41</span>    <span class="fl">0.03</span>  <span class="fl">2.69</span>  <span class="fl">243.04</span>  <span class="fl">246.62</span>  <span class="fl">248.43</span>  <span class="fl">250.21</span>  <span class="fl">253.52</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a>alpha[<span class="dv">9</span>]       <span class="fl">283.31</span>    <span class="fl">0.04</span>  <span class="fl">2.70</span>  <span class="fl">277.91</span>  <span class="fl">281.57</span>  <span class="fl">283.37</span>  <span class="fl">285.05</span>  <span class="fl">288.59</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a>alpha[<span class="dv">10</span>]      <span class="fl">219.31</span>    <span class="fl">0.03</span>  <span class="fl">2.66</span>  <span class="fl">214.14</span>  <span class="fl">217.52</span>  <span class="fl">219.26</span>  <span class="fl">221.14</span>  <span class="fl">224.55</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a>alpha[<span class="dv">11</span>]      <span class="fl">258.25</span>    <span class="fl">0.04</span>  <span class="fl">2.71</span>  <span class="fl">252.87</span>  <span class="fl">256.39</span>  <span class="fl">258.32</span>  <span class="fl">260.12</span>  <span class="fl">263.41</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a>alpha[<span class="dv">12</span>]      <span class="fl">228.17</span>    <span class="fl">0.04</span>  <span class="fl">2.63</span>  <span class="fl">223.21</span>  <span class="fl">226.39</span>  <span class="fl">228.14</span>  <span class="fl">229.91</span>  <span class="fl">233.39</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a>alpha[<span class="dv">13</span>]      <span class="fl">242.39</span>    <span class="fl">0.04</span>  <span class="fl">2.68</span>  <span class="fl">237.08</span>  <span class="fl">240.57</span>  <span class="fl">242.45</span>  <span class="fl">244.22</span>  <span class="fl">247.70</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a>alpha[<span class="dv">14</span>]      <span class="fl">268.25</span>    <span class="fl">0.04</span>  <span class="fl">2.66</span>  <span class="fl">262.97</span>  <span class="fl">266.43</span>  <span class="fl">268.29</span>  <span class="fl">270.08</span>  <span class="fl">273.34</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a>alpha[<span class="dv">15</span>]      <span class="fl">242.73</span>    <span class="fl">0.03</span>  <span class="fl">2.65</span>  <span class="fl">237.51</span>  <span class="fl">241.02</span>  <span class="fl">242.71</span>  <span class="fl">244.48</span>  <span class="fl">247.91</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a>alpha[<span class="dv">16</span>]      <span class="fl">245.35</span>    <span class="fl">0.03</span>  <span class="fl">2.68</span>  <span class="fl">239.99</span>  <span class="fl">243.54</span>  <span class="fl">245.32</span>  <span class="fl">247.15</span>  <span class="fl">250.60</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a>alpha[<span class="dv">17</span>]      <span class="fl">232.16</span>    <span class="fl">0.04</span>  <span class="fl">2.71</span>  <span class="fl">226.83</span>  <span class="fl">230.31</span>  <span class="fl">232.15</span>  <span class="fl">233.99</span>  <span class="fl">237.51</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a>alpha[<span class="dv">18</span>]      <span class="fl">240.42</span>    <span class="fl">0.03</span>  <span class="fl">2.64</span>  <span class="fl">235.33</span>  <span class="fl">238.69</span>  <span class="fl">240.43</span>  <span class="fl">242.18</span>  <span class="fl">245.52</span></span>
+<span id="cb6-25"><a href="#cb6-25"></a>alpha[<span class="dv">19</span>]      <span class="fl">253.77</span>    <span class="fl">0.04</span>  <span class="fl">2.68</span>  <span class="fl">248.45</span>  <span class="fl">251.99</span>  <span class="fl">253.80</span>  <span class="fl">255.54</span>  <span class="fl">259.06</span></span>
+<span id="cb6-26"><a href="#cb6-26"></a>alpha[<span class="dv">20</span>]      <span class="fl">241.62</span>    <span class="fl">0.03</span>  <span class="fl">2.60</span>  <span class="fl">236.58</span>  <span class="fl">239.91</span>  <span class="fl">241.57</span>  <span class="fl">243.34</span>  <span class="fl">246.78</span></span>
+<span id="cb6-27"><a href="#cb6-27"></a>alpha[<span class="dv">21</span>]      <span class="fl">248.59</span>    <span class="fl">0.03</span>  <span class="fl">2.70</span>  <span class="fl">243.24</span>  <span class="fl">246.79</span>  <span class="fl">248.56</span>  <span class="fl">250.41</span>  <span class="fl">253.85</span></span>
+<span id="cb6-28"><a href="#cb6-28"></a>alpha[<span class="dv">22</span>]      <span class="fl">225.31</span>    <span class="fl">0.04</span>  <span class="fl">2.77</span>  <span class="fl">219.92</span>  <span class="fl">223.48</span>  <span class="fl">225.28</span>  <span class="fl">227.18</span>  <span class="fl">230.91</span></span>
+<span id="cb6-29"><a href="#cb6-29"></a>alpha[<span class="dv">23</span>]      <span class="fl">228.52</span>    <span class="fl">0.03</span>  <span class="fl">2.61</span>  <span class="fl">223.43</span>  <span class="fl">226.79</span>  <span class="fl">228.54</span>  <span class="fl">230.24</span>  <span class="fl">233.62</span></span>
+<span id="cb6-30"><a href="#cb6-30"></a>alpha[<span class="dv">24</span>]      <span class="fl">245.11</span>    <span class="fl">0.03</span>  <span class="fl">2.62</span>  <span class="fl">239.91</span>  <span class="fl">243.40</span>  <span class="fl">245.14</span>  <span class="fl">246.83</span>  <span class="fl">250.29</span></span>
+<span id="cb6-31"><a href="#cb6-31"></a>alpha[<span class="dv">25</span>]      <span class="fl">234.44</span>    <span class="fl">0.03</span>  <span class="fl">2.69</span>  <span class="fl">229.26</span>  <span class="fl">232.63</span>  <span class="fl">234.43</span>  <span class="fl">236.23</span>  <span class="fl">239.82</span></span>
+<span id="cb6-32"><a href="#cb6-32"></a>alpha[<span class="dv">26</span>]      <span class="fl">253.92</span>    <span class="fl">0.04</span>  <span class="fl">2.61</span>  <span class="fl">248.70</span>  <span class="fl">252.16</span>  <span class="fl">253.92</span>  <span class="fl">255.65</span>  <span class="fl">259.09</span></span>
+<span id="cb6-33"><a href="#cb6-33"></a>alpha[<span class="dv">27</span>]      <span class="fl">254.27</span>    <span class="fl">0.03</span>  <span class="fl">2.57</span>  <span class="fl">249.27</span>  <span class="fl">252.55</span>  <span class="fl">254.25</span>  <span class="fl">255.96</span>  <span class="fl">259.55</span></span>
+<span id="cb6-34"><a href="#cb6-34"></a>alpha[<span class="dv">28</span>]      <span class="fl">243.01</span>    <span class="fl">0.04</span>  <span class="fl">2.70</span>  <span class="fl">237.55</span>  <span class="fl">241.20</span>  <span class="fl">243.04</span>  <span class="fl">244.87</span>  <span class="fl">248.15</span></span>
+<span id="cb6-35"><a href="#cb6-35"></a>alpha[<span class="dv">29</span>]      <span class="fl">217.91</span>    <span class="fl">0.03</span>  <span class="fl">2.69</span>  <span class="fl">212.74</span>  <span class="fl">216.09</span>  <span class="fl">217.89</span>  <span class="fl">219.71</span>  <span class="fl">223.13</span></span>
+<span id="cb6-36"><a href="#cb6-36"></a>alpha[<span class="dv">30</span>]      <span class="fl">241.42</span>    <span class="fl">0.03</span>  <span class="fl">2.61</span>  <span class="fl">236.37</span>  <span class="fl">239.64</span>  <span class="fl">241.41</span>  <span class="fl">243.24</span>  <span class="fl">246.48</span></span>
+<span id="cb6-37"><a href="#cb6-37"></a>beta[<span class="dv">1</span>]          <span class="fl">6.06</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.59</span>    <span class="fl">5.91</span>    <span class="fl">6.07</span>    <span class="fl">6.22</span>    <span class="fl">6.53</span></span>
+<span id="cb6-38"><a href="#cb6-38"></a>beta[<span class="dv">2</span>]          <span class="fl">7.05</span>    <span class="fl">0.00</span>  <span class="fl">0.26</span>    <span class="fl">6.55</span>    <span class="fl">6.88</span>    <span class="fl">7.05</span>    <span class="fl">7.22</span>    <span class="fl">7.55</span></span>
+<span id="cb6-39"><a href="#cb6-39"></a>beta[<span class="dv">3</span>]          <span class="fl">6.48</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">6.02</span>    <span class="fl">6.32</span>    <span class="fl">6.48</span>    <span class="fl">6.65</span>    <span class="fl">6.97</span></span>
+<span id="cb6-40"><a href="#cb6-40"></a>beta[<span class="dv">4</span>]          <span class="fl">5.34</span>    <span class="fl">0.00</span>  <span class="fl">0.26</span>    <span class="fl">4.82</span>    <span class="fl">5.17</span>    <span class="fl">5.34</span>    <span class="fl">5.52</span>    <span class="fl">5.84</span></span>
+<span id="cb6-41"><a href="#cb6-41"></a>beta[<span class="dv">5</span>]          <span class="fl">6.57</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">6.09</span>    <span class="fl">6.41</span>    <span class="fl">6.57</span>    <span class="fl">6.73</span>    <span class="fl">7.05</span></span>
+<span id="cb6-42"><a href="#cb6-42"></a>beta[<span class="dv">6</span>]          <span class="fl">6.17</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.70</span>    <span class="fl">6.00</span>    <span class="fl">6.17</span>    <span class="fl">6.34</span>    <span class="fl">6.64</span></span>
+<span id="cb6-43"><a href="#cb6-43"></a>beta[<span class="dv">7</span>]          <span class="fl">5.97</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.50</span>    <span class="fl">5.81</span>    <span class="fl">5.97</span>    <span class="fl">6.14</span>    <span class="fl">6.44</span></span>
+<span id="cb6-44"><a href="#cb6-44"></a>beta[<span class="dv">8</span>]          <span class="fl">6.42</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.95</span>    <span class="fl">6.25</span>    <span class="fl">6.41</span>    <span class="fl">6.59</span>    <span class="fl">6.90</span></span>
+<span id="cb6-45"><a href="#cb6-45"></a>beta[<span class="dv">9</span>]          <span class="fl">7.05</span>    <span class="fl">0.00</span>  <span class="fl">0.25</span>    <span class="fl">6.54</span>    <span class="fl">6.89</span>    <span class="fl">7.05</span>    <span class="fl">7.22</span>    <span class="fl">7.54</span></span>
+<span id="cb6-46"><a href="#cb6-46"></a>beta[<span class="dv">10</span>]         <span class="fl">5.84</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.36</span>    <span class="fl">5.68</span>    <span class="fl">5.84</span>    <span class="fl">6.00</span>    <span class="fl">6.31</span></span>
+<span id="cb6-47"><a href="#cb6-47"></a>beta[<span class="dv">11</span>]         <span class="fl">6.80</span>    <span class="fl">0.00</span>  <span class="fl">0.25</span>    <span class="fl">6.31</span>    <span class="fl">6.63</span>    <span class="fl">6.80</span>    <span class="fl">6.97</span>    <span class="fl">7.28</span></span>
+<span id="cb6-48"><a href="#cb6-48"></a>beta[<span class="dv">12</span>]         <span class="fl">6.12</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.65</span>    <span class="fl">5.96</span>    <span class="fl">6.11</span>    <span class="fl">6.28</span>    <span class="fl">6.58</span></span>
+<span id="cb6-49"><a href="#cb6-49"></a>beta[<span class="dv">13</span>]         <span class="fl">6.16</span>    <span class="fl">0.00</span>  <span class="fl">0.25</span>    <span class="fl">5.65</span>    <span class="fl">6.01</span>    <span class="fl">6.16</span>    <span class="fl">6.32</span>    <span class="fl">6.66</span></span>
+<span id="cb6-50"><a href="#cb6-50"></a>beta[<span class="dv">14</span>]         <span class="fl">6.69</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">6.22</span>    <span class="fl">6.52</span>    <span class="fl">6.69</span>    <span class="fl">6.85</span>    <span class="fl">7.17</span></span>
+<span id="cb6-51"><a href="#cb6-51"></a>beta[<span class="dv">15</span>]         <span class="fl">5.42</span>    <span class="fl">0.00</span>  <span class="fl">0.25</span>    <span class="fl">4.94</span>    <span class="fl">5.25</span>    <span class="fl">5.41</span>    <span class="fl">5.59</span>    <span class="fl">5.91</span></span>
+<span id="cb6-52"><a href="#cb6-52"></a>beta[<span class="dv">16</span>]         <span class="fl">5.93</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.45</span>    <span class="fl">5.77</span>    <span class="fl">5.93</span>    <span class="fl">6.09</span>    <span class="fl">6.39</span></span>
+<span id="cb6-53"><a href="#cb6-53"></a>beta[<span class="dv">17</span>]         <span class="fl">6.28</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.82</span>    <span class="fl">6.12</span>    <span class="fl">6.28</span>    <span class="fl">6.44</span>    <span class="fl">6.74</span></span>
+<span id="cb6-54"><a href="#cb6-54"></a>beta[<span class="dv">18</span>]         <span class="fl">5.84</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.36</span>    <span class="fl">5.68</span>    <span class="fl">5.83</span>    <span class="fl">6.00</span>    <span class="fl">6.30</span></span>
+<span id="cb6-55"><a href="#cb6-55"></a>beta[<span class="dv">19</span>]         <span class="fl">6.40</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.93</span>    <span class="fl">6.23</span>    <span class="fl">6.40</span>    <span class="fl">6.56</span>    <span class="fl">6.85</span></span>
+<span id="cb6-56"><a href="#cb6-56"></a>beta[<span class="dv">20</span>]         <span class="fl">6.05</span>    <span class="fl">0.00</span>  <span class="fl">0.25</span>    <span class="fl">5.56</span>    <span class="fl">5.89</span>    <span class="fl">6.05</span>    <span class="fl">6.22</span>    <span class="fl">6.54</span></span>
+<span id="cb6-57"><a href="#cb6-57"></a>beta[<span class="dv">21</span>]         <span class="fl">6.40</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.93</span>    <span class="fl">6.24</span>    <span class="fl">6.40</span>    <span class="fl">6.56</span>    <span class="fl">6.86</span></span>
+<span id="cb6-58"><a href="#cb6-58"></a>beta[<span class="dv">22</span>]         <span class="fl">5.86</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.40</span>    <span class="fl">5.69</span>    <span class="fl">5.86</span>    <span class="fl">6.02</span>    <span class="fl">6.31</span></span>
+<span id="cb6-59"><a href="#cb6-59"></a>beta[<span class="dv">23</span>]         <span class="fl">5.75</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.27</span>    <span class="fl">5.59</span>    <span class="fl">5.75</span>    <span class="fl">5.91</span>    <span class="fl">6.23</span></span>
+<span id="cb6-60"><a href="#cb6-60"></a>beta[<span class="dv">24</span>]         <span class="fl">5.89</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.41</span>    <span class="fl">5.73</span>    <span class="fl">5.89</span>    <span class="fl">6.05</span>    <span class="fl">6.37</span></span>
+<span id="cb6-61"><a href="#cb6-61"></a>beta[<span class="dv">25</span>]         <span class="fl">6.91</span>    <span class="fl">0.00</span>  <span class="fl">0.25</span>    <span class="fl">6.42</span>    <span class="fl">6.74</span>    <span class="fl">6.90</span>    <span class="fl">7.07</span>    <span class="fl">7.40</span></span>
+<span id="cb6-62"><a href="#cb6-62"></a>beta[<span class="dv">26</span>]         <span class="fl">6.54</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">6.06</span>    <span class="fl">6.39</span>    <span class="fl">6.55</span>    <span class="fl">6.70</span>    <span class="fl">7.01</span></span>
+<span id="cb6-63"><a href="#cb6-63"></a>beta[<span class="dv">27</span>]         <span class="fl">5.90</span>    <span class="fl">0.00</span>  <span class="fl">0.24</span>    <span class="fl">5.41</span>    <span class="fl">5.73</span>    <span class="fl">5.90</span>    <span class="fl">6.06</span>    <span class="fl">6.38</span></span>
+<span id="cb6-64"><a href="#cb6-64"></a>beta[<span class="dv">28</span>]         <span class="fl">5.85</span>    <span class="fl">0.00</span>  <span class="fl">0.23</span>    <span class="fl">5.40</span>    <span class="fl">5.69</span>    <span class="fl">5.84</span>    <span class="fl">6.01</span>    <span class="fl">6.31</span></span>
+<span id="cb6-65"><a href="#cb6-65"></a>beta[<span class="dv">29</span>]         <span class="fl">5.68</span>    <span class="fl">0.00</span>  <span class="fl">0.25</span>    <span class="fl">5.20</span>    <span class="fl">5.51</span>    <span class="fl">5.67</span>    <span class="fl">5.84</span>    <span class="fl">6.17</span></span>
+<span id="cb6-66"><a href="#cb6-66"></a>beta[<span class="dv">30</span>]         <span class="fl">6.13</span>    <span class="fl">0.00</span>  <span class="fl">0.23</span>    <span class="fl">5.68</span>    <span class="fl">5.97</span>    <span class="fl">6.12</span>    <span class="fl">6.28</span>    <span class="fl">6.59</span></span>
+<span id="cb6-67"><a href="#cb6-67"></a>mu_alpha       <span class="fl">242.47</span>    <span class="fl">0.05</span>  <span class="fl">2.76</span>  <span class="fl">236.95</span>  <span class="fl">240.61</span>  <span class="fl">242.50</span>  <span class="fl">244.38</span>  <span class="fl">247.70</span></span>
+<span id="cb6-68"><a href="#cb6-68"></a>mu_beta          <span class="fl">6.19</span>    <span class="fl">0.00</span>  <span class="fl">0.11</span>    <span class="fl">5.98</span>    <span class="fl">6.12</span>    <span class="fl">6.19</span>    <span class="fl">6.25</span>    <span class="fl">6.40</span></span>
+<span id="cb6-69"><a href="#cb6-69"></a>sigmasq_y       <span class="fl">37.16</span>    <span class="fl">0.12</span>  <span class="fl">5.69</span>   <span class="fl">27.74</span>   <span class="fl">33.14</span>   <span class="fl">36.56</span>   <span class="fl">40.58</span>   <span class="fl">50.12</span></span>
+<span id="cb6-70"><a href="#cb6-70"></a>sigmasq_alpha  <span class="fl">218.39</span>    <span class="fl">1.06</span> <span class="fl">63.89</span>  <span class="fl">126.08</span>  <span class="fl">173.31</span>  <span class="fl">208.62</span>  <span class="fl">251.30</span>  <span class="fl">372.24</span></span>
+<span id="cb6-71"><a href="#cb6-71"></a>sigmasq_beta     <span class="fl">0.27</span>    <span class="fl">0.00</span>  <span class="fl">0.10</span>    <span class="fl">0.13</span>    <span class="fl">0.21</span>    <span class="fl">0.26</span>    <span class="fl">0.32</span>    <span class="fl">0.52</span></span>
+<span id="cb6-72"><a href="#cb6-72"></a>sigma_y          <span class="fl">6.08</span>    <span class="fl">0.01</span>  <span class="fl">0.46</span>    <span class="fl">5.27</span>    <span class="fl">5.76</span>    <span class="fl">6.05</span>    <span class="fl">6.37</span>    <span class="fl">7.08</span></span>
+<span id="cb6-73"><a href="#cb6-73"></a>sigma_alpha     <span class="fl">14.63</span>    <span class="fl">0.03</span>  <span class="fl">2.07</span>   <span class="fl">11.23</span>   <span class="fl">13.16</span>   <span class="fl">14.44</span>   <span class="fl">15.85</span>   <span class="fl">19.29</span></span>
+<span id="cb6-74"><a href="#cb6-74"></a>sigma_beta       <span class="fl">0.52</span>    <span class="fl">0.00</span>  <span class="fl">0.09</span>    <span class="fl">0.36</span>    <span class="fl">0.45</span>    <span class="fl">0.51</span>    <span class="fl">0.57</span>    <span class="fl">0.72</span></span>
+<span id="cb6-75"><a href="#cb6-75"></a>alpha0         <span class="fl">106.39</span>    <span class="fl">0.06</span>  <span class="fl">3.60</span>   <span class="fl">99.23</span>  <span class="fl">104.00</span>  <span class="fl">106.44</span>  <span class="fl">108.76</span>  <span class="fl">113.55</span></span>
+<span id="cb6-76"><a href="#cb6-76"></a>lp__          <span class="fl">-437.92</span>    <span class="fl">0.21</span>  <span class="fl">7.04</span> <span class="fl">-453.36</span> <span class="fl">-442.36</span> <span class="fl">-437.34</span> <span class="fl">-432.93</span> <span class="fl">-425.72</span></span>
+<span id="cb6-77"><a href="#cb6-77"></a>              n_eff Rhat</span>
+<span id="cb6-78"><a href="#cb6-78"></a>alpha[<span class="dv">1</span>]       <span class="dv">6102</span>    <span class="dv">1</span></span>
+<span id="cb6-79"><a href="#cb6-79"></a>alpha[<span class="dv">2</span>]       <span class="dv">5745</span>    <span class="dv">1</span></span>
+<span id="cb6-80"><a href="#cb6-80"></a>alpha[<span class="dv">3</span>]       <span class="dv">4957</span>    <span class="dv">1</span></span>
+<span id="cb6-81"><a href="#cb6-81"></a>alpha[<span class="dv">4</span>]       <span class="dv">5564</span>    <span class="dv">1</span></span>
+<span id="cb6-82"><a href="#cb6-82"></a>alpha[<span class="dv">5</span>]       <span class="dv">6405</span>    <span class="dv">1</span></span>
+<span id="cb6-83"><a href="#cb6-83"></a>alpha[<span class="dv">6</span>]       <span class="dv">5168</span>    <span class="dv">1</span></span>
+<span id="cb6-84"><a href="#cb6-84"></a>alpha[<span class="dv">7</span>]       <span class="dv">6562</span>    <span class="dv">1</span></span>
+<span id="cb6-85"><a href="#cb6-85"></a>alpha[<span class="dv">8</span>]       <span class="dv">5921</span>    <span class="dv">1</span></span>
+<span id="cb6-86"><a href="#cb6-86"></a>alpha[<span class="dv">9</span>]       <span class="dv">4862</span>    <span class="dv">1</span></span>
+<span id="cb6-87"><a href="#cb6-87"></a>alpha[<span class="dv">10</span>]      <span class="dv">5997</span>    <span class="dv">1</span></span>
+<span id="cb6-88"><a href="#cb6-88"></a>alpha[<span class="dv">11</span>]      <span class="dv">5403</span>    <span class="dv">1</span></span>
+<span id="cb6-89"><a href="#cb6-89"></a>alpha[<span class="dv">12</span>]      <span class="dv">5125</span>    <span class="dv">1</span></span>
+<span id="cb6-90"><a href="#cb6-90"></a>alpha[<span class="dv">13</span>]      <span class="dv">5586</span>    <span class="dv">1</span></span>
+<span id="cb6-91"><a href="#cb6-91"></a>alpha[<span class="dv">14</span>]      <span class="dv">5341</span>    <span class="dv">1</span></span>
+<span id="cb6-92"><a href="#cb6-92"></a>alpha[<span class="dv">15</span>]      <span class="dv">5750</span>    <span class="dv">1</span></span>
+<span id="cb6-93"><a href="#cb6-93"></a>alpha[<span class="dv">16</span>]      <span class="dv">6011</span>    <span class="dv">1</span></span>
+<span id="cb6-94"><a href="#cb6-94"></a>alpha[<span class="dv">17</span>]      <span class="dv">5920</span>    <span class="dv">1</span></span>
+<span id="cb6-95"><a href="#cb6-95"></a>alpha[<span class="dv">18</span>]      <span class="dv">5940</span>    <span class="dv">1</span></span>
+<span id="cb6-96"><a href="#cb6-96"></a>alpha[<span class="dv">19</span>]      <span class="dv">5602</span>    <span class="dv">1</span></span>
+<span id="cb6-97"><a href="#cb6-97"></a>alpha[<span class="dv">20</span>]      <span class="dv">6264</span>    <span class="dv">1</span></span>
+<span id="cb6-98"><a href="#cb6-98"></a>alpha[<span class="dv">21</span>]      <span class="dv">6674</span>    <span class="dv">1</span></span>
+<span id="cb6-99"><a href="#cb6-99"></a>alpha[<span class="dv">22</span>]      <span class="dv">6170</span>    <span class="dv">1</span></span>
+<span id="cb6-100"><a href="#cb6-100"></a>alpha[<span class="dv">23</span>]      <span class="dv">6656</span>    <span class="dv">1</span></span>
+<span id="cb6-101"><a href="#cb6-101"></a>alpha[<span class="dv">24</span>]      <span class="dv">6691</span>    <span class="dv">1</span></span>
+<span id="cb6-102"><a href="#cb6-102"></a>alpha[<span class="dv">25</span>]      <span class="dv">6256</span>    <span class="dv">1</span></span>
+<span id="cb6-103"><a href="#cb6-103"></a>alpha[<span class="dv">26</span>]      <span class="dv">5479</span>    <span class="dv">1</span></span>
+<span id="cb6-104"><a href="#cb6-104"></a>alpha[<span class="dv">27</span>]      <span class="dv">5780</span>    <span class="dv">1</span></span>
+<span id="cb6-105"><a href="#cb6-105"></a>alpha[<span class="dv">28</span>]      <span class="dv">5767</span>    <span class="dv">1</span></span>
+<span id="cb6-106"><a href="#cb6-106"></a>alpha[<span class="dv">29</span>]      <span class="dv">6317</span>    <span class="dv">1</span></span>
+<span id="cb6-107"><a href="#cb6-107"></a>alpha[<span class="dv">30</span>]      <span class="dv">6029</span>    <span class="dv">1</span></span>
+<span id="cb6-108"><a href="#cb6-108"></a>beta[<span class="dv">1</span>]        <span class="dv">5584</span>    <span class="dv">1</span></span>
+<span id="cb6-109"><a href="#cb6-109"></a>beta[<span class="dv">2</span>]        <span class="dv">4936</span>    <span class="dv">1</span></span>
+<span id="cb6-110"><a href="#cb6-110"></a>beta[<span class="dv">3</span>]        <span class="dv">4433</span>    <span class="dv">1</span></span>
+<span id="cb6-111"><a href="#cb6-111"></a>beta[<span class="dv">4</span>]        <span class="dv">5458</span>    <span class="dv">1</span></span>
+<span id="cb6-112"><a href="#cb6-112"></a>beta[<span class="dv">5</span>]        <span class="dv">5527</span>    <span class="dv">1</span></span>
+<span id="cb6-113"><a href="#cb6-113"></a>beta[<span class="dv">6</span>]        <span class="dv">5028</span>    <span class="dv">1</span></span>
+<span id="cb6-114"><a href="#cb6-114"></a>beta[<span class="dv">7</span>]        <span class="dv">5714</span>    <span class="dv">1</span></span>
+<span id="cb6-115"><a href="#cb6-115"></a>beta[<span class="dv">8</span>]        <span class="dv">5518</span>    <span class="dv">1</span></span>
+<span id="cb6-116"><a href="#cb6-116"></a>beta[<span class="dv">9</span>]        <span class="dv">5162</span>    <span class="dv">1</span></span>
+<span id="cb6-117"><a href="#cb6-117"></a>beta[<span class="dv">10</span>]       <span class="dv">5171</span>    <span class="dv">1</span></span>
+<span id="cb6-118"><a href="#cb6-118"></a>beta[<span class="dv">11</span>]       <span class="dv">5098</span>    <span class="dv">1</span></span>
+<span id="cb6-119"><a href="#cb6-119"></a>beta[<span class="dv">12</span>]       <span class="dv">5552</span>    <span class="dv">1</span></span>
+<span id="cb6-120"><a href="#cb6-120"></a>beta[<span class="dv">13</span>]       <span class="dv">5429</span>    <span class="dv">1</span></span>
+<span id="cb6-121"><a href="#cb6-121"></a>beta[<span class="dv">14</span>]       <span class="dv">5107</span>    <span class="dv">1</span></span>
+<span id="cb6-122"><a href="#cb6-122"></a>beta[<span class="dv">15</span>]       <span class="dv">4556</span>    <span class="dv">1</span></span>
+<span id="cb6-123"><a href="#cb6-123"></a>beta[<span class="dv">16</span>]       <span class="dv">5506</span>    <span class="dv">1</span></span>
+<span id="cb6-124"><a href="#cb6-124"></a>beta[<span class="dv">17</span>]       <span class="dv">5684</span>    <span class="dv">1</span></span>
+<span id="cb6-125"><a href="#cb6-125"></a>beta[<span class="dv">18</span>]       <span class="dv">5159</span>    <span class="dv">1</span></span>
+<span id="cb6-126"><a href="#cb6-126"></a>beta[<span class="dv">19</span>]       <span class="dv">5036</span>    <span class="dv">1</span></span>
+<span id="cb6-127"><a href="#cb6-127"></a>beta[<span class="dv">20</span>]       <span class="dv">6193</span>    <span class="dv">1</span></span>
+<span id="cb6-128"><a href="#cb6-128"></a>beta[<span class="dv">21</span>]       <span class="dv">6641</span>    <span class="dv">1</span></span>
+<span id="cb6-129"><a href="#cb6-129"></a>beta[<span class="dv">22</span>]       <span class="dv">5890</span>    <span class="dv">1</span></span>
+<span id="cb6-130"><a href="#cb6-130"></a>beta[<span class="dv">23</span>]       <span class="dv">6016</span>    <span class="dv">1</span></span>
+<span id="cb6-131"><a href="#cb6-131"></a>beta[<span class="dv">24</span>]       <span class="dv">6260</span>    <span class="dv">1</span></span>
+<span id="cb6-132"><a href="#cb6-132"></a>beta[<span class="dv">25</span>]       <span class="dv">4974</span>    <span class="dv">1</span></span>
+<span id="cb6-133"><a href="#cb6-133"></a>beta[<span class="dv">26</span>]       <span class="dv">5722</span>    <span class="dv">1</span></span>
+<span id="cb6-134"><a href="#cb6-134"></a>beta[<span class="dv">27</span>]       <span class="dv">5821</span>    <span class="dv">1</span></span>
+<span id="cb6-135"><a href="#cb6-135"></a>beta[<span class="dv">28</span>]       <span class="dv">5740</span>    <span class="dv">1</span></span>
+<span id="cb6-136"><a href="#cb6-136"></a>beta[<span class="dv">29</span>]       <span class="dv">5303</span>    <span class="dv">1</span></span>
+<span id="cb6-137"><a href="#cb6-137"></a>beta[<span class="dv">30</span>]       <span class="dv">6428</span>    <span class="dv">1</span></span>
+<span id="cb6-138"><a href="#cb6-138"></a>mu_alpha       <span class="dv">3585</span>    <span class="dv">1</span></span>
+<span id="cb6-139"><a href="#cb6-139"></a>mu_beta        <span class="dv">4462</span>    <span class="dv">1</span></span>
+<span id="cb6-140"><a href="#cb6-140"></a>sigmasq_y      <span class="dv">2366</span>    <span class="dv">1</span></span>
+<span id="cb6-141"><a href="#cb6-141"></a>sigmasq_alpha  <span class="dv">3615</span>    <span class="dv">1</span></span>
+<span id="cb6-142"><a href="#cb6-142"></a>sigmasq_beta   <span class="dv">3028</span>    <span class="dv">1</span></span>
+<span id="cb6-143"><a href="#cb6-143"></a>sigma_y        <span class="dv">2370</span>    <span class="dv">1</span></span>
+<span id="cb6-144"><a href="#cb6-144"></a>sigma_alpha    <span class="dv">3919</span>    <span class="dv">1</span></span>
+<span id="cb6-145"><a href="#cb6-145"></a>sigma_beta     <span class="dv">2897</span>    <span class="dv">1</span></span>
+<span id="cb6-146"><a href="#cb6-146"></a>alpha0         <span class="dv">4122</span>    <span class="dv">1</span></span>
+<span id="cb6-147"><a href="#cb6-147"></a>lp__           <span class="dv">1098</span>    <span class="dv">1</span></span>
+<span id="cb6-148"><a href="#cb6-148"></a></span>
+<span id="cb6-149"><a href="#cb6-149"></a>Samples were drawn using <span class="kw">NUTS</span>(diag_e) at Wed Jun <span class="dv">17</span> <span class="dv">19</span><span class="op">:</span><span class="dv">36</span><span class="op">:</span><span class="dv">44</span> <span class="fl">2020.</span></span>
+<span id="cb6-150"><a href="#cb6-150"></a>For each parameter, n_eff is a crude measure of effective sample size,</span>
+<span id="cb6-151"><a href="#cb6-151"></a>and Rhat is the potential scale reduction factor on split <span class="kw">chains</span> (at </span>
+<span id="cb6-152"><a href="#cb6-152"></a>convergence, <span class="dt">Rhat=</span><span class="dv">1</span>).</span></code></pre></div>
 </details><p><br></p>
 <p>We use the <a href="https://tidymodels.github.io/butcher/">butcher</a> package to evaluate the size of each element.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"></a>
-<a class="sourceLine" id="cb7-2" title="2">rats<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="st">  </span>butcher<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/butcher/man/weigh.html">weigh</a></span>(<span class="dt">units =</span> <span class="st">'MB'</span>)</a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="co">#&gt; # A tibble: 404 x 2</span></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt;    object                 size</span></a>
-<a class="sourceLine" id="cb7-7" title="7"><span class="co">#&gt;    &lt;chr&gt;                 &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt;  1 stanmodel            3.71  </span></a>
-<a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt;  2 .MISC                1.66  </span></a>
-<a class="sourceLine" id="cb7-10" title="10"><span class="co">#&gt;  3 sim.samples.alpha[1] 0.0160</span></a>
-<a class="sourceLine" id="cb7-11" title="11"><span class="co">#&gt;  4 sim.samples.alpha[2] 0.0160</span></a>
-<a class="sourceLine" id="cb7-12" title="12"><span class="co">#&gt;  5 sim.samples.alpha[3] 0.0160</span></a>
-<a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt;  6 sim.samples.alpha[4] 0.0160</span></a>
-<a class="sourceLine" id="cb7-14" title="14"><span class="co">#&gt;  7 sim.samples.alpha[5] 0.0160</span></a>
-<a class="sourceLine" id="cb7-15" title="15"><span class="co">#&gt;  8 sim.samples.alpha[6] 0.0160</span></a>
-<a class="sourceLine" id="cb7-16" title="16"><span class="co">#&gt;  9 sim.samples.alpha[7] 0.0160</span></a>
-<a class="sourceLine" id="cb7-17" title="17"><span class="co">#&gt; 10 sim.samples.alpha[8] 0.0160</span></a>
-<a class="sourceLine" id="cb7-18" title="18"><span class="co">#&gt; # … with 394 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2"></a>rats<span class="op">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span>()<span class="op">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="st">  </span>butcher<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/butcher/man/weigh.html">weigh</a></span>(<span class="dt">units =</span> <span class="st">'MB'</span>)</span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; # A tibble: 404 x 2</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt;    object                 size</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt;    &lt;chr&gt;                 &lt;dbl&gt;</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt;  1 stanmodel            5.64  </span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt;  2 .MISC                3.48  </span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt;  3 sim.samples.alpha[1] 0.0160</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt;  4 sim.samples.alpha[2] 0.0160</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt;  5 sim.samples.alpha[3] 0.0160</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt;  6 sim.samples.alpha[4] 0.0160</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt;  7 sim.samples.alpha[5] 0.0160</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt;  8 sim.samples.alpha[6] 0.0160</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="co">#&gt;  9 sim.samples.alpha[7] 0.0160</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="co">#&gt; 10 sim.samples.alpha[8] 0.0160</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="co">#&gt; # … with 394 more rows</span></span></code></pre></div>
 <div id="stan_axe" class="section level2">
 <h2 class="hasAnchor">
 <a href="#stan_axe" class="anchor"></a>stan_axe</h2>
@@ -327,58 +327,58 @@
 <li>The stanmodel stored in <a href="mailto:fit@stanmodel" class="email">fit@stanmodel</a>
 </li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"></a>
-<a class="sourceLine" id="cb8-2" title="2">summary &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
-<a class="sourceLine" id="cb8-3" title="3">  </a>
-<a class="sourceLine" id="cb8-4" title="4">    y &lt;-<span class="st"> </span>x<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-6" title="6"><span class="st">    </span>butcher<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/butcher/man/weigh.html">weigh</a></span>()</a>
-<a class="sourceLine" id="cb8-7" title="7">    </a>
-<a class="sourceLine" id="cb8-8" title="8">    s &lt;-<span class="st"> </span>y<span class="op">$</span>size</a>
-<a class="sourceLine" id="cb8-9" title="9">    </a>
-<a class="sourceLine" id="cb8-10" title="10">    <span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">min =</span> <span class="kw"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(s),</a>
-<a class="sourceLine" id="cb8-11" title="11">               <span class="dt">max =</span> <span class="kw"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(s),</a>
-<a class="sourceLine" id="cb8-12" title="12">               <span class="dt">mean =</span> <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(s), </a>
-<a class="sourceLine" id="cb8-13" title="13">               <span class="dt">sd =</span> <span class="kw"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(s), </a>
-<a class="sourceLine" id="cb8-14" title="14">               <span class="dt">sum =</span> <span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(s))</a>
-<a class="sourceLine" id="cb8-15" title="15">    </a>
-<a class="sourceLine" id="cb8-16" title="16">  }</a></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">butcher_rats &lt;-<span class="st"> </span>rats<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>()</a>
-<a class="sourceLine" id="cb9-3" title="3"></a>
-<a class="sourceLine" id="cb9-4" title="4">butcher_fit_instance &lt;-<span class="st"> </span>rats<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/stan_axe.html">stan_axe</a></span>(<span class="dt">what =</span> <span class="st">'fit_instance'</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-6" title="6"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>()</a>
-<a class="sourceLine" id="cb9-7" title="7"></a>
-<a class="sourceLine" id="cb9-8" title="8">butcher_stanmodel &lt;-<span class="st"> </span>rats<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-9" title="9"><span class="st">  </span><span class="kw"><a href="../reference/stan_axe.html">stan_axe</a></span>(<span class="dt">what =</span> <span class="st">'fit_instance'</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-10" title="10"><span class="st">  </span><span class="kw"><a href="../reference/stan_axe.html">stan_axe</a></span>(<span class="dt">what =</span> <span class="st">'stanmodel'</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-11" title="11"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>()</a>
-<a class="sourceLine" id="cb9-12" title="12"></a>
-<a class="sourceLine" id="cb9-13" title="13">butcher_summary &lt;-<span class="st"> </span>rats<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-14" title="14"><span class="st">  </span><span class="kw"><a href="../reference/stan_axe.html">stan_axe</a></span>(<span class="dt">what =</span> <span class="st">'fit_instance'</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-15" title="15"><span class="st">  </span><span class="kw"><a href="../reference/stan_axe.html">stan_axe</a></span>(<span class="dt">what =</span> <span class="st">'stanmodel'</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-16" title="16"><span class="st">  </span><span class="kw"><a href="../reference/stan_axe.html">stan_axe</a></span>(<span class="dt">what =</span> <span class="st">'summary'</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-17" title="17"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>()</a>
-<a class="sourceLine" id="cb9-18" title="18"></a>
-<a class="sourceLine" id="cb9-19" title="19">butcher_params &lt;-<span class="st"> </span>rats<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-20" title="20"><span class="st">  </span><span class="kw"><a href="../reference/stan_axe.html">stan_axe</a></span>(<span class="dt">what =</span> <span class="st">'fit_instance'</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-21" title="21"><span class="st">  </span><span class="kw"><a href="../reference/stan_axe.html">stan_axe</a></span>(<span class="dt">what =</span> <span class="st">'stanmodel'</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-22" title="22"><span class="st">  </span><span class="kw"><a href="../reference/stan_axe.html">stan_axe</a></span>(<span class="dt">what =</span> <span class="st">'summary'</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-23" title="23"><span class="st">  </span><span class="kw"><a href="../reference/stan_select.html">stan_select</a></span>(alpha)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-24" title="24"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a></span>
+<span id="cb8-2"><a href="#cb8-2"></a>summary &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  </span>
+<span id="cb8-4"><a href="#cb8-4"></a>    y &lt;-<span class="st"> </span>x<span class="op">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span>()<span class="op">%&gt;%</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="st">    </span>butcher<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/butcher/man/weigh.html">weigh</a></span>()</span>
+<span id="cb8-7"><a href="#cb8-7"></a>    </span>
+<span id="cb8-8"><a href="#cb8-8"></a>    s &lt;-<span class="st"> </span>y<span class="op">$</span>size</span>
+<span id="cb8-9"><a href="#cb8-9"></a>    </span>
+<span id="cb8-10"><a href="#cb8-10"></a>    <span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">min =</span> <span class="kw"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(s),</span>
+<span id="cb8-11"><a href="#cb8-11"></a>               <span class="dt">max =</span> <span class="kw"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(s),</span>
+<span id="cb8-12"><a href="#cb8-12"></a>               <span class="dt">mean =</span> <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(s), </span>
+<span id="cb8-13"><a href="#cb8-13"></a>               <span class="dt">sd =</span> <span class="kw"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(s), </span>
+<span id="cb8-14"><a href="#cb8-14"></a>               <span class="dt">sum =</span> <span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(s))</span>
+<span id="cb8-15"><a href="#cb8-15"></a>    </span>
+<span id="cb8-16"><a href="#cb8-16"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>butcher_rats &lt;-<span class="st"> </span>rats<span class="op">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>()</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a>butcher_fit_instance &lt;-<span class="st"> </span>rats<span class="op">%&gt;%</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="st">  </span><span class="kw"><a href="../reference/stan_axe.html">stan_axe</a></span>(<span class="dt">what =</span> <span class="st">'fit_instance'</span>)<span class="op">%&gt;%</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>()</span>
+<span id="cb9-7"><a href="#cb9-7"></a></span>
+<span id="cb9-8"><a href="#cb9-8"></a>butcher_stanmodel &lt;-<span class="st"> </span>rats<span class="op">%&gt;%</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="st">  </span><span class="kw"><a href="../reference/stan_axe.html">stan_axe</a></span>(<span class="dt">what =</span> <span class="st">'fit_instance'</span>)<span class="op">%&gt;%</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="st">  </span><span class="kw"><a href="../reference/stan_axe.html">stan_axe</a></span>(<span class="dt">what =</span> <span class="st">'stanmodel'</span>)<span class="op">%&gt;%</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>()</span>
+<span id="cb9-12"><a href="#cb9-12"></a></span>
+<span id="cb9-13"><a href="#cb9-13"></a>butcher_summary &lt;-<span class="st"> </span>rats<span class="op">%&gt;%</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="st">  </span><span class="kw"><a href="../reference/stan_axe.html">stan_axe</a></span>(<span class="dt">what =</span> <span class="st">'fit_instance'</span>)<span class="op">%&gt;%</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="st">  </span><span class="kw"><a href="../reference/stan_axe.html">stan_axe</a></span>(<span class="dt">what =</span> <span class="st">'stanmodel'</span>)<span class="op">%&gt;%</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="st">  </span><span class="kw"><a href="../reference/stan_axe.html">stan_axe</a></span>(<span class="dt">what =</span> <span class="st">'summary'</span>)<span class="op">%&gt;%</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>()</span>
+<span id="cb9-18"><a href="#cb9-18"></a></span>
+<span id="cb9-19"><a href="#cb9-19"></a>butcher_params &lt;-<span class="st"> </span>rats<span class="op">%&gt;%</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a><span class="st">  </span><span class="kw"><a href="../reference/stan_axe.html">stan_axe</a></span>(<span class="dt">what =</span> <span class="st">'fit_instance'</span>)<span class="op">%&gt;%</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="st">  </span><span class="kw"><a href="../reference/stan_axe.html">stan_axe</a></span>(<span class="dt">what =</span> <span class="st">'stanmodel'</span>)<span class="op">%&gt;%</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a><span class="st">  </span><span class="kw"><a href="../reference/stan_axe.html">stan_axe</a></span>(<span class="dt">what =</span> <span class="st">'summary'</span>)<span class="op">%&gt;%</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a><span class="st">  </span><span class="kw"><a href="../reference/stan_select.html">stan_select</a></span>(alpha)<span class="op">%&gt;%</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>()</span></code></pre></div>
 </div>
 <div id="compare-object-sizes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#compare-object-sizes" class="anchor"></a>Compare Object Sizes</h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">tbl &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map_df</a></span>(</a>
-<a class="sourceLine" id="cb10-2" title="2">  <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'full'</span> =<span class="st"> </span>butcher_rats,</a>
-<a class="sourceLine" id="cb10-3" title="3">       <span class="st">'fit_instance'</span> =<span class="st"> </span>butcher_fit_instance,</a>
-<a class="sourceLine" id="cb10-4" title="4">       <span class="st">'stanmodel'</span> =<span class="st"> </span>butcher_stanmodel,</a>
-<a class="sourceLine" id="cb10-5" title="5">       <span class="st">'summary'</span> =<span class="st"> </span>butcher_summary,</a>
-<a class="sourceLine" id="cb10-6" title="6">       <span class="st">'param'</span> =<span class="st"> </span>butcher_params),</a>
-<a class="sourceLine" id="cb10-7" title="7">  identity,<span class="dt">.id=</span><span class="st">'axe'</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(tbl) </a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>tbl &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map_df</a></span>(</span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'full'</span> =<span class="st"> </span>butcher_rats,</span>
+<span id="cb10-3"><a href="#cb10-3"></a>       <span class="st">'fit_instance'</span> =<span class="st"> </span>butcher_fit_instance,</span>
+<span id="cb10-4"><a href="#cb10-4"></a>       <span class="st">'stanmodel'</span> =<span class="st"> </span>butcher_stanmodel,</span>
+<span id="cb10-5"><a href="#cb10-5"></a>       <span class="st">'summary'</span> =<span class="st"> </span>butcher_summary,</span>
+<span id="cb10-6"><a href="#cb10-6"></a>       <span class="st">'param'</span> =<span class="st"> </span>butcher_params),</span>
+<span id="cb10-7"><a href="#cb10-7"></a>  identity,<span class="dt">.id=</span><span class="st">'axe'</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(tbl) </span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">axe</th>
@@ -392,26 +392,26 @@
 <tr class="odd">
 <td align="left">full</td>
 <td align="right">4.8e-05</td>
-<td align="right">3.711536</td>
-<td align="right">0.0244919</td>
-<td align="right">0.2014100</td>
-<td align="right">9.894712</td>
+<td align="right">5.635592</td>
+<td align="right">0.0337732</td>
+<td align="right">0.3285190</td>
+<td align="right">13.644368</td>
 </tr>
 <tr class="even">
 <td align="left">fit_instance</td>
 <td align="right">4.8e-05</td>
-<td align="right">3.711536</td>
-<td align="right">0.0205039</td>
-<td align="right">0.1842420</td>
-<td align="right">8.283592</td>
+<td align="right">5.635592</td>
+<td align="right">0.0252662</td>
+<td align="right">0.2799158</td>
+<td align="right">10.207528</td>
 </tr>
 <tr class="odd">
 <td align="left">stanmodel</td>
 <td align="right">4.8e-05</td>
-<td align="right">0.045000</td>
-<td align="right">0.0113451</td>
-<td align="right">0.0074580</td>
-<td align="right">4.572056</td>
+<td align="right">0.044880</td>
+<td align="right">0.0113448</td>
+<td align="right">0.0074566</td>
+<td align="right">4.571936</td>
 </tr>
 <tr class="even">
 <td align="left">summary</td>

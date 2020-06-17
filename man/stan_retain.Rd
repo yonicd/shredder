@@ -30,7 +30,8 @@ rats\%>\%
   
 }
 \seealso{
-Other utility: \code{\link{stan_axe}},
-  \code{\link{stan_names}}
+Other utility: 
+\code{\link{stan_axe}()},
+\code{\link{stan_names}()}
 }
 \concept{utility}
