@@ -5,7 +5,7 @@ Version: 0.2.0
 Authors@R: 
     person(given = "Jonathan Sidi",
            role = c("aut", "cre"),
-           email = "yonis@metrumrg.com")
+           email = "yonicd@gmail.com")
 Description: API that incites exploration and iteration of rstan simulation 
   objects using tidy-like verbs.
 License: MIT + file LICENSE
