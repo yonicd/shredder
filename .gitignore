@@ -40,9 +40,3 @@ rsconnect/
 inst/doc
 .Rprofile
 *.DS_Store
-
-
-presentation/libs
-presentation/MCMC/MCMC_discussion*
-
-
