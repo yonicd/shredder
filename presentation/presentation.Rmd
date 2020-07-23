@@ -45,7 +45,7 @@ background-size: 25%
 
 `r emo::ji('bird')`: [@yoniceedee](https://twitter.com/yoniceedee)
 
-![](imgs/GitHub-Mark-32px.png): [yonicd](https://github.com/yonicd)
+![](https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/GitHub-Mark-32px.png): [yonicd](https://github.com/yonicd)
 
 ---
 class: center, middle
@@ -77,28 +77,28 @@ Within an `R` MCMC workflow there is a decision point that the scientist needs t
      - More QC work
 
 ---
-background-image: url(imgs/MCMC_Flow_Trunc_1.svg)
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Trunc_1.svg)
 background-position: 50% 50%
 background-size: 100%
 class: left, top
 Current Workflow
 --
-background-image: url(imgs/MCMC_Flow_Trunc_2.svg)
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Trunc_2.svg)
 background-position: 50% 50%
 background-size: 100%
 class: left, top
 --
-background-image: url(imgs/MCMC_Flow_Trunc_3.svg)
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Trunc_3.svg)
 background-position: 50% 50%
 background-size: 100%
 class: left, top
 --
-background-image: url(imgs/MCMC_Flow_Trunc_4.svg)
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Trunc_4.svg)
 background-position: 50% 50%
 background-size: 100%
 class: left, top
 ---
-background-image: url(imgs/peg.jpg)
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/peg.jpg)
 background-position: 50% 50%
 background-size: 100%
 class: left, top
@@ -199,24 +199,24 @@ fit%>%
 
 ---
 
-background-image: url(imgs/MCMC_Flow_Shredder_Trunc_1.svg)
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_1.svg)
 background-position: 50% 50%
 background-size: 100%
 class: left, top
 Shredder Workflow
 
 --
-background-image: url(imgs/MCMC_Flow_Shredder_Trunc_2.svg)
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_2.svg)
 background-position: 50% 50%
 background-size: 100%
 
 --
-background-image: url(imgs/MCMC_Flow_Shredder_Trunc_3.svg)
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_3.svg)
 background-position: 50% 50%
 background-size: 100%
 
 --
-background-image: url(imgs/MCMC_Flow_Shredder_Trunc_4.svg)
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_4.svg)
 background-position: 50% 50%
 background-size: 100%
 
@@ -283,7 +283,7 @@ km%>%
 
 ---
 
-background-image: url(imgs/km_plot.png)
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/km_plot.png)
 background-position: 50% 50%
 background-size: 55%
 class: left, top
@@ -291,21 +291,21 @@ class: left, top
 
 ---
 
-background-image: url(imgs/MCMC_Flow_Shredder_Multiple_Trunc_1.svg)
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Multiple_Trunc_1.svg)
 background-position: 50% 50%
 background-size: 100%
 class: left, top
 Scalable Workflow
 --
-background-image: url(imgs/MCMC_Flow_Shredder_Multiple_Trunc_2.svg)
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Multiple_Trunc_2.svg)
 background-position: 50% 50%
 background-size: 100%
 --
-background-image: url(imgs/MCMC_Flow_Shredder_Multiple_Trunc_3.svg)
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Multiple_Trunc_3.svg)
 background-position: 50% 50%
 background-size: 100%
 --
-background-image: url(imgs/MCMC_Flow_Shredder_Multiple_Trunc_4.svg)
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Multiple_Trunc_4.svg)
 background-position: 50% 50%
 background-size: 100%
 
