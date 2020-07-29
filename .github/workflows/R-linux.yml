@@ -27,7 +27,7 @@ jobs:
       - name: Install g++
         run: |
           sudo apt-get -qq update
-          sudo apt-get g++
+          sudo apt-get install g++
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
