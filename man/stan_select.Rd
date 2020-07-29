@@ -28,7 +28,7 @@ rats\%>\%stan_select(!!!rlang::syms(c('mu_beta','mu_alpha')))
 
 }
 \seealso{
-\link[rlang:quotation]{quotation}, \link[rlang:quo_label]{quo_label}, \link[purrr:map]{map}
+\link[rlang:nse-defuse]{quotation}, \link[rlang:quo_label]{quo_label}, \link[purrr:map]{map}
 
 Other subsetting: 
 \code{\link{stan_contains}()}

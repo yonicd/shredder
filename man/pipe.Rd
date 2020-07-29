@@ -3,7 +3,13 @@
 \name{\%>\%}
 \alias{\%>\%}
 \alias{\%||\%}
-\title{Pipe operator}
-\description{
-Pipe operator
+\title{Pipe operator imported from purrr}
+\usage{
+lhs \%>\% rhs
+
+lhs \%||\% rhs
 }
+\description{
+Pipe operator imported from purrr
+}
+\keyword{internal}

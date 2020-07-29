@@ -1,13 +1,17 @@
-#' @inherit purrr::'%>%'
-#' @importFrom purrr %>%
+#' Pipe operator imported from purrr
+#'
 #' @name %>%
 #' @rdname pipe
+#' @keywords internal
 #' @export
+#' @importFrom purrr %>%
+#' @usage lhs \%>\% rhs
 NULL
 
 #' @importFrom purrr %||%
 #' @name %||%
 #' @rdname pipe
+#' @usage lhs \%||\% rhs
 #' @export
 NULL
 

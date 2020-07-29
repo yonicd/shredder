@@ -12,8 +12,8 @@ stan_thin_frac(object, size, inc_warmup = TRUE)
 \arguments{
 \item{object}{stanfit object}
 
-\item{size}{numeric, for \link[shredder:stan_thin_n]{stan_thin_n} size of thin, for
-\link[shredder:stan_thin_frac]{stan_thin_frac} fraction of samples to sample.}
+\item{size}{numeric, for \link[=stan_thin_n]{stan_thin_n} size of thin, for
+\link[=stan_thin_frac]{stan_thin_frac} fraction of samples to sample.}
 
 \item{inc_warmup}{logical, include warmup in output, Default: TRUE}
 }

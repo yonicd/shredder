@@ -38,25 +38,7 @@ stan_select.stanfit <- function(object, ...){
   
   assign('pars',all_pars,envir = pars_env)
   
-  pars <- unlist(lapply(rlang::enquos(...),{
-    FUN = function(x,data){
-      
-      ret <- rlang::quo_text(x)
-
-      if(grepl('(stan_contains|stan_starts_with|stan_ends_with)',ret)){
-        ret <- rlang::eval_tidy(x)
-      }
-
-      # remove back ticks from templates of "`par[index]`" to be "par[index]"
-      # this is needed for quot_text output
-      if(grepl('(?=.*`)(?=.*\\[(.*?)\\])','`alpha[1]`',perl = TRUE)){
-        ret <- gsub('`','',ret)
-      }
-      
-      ret
-    }
-  })
-  )
+  pars <- unlist(lapply(rlang::enquos(...),pars_fun,data = data))
   
   if(!length(pars))
     return(message('no pars selected'))
@@ -89,4 +71,21 @@ stan_select.stanfit <- function(object, ...){
   
   object
   
+}
+
+pars_fun <- function(x,data){
+  
+  ret <- rlang::quo_text(x)
+  
+  if(grepl('(stan_contains|stan_starts_with|stan_ends_with)',ret)){
+    ret <- rlang::eval_tidy(x)
+  }
+  
+  # remove back ticks from templates of "`par[index]`" to be "par[index]"
+  # this is needed for quot_text output
+  if(grepl('(?=.*`)(?=.*\\[(.*?)\\])','`alpha[1]`',perl = TRUE)){
+    ret <- gsub('`','',ret)
+  }
+  
+  ret
 }
