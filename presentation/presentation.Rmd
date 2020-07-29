@@ -1,6 +1,6 @@
 ---
 title: "shredder"
-subtitle: "Stan pipelines in R"
+subtitle: "Introducing R pipelines to rstan"
 author: 
   - "StanCon 2020, Jonathan Sidi"
 date: '`r strftime(as.Date("2020-08-13"),format = "%b %d, %Y")`'
@@ -27,7 +27,7 @@ style_duo_accent(
 )
 ```
 
-background-image: url(logo.png)
+background-image: url(imgs/logo.png)
 background-position: 75% 75%
 background-size: 25%
 
@@ -145,6 +145,29 @@ With the proposed API users can:
 - Manipulate various classes that contain a `stanfit` object, such as __rstan__ and __brms__.
 ---
 
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_1.svg)
+background-position: 50% 50%
+background-size: 100%
+class: left, top
+Shredder Workflow
+
+--
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_2.svg)
+background-position: 50% 50%
+background-size: 100%
+
+--
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_3.svg)
+background-position: 50% 50%
+background-size: 100%
+
+--
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_4.svg)
+background-position: 50% 50%
+background-size: 100%
+
+---
+
 ## Current API Verbs
 
 ### Subsetting and Selecting
@@ -196,30 +219,6 @@ fit%>%
   summary() # apply summary function
 ```
 
-
----
-
-background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_1.svg)
-background-position: 50% 50%
-background-size: 100%
-class: left, top
-Shredder Workflow
-
---
-background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_2.svg)
-background-position: 50% 50%
-background-size: 100%
-
---
-background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_3.svg)
-background-position: 50% 50%
-background-size: 100%
-
---
-background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_4.svg)
-background-position: 50% 50%
-background-size: 100%
-
 ---
 # Primitive Example
 
@@ -254,30 +253,29 @@ With a consistent pipeline to generate R-side ready outputs we can strategize wi
 ---
 
 ```r
-# Read in multiple models
+# Read in multiple models (e.g. 4 models)
 fit <- purrr::map( PATHS, .f=function(P) qs::qread(file = P) )
 
 # Read in observed data
 data <- readRds('PATH_TO_DATA')
 
-# Extract vars from each model using primitive pipeline
+# Loop over the models to 
+#   extract pars from each model using stan_extract
 haz_dat_base <- purrr::map(fit,
           stan_extract,
           pull_vars = c('loc', 'shape', 'os','time_shift'),
           thin_n = 5, dat = data)
 
-# Simulate Kaplan- Meir Curves
-km <- purrr::map_df(haz_dat_base,
-  .f  = haz_fun, .id = 'model', 
-  obs = obs_approx, cens = cens_approx)
+# Loop over child fit objects to simulate Kaplan-Meier curves
+km <- purrr::map_df(haz_dat_base,.f  = haz_fun, .id = 'model')
 
-# km plot ----
+# Generate Hex K-M Plot
 km%>%
   dplyr::mutate(
     model = factor(model,levels = joint_par_legend)
     )%>%
-  km_hexplot(obs = obs_approx) + 
-  ggplot2::facet_wrap(~model)
+  km_hexplot() + # ggplot Kaplan-Meier Curves
+  ggplot2::facet_wrap( ~ model)
 
 ```
 
@@ -326,11 +324,11 @@ In addition the {shredder} verbs are __S3 methods__ making them flexible to exte
 ---
 # Summary
 
-- New API
-- New Workflow
-- Reduces Memory Burden
-- Scalable
-- Extendable
+- New API `r emo::ji('man_factory_worker')`
+- New Workflow `r emo::ji('robot_face')`
+- Reduces Memory Burden `r emo::ji('brain')`
+- Scalable `r emo::ji('rocket')`
+- Extendable `r emo::ji('woman_dancing')` `r emo::ji('man_dancing')`
 
 ---
 

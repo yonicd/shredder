@@ -1,0 +1,104 @@
+---
+title: "shredder"
+subtitle: "Introducing R pipelines to rstan"
+author: 
+  - "StanCon 2020, Jonathan Sidi"
+date: '`r strftime(as.Date("2020-08-13"),format = "%b %d, %Y")`'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color = "#23395b",
+  secondary_color = "#FF961C",
+  inverse_header_color = "#FFFFFF"
+)
+```
+
+# Do you use tidyverse?
+
+<img src = https://github.com/rstudio/hex-stickers/raw/master/PNG/tidyverse.png width = 25% style="width=50%; display: block; margin-left: auto; margin-right: auto;">
+<br>
+--
+<img src = https://github.com/rstudio/hex-stickers/raw/master/PNG/dplyr.png width = 25%>
+--
+<img src = https://github.com/rstudio/hex-stickers/raw/master/PNG/tidyr.png width = 25%>
+--
+<img src = https://github.com/rstudio/hex-stickers/raw/master/PNG/purrr.png width = 25%>
+--
+<img src = https://github.com/rstudio/hex-stickers/raw/master/PNG/ggplot2.png width = 25%>
+
+---
+
+# Are your workflows using magrittr pipe operator?
+
+.left-column[ <img src = https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/pipe.png>]
+.right-column[
+```r
+  read.csv('/path/to/data/file.csv') %>%
+    subset(variable_a > x) %>%
+    transform(variable_c = variable_a/variable_b) %>%
+    head(100)
+```
+]
+
+---
+
+# Wouldn't it be nice to to this in rstan?
+
+```r
+
+  model %>%
+    filter()%>%
+    select() %>%
+    mcmc_intervals()
+```
+<img src = https://mc-stan.org/bayesplot/articles/plotting-mcmc-draws_files/figure-html/mcmc_intervals-1.png width=50%>
+--
+<img src = https://media.giphy.com/media/li0dswKqIZNpm/giphy.gif width=40%>
+
+---
+background-image: url(https://github.com/yonicd/hex/raw/master/images/hex/shredder.png)
+background-position: 90% 0%
+background-size: 20%
+
+# shredder is here to help
+
+## With shredder you can create 
+### rstan pipelines using new domain specific verbs
+
+```r
+  model%>%
+    shredder::stan_select(my_pars)%>%
+    shredder::stan_thin_n(5)%>%
+    mcmc_intervals()
+```
+
+---
+
+# Come to the talk to learn how to 
+
+  - #### Convert to pipelines
+  - #### Use tidy-like verbs for rstan
+  - #### Speed up model interrogation and post-processing
+  - #### Scale workflows to seamlessly compare multiple models at once
+  
+---
+
+# Shredder
+
+## Introducing R pipelines to rstan
+
+### StanCon 2020, Jonathan Sidi

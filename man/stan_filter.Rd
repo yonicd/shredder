@@ -26,7 +26,7 @@ where conditions are true.
 \item If no elements are returned for any chain then \code{NULL} is returned with a warning.
 \item If there is a chain that results in no samples then the chain is dropped with a warning.
 \item If permuted is FALSE then uneven chains may be returned depending on the result of the filter.
-\item To comply with \link[rstan:extract]{extract} with \code{permuted=TRUE} chains in which chaines are
+\item To comply with \link[rstan:stanfit-method-extract]{extract} with \code{permuted=TRUE} chains in which chaines are
 assumed to be of equal size.
 \itemize{
 \item Chain size returned is the length of the shortest filtered chain.

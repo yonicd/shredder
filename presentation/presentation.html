@@ -12,7 +12,7 @@
 class: center, middle, inverse, title-slide
 
 # shredder
-## Stan pipelines in R
+## Introducing R pipelines to rstan
 ### StanCon 2020, Jonathan Sidi
 ### Aug 13, 2020
 
@@ -141,6 +141,29 @@ With the proposed API users can:
 - Manipulate various classes that contain a `stanfit` object, such as __rstan__ and __brms__.
 ---
 
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_1.svg)
+background-position: 50% 50%
+background-size: 100%
+class: left, top
+Shredder Workflow
+
+--
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_2.svg)
+background-position: 50% 50%
+background-size: 100%
+
+--
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_3.svg)
+background-position: 50% 50%
+background-size: 100%
+
+--
+background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_4.svg)
+background-position: 50% 50%
+background-size: 100%
+
+---
+
 ## Current API Verbs
 
 ### Subsetting and Selecting
@@ -192,30 +215,6 @@ fit%&gt;%
   summary() # apply summary function
 ```
 
-
----
-
-background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_1.svg)
-background-position: 50% 50%
-background-size: 100%
-class: left, top
-Shredder Workflow
-
---
-background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_2.svg)
-background-position: 50% 50%
-background-size: 100%
-
---
-background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_3.svg)
-background-position: 50% 50%
-background-size: 100%
-
---
-background-image: url(https://github.com/yonicd/shredder/raw/presentation/presentation/imgs/MCMC_Flow_Shredder_Trunc_4.svg)
-background-position: 50% 50%
-background-size: 100%
-
 ---
 # Primitive Example
 
@@ -250,30 +249,29 @@ With a consistent pipeline to generate R-side ready outputs we can strategize wi
 ---
 
 ```r
-# Read in multiple models
+# Read in multiple models (e.g. 4 models)
 fit &lt;- purrr::map( PATHS, .f=function(P) qs::qread(file = P) )
 
 # Read in observed data
 data &lt;- readRds('PATH_TO_DATA')
 
-# Extract vars from each model using primitive pipeline
+# Loop over the models to 
+#   extract pars from each model using stan_extract
 haz_dat_base &lt;- purrr::map(fit,
           stan_extract,
           pull_vars = c('loc', 'shape', 'os','time_shift'),
           thin_n = 5, dat = data)
 
-# Simulate Kaplan- Meir Curves
-km &lt;- purrr::map_df(haz_dat_base,
-  .f  = haz_fun, .id = 'model', 
-  obs = obs_approx, cens = cens_approx)
+# Loop over child fit objects to simulate Kaplan-Meier curves
+km &lt;- purrr::map_df(haz_dat_base,.f  = haz_fun, .id = 'model')
 
-# km plot ----
+# Generate Hex K-M Plot
 km%&gt;%
   dplyr::mutate(
     model = factor(model,levels = joint_par_legend)
     )%&gt;%
-  km_hexplot(obs = obs_approx) + 
-  ggplot2::facet_wrap(~model)
+  km_hexplot() + # ggplot Kaplan-Meier Curves
+  ggplot2::facet_wrap( ~ model)
 
 ```
 
@@ -322,11 +320,11 @@ In addition the {shredder} verbs are __S3 methods__ making them flexible to exte
 ---
 # Summary
 
-- New API
-- New Workflow
-- Reduces Memory Burden
-- Scalable
-- Extendable
+- New API 👨‍🏭
+- New Workflow 🤖
+- Reduces Memory Burden 🧠
+- Scalable 🚀
+- Extendable 💃 🕺
 
 ---
 

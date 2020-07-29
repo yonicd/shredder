@@ -23,7 +23,7 @@ stan_ends_with(match, ignore.case = TRUE, pars = peek_pars())
 character
 }
 \description{
-Partial match functions used in \link[shredder:stan_select]{stan_select}
+Partial match functions used in \link[=stan_select]{stan_select}
 }
 \examples{
 rats <- rats_example()
