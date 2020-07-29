@@ -7,7 +7,7 @@
 \usage{
 lhs \%>\% rhs
 
-lhs \%||\% rhs
+x \%||\% y
 }
 \description{
 Pipe operator imported from purrr

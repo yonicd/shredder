@@ -11,7 +11,7 @@ NULL
 #' @importFrom purrr %||%
 #' @name %||%
 #' @rdname pipe
-#' @usage lhs \%||\% rhs
+#' @usage x \%||\% y
 #' @export
 NULL
 

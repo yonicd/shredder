@@ -10,5 +10,5 @@ peek_pars()
 character
 }
 \description{
-Access pars currently stored that \link[=stan_partials]{stan_partials} use.
+Access pars currently stored that \link[=stan_contains]{stan_contains} use.
 }

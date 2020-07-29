@@ -38,7 +38,7 @@ stan_select.stanfit <- function(object, ...){
   
   assign('pars',all_pars,envir = pars_env)
   
-  pars <- unlist(lapply(rlang::enquos(...),pars_fun,data = data))
+  pars <- unlist(lapply(rlang::enquos(...),pars_fun))
   
   if(!length(pars))
     return(message('no pars selected'))
@@ -73,7 +73,7 @@ stan_select.stanfit <- function(object, ...){
   
 }
 
-pars_fun <- function(x,data){
+pars_fun <- function(x){
   
   ret <- rlang::quo_text(x)
   

@@ -3,7 +3,7 @@ grep_pars <- function (this, universe, ...) {
 }
 
 #' @title Access stored pars for stan partials
-#' @description Access pars currently stored that [stan_partials][shredder::stan_partials] use.
+#' @description Access pars currently stored that [stan_contains][shredder::stan_contains] use.
 #' @return character
 #' @rdname peek_pars
 #' @export 
