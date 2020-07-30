@@ -20,6 +20,8 @@ jobs:
     steps:
       - uses: actions/checkout@main
 
+      - uses: r-lib/actions/setup-pandoc@master
+
       - uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r }}
