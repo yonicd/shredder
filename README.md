@@ -7,12 +7,16 @@
 
 <!-- badges: start -->
 
-[![Covrpage
-Summary](https://img.shields.io/badge/covrpage-Last_Build_2020_06_17-brightgreen.svg)](http://tinyurl.com/s3fr6gn)
-[![Travis build
-status](https://travis-ci.org/yonicd/shredder.svg?branch=master)](https://travis-ci.org/yonicd/shredder)
+[![R-win build
+status](https://github.com/yonicd/shredder/workflows/R-win/badge.svg)](https://github.com/yonicd/shredder)
+[![R-mac build
+status](https://github.com/yonicd/shredder/workflows/R-mac/badge.svg)](https://github.com/yonicd/shredder)
+[![R-linux build
+status](https://github.com/yonicd/shredder/workflows/R-linux/badge.svg)](https://github.com/yonicd/shredder)
 [![Codecov test
 coverage](https://codecov.io/gh/yonicd/shredder/branch/master/graph/badge.svg)](https://codecov.io/gh/yonicd/shredder?branch=master)
+[![Covrpage
+Summary](https://img.shields.io/badge/covrpage-Last_Build_2020_06_17-brightgreen.svg)](http://tinyurl.com/s3fr6gn)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
