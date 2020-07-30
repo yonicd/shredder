@@ -20,13 +20,17 @@ testthat::describe('names',{
     x <- rats%>%stan_select(alpha[1])
     testthat::expect_equal(x@sim$fnames_oi,c('alpha[1]'))
   })
-  
-  it('character pars',{
+
+  it('character par',{
+    x <- rats%>%stan_select('mu_alpha','mu_beta')
+    testthat::expect_equal(x@model_pars,c('mu_alpha','mu_beta'))
+  })  
+    
+  it('character par syms',{
     x <- rats%>%stan_select(!!! rlang::syms(c('mu_alpha','mu_beta')))
     testthat::expect_equal(x@model_pars,c('mu_alpha','mu_beta'))
   })
 
-  
   it('regex character pars',{
     idx <- sprintf('alpha[%s]',1:5)
     x <- rats%>%stan_select(!!!rlang::syms(idx))

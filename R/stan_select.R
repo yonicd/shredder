@@ -58,6 +58,13 @@ stan_select.stanfit <- function(object, ...){
   object@inits <- purrr::map(object@inits,.f=function(x,y) x[y], y = pars)
   
   object@model_pars <- intersect(object@model_pars,pars)
+
+  bad_pars <- setdiff(pars,names(object@par_dims))
+
+  if(length(bad_pars)>0){
+    return(message(sprintf('invalid pars selected: %s',paste0(sprintf("'%s'",bad_pars),collapse = ', '))))
+  }
+    
   object@par_dims <- object@par_dims[pars]
   
   this <- grep(paste0(pars,collapse = '|'),object@sim$fnames_oi,value = TRUE)
@@ -77,15 +84,22 @@ pars_fun <- function(x){
   
   ret <- rlang::quo_text(x)
   
+  ret <- gsub('(^")|("$)','',ret)
+  
   if(grepl('(stan_contains|stan_starts_with|stan_ends_with)',ret)){
     ret <- rlang::eval_tidy(x)
   }
   
   # remove back ticks from templates of "`par[index]`" to be "par[index]"
   # this is needed for quot_text output
-  if(grepl('(?=.*`)(?=.*\\[(.*?)\\])','`alpha[1]`',perl = TRUE)){
-    ret <- gsub('`','',ret)
-  }
+  ret <- sapply(ret,function(x){
+    if(grepl('(?=.*`)(?=.*\\[(.*?)\\])',x,perl = TRUE)){
+      x <- gsub('`','',x)
+    }
+    x
+  })
   
   ret
 }
+
+
