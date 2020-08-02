@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shredder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
       </span>
     </div>
 
@@ -175,7 +175,7 @@ sigma_beta       0.52    0.00  0.09    0.36    0.45    0.51    0.57    0.72  289
 alpha0         106.39    0.06  3.60   99.23  104.00  106.44  108.76  113.55  4122    1
 lp__          -437.92    0.21  7.04 -453.36 -442.36 -437.34 -432.93 -425.72  1098    1
 
-Samples were drawn using NUTS(diag_e) at Thu Jul 30 19:34:39 2020.
+Samples were drawn using NUTS(diag_e) at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
 convergence, Rhat=1).</pre></body></html></div>
@@ -234,14 +234,15 @@ convergence, Rhat=1).</pre></body></html></div>
 <div id="names" class="section level3">
 <h3 class="hasAnchor">
 <a href="#names" class="anchor"></a>Names</h3>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">rats</span><span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/stan_names.html">stan_names</a></span>()</pre></body></html></div>
-<pre><code> [1] "alpha"         "beta"          "mu_alpha"      "mu_beta"       "sigmasq_y"    
+<div class="sourceCode" id="cb6"><html><body><pre class="r">rats%&gt;%
+  stan_names()
+ [1] "alpha"         "beta"          "mu_alpha"      "mu_beta"       "sigmasq_y"    
  [6] "sigmasq_alpha" "sigmasq_beta"  "sigma_y"       "sigma_alpha"   "sigma_beta"   
-[11] "alpha0"        "lp__"         </code></pre>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">rats</span><span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/stan_names.html">stan_names</a></span>(<span class="kw">expand</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
-<pre><code> [1] "alpha[1]"      "alpha[2]"      "alpha[3]"      "alpha[4]"      "alpha[5]"     
+[11] "alpha0"        "lp__"         
+
+rats%&gt;%
+  stan_names(expand = TRUE)
+ [1] "alpha[1]"      "alpha[2]"      "alpha[3]"      "alpha[4]"      "alpha[5]"     
  [6] "alpha[6]"      "alpha[7]"      "alpha[8]"      "alpha[9]"      "alpha[10]"    
 [11] "alpha[11]"     "alpha[12]"     "alpha[13]"     "alpha[14]"     "alpha[15]"    
 [16] "alpha[16]"     "alpha[17]"     "alpha[18]"     "alpha[19]"     "alpha[20]"    
@@ -254,27 +255,28 @@ convergence, Rhat=1).</pre></body></html></div>
 [51] "beta[21]"      "beta[22]"      "beta[23]"      "beta[24]"      "beta[25]"     
 [56] "beta[26]"      "beta[27]"      "beta[28]"      "beta[29]"      "beta[30]"     
 [61] "mu_alpha"      "mu_beta"       "sigmasq_y"     "sigmasq_alpha" "sigmasq_beta" 
-[66] "sigma_y"       "sigma_alpha"   "sigma_beta"    "alpha0"        "lp__"         </code></pre>
+[66] "sigma_y"       "sigma_alpha"   "sigma_beta"    "alpha0"        "lp__"         </pre></body></html></div>
 </div>
 <div id="select" class="section level3">
 <h3 class="hasAnchor">
 <a href="#select" class="anchor"></a>Select</h3>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">rats</span><span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/stan_select.html">stan_select</a></span>(<span class="no">mu_alpha</span>)</pre></body></html></div>
-<pre><code>Inference for Stan model: rats.
+<div class="sourceCode" id="cb7"><html><body><pre class="r">rats%&gt;%
+  stan_select(mu_alpha)
+Inference for Stan model: rats.
 4 chains, each with iter=2000; warmup=1000; thin=1; 
 post-warmup draws per chain=1000, total post-warmup draws=4000.
 
            mean se_mean   sd   2.5%    25%   50%    75% 97.5% n_eff Rhat
 mu_alpha 242.47    0.05 2.76 236.95 240.61 242.5 244.38 247.7  3585    1
 
-Samples were drawn using  at Thu Jul 30 19:34:39 2020.
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).</code></pre>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">rats</span><span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/stan_select.html">stan_select</a></span>(<span class="no">mu_alpha</span>,<span class="no">mu_beta</span>)</pre></body></html></div>
-<pre><code>Inference for Stan model: rats.
+convergence, Rhat=1).
+
+rats%&gt;%
+  stan_select(mu_alpha,mu_beta)
+Inference for Stan model: rats.
 4 chains, each with iter=2000; warmup=1000; thin=1; 
 post-warmup draws per chain=1000, total post-warmup draws=4000.
 
@@ -282,13 +284,14 @@ post-warmup draws per chain=1000, total post-warmup draws=4000.
 mu_alpha 242.47    0.05 2.76 236.95 240.61 242.50 244.38 247.7  3585    1
 mu_beta    6.19    0.00 0.11   5.98   6.12   6.19   6.25   6.4  4462    1
 
-Samples were drawn using  at Thu Jul 30 19:34:39 2020.
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).</code></pre>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">rats</span><span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/stan_select.html">stan_select</a></span>(!!!<span class="kw pkg">rlang</span><span class="kw ns">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">syms</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'mu_alpha'</span>,<span class="st">'mu_beta'</span>)))</pre></body></html></div>
-<pre><code>Inference for Stan model: rats.
+convergence, Rhat=1).
+
+rats%&gt;%
+  stan_select(!!!rlang::syms(c('mu_alpha','mu_beta')))
+Inference for Stan model: rats.
 4 chains, each with iter=2000; warmup=1000; thin=1; 
 post-warmup draws per chain=1000, total post-warmup draws=4000.
 
@@ -296,13 +299,15 @@ post-warmup draws per chain=1000, total post-warmup draws=4000.
 mu_alpha 242.47    0.05 2.76 236.95 240.61 242.50 244.38 247.7  3585    1
 mu_beta    6.19    0.00 0.11   5.98   6.12   6.19   6.25   6.4  4462    1
 
-Samples were drawn using  at Thu Jul 30 19:34:39 2020.
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).</code></pre>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">rats</span><span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/stan_select.html">stan_select</a></span>(<span class="no">alpha</span>[<span class="fl">1</span>],<span class="no">alpha</span>[<span class="fl">2</span>])</pre></body></html></div>
-<pre><code>Inference for Stan model: rats.
+convergence, Rhat=1).
+
+
+rats%&gt;%
+  stan_select(alpha[1],alpha[2])
+Inference for Stan model: rats.
 4 chains, each with iter=2000; warmup=1000; thin=1; 
 post-warmup draws per chain=1000, total post-warmup draws=4000.
 
@@ -310,13 +315,15 @@ post-warmup draws per chain=1000, total post-warmup draws=4000.
 alpha[1] 239.93    0.03 2.61 234.75 238.22 239.91 241.71 244.96  6102    1
 alpha[2] 247.80    0.04 2.70 242.54 245.97 247.79 249.62 253.07  5745    1
 
-Samples were drawn using  at Thu Jul 30 19:34:39 2020.
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).</code></pre>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">rats</span><span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/stan_select.html">stan_select</a></span>(!!!<span class="kw pkg">rlang</span><span class="kw ns">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">syms</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">'alpha[%s]'</span>,<span class="fl">1</span>:<span class="fl">5</span>)))</pre></body></html></div>
-<pre><code>Inference for Stan model: rats.
+convergence, Rhat=1).
+
+
+rats%&gt;%
+  stan_select(!!!rlang::syms(sprintf('alpha[%s]',1:5)))
+Inference for Stan model: rats.
 4 chains, each with iter=2000; warmup=1000; thin=1; 
 post-warmup draws per chain=1000, total post-warmup draws=4000.
 
@@ -327,18 +334,18 @@ alpha[3] 252.44    0.04 2.60 247.27 250.72 252.46 254.21 257.55  4957    1
 alpha[4] 232.56    0.04 2.65 227.48 230.69 232.54 234.34 237.79  5564    1
 alpha[5] 231.58    0.03 2.73 226.42 229.71 231.56 233.46 236.86  6405    1
 
-Samples were drawn using  at Thu Jul 30 19:34:39 2020.
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).</code></pre>
+convergence, Rhat=1).</pre></body></html></div>
 </div>
 <div id="select-with-partials" class="section level3">
 <h3 class="hasAnchor">
 <a href="#select-with-partials" class="anchor"></a>Select with Partials</h3>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="no">rats</span><span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">rats</span><span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/stan_select.html">stan_select</a></span>(<span class="fu"><a href="../reference/stan_partials.html">stan_contains</a></span>(<span class="st">'alpha'</span>))</pre></body></html></div>
 <details closed><p><summary><span title="Click to Expand"> Select all Parameters that contain “alpha” </span> </summary></p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r">
+<div class="sourceCode" id="cb9"><html><body><pre class="r">
 Inference for Stan model: rats.
 4 chains, each with iter=2000; warmup=1000; thin=1; 
 post-warmup draws per chain=1000, total post-warmup draws=4000.
@@ -379,27 +386,28 @@ sigmasq_alpha 218.39    1.06 63.89 126.08 173.31 208.62 251.30 372.24  3615    1
 sigma_alpha    14.63    0.03  2.07  11.23  13.16  14.44  15.85  19.29  3919    1
 alpha0        106.39    0.06  3.60  99.23 104.00 106.44 108.76 113.55  4122    1
 
-Samples were drawn using  at Thu Jul 30 19:34:39 2020.
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
 convergence, Rhat=1).</pre></body></html></div>
 </details><p><br></p>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="no">rats</span><span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/stan_select.html">stan_select</a></span>(<span class="fu"><a href="../reference/stan_partials.html">stan_contains</a></span>(<span class="st">'alpha\\[1\\]'</span>))</pre></body></html></div>
-<pre><code>Inference for Stan model: rats.
+<div class="sourceCode" id="cb10"><html><body><pre class="r">rats%&gt;%
+  stan_select(stan_contains('alpha\\[1\\]'))
+Inference for Stan model: rats.
 4 chains, each with iter=2000; warmup=1000; thin=1; 
 post-warmup draws per chain=1000, total post-warmup draws=4000.
 
            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
 alpha[1] 239.93    0.03 2.61 234.75 238.22 239.91 241.71 244.96  6102    1
 
-Samples were drawn using  at Thu Jul 30 19:34:39 2020.
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).</code></pre>
-<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="no">rats</span><span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/stan_select.html">stan_select</a></span>(<span class="fu"><a href="../reference/stan_partials.html">stan_contains</a></span>(<span class="st">'alpha\\[[1-9]\\]'</span>))</pre></body></html></div>
-<pre><code>Inference for Stan model: rats.
+convergence, Rhat=1).
+
+rats%&gt;%
+  stan_select(stan_contains('alpha\\[[1-9]\\]'))
+Inference for Stan model: rats.
 4 chains, each with iter=2000; warmup=1000; thin=1; 
 post-warmup draws per chain=1000, total post-warmup draws=4000.
 
@@ -414,26 +422,28 @@ alpha[7] 228.66    0.03 2.67 223.37 226.97 228.65 230.47 233.89  6562    1
 alpha[8] 248.41    0.03 2.69 243.04 246.62 248.43 250.21 253.52  5921    1
 alpha[9] 283.31    0.04 2.70 277.91 281.57 283.37 285.05 288.59  4862    1
 
-Samples were drawn using  at Thu Jul 30 19:34:39 2020.
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).</code></pre>
-<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="no">rats</span><span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/stan_select.html">stan_select</a></span>(<span class="fu"><a href="../reference/stan_partials.html">stan_ends_with</a></span>(<span class="st">'0'</span>))</pre></body></html></div>
-<pre><code>Inference for Stan model: rats.
+convergence, Rhat=1).
+
+rats%&gt;%
+  stan_select(stan_ends_with('0'))
+Inference for Stan model: rats.
 4 chains, each with iter=2000; warmup=1000; thin=1; 
 post-warmup draws per chain=1000, total post-warmup draws=4000.
 
          mean se_mean  sd  2.5% 25%    50%    75%  97.5% n_eff Rhat
 alpha0 106.39    0.06 3.6 99.23 104 106.44 108.76 113.55  4122    1
 
-Samples were drawn using  at Thu Jul 30 19:34:39 2020.
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).</code></pre>
-<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="no">rats</span><span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/stan_select.html">stan_select</a></span>(<span class="no">mu_alpha</span>,<span class="fu"><a href="../reference/stan_partials.html">stan_ends_with</a></span>(<span class="st">'0'</span>),<span class="no">beta</span>[<span class="fl">1</span>])</pre></body></html></div>
-<pre><code>Inference for Stan model: rats.
+convergence, Rhat=1).
+
+rats%&gt;%
+  stan_select(mu_alpha,stan_ends_with('0'),beta[1])
+Inference for Stan model: rats.
 4 chains, each with iter=2000; warmup=1000; thin=1; 
 post-warmup draws per chain=1000, total post-warmup draws=4000.
 
@@ -442,10 +452,10 @@ beta[1]    6.06    0.00 0.24   5.59   5.91   6.07   6.22   6.53  5584    1
 mu_alpha 242.47    0.05 2.76 236.95 240.61 242.50 244.38 247.70  3585    1
 alpha0   106.39    0.06 3.60  99.23 104.00 106.44 108.76 113.55  4122    1
 
-Samples were drawn using  at Thu Jul 30 19:34:39 2020.
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).</code></pre>
+convergence, Rhat=1).</pre></body></html></div>
 </div>
 </div>
 <div id="post-warmup-samples" class="section level2">
@@ -454,10 +464,11 @@ convergence, Rhat=1).</code></pre>
 <div id="subsetting-post-warmup-samples" class="section level3">
 <h3 class="hasAnchor">
 <a href="#subsetting-post-warmup-samples" class="anchor"></a>Subsetting post warmup samples</h3>
-<div class="sourceCode" id="cb30"><html><body><pre class="r">  <span class="no">rats</span><span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb11"><html><body><pre class="r">
+  <span class="no">rats</span><span class="kw">%&gt;%</span>
     <span class="fu"><a href="../reference/stan_slice.html">stan_slice</a></span>(<span class="fl">1</span>:<span class="fl">50</span>,<span class="kw">inc_warmup</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
 <details closed><p><summary><span title="Click to Expand"> First 50 with warmup samples </span> </summary></p>
-<div class="sourceCode" id="cb31"><html><body><pre class="r">
+<div class="sourceCode" id="cb12"><html><body><pre class="r">
 Inference for Stan model: rats.
 4 chains, each with iter=1050; warmup=1000; thin=1; 
 post-warmup draws per chain=50, total post-warmup draws=200.
@@ -534,15 +545,15 @@ sigma_beta       0.51    0.01  0.09    0.34    0.45    0.50    0.56    0.73   17
 alpha0         106.45    0.19  3.55   99.33  104.08  106.14  109.01  112.98   343 0.98
 lp__          -438.37    1.01  6.69 -455.55 -442.40 -437.50 -433.84 -427.19    44 1.10
 
-Samples were drawn using  at Thu Jul 30 19:34:39 2020.
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
 convergence, Rhat=1).</pre></body></html></div>
 </details><p><br></p>
-<div class="sourceCode" id="cb32"><html><body><pre class="r">  <span class="no">rats</span><span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb13"><html><body><pre class="r">  <span class="no">rats</span><span class="kw">%&gt;%</span>
     <span class="fu"><a href="../reference/stan_slice.html">stan_slice</a></span>(<span class="fl">1</span>:<span class="fl">50</span>,<span class="kw">inc_warmup</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
 <details closed><p><summary><span title="Click to Expand"> First 50 draws from each chain <em>without</em> warmup samples </span> </summary></p>
-<div class="sourceCode" id="cb33"><html><body><pre class="r">
+<div class="sourceCode" id="cb14"><html><body><pre class="r">
 Inference for Stan model: rats.
 4 chains, each with iter=50; warmup=0; thin=1; 
 post-warmup draws per chain=50, total post-warmup draws=200.
@@ -619,15 +630,15 @@ sigma_beta       0.51    0.01  0.09    0.34    0.45    0.50    0.56    0.73   17
 alpha0         106.45    0.19  3.55   99.33  104.08  106.14  109.01  112.98   343 0.98
 lp__          -438.37    1.01  6.69 -455.55 -442.40 -437.50 -433.84 -427.19    44 1.10
 
-Samples were drawn using  at Thu Jul 30 19:34:39 2020.
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
 convergence, Rhat=1).</pre></body></html></div>
 </details><p><br></p>
-<div class="sourceCode" id="cb34"><html><body><pre class="r">  <span class="no">rats</span><span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb15"><html><body><pre class="r">  <span class="no">rats</span><span class="kw">%&gt;%</span>
     <span class="fu"><a href="../reference/stan_thin.html">stan_thin_n</a></span>(<span class="fl">2</span>)</pre></body></html></div>
 <details closed><p><summary><span title="Click to Expand"> Thin every other sample </span> </summary></p>
-<div class="sourceCode" id="cb35"><html><body><pre class="r">
+<div class="sourceCode" id="cb16"><html><body><pre class="r">
 Inference for Stan model: rats.
 4 chains, each with iter=1500; warmup=1000; thin=1; 
 post-warmup draws per chain=500, total post-warmup draws=2000.
@@ -704,15 +715,16 @@ sigma_beta       0.51    0.00  0.09    0.35    0.45    0.51    0.57    0.72  134
 alpha0         106.32    0.09  3.61   99.20  103.94  106.31  108.74  113.29  1763    1
 lp__          -437.94    0.23  6.93 -452.80 -442.36 -437.43 -433.01 -425.89   881    1
 
-Samples were drawn using  at Thu Jul 30 19:34:39 2020.
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
 convergence, Rhat=1).</pre></body></html></div>
 </details><p><br></p>
-<div class="sourceCode" id="cb36"><html><body><pre class="r">  <span class="no">rats</span><span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb17"><html><body><pre class="r">
+  <span class="no">rats</span><span class="kw">%&gt;%</span>
     <span class="fu"><a href="../reference/stan_thin.html">stan_thin_frac</a></span>(<span class="fl">0.5</span>)</pre></body></html></div>
 <details closed><p><summary><span title="Click to Expand"> Thin 50% of the Samples From each Chain </span> </summary></p>
-<div class="sourceCode" id="cb37"><html><body><pre class="r">
+<div class="sourceCode" id="cb18"><html><body><pre class="r">
 Inference for Stan model: rats.
 4 chains, each with iter=1500; warmup=1000; thin=1; 
 post-warmup draws per chain=500, total post-warmup draws=2000.
@@ -789,7 +801,7 @@ sigma_beta       0.51    0.00  0.09    0.35    0.45    0.50    0.57    0.72  134
 alpha0         106.33    0.09  3.61   99.20  103.94  106.31  108.74  113.34  1779    1
 lp__          -437.94    0.23  6.94 -452.80 -442.36 -437.44 -433.00 -425.81   892    1
 
-Samples were drawn using  at Thu Jul 30 19:34:39 2020.
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
 convergence, Rhat=1).</pre></body></html></div>
@@ -798,27 +810,27 @@ convergence, Rhat=1).</pre></body></html></div>
 <div id="select-and-slice" class="section level3">
 <h3 class="hasAnchor">
 <a href="#select-and-slice" class="anchor"></a>Select and Slice</h3>
-<div class="sourceCode" id="cb38"><html><body><pre class="r"><span class="no">rats</span><span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/stan_select.html">stan_select</a></span>(<span class="no">mu_alpha</span>)<span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/stan_slice.html">stan_slice</a></span>(<span class="fl">1</span>:<span class="fl">50</span>)</pre></body></html></div>
-<pre><code>Inference for Stan model: rats.
+<div class="sourceCode" id="cb19"><html><body><pre class="r">rats%&gt;%
+    stan_select(mu_alpha)%&gt;%
+    stan_slice(1:50)
+Inference for Stan model: rats.
 4 chains, each with iter=1050; warmup=1000; thin=1; 
 post-warmup draws per chain=50, total post-warmup draws=200.
 
            mean se_mean   sd   2.5%   25%    50%    75%  97.5% n_eff Rhat
 mu_alpha 242.53    0.12 2.47 237.91 240.8 242.59 244.18 247.66   456 0.99
 
-Samples were drawn using  at Thu Jul 30 19:34:39 2020.
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).</code></pre>
+convergence, Rhat=1).</pre></body></html></div>
 </div>
 <div id="retain-chains" class="section level3">
 <h3 class="hasAnchor">
 <a href="#retain-chains" class="anchor"></a>Retain Chains</h3>
-<div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="no">rats</span><span class="kw">%&gt;%</span>
-   <span class="fu"><a href="../reference/stan_retain.html">stan_retain</a></span>(<span class="kw">chains</span> <span class="kw">=</span> <span class="fl">1</span>)</pre></body></html></div>
-<pre><code>Inference for Stan model: rats.
+<div class="sourceCode" id="cb20"><html><body><pre class="r">rats%&gt;%
+   stan_retain(chains = 1)
+Inference for Stan model: rats.
 1 chains, each with iter=2000; warmup=1000; thin=1; 
 post-warmup draws per chain=1000, total post-warmup draws=1000.
 
@@ -894,13 +906,14 @@ sigma_beta       0.52    0.00  0.10    0.35    0.45    0.51    0.57    0.72   90
 alpha0         106.39    0.09  3.45   99.10  104.03  106.48  108.69  113.09  1623    1
 lp__          -437.72    0.44  7.11 -453.66 -442.15 -437.13 -432.48 -425.68   258    1
 
-Samples were drawn using NUTS(diag_e) at Thu Jul 30 19:34:39 2020.
+Samples were drawn using NUTS(diag_e) at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).</code></pre>
-<div class="sourceCode" id="cb42"><html><body><pre class="r"><span class="no">rats</span><span class="kw">%&gt;%</span>
-   <span class="fu"><a href="../reference/stan_retain.html">stan_retain</a></span>(<span class="kw">chains</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">3</span>))</pre></body></html></div>
-<pre><code>Inference for Stan model: rats.
+convergence, Rhat=1).
+   
+rats%&gt;%
+   stan_retain(chains = c(1,3))
+Inference for Stan model: rats.
 2 chains, each with iter=2000; warmup=1000; thin=1; 
 post-warmup draws per chain=1000, total post-warmup draws=2000.
 
@@ -976,19 +989,19 @@ sigma_beta       0.51    0.00  0.09    0.35    0.45    0.51    0.57    0.72  142
 alpha0         106.37    0.08  3.56   99.21  104.05  106.42  108.70  113.59  2066    1
 lp__          -437.92    0.30  7.09 -453.67 -442.33 -437.28 -433.00 -425.43   543    1
 
-Samples were drawn using NUTS(diag_e) at Thu Jul 30 19:34:39 2020.
+Samples were drawn using NUTS(diag_e) at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).</code></pre>
+convergence, Rhat=1).</pre></body></html></div>
 </div>
 <div id="filter" class="section level3">
 <h3 class="hasAnchor">
 <a href="#filter" class="anchor"></a>Filter</h3>
 <p>Users can filter conditionally on posterior samples. The function will locate the indicies that the logical expression returns for each chain. Due to a constraint in <code><a href="https://mc-stan.org/rstan/reference/stanfit-method-extract.html">rstan::extract</a></code> with <code>permuted=FALSE</code> chains are assumed to be of equal size. To keep this assumption the chain size returned is the length of the shortest conditional chain. If there is a chain that results in no samples then the chain is dropped with a warning. If no elements are returned for any chain then <code>NULL</code> is returned.</p>
-<div class="sourceCode" id="cb44"><html><body><pre class="r"><span class="no">rats</span><span class="kw">%&gt;%</span>
-   <span class="fu"><a href="../reference/stan_select.html">stan_select</a></span>(<span class="no">mu_alpha</span>,<span class="no">mu_beta</span>)<span class="kw">%&gt;%</span>
-   <span class="fu"><a href="../reference/stan_filter.html">stan_filter</a></span>(<span class="no">mu_beta</span> <span class="kw">&lt;</span> <span class="fl">6</span>)</pre></body></html></div>
-<pre><code>Inference for Stan model: rats.
+<div class="sourceCode" id="cb21"><html><body><pre class="r">rats%&gt;%
+   stan_select(mu_alpha,mu_beta)%&gt;%
+   stan_filter(mu_beta &lt; 6)
+Inference for Stan model: rats.
 4 chains, each with iter=1028; warmup=1000; thin=1; 
 post-warmup draws per chain=28, total post-warmup draws=112.
 
@@ -996,10 +1009,10 @@ post-warmup draws per chain=28, total post-warmup draws=112.
 mu_alpha 242.32    0.34 2.81 236.93 240.39 242.33 244.21 247.74    68 1.05
 mu_beta    5.95    0.00 0.05   5.83   5.94   5.96   5.98   6.00   120 0.99
 
-Samples were drawn using  at Thu Jul 30 19:34:39 2020.
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).</code></pre>
+convergence, Rhat=1).</pre></body></html></div>
 </div>
 </div>
   </div>

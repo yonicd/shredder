@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shredder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
       </span>
     </div>
 
@@ -121,17 +121,17 @@ Samples: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI    Rhat Bulk_ESS Tail_ESS
-Intercept        -0.02177   0.15085 -0.31759  0.27921 1.00378     4803     2803
-sigma_Intercept  -0.19021   0.13301 -0.42741  0.09924 0.99972     3754     2915
-grouptreat        1.20988   0.36708  0.48348  1.94462 1.00148     2548     2377
-sigma_grouptreat  0.76776   0.18740  0.39628  1.12659 1.00106     3667     2750
+Intercept         0.06698   0.15800 -0.24173  0.37999 1.00169     5280     2818
+sigma_Intercept  -0.17407   0.13197 -0.42005  0.10367 1.00107     3635     2690
+grouptreat        0.71749   0.41627 -0.12423  1.53980 1.00066     2569     2354
+sigma_grouptreat  0.90143   0.18605  0.53340  1.26824 1.00158     3215     2815
 
 Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">fit</span><span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw">N</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">ask</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<p><img src="brms_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;"><img src="brms_files/figure-html/unnamed-chunk-5-2.png" width="60%" style="display: block; margin: auto;"></p>
+<p><img src="brms_plot_1-1.png" title="plot of chunk brms_plot_1" alt="plot of chunk brms_plot_1" width="60%" style="display: block; margin: auto;"><img src="brms_plot_1-2.png" title="plot of chunk brms_plot_1" alt="plot of chunk brms_plot_1" width="60%" style="display: block; margin: auto;"></p>
 </div>
 <div id="select-first-100-posterior-samples-from-each-chain" class="section level2">
 <h2 class="hasAnchor">
@@ -147,17 +147,17 @@ Samples: 4 chains, each with iter = 1100; warmup = 1000; thin = 1;
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI    Rhat Bulk_ESS Tail_ESS
-Intercept        -0.02612   0.16041 -0.34713  0.32419 1.02522      452      309
-sigma_Intercept  -0.18757   0.13576 -0.41387  0.10167 1.00565      412      311
-grouptreat        1.18093   0.37903  0.43960  1.86378 1.02284      173      259
-sigma_grouptreat  0.76551   0.19286  0.37372  1.09767 1.01414      397      248
+Intercept         0.07013   0.16137 -0.23785  0.38342 1.01057      774      364
+sigma_Intercept  -0.16386   0.14627 -0.42317  0.12234 1.00969      403      300
+grouptreat        0.71854   0.41869 -0.04519  1.53400 1.01188      296      313
+sigma_grouptreat  0.89130   0.19825  0.51367  1.30166 1.00422      344      263
 
 Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">fit_slice</span><span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw">N</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">ask</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<p><img src="brms_files/figure-html/unnamed-chunk-8-1.png" width="60%" style="display: block; margin: auto;"><img src="brms_files/figure-html/unnamed-chunk-8-2.png" width="60%" style="display: block; margin: auto;"></p>
+<p><img src="brms_plot_2-1.png" title="plot of chunk brms_plot_2" alt="plot of chunk brms_plot_2" width="60%" style="display: block; margin: auto;"><img src="brms_plot_2-2.png" title="plot of chunk brms_plot_2" alt="plot of chunk brms_plot_2" width="60%" style="display: block; margin: auto;"></p>
 </div>
 <div id="thin-25-of-posterior-samples-from-each-chain" class="section level2">
 <h2 class="hasAnchor">
@@ -174,17 +174,17 @@ Samples: 4 chains, each with iter = 1250; warmup = 1000; thin = 1;
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI    Rhat Bulk_ESS Tail_ESS
-Intercept        -0.01217   0.15271 -0.29943  0.28213 1.00052     1098      961
-sigma_Intercept  -0.18890   0.13348 -0.41992  0.09984 0.99916     1048      988
-grouptreat        1.19453   0.36537  0.51006  1.92717 1.00672      921      915
-sigma_grouptreat  0.77022   0.18671  0.38841  1.12669 0.99931     1049      931
+Intercept         0.06683   0.15555 -0.24601  0.36279 1.00068      952     1033
+sigma_Intercept  -0.17761   0.13061 -0.42181  0.08630 1.00249     1022     1012
+grouptreat        0.72207   0.41571 -0.07618  1.57548 1.00041     1003      894
+sigma_grouptreat  0.90896   0.18475  0.56465  1.28181 1.00050     1052      994
 
 Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">fit_thin</span><span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw">N</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">ask</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<p><img src="brms_files/figure-html/unnamed-chunk-11-1.png" width="60%" style="display: block; margin: auto;"><img src="brms_files/figure-html/unnamed-chunk-11-2.png" width="60%" style="display: block; margin: auto;"></p>
+<p><img src="brms_plot_3-1.png" title="plot of chunk brms_plot_3" alt="plot of chunk brms_plot_3" width="60%" style="display: block; margin: auto;"><img src="brms_plot_3-2.png" title="plot of chunk brms_plot_3" alt="plot of chunk brms_plot_3" width="60%" style="display: block; margin: auto;"></p>
 </div>
 <div id="filter-posterior-samples-by-conditional" class="section level2">
 <h2 class="hasAnchor">
@@ -196,22 +196,22 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 Formula: symptom_post ~ group 
          sigma ~ group
    Data: dat1 (Number of observations: 60) 
-Samples: 4 chains, each with iter = 1702; warmup = 1000; thin = 1;
-         total post-warmup samples = 2808
+Samples: 4 chains, each with iter = 1228; warmup = 1000; thin = 1;
+         total post-warmup samples = 912
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI    Rhat Bulk_ESS Tail_ESS
-Intercept        -0.05212   0.14254 -0.33914  0.23209 1.00099     3516     1815
-sigma_Intercept  -0.19167   0.13226 -0.42626  0.09474 0.99939     2189     1900
-grouptreat        1.38065   0.26186  1.01924  2.00972 1.00266     1684     1616
-sigma_grouptreat  0.76518   0.18719  0.38536  1.11464 1.00224     2413     1906
+Intercept        -0.00769   0.15381 -0.32381  0.29970 1.00015      957      755
+sigma_Intercept  -0.17751   0.13422 -0.42817  0.13153 1.00122      659      794
+grouptreat        1.25471   0.20926  1.01099  1.79655 1.00431      605      775
+sigma_grouptreat  0.92356   0.20039  0.52929  1.30766 1.00501      614      655
 
 Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">fit_filter</span><span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw">N</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">ask</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<p><img src="brms_files/figure-html/unnamed-chunk-14-1.png" width="60%" style="display: block; margin: auto;"><img src="brms_files/figure-html/unnamed-chunk-14-2.png" width="60%" style="display: block; margin: auto;"></p>
+<p><img src="brms_plot_4-1.png" title="plot of chunk brms_plot_4" alt="plot of chunk brms_plot_4" width="60%" style="display: block; margin: auto;"><img src="brms_plot_4-2.png" title="plot of chunk brms_plot_4" alt="plot of chunk brms_plot_4" width="60%" style="display: block; margin: auto;"></p>
 </div>
 <div id="filter-posterior-samples-by-conditional-subset-chain" class="section level2">
 <h2 class="hasAnchor">
@@ -224,22 +224,22 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 Formula: symptom_post ~ group 
          sigma ~ group
    Data: dat1 (Number of observations: 60) 
-Samples: 1 chains, each with iter = 1702; warmup = 1000; thin = 1;
-         total post-warmup samples = 702
+Samples: 1 chains, each with iter = 1228; warmup = 1000; thin = 1;
+         total post-warmup samples = 228
 
 Population-Level Effects: 
                  Estimate Est.Error l-95% CI u-95% CI    Rhat Bulk_ESS Tail_ESS
-Intercept        -0.06152   0.14469 -0.33933  0.23035 1.00156      837      432
-sigma_Intercept  -0.18756   0.13138 -0.41385  0.10425 1.00133      508      614
-grouptreat        1.39656   0.26715  1.01459  2.02818 1.00767      368      384
-sigma_grouptreat  0.76097   0.17997  0.37433  1.09105 1.00797      580      582
+Intercept        -0.01025   0.16019 -0.33472  0.30657 1.00007      333      128
+sigma_Intercept  -0.17540   0.14239 -0.42458  0.13767 0.99844      157      153
+grouptreat        1.21999   0.18977  1.00719  1.70702 0.99858      175      217
+sigma_grouptreat  0.92037   0.22289  0.51294  1.35952 1.01292      139      140
 
 Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">fit_filter_chain</span><span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw">N</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">ask</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<p><img src="brms_files/figure-html/unnamed-chunk-17-1.png" width="60%" style="display: block; margin: auto;"><img src="brms_files/figure-html/unnamed-chunk-17-2.png" width="60%" style="display: block; margin: auto;"></p>
+<p><img src="brms_plot_5-1.png" title="plot of chunk brms_plot_5" alt="plot of chunk brms_plot_5" width="60%" style="display: block; margin: auto;"><img src="brms_plot_5-2.png" title="plot of chunk brms_plot_5" alt="plot of chunk brms_plot_5" width="60%" style="display: block; margin: auto;"></p>
 </div>
   </div>
 
