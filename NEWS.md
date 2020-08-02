@@ -1,3 +1,11 @@
+# shredder 0.2.2
+
+* Precompile Vignettes
+
+# shredder 0.2.1
+
+* Update rstan_select to work with character inputs in addition to names and quasiquotations
+
 # shredder 0.2.0
 
 * Add stan_axe
