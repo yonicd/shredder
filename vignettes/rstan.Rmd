@@ -2,197 +2,1016 @@
 title: "Working with rstan"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Usage}
+  %\VignetteIndexEntry{Working with rstan}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-stopifnot(require(knitr))
-options(width = 90)
-opts_chunk$set(
-  comment = NA,
-  message = FALSE,
-  warning = FALSE,
-  eval = TRUE,
-  dev = "png",
-  dpi = 150,
-  fig.asp = 0.8,
-  fig.width = 5,
-  out.width = "60%",
-  fig.align = "center"
-)
-```
+
 
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
 
-```{r example}
+
+```r
 library(shredder)
 library(rstan)
 ```
 
-```{r,results='hide',warning=FALSE,message=FALSE}
+
+```r
 rats <- shredder::rats_example(nCores = 1)
 ```
 
-```{r,eval = FALSE}
+
+```r
 rats
 ```
 
-```{r,echo = FALSE}
-rats%>%
-  details::details(summary = 'Standard Output')
+<details closed>
+<summary> <span title='Click to Expand'> Standard Output </span> </summary>
+
+```r
+
+Inference for Stan model: rats.
+4 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=4000.
+
+                 mean se_mean    sd    2.5%     25%     50%     75%   97.5% n_eff Rhat
+alpha[1]       239.93    0.03  2.61  234.75  238.22  239.91  241.71  244.96  6102    1
+alpha[2]       247.80    0.04  2.70  242.54  245.97  247.79  249.62  253.07  5745    1
+alpha[3]       252.44    0.04  2.60  247.27  250.72  252.46  254.21  257.55  4957    1
+alpha[4]       232.56    0.04  2.65  227.48  230.69  232.54  234.34  237.79  5564    1
+alpha[5]       231.58    0.03  2.73  226.42  229.71  231.56  233.46  236.86  6405    1
+alpha[6]       249.76    0.04  2.71  244.61  247.94  249.74  251.60  255.03  5168    1
+alpha[7]       228.66    0.03  2.67  223.37  226.97  228.65  230.47  233.89  6562    1
+alpha[8]       248.41    0.03  2.69  243.04  246.62  248.43  250.21  253.52  5921    1
+alpha[9]       283.31    0.04  2.70  277.91  281.57  283.37  285.05  288.59  4862    1
+alpha[10]      219.31    0.03  2.66  214.14  217.52  219.26  221.14  224.55  5997    1
+alpha[11]      258.25    0.04  2.71  252.87  256.39  258.32  260.12  263.41  5403    1
+alpha[12]      228.17    0.04  2.63  223.21  226.39  228.14  229.91  233.39  5125    1
+alpha[13]      242.39    0.04  2.68  237.08  240.57  242.45  244.22  247.70  5586    1
+alpha[14]      268.25    0.04  2.66  262.97  266.43  268.29  270.08  273.34  5341    1
+alpha[15]      242.73    0.03  2.65  237.51  241.02  242.71  244.48  247.91  5750    1
+alpha[16]      245.35    0.03  2.68  239.99  243.54  245.32  247.15  250.60  6011    1
+alpha[17]      232.16    0.04  2.71  226.83  230.31  232.15  233.99  237.51  5920    1
+alpha[18]      240.42    0.03  2.64  235.33  238.69  240.43  242.18  245.52  5940    1
+alpha[19]      253.77    0.04  2.68  248.45  251.99  253.80  255.54  259.06  5602    1
+alpha[20]      241.62    0.03  2.60  236.58  239.91  241.57  243.34  246.78  6264    1
+alpha[21]      248.59    0.03  2.70  243.24  246.79  248.56  250.41  253.85  6674    1
+alpha[22]      225.31    0.04  2.77  219.92  223.48  225.28  227.18  230.91  6170    1
+alpha[23]      228.52    0.03  2.61  223.43  226.79  228.54  230.24  233.62  6656    1
+alpha[24]      245.11    0.03  2.62  239.91  243.40  245.14  246.83  250.29  6691    1
+alpha[25]      234.44    0.03  2.69  229.26  232.63  234.43  236.23  239.82  6256    1
+alpha[26]      253.92    0.04  2.61  248.70  252.16  253.92  255.65  259.09  5479    1
+alpha[27]      254.27    0.03  2.57  249.27  252.55  254.25  255.96  259.55  5780    1
+alpha[28]      243.01    0.04  2.70  237.55  241.20  243.04  244.87  248.15  5767    1
+alpha[29]      217.91    0.03  2.69  212.74  216.09  217.89  219.71  223.13  6317    1
+alpha[30]      241.42    0.03  2.61  236.37  239.64  241.41  243.24  246.48  6029    1
+beta[1]          6.06    0.00  0.24    5.59    5.91    6.07    6.22    6.53  5584    1
+beta[2]          7.05    0.00  0.26    6.55    6.88    7.05    7.22    7.55  4936    1
+beta[3]          6.48    0.00  0.24    6.02    6.32    6.48    6.65    6.97  4433    1
+beta[4]          5.34    0.00  0.26    4.82    5.17    5.34    5.52    5.84  5458    1
+beta[5]          6.57    0.00  0.24    6.09    6.41    6.57    6.73    7.05  5527    1
+beta[6]          6.17    0.00  0.24    5.70    6.00    6.17    6.34    6.64  5028    1
+beta[7]          5.97    0.00  0.24    5.50    5.81    5.97    6.14    6.44  5714    1
+beta[8]          6.42    0.00  0.24    5.95    6.25    6.41    6.59    6.90  5518    1
+beta[9]          7.05    0.00  0.25    6.54    6.89    7.05    7.22    7.54  5162    1
+beta[10]         5.84    0.00  0.24    5.36    5.68    5.84    6.00    6.31  5171    1
+beta[11]         6.80    0.00  0.25    6.31    6.63    6.80    6.97    7.28  5098    1
+beta[12]         6.12    0.00  0.24    5.65    5.96    6.11    6.28    6.58  5552    1
+beta[13]         6.16    0.00  0.25    5.65    6.01    6.16    6.32    6.66  5429    1
+beta[14]         6.69    0.00  0.24    6.22    6.52    6.69    6.85    7.17  5107    1
+beta[15]         5.42    0.00  0.25    4.94    5.25    5.41    5.59    5.91  4556    1
+beta[16]         5.93    0.00  0.24    5.45    5.77    5.93    6.09    6.39  5506    1
+beta[17]         6.28    0.00  0.24    5.82    6.12    6.28    6.44    6.74  5684    1
+beta[18]         5.84    0.00  0.24    5.36    5.68    5.83    6.00    6.30  5159    1
+beta[19]         6.40    0.00  0.24    5.93    6.23    6.40    6.56    6.85  5036    1
+beta[20]         6.05    0.00  0.25    5.56    5.89    6.05    6.22    6.54  6193    1
+beta[21]         6.40    0.00  0.24    5.93    6.24    6.40    6.56    6.86  6641    1
+beta[22]         5.86    0.00  0.24    5.40    5.69    5.86    6.02    6.31  5890    1
+beta[23]         5.75    0.00  0.24    5.27    5.59    5.75    5.91    6.23  6016    1
+beta[24]         5.89    0.00  0.24    5.41    5.73    5.89    6.05    6.37  6260    1
+beta[25]         6.91    0.00  0.25    6.42    6.74    6.90    7.07    7.40  4974    1
+beta[26]         6.54    0.00  0.24    6.06    6.39    6.55    6.70    7.01  5722    1
+beta[27]         5.90    0.00  0.24    5.41    5.73    5.90    6.06    6.38  5821    1
+beta[28]         5.85    0.00  0.23    5.40    5.69    5.84    6.01    6.31  5740    1
+beta[29]         5.68    0.00  0.25    5.20    5.51    5.67    5.84    6.17  5303    1
+beta[30]         6.13    0.00  0.23    5.68    5.97    6.12    6.28    6.59  6428    1
+mu_alpha       242.47    0.05  2.76  236.95  240.61  242.50  244.38  247.70  3585    1
+mu_beta          6.19    0.00  0.11    5.98    6.12    6.19    6.25    6.40  4462    1
+sigmasq_y       37.16    0.12  5.69   27.74   33.14   36.56   40.58   50.12  2366    1
+sigmasq_alpha  218.39    1.06 63.89  126.08  173.31  208.62  251.30  372.24  3615    1
+sigmasq_beta     0.27    0.00  0.10    0.13    0.21    0.26    0.32    0.52  3028    1
+sigma_y          6.08    0.01  0.46    5.27    5.76    6.05    6.37    7.08  2370    1
+sigma_alpha     14.63    0.03  2.07   11.23   13.16   14.44   15.85   19.29  3919    1
+sigma_beta       0.52    0.00  0.09    0.36    0.45    0.51    0.57    0.72  2897    1
+alpha0         106.39    0.06  3.60   99.23  104.00  106.44  108.76  113.55  4122    1
+lp__          -437.92    0.21  7.04 -453.36 -442.36 -437.34 -432.93 -425.72  1098    1
+
+Samples were drawn using NUTS(diag_e) at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
+
 ```
 
-```{r,echo=FALSE}
-details::details(system.file('rats.stan',package='shredder'),
-                 summary = 'The Stan Script',lang = 'c')
+</details>
+<br>
+
+<details closed>
+<summary> <span title='Click to Expand'> The Stan Script </span> </summary>
+
+```c
+
+data {
+  int<lower=0> N;
+  int<lower=0> T;
+  real x[T];
+  real y[N,T];
+  real xbar;
+}
+parameters {
+  real alpha[N];
+  real beta[N];
+
+  real mu_alpha;
+  real mu_beta;          // beta.c in original bugs model
+
+  real<lower=0> sigmasq_y;
+  real<lower=0> sigmasq_alpha;
+  real<lower=0> sigmasq_beta;
+}
+transformed parameters {
+  real<lower=0> sigma_y;       // sigma in original bugs model
+  real<lower=0> sigma_alpha;
+  real<lower=0> sigma_beta;
+
+  sigma_y = sqrt(sigmasq_y);
+  sigma_alpha = sqrt(sigmasq_alpha);
+  sigma_beta = sqrt(sigmasq_beta);
+}
+model {
+  mu_alpha ~ normal(0, 100);
+  mu_beta ~ normal(0, 100);
+  sigmasq_y ~ inv_gamma(0.001, 0.001);
+  sigmasq_alpha ~ inv_gamma(0.001, 0.001);
+  sigmasq_beta ~ inv_gamma(0.001, 0.001);
+  alpha ~ normal(mu_alpha, sigma_alpha); // vectorized
+  beta ~ normal(mu_beta, sigma_beta);  // vectorized
+  for (n in 1:N)
+    for (t in 1:T) 
+      y[n,t] ~ normal(alpha[n] + beta[n] * (x[t] - xbar), sigma_y);
+
+}
+generated quantities {
+  real alpha0;
+  alpha0 = mu_alpha - xbar * mu_beta;
+}
+
 ```
+
+</details>
+<br>
 
 
 ## Pars
 
 ### Names
 
-```{r}
+
+```r
 rats%>%
   stan_names()
+ [1] "alpha"         "beta"          "mu_alpha"      "mu_beta"       "sigmasq_y"    
+ [6] "sigmasq_alpha" "sigmasq_beta"  "sigma_y"       "sigma_alpha"   "sigma_beta"   
+[11] "alpha0"        "lp__"         
 
 rats%>%
   stan_names(expand = TRUE)
+ [1] "alpha[1]"      "alpha[2]"      "alpha[3]"      "alpha[4]"      "alpha[5]"     
+ [6] "alpha[6]"      "alpha[7]"      "alpha[8]"      "alpha[9]"      "alpha[10]"    
+[11] "alpha[11]"     "alpha[12]"     "alpha[13]"     "alpha[14]"     "alpha[15]"    
+[16] "alpha[16]"     "alpha[17]"     "alpha[18]"     "alpha[19]"     "alpha[20]"    
+[21] "alpha[21]"     "alpha[22]"     "alpha[23]"     "alpha[24]"     "alpha[25]"    
+[26] "alpha[26]"     "alpha[27]"     "alpha[28]"     "alpha[29]"     "alpha[30]"    
+[31] "beta[1]"       "beta[2]"       "beta[3]"       "beta[4]"       "beta[5]"      
+[36] "beta[6]"       "beta[7]"       "beta[8]"       "beta[9]"       "beta[10]"     
+[41] "beta[11]"      "beta[12]"      "beta[13]"      "beta[14]"      "beta[15]"     
+[46] "beta[16]"      "beta[17]"      "beta[18]"      "beta[19]"      "beta[20]"     
+[51] "beta[21]"      "beta[22]"      "beta[23]"      "beta[24]"      "beta[25]"     
+[56] "beta[26]"      "beta[27]"      "beta[28]"      "beta[29]"      "beta[30]"     
+[61] "mu_alpha"      "mu_beta"       "sigmasq_y"     "sigmasq_alpha" "sigmasq_beta" 
+[66] "sigma_y"       "sigma_alpha"   "sigma_beta"    "alpha0"        "lp__"         
 ```
 
 ### Select
 
-```{r}
+
+```r
 rats%>%
   stan_select(mu_alpha)
+Inference for Stan model: rats.
+4 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=4000.
+
+           mean se_mean   sd   2.5%    25%   50%    75% 97.5% n_eff Rhat
+mu_alpha 242.47    0.05 2.76 236.95 240.61 242.5 244.38 247.7  3585    1
+
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
 
 rats%>%
   stan_select(mu_alpha,mu_beta)
+Inference for Stan model: rats.
+4 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=4000.
+
+           mean se_mean   sd   2.5%    25%    50%    75% 97.5% n_eff Rhat
+mu_alpha 242.47    0.05 2.76 236.95 240.61 242.50 244.38 247.7  3585    1
+mu_beta    6.19    0.00 0.11   5.98   6.12   6.19   6.25   6.4  4462    1
+
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
 
 rats%>%
   stan_select(!!!rlang::syms(c('mu_alpha','mu_beta')))
+Inference for Stan model: rats.
+4 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=4000.
+
+           mean se_mean   sd   2.5%    25%    50%    75% 97.5% n_eff Rhat
+mu_alpha 242.47    0.05 2.76 236.95 240.61 242.50 244.38 247.7  3585    1
+mu_beta    6.19    0.00 0.11   5.98   6.12   6.19   6.25   6.4  4462    1
+
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
 
 
 rats%>%
   stan_select(alpha[1],alpha[2])
+Inference for Stan model: rats.
+4 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=4000.
+
+           mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
+alpha[1] 239.93    0.03 2.61 234.75 238.22 239.91 241.71 244.96  6102    1
+alpha[2] 247.80    0.04 2.70 242.54 245.97 247.79 249.62 253.07  5745    1
+
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
 
 
 rats%>%
   stan_select(!!!rlang::syms(sprintf('alpha[%s]',1:5)))
+Inference for Stan model: rats.
+4 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=4000.
 
+           mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
+alpha[1] 239.93    0.03 2.61 234.75 238.22 239.91 241.71 244.96  6102    1
+alpha[2] 247.80    0.04 2.70 242.54 245.97 247.79 249.62 253.07  5745    1
+alpha[3] 252.44    0.04 2.60 247.27 250.72 252.46 254.21 257.55  4957    1
+alpha[4] 232.56    0.04 2.65 227.48 230.69 232.54 234.34 237.79  5564    1
+alpha[5] 231.58    0.03 2.73 226.42 229.71 231.56 233.46 236.86  6405    1
+
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
 ```
 
 ### Select with Partials
 
 
-```{r,eval=FALSE}
+
+```r
 rats%>%
   stan_select(stan_contains('alpha'))
 
 ```
 
-```{r,echo = FALSE}
-rats%>%
-  stan_select(stan_contains('alpha'))%>%
-  details::details(summary = 'Select all Parameters that contain "alpha"')
+<details closed>
+<summary> <span title='Click to Expand'> Select all Parameters that contain "alpha" </span> </summary>
+
+```r
+
+Inference for Stan model: rats.
+4 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=4000.
+
+                mean se_mean    sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
+alpha[1]      239.93    0.03  2.61 234.75 238.22 239.91 241.71 244.96  6102    1
+alpha[2]      247.80    0.04  2.70 242.54 245.97 247.79 249.62 253.07  5745    1
+alpha[3]      252.44    0.04  2.60 247.27 250.72 252.46 254.21 257.55  4957    1
+alpha[4]      232.56    0.04  2.65 227.48 230.69 232.54 234.34 237.79  5564    1
+alpha[5]      231.58    0.03  2.73 226.42 229.71 231.56 233.46 236.86  6405    1
+alpha[6]      249.76    0.04  2.71 244.61 247.94 249.74 251.60 255.03  5168    1
+alpha[7]      228.66    0.03  2.67 223.37 226.97 228.65 230.47 233.89  6562    1
+alpha[8]      248.41    0.03  2.69 243.04 246.62 248.43 250.21 253.52  5921    1
+alpha[9]      283.31    0.04  2.70 277.91 281.57 283.37 285.05 288.59  4862    1
+alpha[10]     219.31    0.03  2.66 214.14 217.52 219.26 221.14 224.55  5997    1
+alpha[11]     258.25    0.04  2.71 252.87 256.39 258.32 260.12 263.41  5403    1
+alpha[12]     228.17    0.04  2.63 223.21 226.39 228.14 229.91 233.39  5125    1
+alpha[13]     242.39    0.04  2.68 237.08 240.57 242.45 244.22 247.70  5586    1
+alpha[14]     268.25    0.04  2.66 262.97 266.43 268.29 270.08 273.34  5341    1
+alpha[15]     242.73    0.03  2.65 237.51 241.02 242.71 244.48 247.91  5750    1
+alpha[16]     245.35    0.03  2.68 239.99 243.54 245.32 247.15 250.60  6011    1
+alpha[17]     232.16    0.04  2.71 226.83 230.31 232.15 233.99 237.51  5920    1
+alpha[18]     240.42    0.03  2.64 235.33 238.69 240.43 242.18 245.52  5940    1
+alpha[19]     253.77    0.04  2.68 248.45 251.99 253.80 255.54 259.06  5602    1
+alpha[20]     241.62    0.03  2.60 236.58 239.91 241.57 243.34 246.78  6264    1
+alpha[21]     248.59    0.03  2.70 243.24 246.79 248.56 250.41 253.85  6674    1
+alpha[22]     225.31    0.04  2.77 219.92 223.48 225.28 227.18 230.91  6170    1
+alpha[23]     228.52    0.03  2.61 223.43 226.79 228.54 230.24 233.62  6656    1
+alpha[24]     245.11    0.03  2.62 239.91 243.40 245.14 246.83 250.29  6691    1
+alpha[25]     234.44    0.03  2.69 229.26 232.63 234.43 236.23 239.82  6256    1
+alpha[26]     253.92    0.04  2.61 248.70 252.16 253.92 255.65 259.09  5479    1
+alpha[27]     254.27    0.03  2.57 249.27 252.55 254.25 255.96 259.55  5780    1
+alpha[28]     243.01    0.04  2.70 237.55 241.20 243.04 244.87 248.15  5767    1
+alpha[29]     217.91    0.03  2.69 212.74 216.09 217.89 219.71 223.13  6317    1
+alpha[30]     241.42    0.03  2.61 236.37 239.64 241.41 243.24 246.48  6029    1
+mu_alpha      242.47    0.05  2.76 236.95 240.61 242.50 244.38 247.70  3585    1
+sigmasq_alpha 218.39    1.06 63.89 126.08 173.31 208.62 251.30 372.24  3615    1
+sigma_alpha    14.63    0.03  2.07  11.23  13.16  14.44  15.85  19.29  3919    1
+alpha0        106.39    0.06  3.60  99.23 104.00 106.44 108.76 113.55  4122    1
+
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
 
 ```
 
-```{r}
+</details>
+<br>
+
+
+```r
 rats%>%
   stan_select(stan_contains('alpha\\[1\\]'))
+Inference for Stan model: rats.
+4 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=4000.
+
+           mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
+alpha[1] 239.93    0.03 2.61 234.75 238.22 239.91 241.71 244.96  6102    1
+
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
 
 rats%>%
   stan_select(stan_contains('alpha\\[[1-9]\\]'))
+Inference for Stan model: rats.
+4 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=4000.
+
+           mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
+alpha[1] 239.93    0.03 2.61 234.75 238.22 239.91 241.71 244.96  6102    1
+alpha[2] 247.80    0.04 2.70 242.54 245.97 247.79 249.62 253.07  5745    1
+alpha[3] 252.44    0.04 2.60 247.27 250.72 252.46 254.21 257.55  4957    1
+alpha[4] 232.56    0.04 2.65 227.48 230.69 232.54 234.34 237.79  5564    1
+alpha[5] 231.58    0.03 2.73 226.42 229.71 231.56 233.46 236.86  6405    1
+alpha[6] 249.76    0.04 2.71 244.61 247.94 249.74 251.60 255.03  5168    1
+alpha[7] 228.66    0.03 2.67 223.37 226.97 228.65 230.47 233.89  6562    1
+alpha[8] 248.41    0.03 2.69 243.04 246.62 248.43 250.21 253.52  5921    1
+alpha[9] 283.31    0.04 2.70 277.91 281.57 283.37 285.05 288.59  4862    1
+
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
 
 rats%>%
   stan_select(stan_ends_with('0'))
+Inference for Stan model: rats.
+4 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=4000.
+
+         mean se_mean  sd  2.5% 25%    50%    75%  97.5% n_eff Rhat
+alpha0 106.39    0.06 3.6 99.23 104 106.44 108.76 113.55  4122    1
+
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
 
 rats%>%
   stan_select(mu_alpha,stan_ends_with('0'),beta[1])
+Inference for Stan model: rats.
+4 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=4000.
+
+           mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
+beta[1]    6.06    0.00 0.24   5.59   5.91   6.07   6.22   6.53  5584    1
+mu_alpha 242.47    0.05 2.76 236.95 240.61 242.50 244.38 247.70  3585    1
+alpha0   106.39    0.06 3.60  99.23 104.00 106.44 108.76 113.55  4122    1
+
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
 ```
 
 ## Post-warmup samples
 
 ### Subsetting post warmup samples
 
-```{r,eval=FALSE}
+
+```r
 
   rats%>%
     stan_slice(1:50,inc_warmup = TRUE)
 
 ```
 
-```{r,echo=FALSE}
+<details closed>
+<summary> <span title='Click to Expand'> First 50 with warmup samples </span> </summary>
 
-  rats%>%
-    stan_slice(1:50,inc_warmup = TRUE)%>%
-  details::details(summary = 'First 50 with warmup samples')
+```r
+
+Inference for Stan model: rats.
+4 chains, each with iter=1050; warmup=1000; thin=1; 
+post-warmup draws per chain=50, total post-warmup draws=200.
+
+                 mean se_mean    sd    2.5%     25%     50%     75%   97.5% n_eff Rhat
+alpha[1]       239.91    0.13  2.79  234.83  237.75  239.96  241.93  244.89   460 0.98
+alpha[2]       247.78    0.14  2.86  241.44  246.16  247.74  249.45  253.35   420 0.98
+alpha[3]       252.50    0.16  2.45  248.25  250.85  252.45  254.18  257.19   248 0.99
+alpha[4]       232.60    0.15  2.54  228.13  230.63  232.46  234.50  237.33   305 0.99
+alpha[5]       231.47    0.12  2.67  227.33  229.23  231.24  233.56  236.06   460 1.00
+alpha[6]       249.85    0.15  3.00  244.16  247.56  249.99  252.13  255.52   381 1.00
+alpha[7]       228.31    0.15  2.92  222.42  226.57  228.58  230.07  234.15   390 1.00
+alpha[8]       248.23    0.15  2.47  243.59  246.46  248.43  249.74  253.05   259 0.99
+alpha[9]       283.23    0.14  2.60  278.46  281.62  283.14  284.70  288.23   323 1.00
+alpha[10]      219.20    0.12  2.52  213.74  217.56  219.18  220.79  224.63   460 0.98
+alpha[11]      258.04    0.13  2.87  252.82  256.02  258.16  260.11  263.35   460 0.99
+alpha[12]      228.07    0.14  2.71  222.44  226.56  228.26  229.76  233.11   365 0.99
+alpha[13]      242.45    0.12  2.48  237.67  240.59  242.51  244.51  246.94   460 0.99
+alpha[14]      267.90    0.14  2.59  262.43  266.33  268.04  269.78  272.54   321 0.99
+alpha[15]      242.74    0.14  2.92  236.82  240.99  242.48  245.04  247.51   410 1.00
+alpha[16]      245.43    0.13  2.70  240.26  243.67  245.64  247.11  250.60   421 0.99
+alpha[17]      232.36    0.13  2.87  227.26  230.75  232.33  234.21  237.85   460 0.99
+alpha[18]      240.19    0.12  2.59  235.58  238.41  240.10  242.16  245.37   460 0.99
+alpha[19]      253.65    0.15  2.61  248.83  252.11  253.51  255.05  259.02   321 0.99
+alpha[20]      241.74    0.16  2.69  235.82  239.79  241.78  243.64  246.05   283 1.01
+alpha[21]      248.44    0.14  2.61  243.52  246.75  248.35  250.14  253.85   344 0.99
+alpha[22]      225.52    0.17  2.76  219.87  223.87  225.62  227.20  231.14   263 1.01
+alpha[23]      228.73    0.13  2.74  223.15  227.00  228.84  230.37  233.41   460 0.98
+alpha[24]      245.03    0.13  2.86  239.83  243.20  245.00  246.66  250.47   460 0.99
+alpha[25]      234.28    0.15  3.00  228.18  232.45  234.19  236.23  239.98   399 0.99
+alpha[26]      253.90    0.14  2.42  249.18  252.24  253.86  255.53  258.53   297 1.00
+alpha[27]      254.31    0.12  2.34  250.24  252.57  254.30  255.84  259.02   354 0.99
+alpha[28]      242.91    0.14  2.53  238.26  241.10  242.93  244.68  247.30   325 0.99
+alpha[29]      218.12    0.15  2.65  213.31  216.19  218.28  220.05  222.61   294 0.99
+alpha[30]      241.59    0.12  2.50  237.41  239.78  241.63  243.33  246.55   432 0.99
+beta[1]          6.08    0.02  0.22    5.66    5.93    6.08    6.23    6.48   187 1.02
+beta[2]          7.02    0.01  0.25    6.55    6.85    7.00    7.20    7.43   323 1.00
+beta[3]          6.46    0.02  0.23    6.00    6.30    6.46    6.60    6.88   204 1.00
+beta[4]          5.36    0.01  0.31    4.70    5.16    5.35    5.57    5.98   460 0.98
+beta[5]          6.58    0.02  0.25    6.15    6.40    6.58    6.75    7.01   141 1.00
+beta[6]          6.19    0.01  0.22    5.75    6.03    6.20    6.36    6.57   334 0.99
+beta[7]          5.98    0.01  0.25    5.53    5.81    5.97    6.14    6.49   367 0.99
+beta[8]          6.42    0.01  0.27    5.93    6.23    6.40    6.60    7.00   460 0.99
+beta[9]          7.03    0.01  0.25    6.58    6.85    7.02    7.18    7.50   353 1.00
+beta[10]         5.85    0.01  0.23    5.42    5.69    5.85    5.99    6.31   344 0.99
+beta[11]         6.80    0.01  0.26    6.24    6.62    6.82    6.97    7.22   460 0.99
+beta[12]         6.12    0.01  0.22    5.69    5.99    6.12    6.28    6.54   236 1.00
+beta[13]         6.17    0.01  0.26    5.69    5.98    6.18    6.35    6.68   339 1.00
+beta[14]         6.67    0.01  0.23    6.21    6.52    6.67    6.84    7.09   367 0.99
+beta[15]         5.44    0.01  0.30    4.79    5.24    5.43    5.64    6.02   460 0.98
+beta[16]         5.93    0.01  0.23    5.54    5.77    5.93    6.07    6.39   263 0.98
+beta[17]         6.27    0.01  0.22    5.85    6.11    6.27    6.47    6.65   460 0.99
+beta[18]         5.86    0.01  0.25    5.39    5.69    5.86    6.06    6.35   364 1.00
+beta[19]         6.43    0.01  0.24    5.98    6.25    6.42    6.62    6.85   338 1.01
+beta[20]         6.06    0.01  0.23    5.63    5.88    6.07    6.24    6.48   378 1.01
+beta[21]         6.42    0.01  0.23    5.98    6.28    6.41    6.58    6.83   460 0.98
+beta[22]         5.86    0.01  0.23    5.42    5.70    5.88    6.01    6.31   292 0.99
+beta[23]         5.76    0.01  0.27    5.19    5.59    5.76    5.92    6.30   460 0.98
+beta[24]         5.89    0.01  0.25    5.45    5.71    5.89    6.07    6.37   295 0.99
+beta[25]         6.90    0.01  0.26    6.45    6.71    6.89    7.09    7.43   342 0.99
+beta[26]         6.53    0.01  0.26    6.06    6.36    6.55    6.71    6.99   366 1.00
+beta[27]         5.89    0.01  0.23    5.44    5.74    5.88    6.05    6.30   289 0.99
+beta[28]         5.85    0.01  0.24    5.41    5.68    5.83    6.02    6.30   304 0.99
+beta[29]         5.69    0.01  0.27    5.12    5.52    5.68    5.89    6.21   386 0.99
+beta[30]         6.13    0.01  0.24    5.71    5.95    6.13    6.30    6.57   440 0.99
+mu_alpha       242.53    0.12  2.47  237.91  240.80  242.59  244.18  247.66   456 0.99
+mu_beta          6.19    0.01  0.11    5.99    6.11    6.18    6.27    6.43   232 0.99
+sigmasq_y       37.72    0.33  4.77   29.83   34.21   37.63   41.17   46.63   210 1.00
+sigmasq_alpha  216.38    3.77 66.47  122.44  170.32  206.60  249.85  367.04   311 1.00
+sigmasq_beta     0.27    0.01  0.10    0.12    0.20    0.25    0.31    0.54   190 1.01
+sigma_y          6.13    0.03  0.39    5.46    5.85    6.13    6.42    6.83   204 1.00
+sigma_alpha     14.55    0.12  2.17   11.07   13.05   14.37   15.81   19.16   321 1.00
+sigma_beta       0.51    0.01  0.09    0.34    0.45    0.50    0.56    0.73   175 1.01
+alpha0         106.45    0.19  3.55   99.33  104.08  106.14  109.01  112.98   343 0.98
+lp__          -438.37    1.01  6.69 -455.55 -442.40 -437.50 -433.84 -427.19    44 1.10
+
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
 
 ```
 
-```{r,eval=FALSE}
+</details>
+<br>
+
+
+```r
   rats%>%
     stan_slice(1:50,inc_warmup = FALSE)
 
 ```
 
 
-```{r,echo=FALSE}
-  rats%>%
-    stan_slice(1:50,inc_warmup = FALSE)%>%
-  details::details(summary = 'First 50 draws from each chain <em>without</em> warmup samples')
+<details closed>
+<summary> <span title='Click to Expand'> First 50 draws from each chain <em>without</em> warmup samples </span> </summary>
+
+```r
+
+Inference for Stan model: rats.
+4 chains, each with iter=50; warmup=0; thin=1; 
+post-warmup draws per chain=50, total post-warmup draws=200.
+
+                 mean se_mean    sd    2.5%     25%     50%     75%   97.5% n_eff Rhat
+alpha[1]       239.91    0.13  2.79  234.83  237.75  239.96  241.93  244.89   460 0.98
+alpha[2]       247.78    0.14  2.86  241.44  246.16  247.74  249.45  253.35   420 0.98
+alpha[3]       252.50    0.16  2.45  248.25  250.85  252.45  254.18  257.19   248 0.99
+alpha[4]       232.60    0.15  2.54  228.13  230.63  232.46  234.50  237.33   305 0.99
+alpha[5]       231.47    0.12  2.67  227.33  229.23  231.24  233.56  236.06   460 1.00
+alpha[6]       249.85    0.15  3.00  244.16  247.56  249.99  252.13  255.52   381 1.00
+alpha[7]       228.31    0.15  2.92  222.42  226.57  228.58  230.07  234.15   390 1.00
+alpha[8]       248.23    0.15  2.47  243.59  246.46  248.43  249.74  253.05   259 0.99
+alpha[9]       283.23    0.14  2.60  278.46  281.62  283.14  284.70  288.23   323 1.00
+alpha[10]      219.20    0.12  2.52  213.74  217.56  219.18  220.79  224.63   460 0.98
+alpha[11]      258.04    0.13  2.87  252.82  256.02  258.16  260.11  263.35   460 0.99
+alpha[12]      228.07    0.14  2.71  222.44  226.56  228.26  229.76  233.11   365 0.99
+alpha[13]      242.45    0.12  2.48  237.67  240.59  242.51  244.51  246.94   460 0.99
+alpha[14]      267.90    0.14  2.59  262.43  266.33  268.04  269.78  272.54   321 0.99
+alpha[15]      242.74    0.14  2.92  236.82  240.99  242.48  245.04  247.51   410 1.00
+alpha[16]      245.43    0.13  2.70  240.26  243.67  245.64  247.11  250.60   421 0.99
+alpha[17]      232.36    0.13  2.87  227.26  230.75  232.33  234.21  237.85   460 0.99
+alpha[18]      240.19    0.12  2.59  235.58  238.41  240.10  242.16  245.37   460 0.99
+alpha[19]      253.65    0.15  2.61  248.83  252.11  253.51  255.05  259.02   321 0.99
+alpha[20]      241.74    0.16  2.69  235.82  239.79  241.78  243.64  246.05   283 1.01
+alpha[21]      248.44    0.14  2.61  243.52  246.75  248.35  250.14  253.85   344 0.99
+alpha[22]      225.52    0.17  2.76  219.87  223.87  225.62  227.20  231.14   263 1.01
+alpha[23]      228.73    0.13  2.74  223.15  227.00  228.84  230.37  233.41   460 0.98
+alpha[24]      245.03    0.13  2.86  239.83  243.20  245.00  246.66  250.47   460 0.99
+alpha[25]      234.28    0.15  3.00  228.18  232.45  234.19  236.23  239.98   399 0.99
+alpha[26]      253.90    0.14  2.42  249.18  252.24  253.86  255.53  258.53   297 1.00
+alpha[27]      254.31    0.12  2.34  250.24  252.57  254.30  255.84  259.02   354 0.99
+alpha[28]      242.91    0.14  2.53  238.26  241.10  242.93  244.68  247.30   325 0.99
+alpha[29]      218.12    0.15  2.65  213.31  216.19  218.28  220.05  222.61   294 0.99
+alpha[30]      241.59    0.12  2.50  237.41  239.78  241.63  243.33  246.55   432 0.99
+beta[1]          6.08    0.02  0.22    5.66    5.93    6.08    6.23    6.48   187 1.02
+beta[2]          7.02    0.01  0.25    6.55    6.85    7.00    7.20    7.43   323 1.00
+beta[3]          6.46    0.02  0.23    6.00    6.30    6.46    6.60    6.88   204 1.00
+beta[4]          5.36    0.01  0.31    4.70    5.16    5.35    5.57    5.98   460 0.98
+beta[5]          6.58    0.02  0.25    6.15    6.40    6.58    6.75    7.01   141 1.00
+beta[6]          6.19    0.01  0.22    5.75    6.03    6.20    6.36    6.57   334 0.99
+beta[7]          5.98    0.01  0.25    5.53    5.81    5.97    6.14    6.49   367 0.99
+beta[8]          6.42    0.01  0.27    5.93    6.23    6.40    6.60    7.00   460 0.99
+beta[9]          7.03    0.01  0.25    6.58    6.85    7.02    7.18    7.50   353 1.00
+beta[10]         5.85    0.01  0.23    5.42    5.69    5.85    5.99    6.31   344 0.99
+beta[11]         6.80    0.01  0.26    6.24    6.62    6.82    6.97    7.22   460 0.99
+beta[12]         6.12    0.01  0.22    5.69    5.99    6.12    6.28    6.54   236 1.00
+beta[13]         6.17    0.01  0.26    5.69    5.98    6.18    6.35    6.68   339 1.00
+beta[14]         6.67    0.01  0.23    6.21    6.52    6.67    6.84    7.09   367 0.99
+beta[15]         5.44    0.01  0.30    4.79    5.24    5.43    5.64    6.02   460 0.98
+beta[16]         5.93    0.01  0.23    5.54    5.77    5.93    6.07    6.39   263 0.98
+beta[17]         6.27    0.01  0.22    5.85    6.11    6.27    6.47    6.65   460 0.99
+beta[18]         5.86    0.01  0.25    5.39    5.69    5.86    6.06    6.35   364 1.00
+beta[19]         6.43    0.01  0.24    5.98    6.25    6.42    6.62    6.85   338 1.01
+beta[20]         6.06    0.01  0.23    5.63    5.88    6.07    6.24    6.48   378 1.01
+beta[21]         6.42    0.01  0.23    5.98    6.28    6.41    6.58    6.83   460 0.98
+beta[22]         5.86    0.01  0.23    5.42    5.70    5.88    6.01    6.31   292 0.99
+beta[23]         5.76    0.01  0.27    5.19    5.59    5.76    5.92    6.30   460 0.98
+beta[24]         5.89    0.01  0.25    5.45    5.71    5.89    6.07    6.37   295 0.99
+beta[25]         6.90    0.01  0.26    6.45    6.71    6.89    7.09    7.43   342 0.99
+beta[26]         6.53    0.01  0.26    6.06    6.36    6.55    6.71    6.99   366 1.00
+beta[27]         5.89    0.01  0.23    5.44    5.74    5.88    6.05    6.30   289 0.99
+beta[28]         5.85    0.01  0.24    5.41    5.68    5.83    6.02    6.30   304 0.99
+beta[29]         5.69    0.01  0.27    5.12    5.52    5.68    5.89    6.21   386 0.99
+beta[30]         6.13    0.01  0.24    5.71    5.95    6.13    6.30    6.57   440 0.99
+mu_alpha       242.53    0.12  2.47  237.91  240.80  242.59  244.18  247.66   456 0.99
+mu_beta          6.19    0.01  0.11    5.99    6.11    6.18    6.27    6.43   232 0.99
+sigmasq_y       37.72    0.33  4.77   29.83   34.21   37.63   41.17   46.63   210 1.00
+sigmasq_alpha  216.38    3.77 66.47  122.44  170.32  206.60  249.85  367.04   311 1.00
+sigmasq_beta     0.27    0.01  0.10    0.12    0.20    0.25    0.31    0.54   190 1.01
+sigma_y          6.13    0.03  0.39    5.46    5.85    6.13    6.42    6.83   204 1.00
+sigma_alpha     14.55    0.12  2.17   11.07   13.05   14.37   15.81   19.16   321 1.00
+sigma_beta       0.51    0.01  0.09    0.34    0.45    0.50    0.56    0.73   175 1.01
+alpha0         106.45    0.19  3.55   99.33  104.08  106.14  109.01  112.98   343 0.98
+lp__          -438.37    1.01  6.69 -455.55 -442.40 -437.50 -433.84 -427.19    44 1.10
+
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
 
 ```
 
-```{r,eval=FALSE}
+</details>
+<br>
+
+
+```r
   rats%>%
     stan_thin_n(2)
 
 ```
 
-```{r,echo=FALSE}
-  rats%>%
-    stan_thin_n(2)%>%
-  details::details(summary = 'Thin every other sample')
+<details closed>
+<summary> <span title='Click to Expand'> Thin every other sample </span> </summary>
+
+```r
+
+Inference for Stan model: rats.
+4 chains, each with iter=1500; warmup=1000; thin=1; 
+post-warmup draws per chain=500, total post-warmup draws=2000.
+
+                 mean se_mean    sd    2.5%     25%     50%     75%   97.5% n_eff Rhat
+alpha[1]       239.88    0.06  2.61  234.83  238.14  239.85  241.65  244.97  1734    1
+alpha[2]       247.88    0.07  2.72  242.43  246.02  247.94  249.74  253.07  1644    1
+alpha[3]       252.43    0.06  2.59  247.35  250.72  252.45  254.22  257.56  1626    1
+alpha[4]       232.57    0.06  2.65  227.57  230.76  232.56  234.31  237.96  1960    1
+alpha[5]       231.55    0.06  2.71  226.40  229.69  231.54  233.44  236.79  1751    1
+alpha[6]       249.77    0.07  2.72  244.44  247.92  249.77  251.64  254.93  1643    1
+alpha[7]       228.63    0.06  2.66  223.31  226.89  228.65  230.42  233.70  1774    1
+alpha[8]       248.42    0.07  2.70  242.94  246.65  248.48  250.25  253.45  1563    1
+alpha[9]       283.28    0.06  2.68  277.99  281.53  283.28  285.06  288.41  1833    1
+alpha[10]      219.32    0.06  2.66  214.14  217.56  219.27  221.17  224.61  1731    1
+alpha[11]      258.33    0.06  2.71  253.12  256.52  258.41  260.22  263.72  1819    1
+alpha[12]      228.26    0.06  2.61  223.28  226.43  228.23  229.99  233.41  1903    1
+alpha[13]      242.40    0.06  2.66  237.01  240.61  242.45  244.17  247.57  2107    1
+alpha[14]      268.35    0.07  2.67  263.07  266.52  268.45  270.14  273.51  1667    1
+alpha[15]      242.81    0.06  2.66  237.47  241.08  242.77  244.61  247.80  1911    1
+alpha[16]      245.38    0.06  2.69  240.07  243.54  245.30  247.15  250.79  1789    1
+alpha[17]      232.15    0.07  2.70  226.75  230.26  232.19  233.95  237.54  1698    1
+alpha[18]      240.45    0.06  2.64  235.47  238.67  240.46  242.21  245.57  1670    1
+alpha[19]      253.74    0.06  2.68  248.38  252.00  253.83  255.52  258.96  1927    1
+alpha[20]      241.67    0.06  2.60  236.52  239.98  241.59  243.32  246.78  1858    1
+alpha[21]      248.68    0.06  2.69  243.50  246.84  248.63  250.47  253.88  1854    1
+alpha[22]      225.34    0.07  2.77  219.86  223.55  225.29  227.21  231.07  1581    1
+alpha[23]      228.53    0.07  2.61  223.42  226.79  228.54  230.25  233.54  1564    1
+alpha[24]      245.08    0.06  2.64  239.80  243.39  245.08  246.82  250.09  1756    1
+alpha[25]      234.24    0.06  2.68  228.92  232.47  234.28  236.09  239.49  1731    1
+alpha[26]      253.90    0.06  2.61  248.68  252.12  253.90  255.65  258.89  1650    1
+alpha[27]      254.29    0.06  2.58  249.26  252.54  254.25  256.02  259.47  1767    1
+alpha[28]      242.97    0.07  2.69  237.65  241.10  243.06  244.80  248.13  1699    1
+alpha[29]      217.91    0.06  2.69  212.79  216.06  217.88  219.73  223.16  1918    1
+alpha[30]      241.48    0.06  2.62  236.66  239.67  241.39  243.32  246.74  1711    1
+beta[1]          6.07    0.01  0.24    5.60    5.92    6.07    6.24    6.54  1894    1
+beta[2]          7.05    0.01  0.25    6.55    6.88    7.05    7.22    7.55  1938    1
+beta[3]          6.48    0.01  0.24    6.03    6.32    6.48    6.64    6.97  1786    1
+beta[4]          5.33    0.01  0.26    4.82    5.15    5.33    5.50    5.81  1475    1
+beta[5]          6.57    0.01  0.24    6.09    6.41    6.57    6.73    7.05  1715    1
+beta[6]          6.17    0.01  0.24    5.70    6.00    6.17    6.34    6.64  1922    1
+beta[7]          5.97    0.01  0.25    5.50    5.80    5.97    6.14    6.44  1906    1
+beta[8]          6.42    0.01  0.24    5.95    6.24    6.41    6.60    6.89  1837    1
+beta[9]          7.04    0.01  0.25    6.53    6.88    7.04    7.21    7.53  1682    1
+beta[10]         5.84    0.01  0.24    5.36    5.68    5.84    6.00    6.31  1743    1
+beta[11]         6.80    0.01  0.25    6.30    6.64    6.80    6.97    7.28  1685    1
+beta[12]         6.11    0.01  0.24    5.64    5.95    6.11    6.28    6.56  1906    1
+beta[13]         6.16    0.01  0.25    5.65    6.00    6.16    6.32    6.66  1552    1
+beta[14]         6.69    0.01  0.25    6.20    6.52    6.69    6.85    7.18  1661    1
+beta[15]         5.41    0.01  0.25    4.94    5.24    5.41    5.58    5.90  1754    1
+beta[16]         5.93    0.01  0.24    5.46    5.77    5.93    6.09    6.39  1765    1
+beta[17]         6.28    0.01  0.24    5.82    6.12    6.29    6.46    6.74  1574    1
+beta[18]         5.84    0.01  0.24    5.37    5.67    5.84    6.01    6.30  1754    1
+beta[19]         6.41    0.01  0.24    5.95    6.24    6.41    6.57    6.86  1808    1
+beta[20]         6.04    0.01  0.25    5.56    5.88    6.05    6.21    6.55  1645    1
+beta[21]         6.40    0.01  0.24    5.93    6.24    6.39    6.55    6.86  1668    1
+beta[22]         5.86    0.01  0.24    5.40    5.70    5.87    6.03    6.31  1675    1
+beta[23]         5.75    0.01  0.25    5.27    5.58    5.74    5.91    6.24  1586    1
+beta[24]         5.89    0.01  0.24    5.41    5.72    5.89    6.04    6.37  1821    1
+beta[25]         6.92    0.01  0.25    6.44    6.75    6.92    7.08    7.42  1625    1
+beta[26]         6.54    0.01  0.24    6.07    6.39    6.54    6.70    7.01  1899    1
+beta[27]         5.90    0.01  0.24    5.40    5.73    5.90    6.07    6.36  1676    1
+beta[28]         5.85    0.01  0.23    5.39    5.70    5.85    6.01    6.30  1681    1
+beta[29]         5.67    0.01  0.25    5.20    5.51    5.67    5.84    6.17  1791    1
+beta[30]         6.13    0.01  0.23    5.68    5.97    6.12    6.28    6.60  1893    1
+mu_alpha       242.48    0.07  2.75  237.09  240.58  242.49  244.39  247.68  1609    1
+mu_beta          6.19    0.00  0.11    5.99    6.12    6.19    6.26    6.40  1932    1
+sigmasq_y       37.10    0.15  5.72   27.69   33.06   36.60   40.53   50.33  1429    1
+sigmasq_alpha  219.35    1.56 65.38  126.94  173.43  209.82  252.77  375.88  1761    1
+sigmasq_beta     0.27    0.00  0.10    0.12    0.21    0.26    0.32    0.52  1392    1
+sigma_y          6.07    0.01  0.46    5.26    5.75    6.05    6.37    7.09  1417    1
+sigma_alpha     14.66    0.05  2.11   11.27   13.17   14.49   15.90   19.39  1804    1
+sigma_beta       0.51    0.00  0.09    0.35    0.45    0.51    0.57    0.72  1344    1
+alpha0         106.32    0.09  3.61   99.20  103.94  106.31  108.74  113.29  1763    1
+lp__          -437.94    0.23  6.93 -452.80 -442.36 -437.43 -433.01 -425.89   881    1
+
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
 
 ```
 
-```{r,eval=FALSE}
+</details>
+<br>
+
+
+```r
 
   rats%>%
     stan_thin_frac(0.5)
 
 ```
 
-```{r,echo=FALSE}
-rats%>%
-    stan_thin_frac(0.5)%>%
-    details::details(summary = 'Thin 50% of the Samples From each Chain')
+<details closed>
+<summary> <span title='Click to Expand'> Thin 50% of the Samples From each Chain </span> </summary>
+
+```r
+
+Inference for Stan model: rats.
+4 chains, each with iter=1500; warmup=1000; thin=1; 
+post-warmup draws per chain=500, total post-warmup draws=2000.
+
+                 mean se_mean    sd    2.5%     25%     50%     75%   97.5% n_eff Rhat
+alpha[1]       239.89    0.06  2.61  234.83  238.17  239.85  241.66  245.03  1737    1
+alpha[2]       247.88    0.07  2.72  242.43  246.01  247.93  249.74  253.07  1651    1
+alpha[3]       252.43    0.06  2.59  247.35  250.71  252.45  254.22  257.56  1627    1
+alpha[4]       232.57    0.06  2.65  227.57  230.76  232.57  234.31  237.96  1974    1
+alpha[5]       231.55    0.06  2.71  226.40  229.71  231.54  233.44  236.79  1757    1
+alpha[6]       249.77    0.07  2.72  244.44  247.91  249.78  251.65  254.97  1652    1
+alpha[7]       228.63    0.06  2.66  223.31  226.89  228.65  230.42  233.70  1773    1
+alpha[8]       248.42    0.07  2.70  242.94  246.65  248.47  250.25  253.45  1549    1
+alpha[9]       283.28    0.06  2.68  278.02  281.54  283.28  285.06  288.41  1824    1
+alpha[10]      219.32    0.06  2.66  214.14  217.56  219.27  221.15  224.61  1730    1
+alpha[11]      258.33    0.06  2.71  253.12  256.52  258.39  260.21  263.72  1824    1
+alpha[12]      228.27    0.06  2.61  223.28  226.44  228.23  229.99  233.41  1907    1
+alpha[13]      242.39    0.06  2.66  237.01  240.60  242.45  244.16  247.57  2111    1
+alpha[14]      268.36    0.07  2.67  263.07  266.53  268.46  270.15  273.51  1668    1
+alpha[15]      242.80    0.06  2.66  237.47  241.08  242.77  244.60  247.80  1915    1
+alpha[16]      245.39    0.06  2.69  240.07  243.54  245.31  247.16  250.79  1791    1
+alpha[17]      232.14    0.07  2.70  226.75  230.25  232.19  233.94  237.54  1708    1
+alpha[18]      240.45    0.06  2.64  235.46  238.67  240.46  242.20  245.56  1678    1
+alpha[19]      253.74    0.06  2.68  248.38  252.00  253.83  255.52  258.96  1930    1
+alpha[20]      241.66    0.06  2.61  236.51  239.96  241.58  243.32  246.78  1866    1
+alpha[21]      248.67    0.06  2.69  243.50  246.83  248.62  250.47  253.88  1863    1
+alpha[22]      225.35    0.07  2.77  219.86  223.56  225.30  227.21  231.07  1576    1
+alpha[23]      228.54    0.07  2.61  223.43  226.80  228.55  230.26  233.54  1600    1
+alpha[24]      245.08    0.06  2.64  239.80  243.38  245.08  246.81  250.09  1758    1
+alpha[25]      234.24    0.06  2.68  228.92  232.47  234.29  236.09  239.49  1734    1
+alpha[26]      253.89    0.06  2.60  248.68  252.12  253.90  255.65  258.89  1654    1
+alpha[27]      254.29    0.06  2.58  249.26  252.54  254.26  256.02  259.47  1769    1
+alpha[28]      242.96    0.07  2.69  237.65  241.10  243.04  244.80  248.13  1694    1
+alpha[29]      217.91    0.06  2.69  212.79  216.08  217.88  219.73  223.16  1926    1
+alpha[30]      241.49    0.06  2.62  236.66  239.68  241.39  243.34  246.74  1712    1
+beta[1]          6.07    0.01  0.24    5.60    5.92    6.07    6.23    6.54  1897    1
+beta[2]          7.05    0.01  0.25    6.55    6.88    7.05    7.22    7.55  1932    1
+beta[3]          6.48    0.01  0.24    6.03    6.32    6.48    6.64    6.97  1787    1
+beta[4]          5.33    0.01  0.26    4.82    5.15    5.33    5.50    5.81  1479    1
+beta[5]          6.57    0.01  0.24    6.09    6.41    6.57    6.73    7.04  1721    1
+beta[6]          6.17    0.01  0.24    5.70    6.00    6.17    6.34    6.64  1926    1
+beta[7]          5.97    0.01  0.25    5.50    5.80    5.97    6.15    6.44  1897    1
+beta[8]          6.42    0.01  0.24    5.95    6.24    6.41    6.60    6.89  1853    1
+beta[9]          7.04    0.01  0.25    6.53    6.88    7.04    7.21    7.53  1687    1
+beta[10]         5.84    0.01  0.24    5.36    5.68    5.84    6.00    6.31  1743    1
+beta[11]         6.80    0.01  0.25    6.30    6.64    6.80    6.97    7.28  1683    1
+beta[12]         6.11    0.01  0.24    5.64    5.95    6.11    6.28    6.57  1915    1
+beta[13]         6.16    0.01  0.25    5.65    6.00    6.16    6.32    6.66  1581    1
+beta[14]         6.69    0.01  0.25    6.20    6.52    6.69    6.85    7.18  1675    1
+beta[15]         5.41    0.01  0.25    4.94    5.24    5.41    5.58    5.90  1757    1
+beta[16]         5.93    0.01  0.24    5.46    5.77    5.93    6.09    6.39  1770    1
+beta[17]         6.28    0.01  0.24    5.82    6.12    6.29    6.45    6.74  1574    1
+beta[18]         5.84    0.01  0.24    5.36    5.67    5.84    6.01    6.30  1766    1
+beta[19]         6.41    0.01  0.24    5.95    6.24    6.41    6.57    6.86  1812    1
+beta[20]         6.04    0.01  0.25    5.56    5.88    6.05    6.21    6.55  1652    1
+beta[21]         6.40    0.01  0.24    5.93    6.24    6.39    6.55    6.86  1675    1
+beta[22]         5.87    0.01  0.24    5.40    5.70    5.87    6.03    6.32  1695    1
+beta[23]         5.75    0.01  0.25    5.27    5.58    5.74    5.91    6.24  1580    1
+beta[24]         5.89    0.01  0.24    5.41    5.72    5.89    6.04    6.37  1840    1
+beta[25]         6.92    0.01  0.25    6.44    6.75    6.92    7.08    7.42  1624    1
+beta[26]         6.54    0.01  0.24    6.07    6.39    6.54    6.70    7.01  1906    1
+beta[27]         5.90    0.01  0.24    5.40    5.73    5.90    6.07    6.36  1661    1
+beta[28]         5.85    0.01  0.23    5.39    5.70    5.85    6.01    6.30  1682    1
+beta[29]         5.67    0.01  0.25    5.20    5.51    5.67    5.84    6.17  1794    1
+beta[30]         6.13    0.01  0.23    5.68    5.97    6.12    6.28    6.60  1912    1
+mu_alpha       242.49    0.07  2.75  237.12  240.59  242.50  244.40  247.69  1635    1
+mu_beta          6.19    0.00  0.11    5.99    6.12    6.19    6.26    6.40  1931    1
+sigmasq_y       37.12    0.15  5.73   27.69   33.06   36.60   40.58   50.49  1427    1
+sigmasq_alpha  219.35    1.56 65.39  126.94  173.43  209.76  252.95  375.88  1761    1
+sigmasq_beta     0.27    0.00  0.10    0.12    0.20    0.25    0.32    0.52  1387    1
+sigma_y          6.07    0.01  0.46    5.26    5.75    6.05    6.37    7.11  1414    1
+sigma_alpha     14.66    0.05  2.11   11.27   13.17   14.48   15.90   19.39  1804    1
+sigma_beta       0.51    0.00  0.09    0.35    0.45    0.50    0.57    0.72  1344    1
+alpha0         106.33    0.09  3.61   99.20  103.94  106.31  108.74  113.34  1779    1
+lp__          -437.94    0.23  6.94 -452.80 -442.36 -437.44 -433.00 -425.81   892    1
+
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
 
 ```
 
+</details>
+<br>
+
 ### Select and Slice
 
-```{r}
+
+```r
 rats%>%
     stan_select(mu_alpha)%>%
     stan_slice(1:50)
+Inference for Stan model: rats.
+4 chains, each with iter=1050; warmup=1000; thin=1; 
+post-warmup draws per chain=50, total post-warmup draws=200.
 
+           mean se_mean   sd   2.5%   25%    50%    75%  97.5% n_eff Rhat
+mu_alpha 242.53    0.12 2.47 237.91 240.8 242.59 244.18 247.66   456 0.99
+
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
 ```
 
 ### Retain Chains
 
-```{r}
+
+```r
 rats%>%
    stan_retain(chains = 1)
+Inference for Stan model: rats.
+1 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=1000.
+
+                 mean se_mean    sd    2.5%     25%     50%     75%   97.5% n_eff Rhat
+alpha[1]       239.92    0.06  2.63  234.74  238.25  239.91  241.69  245.06  2170    1
+alpha[2]       247.87    0.05  2.61  242.98  246.08  247.82  249.60  252.97  2298    1
+alpha[3]       252.45    0.06  2.70  247.15  250.62  252.45  254.34  257.65  1843    1
+alpha[4]       232.64    0.06  2.65  227.45  230.93  232.57  234.36  237.78  1767    1
+alpha[5]       231.74    0.07  2.71  226.51  229.86  231.68  233.63  236.85  1724    1
+alpha[6]       249.76    0.06  2.75  244.61  247.86  249.82  251.67  255.04  1852    1
+alpha[7]       228.73    0.05  2.51  223.78  227.14  228.70  230.32  233.52  2583    1
+alpha[8]       248.35    0.06  2.74  242.79  246.64  248.36  250.09  253.62  2378    1
+alpha[9]       283.35    0.07  2.66  277.98  281.61  283.41  285.06  288.55  1319    1
+alpha[10]      219.37    0.05  2.55  214.44  217.57  219.29  221.12  224.37  2180    1
+alpha[11]      258.19    0.06  2.60  252.95  256.47  258.25  259.93  262.81  1786    1
+alpha[12]      228.13    0.06  2.62  223.27  226.35  228.16  229.91  233.26  1895    1
+alpha[13]      242.36    0.06  2.65  237.01  240.64  242.42  244.13  247.74  2173    1
+alpha[14]      268.15    0.05  2.69  262.97  266.30  268.21  269.91  273.31  3000    1
+alpha[15]      242.80    0.06  2.59  237.71  241.10  242.72  244.45  247.70  1704    1
+alpha[16]      245.33    0.05  2.62  240.10  243.74  245.26  247.00  250.50  2458    1
+alpha[17]      232.11    0.06  2.73  226.75  230.21  232.12  234.01  237.16  2196    1
+alpha[18]      240.44    0.05  2.68  235.40  238.70  240.47  242.24  245.50  2400    1
+alpha[19]      253.79    0.05  2.66  248.75  251.89  253.84  255.62  259.00  2393    1
+alpha[20]      241.64    0.06  2.64  236.64  239.92  241.57  243.32  246.97  2169    1
+alpha[21]      248.54    0.05  2.61  243.40  246.83  248.54  250.26  253.69  2821    1
+alpha[22]      225.28    0.06  2.76  219.74  223.53  225.22  227.08  230.80  2119    1
+alpha[23]      228.54    0.06  2.61  223.46  226.80  228.53  230.24  233.78  1957    1
+alpha[24]      245.16    0.05  2.55  240.47  243.48  245.14  246.89  250.32  2590    1
+alpha[25]      234.40    0.06  2.78  229.02  232.58  234.35  236.16  239.94  2320    1
+alpha[26]      254.00    0.06  2.63  248.79  252.32  254.02  255.75  259.10  2220    1
+alpha[27]      254.26    0.06  2.49  249.30  252.62  254.22  255.92  259.31  1818    1
+alpha[28]      242.97    0.07  2.83  237.37  241.06  243.05  244.97  248.15  1622    1
+alpha[29]      217.81    0.06  2.70  212.33  216.03  217.83  219.73  222.94  2049    1
+alpha[30]      241.44    0.06  2.63  236.48  239.68  241.41  243.26  246.47  1665    1
+beta[1]          6.06    0.00  0.23    5.60    5.91    6.07    6.21    6.48  2245    1
+beta[2]          7.06    0.01  0.24    6.57    6.89    7.06    7.21    7.56  1707    1
+beta[3]          6.49    0.00  0.23    6.03    6.32    6.49    6.65    6.93  2116    1
+beta[4]          5.34    0.01  0.27    4.79    5.15    5.33    5.53    5.87  2281    1
+beta[5]          6.57    0.01  0.23    6.10    6.41    6.57    6.72    6.99  1751    1
+beta[6]          6.17    0.01  0.25    5.67    6.00    6.17    6.34    6.63  2401    1
+beta[7]          5.98    0.01  0.24    5.52    5.82    5.98    6.14    6.44  2003    1
+beta[8]          6.41    0.01  0.24    5.95    6.24    6.40    6.58    6.89  1659    1
+beta[9]          7.05    0.01  0.24    6.60    6.89    7.05    7.22    7.53  1659    1
+beta[10]         5.84    0.01  0.23    5.37    5.68    5.84    6.00    6.29  1914    1
+beta[11]         6.79    0.01  0.25    6.31    6.63    6.79    6.97    7.27  1469    1
+beta[12]         6.12    0.01  0.25    5.62    5.95    6.11    6.30    6.61  1922    1
+beta[13]         6.16    0.01  0.26    5.65    6.00    6.16    6.33    6.68  2391    1
+beta[14]         6.68    0.01  0.25    6.18    6.52    6.69    6.84    7.18  2237    1
+beta[15]         5.42    0.01  0.25    4.89    5.25    5.42    5.58    5.90  1693    1
+beta[16]         5.92    0.01  0.24    5.45    5.74    5.92    6.09    6.40  2303    1
+beta[17]         6.27    0.00  0.24    5.83    6.11    6.27    6.44    6.73  2462    1
+beta[18]         5.84    0.01  0.24    5.37    5.68    5.85    6.01    6.31  2121    1
+beta[19]         6.41    0.01  0.24    5.94    6.23    6.41    6.58    6.85  2258    1
+beta[20]         6.05    0.01  0.25    5.55    5.89    6.05    6.21    6.53  1895    1
+beta[21]         6.40    0.01  0.24    5.93    6.25    6.41    6.56    6.86  1789    1
+beta[22]         5.85    0.01  0.24    5.41    5.68    5.85    6.02    6.28  2047    1
+beta[23]         5.75    0.01  0.25    5.26    5.59    5.75    5.92    6.24  1552    1
+beta[24]         5.89    0.01  0.24    5.40    5.73    5.88    6.05    6.35  1880    1
+beta[25]         6.90    0.01  0.24    6.42    6.75    6.90    7.06    7.36  2259    1
+beta[26]         6.55    0.01  0.25    6.05    6.39    6.54    6.70    7.06  1926    1
+beta[27]         5.91    0.01  0.25    5.41    5.74    5.91    6.07    6.40  2106    1
+beta[28]         5.84    0.01  0.24    5.40    5.68    5.84    6.01    6.31  1765    1
+beta[29]         5.68    0.01  0.25    5.19    5.52    5.67    5.85    6.18  2156    1
+beta[30]         6.12    0.00  0.23    5.68    5.96    6.13    6.28    6.59  2313    1
+mu_alpha       242.45    0.07  2.65  237.11  240.71  242.54  244.26  247.36  1294    1
+mu_beta          6.18    0.00  0.10    5.98    6.12    6.18    6.25    6.39  1667    1
+sigmasq_y       37.25    0.22  5.68   28.06   33.17   36.69   40.47   50.07   698    1
+sigmasq_alpha  215.89    1.61 59.38  128.18  174.71  206.40  249.90  350.45  1363    1
+sigmasq_beta     0.27    0.00  0.11    0.13    0.20    0.26    0.32    0.52   921    1
+sigma_y          6.09    0.02  0.46    5.30    5.76    6.06    6.36    7.08   713    1
+sigma_alpha     14.56    0.05  1.96   11.32   13.22   14.37   15.81   18.72  1530    1
+sigma_beta       0.52    0.00  0.10    0.35    0.45    0.51    0.57    0.72   906    1
+alpha0         106.39    0.09  3.45   99.10  104.03  106.48  108.69  113.09  1623    1
+lp__          -437.72    0.44  7.11 -453.66 -442.15 -437.13 -432.48 -425.68   258    1
+
+Samples were drawn using NUTS(diag_e) at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
    
 rats%>%
    stan_retain(chains = c(1,3))
+Inference for Stan model: rats.
+2 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=2000.
+
+                 mean se_mean    sd    2.5%     25%     50%     75%   97.5% n_eff Rhat
+alpha[1]       239.93    0.05  2.62  234.76  238.23  239.93  241.67  245.03  3099    1
+alpha[2]       247.79    0.05  2.66  242.61  246.02  247.77  249.62  252.97  2933    1
+alpha[3]       252.42    0.05  2.61  247.18  250.62  252.44  254.21  257.37  2701    1
+alpha[4]       232.59    0.05  2.62  227.48  230.80  232.53  234.29  237.85  2701    1
+alpha[5]       231.64    0.05  2.79  226.42  229.75  231.62  233.54  236.83  3453    1
+alpha[6]       249.73    0.05  2.67  244.61  247.93  249.75  251.49  254.80  3206    1
+alpha[7]       228.71    0.04  2.63  223.56  227.05  228.73  230.47  233.87  3833    1
+alpha[8]       248.39    0.04  2.66  243.01  246.67  248.41  250.12  253.47  3636    1
+alpha[9]       283.37    0.05  2.67  277.99  281.65  283.42  285.09  288.65  2703    1
+alpha[10]      219.35    0.05  2.63  214.14  217.61  219.29  221.14  224.52  3070    1
+alpha[11]      258.24    0.05  2.73  252.73  256.40  258.35  260.10  263.17  2745    1
+alpha[12]      228.13    0.05  2.61  223.12  226.41  228.11  229.81  233.39  3232    1
+alpha[13]      242.39    0.05  2.65  237.01  240.65  242.44  244.15  247.57  3270    1
+alpha[14]      268.26    0.05  2.68  262.94  266.44  268.30  270.10  273.29  3253    1
+alpha[15]      242.77    0.05  2.61  237.60  241.07  242.71  244.45  247.88  3251    1
+alpha[16]      245.33    0.04  2.61  240.00  243.68  245.30  247.04  250.36  3807    1
+alpha[17]      232.12    0.05  2.66  226.96  230.28  232.14  233.96  237.32  3383    1
+alpha[18]      240.42    0.05  2.71  235.29  238.64  240.43  242.24  245.61  3322    1
+alpha[19]      253.78    0.05  2.65  248.60  251.96  253.84  255.59  259.02  3211    1
+alpha[20]      241.58    0.05  2.59  236.55  239.91  241.54  243.28  246.81  3202    1
+alpha[21]      248.57    0.04  2.68  243.27  246.77  248.53  250.35  253.76  3556    1
+alpha[22]      225.31    0.05  2.88  219.74  223.36  225.28  227.25  231.13  3694    1
+alpha[23]      228.52    0.05  2.69  223.14  226.68  228.56  230.32  233.73  3269    1
+alpha[24]      245.14    0.04  2.56  240.26  243.42  245.15  246.85  250.31  3584    1
+alpha[25]      234.40    0.05  2.68  229.18  232.65  234.40  236.12  239.76  3428    1
+alpha[26]      253.95    0.05  2.63  248.71  252.23  253.88  255.67  259.12  3152    1
+alpha[27]      254.23    0.05  2.57  249.21  252.55  254.22  255.95  259.36  3214    1
+alpha[28]      243.04    0.05  2.68  237.60  241.24  243.10  244.90  248.14  2857    1
+alpha[29]      217.91    0.05  2.70  212.69  216.10  217.91  219.76  223.15  3334    1
+alpha[30]      241.49    0.05  2.63  236.35  239.70  241.46  243.26  246.51  3283    1
+beta[1]          6.06    0.00  0.23    5.60    5.91    6.06    6.21    6.52  3456    1
+beta[2]          7.05    0.00  0.25    6.56    6.89    7.06    7.22    7.55  2749    1
+beta[3]          6.48    0.00  0.23    6.02    6.32    6.49    6.65    6.94  2486    1
+beta[4]          5.34    0.01  0.27    4.81    5.16    5.34    5.52    5.86  2645    1
+beta[5]          6.57    0.00  0.24    6.09    6.40    6.57    6.73    7.02  2798    1
+beta[6]          6.17    0.00  0.25    5.68    6.00    6.17    6.34    6.63  2961    1
+beta[7]          5.97    0.00  0.24    5.51    5.80    5.97    6.14    6.43  3017    1
+beta[8]          6.41    0.00  0.24    5.94    6.24    6.41    6.58    6.89  2634    1
+beta[9]          7.05    0.01  0.25    6.57    6.89    7.05    7.22    7.55  2503    1
+beta[10]         5.84    0.00  0.24    5.35    5.67    5.84    6.01    6.31  2944    1
+beta[11]         6.80    0.00  0.25    6.31    6.63    6.80    6.97    7.27  2519    1
+beta[12]         6.12    0.00  0.25    5.64    5.96    6.12    6.30    6.58  3406    1
+beta[13]         6.16    0.00  0.25    5.66    6.00    6.16    6.32    6.66  2941    1
+beta[14]         6.69    0.00  0.24    6.21    6.52    6.69    6.85    7.17  2680    1
+beta[15]         5.41    0.01  0.25    4.92    5.24    5.41    5.58    5.90  2289    1
+beta[16]         5.92    0.00  0.24    5.45    5.75    5.93    6.10    6.39  3040    1
+beta[17]         6.28    0.00  0.24    5.83    6.12    6.28    6.44    6.74  2847    1
+beta[18]         5.84    0.00  0.25    5.36    5.67    5.84    6.00    6.32  2542    1
+beta[19]         6.40    0.00  0.24    5.93    6.23    6.41    6.57    6.85  2731    1
+beta[20]         6.05    0.00  0.25    5.57    5.89    6.05    6.21    6.54  3117    1
+beta[21]         6.40    0.00  0.25    5.92    6.24    6.41    6.57    6.87  4018    1
+beta[22]         5.86    0.00  0.24    5.41    5.69    5.85    6.02    6.31  2991    1
+beta[23]         5.75    0.00  0.25    5.26    5.58    5.75    5.91    6.23  2926    1
+beta[24]         5.89    0.00  0.24    5.41    5.73    5.90    6.05    6.35  3390    1
+beta[25]         6.91    0.00  0.25    6.41    6.74    6.90    7.07    7.39  2701    1
+beta[26]         6.54    0.00  0.24    6.06    6.39    6.54    6.70    7.03  3062    1
+beta[27]         5.90    0.00  0.24    5.41    5.73    5.91    6.06    6.38  3491    1
+beta[28]         5.85    0.00  0.24    5.40    5.68    5.84    6.00    6.31  2925    1
+beta[29]         5.68    0.00  0.25    5.21    5.51    5.67    5.85    6.17  3167    1
+beta[30]         6.12    0.00  0.23    5.68    5.96    6.12    6.27    6.58  3553    1
+mu_alpha       242.46    0.08  2.76  236.89  240.64  242.54  244.35  247.70  1114    1
+mu_beta          6.19    0.00  0.10    5.99    6.12    6.19    6.25    6.40  2279    1
+sigmasq_y       37.16    0.17  5.69   28.01   33.14   36.53   40.58   50.11  1107    1
+sigmasq_alpha  217.43    1.40 60.83  127.60  174.99  208.54  249.60  367.33  1885    1
+sigmasq_beta     0.27    0.00  0.10    0.13    0.20    0.26    0.32    0.52  1534    1
+sigma_y          6.08    0.01  0.46    5.29    5.76    6.04    6.37    7.08  1119    1
+sigma_alpha     14.61    0.04  1.99   11.30   13.23   14.44   15.80   19.17  2051    1
+sigma_beta       0.51    0.00  0.09    0.35    0.45    0.51    0.57    0.72  1420    1
+alpha0         106.37    0.08  3.56   99.21  104.05  106.42  108.70  113.59  2066    1
+lp__          -437.92    0.30  7.09 -453.67 -442.33 -437.28 -433.00 -425.43   543    1
+
+Samples were drawn using NUTS(diag_e) at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
 ```
 
 
@@ -200,9 +1019,21 @@ rats%>%
 
 Users can filter conditionally on posterior samples. The function will locate the indicies that the logical expression returns for each chain. Due to a constraint in `rstan::extract` with `permuted=FALSE` chains are assumed to be of equal size. To keep this assumption the chain size returned is the length of the shortest conditional chain. If there is a chain that results in no samples then the chain is dropped with a warning. If no elements are returned for any chain then `NULL` is returned.
 
-```{r}
+
+```r
 rats%>%
    stan_select(mu_alpha,mu_beta)%>%
    stan_filter(mu_beta < 6)
- 
+Inference for Stan model: rats.
+4 chains, each with iter=1028; warmup=1000; thin=1; 
+post-warmup draws per chain=28, total post-warmup draws=112.
+
+           mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
+mu_alpha 242.32    0.34 2.81 236.93 240.39 242.33 244.21 247.74    68 1.05
+mu_beta    5.95    0.00 0.05   5.83   5.94   5.96   5.98   6.00   120 0.99
+
+Samples were drawn using  at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
 ```

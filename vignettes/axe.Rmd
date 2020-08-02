@@ -7,14 +7,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 
-```{r setup}
+
+
+```r
 library(shredder)
 library(butcher)
 library(details)
@@ -22,27 +18,192 @@ library(details)
 
 `stanfit` object hold a lot of information and some of the elements that take of most of the memory are not necessarily needed in post-processing. This vignette introduces verbs that can safely remove these elements without corrupting the stanfit object.
 
-```{r,results='hide',message=FALSE}
-rats <- rats_example(nCores = 1)
 
+```r
+rats <- rats_example(nCores = 1)
 ```
  
-```{details, details.summary = 'The Model'}
+
+```details
 rats@stanmodel
 ```
 
-```{details, details.summary = 'Model Summary'}
+
+<details closed>
+<summary> <span title='Click to Open'> The Model </span> </summary>
+
+```r
+
+S4 class stanmodel 'rats' coded as follows:
+data {
+  int<lower=0> N;
+  int<lower=0> T;
+  real x[T];
+  real y[N,T];
+  real xbar;
+}
+parameters {
+  real alpha[N];
+  real beta[N];
+
+  real mu_alpha;
+  real mu_beta;          // beta.c in original bugs model
+
+  real<lower=0> sigmasq_y;
+  real<lower=0> sigmasq_alpha;
+  real<lower=0> sigmasq_beta;
+}
+transformed parameters {
+  real<lower=0> sigma_y;       // sigma in original bugs model
+  real<lower=0> sigma_alpha;
+  real<lower=0> sigma_beta;
+
+  sigma_y = sqrt(sigmasq_y);
+  sigma_alpha = sqrt(sigmasq_alpha);
+  sigma_beta = sqrt(sigmasq_beta);
+}
+model {
+  mu_alpha ~ normal(0, 100);
+  mu_beta ~ normal(0, 100);
+  sigmasq_y ~ inv_gamma(0.001, 0.001);
+  sigmasq_alpha ~ inv_gamma(0.001, 0.001);
+  sigmasq_beta ~ inv_gamma(0.001, 0.001);
+  alpha ~ normal(mu_alpha, sigma_alpha); // vectorized
+  beta ~ normal(mu_beta, sigma_beta);  // vectorized
+  for (n in 1:N)
+    for (t in 1:T) 
+      y[n,t] ~ normal(alpha[n] + beta[n] * (x[t] - xbar), sigma_y);
+
+}
+generated quantities {
+  real alpha0;
+  alpha0 = mu_alpha - xbar * mu_beta;
+} 
+
+```
+
+</details>
+<br>
+
+
+```details
 rats
 ```
 
+
+<details closed>
+<summary> <span title='Click to Open'> Model Summary </span> </summary>
+
+```r
+
+Inference for Stan model: rats.
+4 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=4000.
+
+                 mean se_mean    sd    2.5%     25%     50%     75%   97.5% n_eff Rhat
+alpha[1]       239.93    0.03  2.61  234.75  238.22  239.91  241.71  244.96  6102    1
+alpha[2]       247.80    0.04  2.70  242.54  245.97  247.79  249.62  253.07  5745    1
+alpha[3]       252.44    0.04  2.60  247.27  250.72  252.46  254.21  257.55  4957    1
+alpha[4]       232.56    0.04  2.65  227.48  230.69  232.54  234.34  237.79  5564    1
+alpha[5]       231.58    0.03  2.73  226.42  229.71  231.56  233.46  236.86  6405    1
+alpha[6]       249.76    0.04  2.71  244.61  247.94  249.74  251.60  255.03  5168    1
+alpha[7]       228.66    0.03  2.67  223.37  226.97  228.65  230.47  233.89  6562    1
+alpha[8]       248.41    0.03  2.69  243.04  246.62  248.43  250.21  253.52  5921    1
+alpha[9]       283.31    0.04  2.70  277.91  281.57  283.37  285.05  288.59  4862    1
+alpha[10]      219.31    0.03  2.66  214.14  217.52  219.26  221.14  224.55  5997    1
+alpha[11]      258.25    0.04  2.71  252.87  256.39  258.32  260.12  263.41  5403    1
+alpha[12]      228.17    0.04  2.63  223.21  226.39  228.14  229.91  233.39  5125    1
+alpha[13]      242.39    0.04  2.68  237.08  240.57  242.45  244.22  247.70  5586    1
+alpha[14]      268.25    0.04  2.66  262.97  266.43  268.29  270.08  273.34  5341    1
+alpha[15]      242.73    0.03  2.65  237.51  241.02  242.71  244.48  247.91  5750    1
+alpha[16]      245.35    0.03  2.68  239.99  243.54  245.32  247.15  250.60  6011    1
+alpha[17]      232.16    0.04  2.71  226.83  230.31  232.15  233.99  237.51  5920    1
+alpha[18]      240.42    0.03  2.64  235.33  238.69  240.43  242.18  245.52  5940    1
+alpha[19]      253.77    0.04  2.68  248.45  251.99  253.80  255.54  259.06  5602    1
+alpha[20]      241.62    0.03  2.60  236.58  239.91  241.57  243.34  246.78  6264    1
+alpha[21]      248.59    0.03  2.70  243.24  246.79  248.56  250.41  253.85  6674    1
+alpha[22]      225.31    0.04  2.77  219.92  223.48  225.28  227.18  230.91  6170    1
+alpha[23]      228.52    0.03  2.61  223.43  226.79  228.54  230.24  233.62  6656    1
+alpha[24]      245.11    0.03  2.62  239.91  243.40  245.14  246.83  250.29  6691    1
+alpha[25]      234.44    0.03  2.69  229.26  232.63  234.43  236.23  239.82  6256    1
+alpha[26]      253.92    0.04  2.61  248.70  252.16  253.92  255.65  259.09  5479    1
+alpha[27]      254.27    0.03  2.57  249.27  252.55  254.25  255.96  259.55  5780    1
+alpha[28]      243.01    0.04  2.70  237.55  241.20  243.04  244.87  248.15  5767    1
+alpha[29]      217.91    0.03  2.69  212.74  216.09  217.89  219.71  223.13  6317    1
+alpha[30]      241.42    0.03  2.61  236.37  239.64  241.41  243.24  246.48  6029    1
+beta[1]          6.06    0.00  0.24    5.59    5.91    6.07    6.22    6.53  5584    1
+beta[2]          7.05    0.00  0.26    6.55    6.88    7.05    7.22    7.55  4936    1
+beta[3]          6.48    0.00  0.24    6.02    6.32    6.48    6.65    6.97  4433    1
+beta[4]          5.34    0.00  0.26    4.82    5.17    5.34    5.52    5.84  5458    1
+beta[5]          6.57    0.00  0.24    6.09    6.41    6.57    6.73    7.05  5527    1
+beta[6]          6.17    0.00  0.24    5.70    6.00    6.17    6.34    6.64  5028    1
+beta[7]          5.97    0.00  0.24    5.50    5.81    5.97    6.14    6.44  5714    1
+beta[8]          6.42    0.00  0.24    5.95    6.25    6.41    6.59    6.90  5518    1
+beta[9]          7.05    0.00  0.25    6.54    6.89    7.05    7.22    7.54  5162    1
+beta[10]         5.84    0.00  0.24    5.36    5.68    5.84    6.00    6.31  5171    1
+beta[11]         6.80    0.00  0.25    6.31    6.63    6.80    6.97    7.28  5098    1
+beta[12]         6.12    0.00  0.24    5.65    5.96    6.11    6.28    6.58  5552    1
+beta[13]         6.16    0.00  0.25    5.65    6.01    6.16    6.32    6.66  5429    1
+beta[14]         6.69    0.00  0.24    6.22    6.52    6.69    6.85    7.17  5107    1
+beta[15]         5.42    0.00  0.25    4.94    5.25    5.41    5.59    5.91  4556    1
+beta[16]         5.93    0.00  0.24    5.45    5.77    5.93    6.09    6.39  5506    1
+beta[17]         6.28    0.00  0.24    5.82    6.12    6.28    6.44    6.74  5684    1
+beta[18]         5.84    0.00  0.24    5.36    5.68    5.83    6.00    6.30  5159    1
+beta[19]         6.40    0.00  0.24    5.93    6.23    6.40    6.56    6.85  5036    1
+beta[20]         6.05    0.00  0.25    5.56    5.89    6.05    6.22    6.54  6193    1
+beta[21]         6.40    0.00  0.24    5.93    6.24    6.40    6.56    6.86  6641    1
+beta[22]         5.86    0.00  0.24    5.40    5.69    5.86    6.02    6.31  5890    1
+beta[23]         5.75    0.00  0.24    5.27    5.59    5.75    5.91    6.23  6016    1
+beta[24]         5.89    0.00  0.24    5.41    5.73    5.89    6.05    6.37  6260    1
+beta[25]         6.91    0.00  0.25    6.42    6.74    6.90    7.07    7.40  4974    1
+beta[26]         6.54    0.00  0.24    6.06    6.39    6.55    6.70    7.01  5722    1
+beta[27]         5.90    0.00  0.24    5.41    5.73    5.90    6.06    6.38  5821    1
+beta[28]         5.85    0.00  0.23    5.40    5.69    5.84    6.01    6.31  5740    1
+beta[29]         5.68    0.00  0.25    5.20    5.51    5.67    5.84    6.17  5303    1
+beta[30]         6.13    0.00  0.23    5.68    5.97    6.12    6.28    6.59  6428    1
+mu_alpha       242.47    0.05  2.76  236.95  240.61  242.50  244.38  247.70  3585    1
+mu_beta          6.19    0.00  0.11    5.98    6.12    6.19    6.25    6.40  4462    1
+sigmasq_y       37.16    0.12  5.69   27.74   33.14   36.56   40.58   50.12  2366    1
+sigmasq_alpha  218.39    1.06 63.89  126.08  173.31  208.62  251.30  372.24  3615    1
+sigmasq_beta     0.27    0.00  0.10    0.13    0.21    0.26    0.32    0.52  3028    1
+sigma_y          6.08    0.01  0.46    5.27    5.76    6.05    6.37    7.08  2370    1
+sigma_alpha     14.63    0.03  2.07   11.23   13.16   14.44   15.85   19.29  3919    1
+sigma_beta       0.52    0.00  0.09    0.36    0.45    0.51    0.57    0.72  2897    1
+alpha0         106.39    0.06  3.60   99.23  104.00  106.44  108.76  113.55  4122    1
+lp__          -437.92    0.21  7.04 -453.36 -442.36 -437.34 -432.93 -425.72  1098    1
+
+Samples were drawn using NUTS(diag_e) at Fri Jul 31 07:47:56 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
+
+```
+
+</details>
+<br>
+
 We use the [butcher](https://tidymodels.github.io/butcher/) package to evaluate the size of each element.
 
-```{r}
+
+```r
 
 rats%>%
   attributes()%>%
   butcher::weigh(units = 'MB')
-
+#> # A tibble: 404 x 2
+#>    object                 size
+#>    <chr>                 <dbl>
+#>  1 stanmodel            5.86  
+#>  2 .MISC                0.0449
+#>  3 sim.samples.alpha[1] 0.0160
+#>  4 sim.samples.alpha[2] 0.0160
+#>  5 sim.samples.alpha[3] 0.0160
+#>  6 sim.samples.alpha[4] 0.0160
+#>  7 sim.samples.alpha[5] 0.0160
+#>  8 sim.samples.alpha[6] 0.0160
+#>  9 sim.samples.alpha[7] 0.0160
+#> 10 sim.samples.alpha[8] 0.0160
+#> # … with 394 more rows
 ```
  
 ## stan_axe
@@ -53,7 +214,8 @@ rats%>%
   - The cached cpp object stored in fit@.MISC$stan_fit_instance
   - The stanmodel stored in fit@stanmodel
  
-```{r}
+
+```r
 
 summary <- function(x){
   
@@ -72,7 +234,8 @@ summary <- function(x){
   }
 ```
 
-```{r}
+
+```r
 butcher_rats <- rats%>%
   summary()
 
@@ -97,12 +260,12 @@ butcher_params <- rats%>%
   stan_axe(what = 'summary')%>%
   stan_select(alpha)%>%
   summary()
-
 ```
   
 ## Compare Object Sizes 
  
-```{r}
+
+```r
 tbl <- purrr::map_df(
   list('full' = butcher_rats,
        'fit_instance' = butcher_fit_instance,
@@ -112,6 +275,17 @@ tbl <- purrr::map_df(
   identity,.id='axe')
 ```
  
-```{r}
+
+```r
 knitr::kable(tbl) 
 ```
+
+
+
+|axe          |     min|      max|      mean|        sd|       sum|
+|:------------|-------:|--------:|---------:|---------:|---------:|
+|full         | 4.8e-05| 5.860896| 0.0258238| 0.2911213| 10.432832|
+|fit_instance | 4.8e-05| 5.860896| 0.0258238| 0.2911213| 10.432832|
+|stanmodel    | 4.8e-05| 0.044880| 0.0113448| 0.0074566|  4.571936|
+|summary      | 4.8e-05| 0.016048| 0.0112342| 0.0072865|  4.527392|
+|param        | 5.6e-05| 0.016048| 0.0108903| 0.0073964|  2.014712|

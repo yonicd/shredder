@@ -1,0 +1,208 @@
+---
+title: "Working with rstan"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working with rstan}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+stopifnot(require(knitr))
+options(width = 90)
+opts_chunk$set(
+  comment = NA,
+  message = FALSE,
+  warning = FALSE,
+  eval = TRUE,
+  dev = "png",
+  dpi = 150,
+  fig.asp = 0.8,
+  fig.width = 5,
+  out.width = "60%",
+  fig.align = "center"
+)
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(shredder)
+library(rstan)
+```
+
+```{r,results='hide',warning=FALSE,message=FALSE}
+rats <- shredder::rats_example(nCores = 1)
+```
+
+```{r,eval = FALSE}
+rats
+```
+
+```{r,echo = FALSE}
+rats%>%
+  details::details(summary = 'Standard Output')
+```
+
+```{r,echo=FALSE}
+details::details(system.file('rats.stan',package='shredder'),
+                 summary = 'The Stan Script',lang = 'c')
+```
+
+
+## Pars
+
+### Names
+
+```{r}
+rats%>%
+  stan_names()
+
+rats%>%
+  stan_names(expand = TRUE)
+```
+
+### Select
+
+```{r}
+rats%>%
+  stan_select(mu_alpha)
+
+rats%>%
+  stan_select(mu_alpha,mu_beta)
+
+rats%>%
+  stan_select(!!!rlang::syms(c('mu_alpha','mu_beta')))
+
+
+rats%>%
+  stan_select(alpha[1],alpha[2])
+
+
+rats%>%
+  stan_select(!!!rlang::syms(sprintf('alpha[%s]',1:5)))
+
+```
+
+### Select with Partials
+
+
+```{r,eval=FALSE}
+rats%>%
+  stan_select(stan_contains('alpha'))
+
+```
+
+```{r,echo = FALSE}
+rats%>%
+  stan_select(stan_contains('alpha'))%>%
+  details::details(summary = 'Select all Parameters that contain "alpha"')
+
+```
+
+```{r}
+rats%>%
+  stan_select(stan_contains('alpha\\[1\\]'))
+
+rats%>%
+  stan_select(stan_contains('alpha\\[[1-9]\\]'))
+
+rats%>%
+  stan_select(stan_ends_with('0'))
+
+rats%>%
+  stan_select(mu_alpha,stan_ends_with('0'),beta[1])
+```
+
+## Post-warmup samples
+
+### Subsetting post warmup samples
+
+```{r,eval=FALSE}
+
+  rats%>%
+    stan_slice(1:50,inc_warmup = TRUE)
+
+```
+
+```{r,echo=FALSE}
+
+  rats%>%
+    stan_slice(1:50,inc_warmup = TRUE)%>%
+  details::details(summary = 'First 50 with warmup samples')
+
+```
+
+```{r,eval=FALSE}
+  rats%>%
+    stan_slice(1:50,inc_warmup = FALSE)
+
+```
+
+
+```{r,echo=FALSE}
+  rats%>%
+    stan_slice(1:50,inc_warmup = FALSE)%>%
+  details::details(summary = 'First 50 draws from each chain <em>without</em> warmup samples')
+
+```
+
+```{r,eval=FALSE}
+  rats%>%
+    stan_thin_n(2)
+
+```
+
+```{r,echo=FALSE}
+  rats%>%
+    stan_thin_n(2)%>%
+  details::details(summary = 'Thin every other sample')
+
+```
+
+```{r,eval=FALSE}
+
+  rats%>%
+    stan_thin_frac(0.5)
+
+```
+
+```{r,echo=FALSE}
+rats%>%
+    stan_thin_frac(0.5)%>%
+    details::details(summary = 'Thin 50% of the Samples From each Chain')
+
+```
+
+### Select and Slice
+
+```{r}
+rats%>%
+    stan_select(mu_alpha)%>%
+    stan_slice(1:50)
+
+```
+
+### Retain Chains
+
+```{r}
+rats%>%
+   stan_retain(chains = 1)
+   
+rats%>%
+   stan_retain(chains = c(1,3))
+```
+
+
+### Filter
+
+Users can filter conditionally on posterior samples. The function will locate the indicies that the logical expression returns for each chain. Due to a constraint in `rstan::extract` with `permuted=FALSE` chains are assumed to be of equal size. To keep this assumption the chain size returned is the length of the shortest conditional chain. If there is a chain that results in no samples then the chain is dropped with a warning. If no elements are returned for any chain then `NULL` is returned.
+
+```{r}
+rats%>%
+   stan_select(mu_alpha,mu_beta)%>%
+   stan_filter(mu_beta < 6)
+ 
+```
