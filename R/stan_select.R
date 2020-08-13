@@ -54,17 +54,16 @@ stan_select.stanfit <- function(object, ...){
   object@sim$dims_oi <- object@sim$dims_oi[object@sim$pars_oi]
   object@sim$n_flatnames <- length(object@sim$fnames_oi)
   
-  
-  object@inits <- purrr::map(object@inits,.f=function(x,y) x[y], y = pars)
-  
   object@model_pars <- intersect(object@model_pars,pars)
-
-  bad_pars <- setdiff(pars,names(object@par_dims))
-
-  if(length(bad_pars)>0){
-    return(message(sprintf('invalid pars selected: %s',paste0(sprintf("'%s'",bad_pars),collapse = ', '))))
+  
+  object@inits <- purrr::map(object@inits,.f=function(x,y) x[y], y = object@model_pars)
+  
+  pars <- intersect(pars,names(object@par_dims))
+   
+  if(!length(pars)){
+    return(message('No pars selected'))
   }
-    
+   
   object@par_dims <- object@par_dims[pars]
   
   this <- grep(paste0(pars,collapse = '|'),object@sim$fnames_oi,value = TRUE)

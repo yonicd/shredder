@@ -1,0 +1,92 @@
+---
+title: "Benchmarking"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Benchmarking}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+  
+```{r, include = FALSE}
+stopifnot(require(knitr))
+options(width = 90)
+opts_chunk$set(
+  fig.path = './',
+  comment = NA,
+  message = FALSE,
+  warning = FALSE,
+  eval = TRUE,
+  dev = "png",
+  dpi = 150,
+  fig.asp = 0.8,
+  fig.width = 5,
+  out.width = "60%",
+  fig.align = "center"
+)
+```
+
+```{r setup}
+library(rstan)
+library(shredder)
+library(tidybayes)
+library(microbenchmark)
+rstan_options(auto_write = TRUE)
+```
+
+Set seed
+```{r}
+set.seed(1234)
+```
+
+Run Model
+
+```{r,results='hide',warning=FALSE,message=FALSE}
+rats <- shredder::rats_example(nCores = 4)
+```
+
+## Set up functions
+
+### tidybayes
+
+```{r}
+tb <- function(mod){
+  mod%>%
+    tidybayes::spread_draws(mu_alpha,mu_beta)  
+}
+```
+
+### tidybayes with shredder select
+
+```{r}
+sh_select <- function(mod){
+  mod%>%
+    stan_select(mu_alpha,mu_beta)%>%
+    tidybayes::spread_draws(mu_alpha,mu_beta)  
+}
+```
+
+### tidybayes with shredder thin (every 20th sample)
+```{r}
+sh_thin <- function(mod){
+  mod%>%
+    stan_thin_n(20)%>%
+    tidybayes::spread_draws(mu_alpha,mu_beta)
+}
+```
+
+## Benchmark
+
+### Run benchmark
+
+```{r}
+bench <- microbenchmark(
+  "tidybayes" = {tb(rats)},
+  "shredder select" = {sh_select(rats)},
+  "shredder thin" = {sh_thin(rats)})
+```
+
+### Output
+
+```{r benchmark}
+ggplot2::autoplot(bench)
+```

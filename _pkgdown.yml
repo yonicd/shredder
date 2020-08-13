@@ -42,6 +42,9 @@ articles:
   - title: "Extending"
     contents:
       - tidybayes
+  - title: "Benchmarking"
+    contents:      
+      - benchmark
   - title: "Unit Tests"
     contents: 
       - tests_and_coverage
