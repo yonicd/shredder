@@ -18,14 +18,19 @@ stanfit object
 Choose variables from a stanfit object
 }
 \examples{
+\donttest{
 rats <- rats_example(nCores = 1)
 
 rats\%>\%stan_select(mu_beta)
 
 rats\%>\%stan_select(mu_beta,beta)
 
-rats\%>\%stan_select(!!!rlang::syms(c('mu_beta','mu_alpha')))
+rats\%>\%stan_select('mu_beta')
 
+tmp <- c('mu_beta','mu_alpha')
+
+rats\%>\%stan_select(!!!rlang::syms(tmp))
+}
 }
 \seealso{
 \link[rlang:nse-defuse]{quotation}, \link[rlang:quo_label]{quo_label}, \link[purrr:map]{map}

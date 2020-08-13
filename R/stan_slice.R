@@ -6,6 +6,7 @@
 #' @param inc_warmup logical, include warmup in output, Default: TRUE
 #' @return stanfit object
 #' @examples 
+#' \donttest{
 #' rats <- rats_example(nCores = 1)
 #' 
 #' rats%>%
@@ -15,7 +16,7 @@
 #' rats%>%
 #'   stan_select(mu_alpha)%>%
 #'   stan_slice(1:30,inc_warmup = FALSE)
-#' 
+#' }
 #' @rdname stan_slice
 #' @family filtering
 #' @export 

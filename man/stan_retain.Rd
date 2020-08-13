@@ -18,6 +18,7 @@ stanfit object
 Use stan_retain() to choose chains to retain.
 }
 \examples{
+\donttest{
 rats <- rats_example(nCores = 1)
 
 #retain first chain only
@@ -27,7 +28,7 @@ rats\%>\%
 #retain chains 1 and 3
 rats\%>\%
   stan_retain(c(1,3))
-  
+ }
 }
 \seealso{
 Other utility: 

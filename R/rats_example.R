@@ -4,9 +4,11 @@
 #' @param nCores numeric, Maximum number of cores to use, Default: pmin(parallel::detectCores(),4)
 #' @return stanfit object
 #' @examples 
-#'   library(shredder)
+#' \donttest{
+#'   require(shredder)
 #'   rats <- rats_example(nCores = 1)
 #'   rats
+#' }
 #' @seealso 
 #'  [rstan][rstan::stan]
 #'  [detectCores][parallel::detectCores]

@@ -22,9 +22,11 @@ stanfit object
 Run Rats data model
 }
 \examples{
-  library(shredder)
+\donttest{
+  require(shredder)
   rats <- rats_example(nCores = 1)
   rats
+}
 }
 \seealso{
 \link[rstan:stan]{rstan}

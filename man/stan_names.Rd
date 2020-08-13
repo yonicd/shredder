@@ -19,12 +19,13 @@ character
 Functions to get the names of a stanfit object.
 }
 \examples{
+\donttest{
 rats <- rats_example(nCores = 1)
 
 rats\%>\%stan_names()
 
 rats\%>\%stan_names(expand = TRUE)
-
+}
 }
 \seealso{
 Other utility: 

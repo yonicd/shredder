@@ -26,6 +26,7 @@ character
 Partial match functions used in \link[=stan_select]{stan_select}
 }
 \examples{
+\donttest{
 rats <- rats_example()
 
 rats\%>\%
@@ -36,21 +37,21 @@ rats\%>\%
 
 rats\%>\%
   stan_select(mu_alpha, stan_contains('sq'))
-  
+
+ 
 rats\%>\%
   stan_select(stan_starts_with('mu'))
 
 rats\%>\%
   stan_select(stan_starts_with('mu'),stan_contains('sq'))
-  
-  
+
 rats\%>\%
   stan_select(stan_ends_with('0'))
 
 # free form regex in contains   
 rats\%>\%
   stan_select(stan_contains('sq|mu'))
-
+}
 
 }
 \seealso{

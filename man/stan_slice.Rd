@@ -21,6 +21,7 @@ Choose post-warumps samples by their ordinal
 position from each parameter in a stanfit object
 }
 \examples{
+\donttest{
 rats <- rats_example(nCores = 1)
 
 rats\%>\%
@@ -30,7 +31,7 @@ rats\%>\%
 rats\%>\%
   stan_select(mu_alpha)\%>\%
   stan_slice(1:30,inc_warmup = FALSE)
-
+}
 }
 \seealso{
 Other filtering: 

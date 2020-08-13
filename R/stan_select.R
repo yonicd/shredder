@@ -4,14 +4,19 @@
 #' @param ... One or more unquoted expressions separated by commas
 #' @return stanfit object
 #' @examples 
+#' \donttest{
 #' rats <- rats_example(nCores = 1)
 #' 
 #' rats%>%stan_select(mu_beta)
 #' 
 #' rats%>%stan_select(mu_beta,beta)
 #' 
-#' rats%>%stan_select(!!!rlang::syms(c('mu_beta','mu_alpha')))
+#' rats%>%stan_select('mu_beta')
 #' 
+#' tmp <- c('mu_beta','mu_alpha')
+#' 
+#' rats%>%stan_select(!!!rlang::syms(tmp))
+#' }
 #' @seealso 
 #' [quotation][rlang::quotation], [quo_label][rlang::quo_label], [map][purrr::map]
 #' @rdname stan_select

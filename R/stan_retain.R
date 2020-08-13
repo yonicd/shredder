@@ -4,6 +4,7 @@
 #' @param chains numeric, chains to retain, Default: 1
 #' @return stanfit object
 #' @examples 
+#' \donttest{
 #' rats <- rats_example(nCores = 1)
 #' 
 #' #retain first chain only
@@ -13,7 +14,7 @@
 #' #retain chains 1 and 3
 #' rats%>%
 #'   stan_retain(c(1,3))
-#'   
+#'  }
 #' @rdname stan_retain
 #' @family utility
 #' @export 

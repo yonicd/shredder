@@ -4,12 +4,13 @@
 #' @param expand logical, if TRUE par names are returned including dimesnion 
 #'   indicies (fnames_oi), Default: FALSE
 #' @examples 
+#' \donttest{
 #' rats <- rats_example(nCores = 1)
 #' 
 #' rats%>%stan_names()
 #' 
 #' rats%>%stan_names(expand = TRUE)
-#' 
+#' }
 #' @return character
 #' @rdname stan_names
 #' @family utility

@@ -17,6 +17,7 @@ peek_pars <- function(){
 #' @param ignore.case logical to ignore the case, Default: TRUE
 #' @param pars list of pars to search in, Default: peek_pars()
 #' @examples 
+#' \donttest{
 #' rats <- rats_example()
 #' 
 #' rats%>%
@@ -27,21 +28,21 @@ peek_pars <- function(){
 #' 
 #' rats%>%
 #'   stan_select(mu_alpha, stan_contains('sq'))
-#'   
+#'
+#'  
 #' rats%>%
 #'   stan_select(stan_starts_with('mu'))
 #'
 #' rats%>%
 #'   stan_select(stan_starts_with('mu'),stan_contains('sq'))
-#'   
-#'   
+#'
 #' rats%>%
 #'   stan_select(stan_ends_with('0'))
 #' 
 #' # free form regex in contains   
 #' rats%>%
 #'   stan_select(stan_contains('sq|mu'))
-#' 
+#' }
 #' 
 #' @return character
 #' @rdname stan_partials

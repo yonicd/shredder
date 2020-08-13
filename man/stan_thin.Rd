@@ -25,6 +25,7 @@ This is a wrapper around stan_slice() to make it easy to
 thin samples from each parameter in a stanfit object.
 }
 \examples{
+\donttest{
 rats <- rats_example(nCores = 1)
 
 rats\%>\%
@@ -38,7 +39,7 @@ rats\%>\%
 rats\%>\%
   stan_select(mu_alpha)\%>\%
   stan_thin_n(30,inc_warmup = FALSE)
-
+}
 }
 \seealso{
 Other filtering: 

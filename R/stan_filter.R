@@ -16,6 +16,7 @@
 #'   - Chain size returned is the length of the shortest filtered chain. 
 #' 
 #' @examples 
+#' \donttest{
 #' rats <- rats_example(nCores = 1)
 #' 
 #' rats%>%
@@ -32,7 +33,7 @@
 #' rats%>%
 #'  stan_select(`alpha[1]`,`alpha[2]`,mu_alpha,mu_beta)%>%
 #'  stan_filter(mu_beta < 6 & `alpha[1]` > 240)
-#'   
+#' }
 #' @rdname stan_filter
 #' @family filtering
 #' @export 
