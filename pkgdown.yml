@@ -3,9 +3,10 @@ pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   axe: axe.html
+  benchmark: benchmark.html
   brms: brms.html
   rstan: rstan.html
   tests_and_coverage: tests_and_coverage.html
   tidybayes: tidybayes.html
-last_built: 2020-08-02T11:05Z
+last_built: 2020-08-13T19:46Z
 
