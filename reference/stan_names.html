@@ -155,7 +155,8 @@ indicies (fnames_oi), Default: FALSE</p></td>
 <code><a href='stan_retain.html'>stan_retain</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>rats</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rats_example.html'>rats_example</a></span>(<span class='kw'>nCores</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='no'>rats</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rats_example.html'>rats_example</a></span>(<span class='kw'>nCores</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 
 <span class='no'>rats</span><span class='kw'>%&gt;%</span><span class='fu'>stan_names</span>()</div><div class='output co'>#&gt;  [1] "alpha"         "beta"          "mu_alpha"      "mu_beta"      
 #&gt;  [5] "sigmasq_y"     "sigmasq_alpha" "sigmasq_beta"  "sigma_y"      
@@ -177,7 +178,7 @@ indicies (fnames_oi), Default: FALSE</p></td>
 #&gt; [57] "beta[27]"      "beta[28]"      "beta[29]"      "beta[30]"     
 #&gt; [61] "mu_alpha"      "mu_beta"       "sigmasq_y"     "sigmasq_alpha"
 #&gt; [65] "sigmasq_beta"  "sigma_y"       "sigma_alpha"   "sigma_beta"   
-#&gt; [69] "alpha0"        "lp__"         </div><div class='input'>
+#&gt; [69] "alpha0"        "lp__"         </div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

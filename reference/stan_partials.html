@@ -161,7 +161,8 @@
 <code><a href='stan_select.html'>stan_select</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>rats</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rats_example.html'>rats_example</a></span>()
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='no'>rats</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rats_example.html'>rats_example</a></span>()
 
 <span class='no'>rats</span><span class='kw'>%&gt;%</span>
   <span class='fu'><a href='stan_names.html'>stan_names</a></span>()</div><div class='output co'>#&gt;  [1] "alpha"         "beta"          "mu_alpha"      "mu_beta"      
@@ -181,7 +182,7 @@
 #&gt; sigmasq_alpha    1
 #&gt; sigmasq_beta     1
 #&gt; 
-#&gt; Samples were drawn using  at Thu Aug 13 19:47:31 2020.
+#&gt; Samples were drawn using  at Mon Aug 31 11:07:31 2020.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>
@@ -201,10 +202,11 @@
 #&gt; sigmasq_alpha    1
 #&gt; sigmasq_beta     1
 #&gt; 
-#&gt; Samples were drawn using  at Thu Aug 13 19:47:31 2020.
+#&gt; Samples were drawn using  at Mon Aug 31 11:07:31 2020.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>
+
 <span class='no'>rats</span><span class='kw'>%&gt;%</span>
   <span class='fu'><a href='stan_select.html'>stan_select</a></span>(<span class='fu'>stan_starts_with</span>(<span class='st'>'mu'</span>))</div><div class='output co'>#&gt; Inference for Stan model: rats.
 #&gt; 4 chains, each with iter=2000; warmup=1000; thin=1; 
@@ -214,7 +216,7 @@
 #&gt; mu_alpha 242.47    0.05 2.76 236.95 240.61 242.50 244.38 247.7  3585    1
 #&gt; mu_beta    6.19    0.00 0.11   5.98   6.12   6.19   6.25   6.4  4462    1
 #&gt; 
-#&gt; Samples were drawn using  at Thu Aug 13 19:47:31 2020.
+#&gt; Samples were drawn using  at Mon Aug 31 11:07:31 2020.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>
@@ -236,11 +238,10 @@
 #&gt; sigmasq_alpha    1
 #&gt; sigmasq_beta     1
 #&gt; 
-#&gt; Samples were drawn using  at Thu Aug 13 19:47:31 2020.
+#&gt; Samples were drawn using  at Mon Aug 31 11:07:31 2020.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>
-
 <span class='no'>rats</span><span class='kw'>%&gt;%</span>
   <span class='fu'><a href='stan_select.html'>stan_select</a></span>(<span class='fu'>stan_ends_with</span>(<span class='st'>'0'</span>))</div><div class='output co'>#&gt; Inference for Stan model: rats.
 #&gt; 4 chains, each with iter=2000; warmup=1000; thin=1; 
@@ -249,7 +250,7 @@
 #&gt;          mean se_mean  sd  2.5% 25%    50%    75%  97.5% n_eff Rhat
 #&gt; alpha0 106.39    0.06 3.6 99.23 104 106.44 108.76 113.55  4122    1
 #&gt; 
-#&gt; Samples were drawn using  at Thu Aug 13 19:47:31 2020.
+#&gt; Samples were drawn using  at Mon Aug 31 11:07:31 2020.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>
@@ -272,10 +273,10 @@
 #&gt; sigmasq_alpha    1
 #&gt; sigmasq_beta     1
 #&gt; 
-#&gt; Samples were drawn using  at Thu Aug 13 19:47:31 2020.
+#&gt; Samples were drawn using  at Mon Aug 31 11:07:31 2020.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
-#&gt; convergence, Rhat=1).</div><div class='input'>
+#&gt; convergence, Rhat=1).</div><div class='input'># }
 
 </div></pre>
   </div>

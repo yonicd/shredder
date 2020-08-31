@@ -160,7 +160,8 @@ position from each parameter in a stanfit object</p>
 <code><a href='stan_thin.html'>stan_thin_n</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>rats</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rats_example.html'>rats_example</a></span>(<span class='kw'>nCores</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='no'>rats</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rats_example.html'>rats_example</a></span>(<span class='kw'>nCores</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 
 <span class='no'>rats</span><span class='kw'>%&gt;%</span>
   <span class='fu'><a href='stan_select.html'>stan_select</a></span>(<span class='no'>mu_alpha</span>)<span class='kw'>%&gt;%</span>
@@ -171,7 +172,7 @@ position from each parameter in a stanfit object</p>
 #&gt;            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
 #&gt; mu_alpha 242.34    0.14 2.27 238.35 240.75 242.24 243.87 247.16   250    1
 #&gt; 
-#&gt; Samples were drawn using  at Thu Aug 13 19:47:31 2020.
+#&gt; Samples were drawn using  at Mon Aug 31 11:07:31 2020.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>
@@ -184,10 +185,10 @@ position from each parameter in a stanfit object</p>
 #&gt;            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
 #&gt; mu_alpha 242.34    0.14 2.27 238.35 240.75 242.24 243.87 247.16   250    1
 #&gt; 
-#&gt; Samples were drawn using  at Thu Aug 13 19:47:31 2020.
+#&gt; Samples were drawn using  at Mon Aug 31 11:07:31 2020.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
-#&gt; convergence, Rhat=1).</div><div class='input'>
+#&gt; convergence, Rhat=1).</div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

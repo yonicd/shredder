@@ -154,7 +154,8 @@
 <code><a href='stan_partials.html'>stan_contains</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>rats</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rats_example.html'>rats_example</a></span>(<span class='kw'>nCores</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='no'>rats</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rats_example.html'>rats_example</a></span>(<span class='kw'>nCores</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 
 <span class='no'>rats</span><span class='kw'>%&gt;%</span><span class='fu'>stan_select</span>(<span class='no'>mu_beta</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
 #&gt; 4 chains, each with iter=2000; warmup=1000; thin=1; 
@@ -163,7 +164,7 @@
 #&gt;         mean se_mean   sd 2.5%  25%  50%  75% 97.5% n_eff Rhat
 #&gt; mu_beta 6.19       0 0.11 5.98 6.12 6.19 6.25   6.4  4462    1
 #&gt; 
-#&gt; Samples were drawn using  at Thu Aug 13 19:47:31 2020.
+#&gt; Samples were drawn using  at Mon Aug 31 11:07:31 2020.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>
@@ -204,11 +205,24 @@
 #&gt; beta[30] 6.13       0 0.23 5.68 5.97 6.12 6.28  6.59  6428    1
 #&gt; mu_beta  6.19       0 0.11 5.98 6.12 6.19 6.25  6.40  4462    1
 #&gt; 
-#&gt; Samples were drawn using  at Thu Aug 13 19:47:31 2020.
+#&gt; Samples were drawn using  at Mon Aug 31 11:07:31 2020.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
 #&gt; convergence, Rhat=1).</div><div class='input'>
-<span class='no'>rats</span><span class='kw'>%&gt;%</span><span class='fu'>stan_select</span>(!!!<span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='https://rlang.r-lib.org/reference/sym.html'>syms</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'mu_beta'</span>,<span class='st'>'mu_alpha'</span>)))</div><div class='output co'>#&gt; Inference for Stan model: rats.
+<span class='no'>rats</span><span class='kw'>%&gt;%</span><span class='fu'>stan_select</span>(<span class='st'>'mu_beta'</span>)</div><div class='output co'>#&gt; Inference for Stan model: rats.
+#&gt; 4 chains, each with iter=2000; warmup=1000; thin=1; 
+#&gt; post-warmup draws per chain=1000, total post-warmup draws=4000.
+#&gt; 
+#&gt;         mean se_mean   sd 2.5%  25%  50%  75% 97.5% n_eff Rhat
+#&gt; mu_beta 6.19       0 0.11 5.98 6.12 6.19 6.25   6.4  4462    1
+#&gt; 
+#&gt; Samples were drawn using  at Mon Aug 31 11:07:31 2020.
+#&gt; For each parameter, n_eff is a crude measure of effective sample size,
+#&gt; and Rhat is the potential scale reduction factor on split chains (at 
+#&gt; convergence, Rhat=1).</div><div class='input'>
+<span class='no'>tmp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'mu_beta'</span>,<span class='st'>'mu_alpha'</span>)
+
+<span class='no'>rats</span><span class='kw'>%&gt;%</span><span class='fu'>stan_select</span>(!!!<span class='kw pkg'>rlang</span><span class='kw ns'>::</span><span class='fu'><a href='https://rlang.r-lib.org/reference/sym.html'>syms</a></span>(<span class='no'>tmp</span>))</div><div class='output co'>#&gt; Inference for Stan model: rats.
 #&gt; 4 chains, each with iter=2000; warmup=1000; thin=1; 
 #&gt; post-warmup draws per chain=1000, total post-warmup draws=4000.
 #&gt; 
@@ -216,10 +230,10 @@
 #&gt; mu_alpha 242.47    0.05 2.76 236.95 240.61 242.50 244.38 247.7  3585    1
 #&gt; mu_beta    6.19    0.00 0.11   5.98   6.12   6.19   6.25   6.4  4462    1
 #&gt; 
-#&gt; Samples were drawn using  at Thu Aug 13 19:47:31 2020.
+#&gt; Samples were drawn using  at Mon Aug 31 11:07:31 2020.
 #&gt; For each parameter, n_eff is a crude measure of effective sample size,
 #&gt; and Rhat is the potential scale reduction factor on split chains (at 
-#&gt; convergence, Rhat=1).</div><div class='input'>
+#&gt; convergence, Rhat=1).</div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
